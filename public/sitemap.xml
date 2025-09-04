@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Homepage -->
+  <url>
+    <loc>https://toyrender.com/</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://toyrender.com/privacy.html</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://toyrender.com/terms.html</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- FAQ Section (if exists) -->
+  <url>
+    <loc>https://toyrender.com/#faq</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Contact Section (if exists) -->
+  <url>
+    <loc>https://toyrender.com/#contact</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Pricing Section -->
+  <url>
+    <loc>https://toyrender.com/#pricing</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Examples Gallery Section -->
+  <url>
+    <loc>https://toyrender.com/#examples</loc>
+    <lastmod>2024-09-04T17:30:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+</urlset>
