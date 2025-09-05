@@ -42,6 +42,29 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// --- Simple NDJSON logger ---
+const LOG_DIR = path.join(__dirname, "logs");
+if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
+const GEN_LOG_PATH = path.join(LOG_DIR, "generation.ndjson");
+const genLogStream = fs.createWriteStream(GEN_LOG_PATH, { flags: "a" });
+
+function logGen(obj) {
+  try {
+    obj.ts = new Date().toISOString();
+    genLogStream.write(JSON.stringify(obj) + "\n");
+  } catch (e) {
+    console.warn("logGen failed:", e.message);
+  }
+}
+
+// close log file cleanly on exit
+process.on("SIGINT", () => {
+  genLogStream.end(() => process.exit(0));
+});
+process.on("SIGTERM", () => {
+  genLogStream.end(() => process.exit(0));
+});
+
 function parseQuotaViolations(err) {
   const details = err?.error?.details || [];
   const qf = details.find((d) => (d["@type"] || "").includes("QuotaFailure"));
@@ -87,6 +110,23 @@ async function withBackoff(fn, tries = 2) {
   err.status = 429;
   throw err;
 }
+
+function keyFingerprint() {
+  return crypto
+    .createHash("sha256")
+    .update(process.env.GEMINI_API_KEY || "")
+    .digest("hex")
+    .slice(0, 8);
+}
+
+function hashPrompt(s) {
+  return crypto
+    .createHash("sha256")
+    .update(s || "")
+    .digest("hex")
+    .slice(0, 8);
+}
+
 // --- Rate Limiting ---
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -176,21 +216,33 @@ function timeout(ms) {
 app.post("/api/generate", upload.single("photo"), async (req, res) => {
   console.log("=== /api/generate POST received ===");
 
+  const reqId =
+    (crypto.randomUUID && crypto.randomUUID()) ||
+    Date.now() + "-" + Math.random().toString(16).slice(2);
+  const t0 = Date.now();
+
   if (!req.file) {
     console.log("No file in request");
     return res.status(400).json({ error: "No file uploaded" });
   }
 
   try {
-    // ⭐ CHANGE: use the uploaded file (not Example1.jpg) and downscale to cut input-tokens/min
-
+    // Read uploaded file
     const inputPath = req.file.path;
     const raw = fs.readFileSync(inputPath);
 
-    // Try to use sharp; if unavailable, fall back to original bytes
+    // Collect image metadata (best-effort)
+    let meta = {};
+    try {
+      const s = sharp || require("sharp");
+      meta = await s(raw).metadata(); // { format, width, height }
+    } catch (_) {
+      /* ignore */
+    }
+
+    // Resize/compress to reduce tokens/min
     let resizedBuf = raw;
     try {
-      // lazy require guards against “sharp is not defined” if the top import didn’t load
       const s = sharp || require("sharp");
       resizedBuf = await s(raw)
         .resize({
@@ -208,10 +260,29 @@ app.post("/api/generate", upload.single("photo"), async (req, res) => {
       );
     }
 
-    // ⭐ CHANGE: correct mime → we produced JPEG
-
+    // Prompt (default figurine prompt unless client sends one)
     const prompt =
       (req.body.prompt && req.body.prompt.trim()) || FIGURINE_PROMPT1;
+
+    // ---- LOG: start
+    logGen({
+      event: "gen_start",
+      reqId,
+      ip: req.ip,
+      key_fp: keyFingerprint(),
+      model: "gemini-2.5-flash-image-preview",
+      file: {
+        name: req.file.originalname,
+        savedAs: req.file.filename,
+        mimetype: req.file.mimetype,
+        size: req.file.size,
+        format: meta.format || null,
+        width: meta.width || null,
+        height: meta.height || null,
+      },
+      prompt_hash: hashPrompt(prompt),
+    });
+    // ---- /LOG
 
     const parts = [
       { text: prompt },
@@ -223,7 +294,7 @@ app.post("/api/generate", upload.single("photo"), async (req, res) => {
       },
     ];
 
-    // ⭐ CHANGE: call model with throttle + backoff; send a JSON response
+    // Call model with throttle + backoff
     const response = await limiter.schedule(() =>
       withBackoff(() =>
         ai.models.generateContent({
@@ -233,14 +304,15 @@ app.post("/api/generate", upload.single("photo"), async (req, res) => {
       )
     );
 
-    // Handle response (text or generated image)
+    // Extract outputs
     const cand = response?.candidates?.[0]?.content?.parts || [];
     let outImagePath = null;
     let outText = "";
 
     for (const part of cand) {
-      if (part.text) outText += part.text + "\n";
-      else if (part.inlineData?.data) {
+      if (part.text) {
+        outText += part.text + "\n";
+      } else if (part.inlineData?.data) {
         const buffer = Buffer.from(part.inlineData.data, "base64");
         const fname = `gemini-output-${Date.now()}.png`;
         outImagePath = path.join(resultsDir, fname);
@@ -248,19 +320,43 @@ app.post("/api/generate", upload.single("photo"), async (req, res) => {
       }
     }
 
+    // ---- LOG: success
+    logGen({
+      event: "gen_success",
+      reqId,
+      duration_ms: Date.now() - t0,
+      output: {
+        image: outImagePath ? path.basename(outImagePath) : null,
+        text_len: outText.trim().length,
+      },
+    });
+    // ---- /LOG
+
     return res.json({
       ok: true,
       text: outText.trim(),
       imageUrl: outImagePath ? "/results/" + path.basename(outImagePath) : null,
     });
   } catch (e) {
+    // ---- LOG: error
+    const q = parseQuotaViolations(e);
+    logGen({
+      event: "gen_error",
+      reqId,
+      duration_ms: Date.now() - t0,
+      status: e?.status || 500,
+      message: e?.message || "Generation failed",
+      reason: e?.reason || null,
+      quota: q,
+    });
+    // ---- /LOG
+
     console.error("Generation error:", e?.message || e);
-    // Pass through 429 so the client can show a clear message
     return res.status(e?.status || 500).json({
       ok: false,
       status: e?.status || 500,
       error: e?.message || "Generation failed",
-      reason: e?.reason || null, // "daily" when daily cap
+      reason: e?.reason || null,
       details: e?.error?.details || null,
     });
   }
