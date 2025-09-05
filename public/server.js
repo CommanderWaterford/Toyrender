@@ -43,7 +43,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // --- Simple NDJSON logger ---
-const LOG_DIR = path.join(__dirname, "logs");
+const LOG_DIR = path.resolve(__dirname, "../_logs");
 if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
 const GEN_LOG_PATH = path.join(LOG_DIR, "generation.ndjson");
 const genLogStream = fs.createWriteStream(GEN_LOG_PATH, { flags: "a" });
@@ -362,38 +362,38 @@ app.post("/api/generate", upload.single("photo"), async (req, res) => {
   }
 });
 
-app.get("/api/probe-image", async (_req, res) => {
-  try {
-    // 1x1 transparent PNG
-    const onePx =
-      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
+// app.get("/api/probe-image", async (_req, res) => {
+//   try {
+//     // 1x1 transparent PNG
+//     const onePx =
+//       "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
 
-    const r = await ai.models.generateContent({
-      model: "gemini-2.5-flash-image-preview",
-      contents: [
-        {
-          role: "user",
-          parts: [
-            { text: "Generate a tiny sticker-style icon based on this pixel." },
-            { inlineData: { mimeType: "image/png", data: onePx } },
-          ],
-        },
-      ],
-    });
+//     const r = await ai.models.generateContent({
+//       model: "gemini-2.5-flash-image-preview",
+//       contents: [
+//         {
+//           role: "user",
+//           parts: [
+//             { text: "Generate a tiny sticker-style icon based on this pixel." },
+//             { inlineData: { mimeType: "image/png", data: onePx } },
+//           ],
+//         },
+//       ],
+//     });
 
-    res.json({
-      ok: true,
-      got_candidates: Array.isArray(r?.candidates),
-    });
-  } catch (e) {
-    res.status(e?.status || 500).json({
-      ok: false,
-      status: e?.status || 500,
-      error: e?.message || "probe-image failed",
-      details: e?.error?.details || null,
-    });
-  }
-});
+//     res.json({
+//       ok: true,
+//       got_candidates: Array.isArray(r?.candidates),
+//     });
+//   } catch (e) {
+//     res.status(e?.status || 500).json({
+//       ok: false,
+//       status: e?.status || 500,
+//       error: e?.message || "probe-image failed",
+//       details: e?.error?.details || null,
+//     });
+//   }
+// });
 
 // --- Test Route ---
 app.get("/api/probe", async (_req, res) => {

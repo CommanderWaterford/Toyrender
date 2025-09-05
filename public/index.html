@@ -333,7 +333,32 @@
           animation: none;
         }
       }
+
+      /* Hide scrollbar but keep scrollability */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Make native scrolling feel snappy & momentum-y */
+      .testimonial-track {
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        will-change: scroll-position;
+      }
+      .testimonial-track.dragging {
+        cursor: grabbing !important;
+      }
     </style>
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      async
+    ></script>
   </head>
   <body
     class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
@@ -543,368 +568,148 @@
       </section>
 
       <!-- Testimonials Examples-->
-      <!-- Customer Testimonials with Image Slider -->
-      <section class="mt-20" aria-labelledby="testimonials-title">
-        <h2
-          id="testimonials-title"
-          class="text-3xl font-bold text-center mb-12"
-        >
+      <section id="testimonials" class="py-12 relative">
+        <h2 class="text-2xl font-semibold mb-4 px-6">
           See What Others Created
         </h2>
 
-        <!-- Horizontal Scrolling Testimonial Slider -->
-        <div class="relative overflow-hidden rounded-2xl">
-          <div class="flex scroll-container">
-            <!-- First set of testimonials -->
-            <div class="flex gap-6 min-w-max">
-              <!-- Testimonial 1 -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div class="h-64 overflow-hidden bg-black/30">
-                    <img
-                      src="/images/Example1.jpg"
-                      alt="Customer figurine example 1"
-                      class="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Amazing quality! Turned my photo with my grandma into a
-                      figurine that looks simply awesome. My family loves it!"
-                    </p>
-                    <p class="font-semibold">- Sarah M.</p>
-                  </div>
-                </div>
-              </div>
+        <!-- arrows -->
+        <button
+          type="button"
+          class="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white"
+          data-track-left
+          aria-label="Scroll testimonials left"
+        >
+          ‹
+        </button>
+        <button
+          type="button"
+          class="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white"
+          data-track-right
+          aria-label="Scroll testimonials right"
+        >
+          ›
+        </button>
 
-              <!-- Testimonial 2 -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div class="h-64 overflow-hidden bg-black/30">
-                    <img
-                      src="/images/Example2.jpg"
-                      alt="Customer figurine example 2"
-                      class="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Perfect for our anniversary! Good summer vibes memories
-                      was exactly what I was looking for. Super fast generation
-                      too!"
-                    </p>
-                    <p class="font-semibold">- Mike T.</p>
-                  </div>
-                </div>
-              </div>
+        <!-- swipe/drag hint -->
+        <div
+          class="pointer-events-none absolute right-4 top-0 z-20 mt-2 px-3 py-1 rounded-full text-xs font-medium bg-black/60 text-white opacity-90 md:hidden"
+          data-swipe-hint
+        >
+          Swipe →
+        </div>
+        <div
+          class="pointer-events-none absolute right-4 top-0 z-20 mt-2 px-3 py-1 rounded-full text-xs font-medium bg-black/60 text-white opacity-90 hidden md:block"
+          data-drag-hint
+        >
+          Drag ↔︎
+        </div>
 
-              <!-- Testimonial 3 -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div class="h-64 overflow-hidden bg-black/30">
-                    <img
-                      src="/images/Example3.jpg"
-                      alt="Customer figurine example 3"
-                      class="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Used this for my LinkedIn profile makeover. The business
-                      pro figurine gives my profile a unique, memorable touch!"
-                    </p>
-                    <p class="font-semibold">- Jennifer L.</p>
-                  </div>
-                </div>
-              </div>
+        <!-- gradient edges to suggest overflow -->
+        <div
+          class="pointer-events-none absolute inset-y-0 left-0 w-12 z-10 bg-gradient-to-r from-[rgba(0,0,0,0.25)] to-transparent"
+        ></div>
+        <div
+          class="pointer-events-none absolute inset-y-0 right-0 w-12 z-10 bg-gradient-to-l from-[rgba(0,0,0,0.25)] to-transparent"
+        ></div>
 
-              <!-- Testimonial 4 -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div class="h-64 overflow-hidden bg-black/30">
-                    <img
-                      src="/images/Example4.jpg"
-                      alt="Customer figurine example 4"
-                      class="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Best gift ever for my birthday! My wife loved the
-                      figurine design. It's now framed in our living room!"
-                    </p>
-                    <p class="font-semibold">- David K.</p>
-                  </div>
-                </div>
-              </div>
+        <div
+          class="testimonial-track relative flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 pb-3 touch-pan-x select-none cursor-grab active:cursor-grabbing no-scrollbar"
+          data-drag-scroll
+          role="region"
+          aria-label="Customer testimonials—drag or swipe to scroll"
+        >
+          <!-- Example cards (use your real images/text) -->
+          <article
+            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
+          >
+            <img
+              src="/images/Example1.jpg"
+              alt="Customer figurine example 1"
+              class="w-full h-52 object-cover rounded-xl"
+            />
+            <blockquote class="mt-3 text-sm opacity-90">
+              “Amazing quality! Turned my photo with my grandma into a figurine
+              that looks simply awesome. My family loves it!”
+            </blockquote>
+            <div class="mt-3 text-xs opacity-70">— Sarah M.</div>
+          </article>
 
-              <!-- Testimonial 5 -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div class="h-64 overflow-hidden bg-black/30">
-                    <img
-                      src="/images/Example5.jpg"
-                      alt="Customer figurine example 5"
-                      class="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Created a set of Figurines of myself in shape for my girl
-                      friend. She went immeditately to a 3D Publisher with the
-                      image! Great quality output."
-                    </p>
-                    <p class="font-semibold">- Robert H.</p>
-                  </div>
-                </div>
-              </div>
+          <article
+            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
+          >
+            <img
+              src="/images/Example2.jpg"
+              alt="Customer figurine example 2"
+              class="w-full h-52 object-cover rounded-xl"
+            />
+            <blockquote class="mt-3 text-sm opacity-90">
+              “Perfect for our anniversary! Good summer vibes memories was
+              exactly what I was looking for. Super fast generation too!”
+            </blockquote>
+            <div class="mt-3 text-xs opacity-70">— Mike T.</div>
+          </article>
 
-              <!-- Testimonial 6 -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div class="h-64 overflow-hidden bg-black/30">
-                    <img
-                      src="/images/Example6.jpg"
-                      alt="Customer figurine example 6"
-                      class="w-full h-64 object-cover"
-                    />
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "The spy theme turned out incredible! Using it for my
-                      gaming channel branding. Worth every penny!"
-                    </p>
-                    <p class="font-semibold">- Emily R.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <article
+            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
+          >
+            <img
+              src="/images/Example3.jpg"
+              alt="Customer figurine example 3"
+              class="w-full h-52 object-cover rounded-xl"
+            />
+            <blockquote class="mt-3 text-sm opacity-90">
+              “Used this for my LinkedIn profile makeover. The business pro
+              figurine gives my profile a unique, memorable touch!”
+            </blockquote>
+            <div class="mt-3 text-xs opacity-70">— Jennifer L.</div>
+          </article>
 
-            <!-- Duplicate set for continuous scroll -->
-            <div class="flex gap-6 min-w-max">
-              <!-- Testimonial 1 (duplicate) -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div
-                    class="h-64 bg-gradient-to-br from-purple-800 to-pink-800 flex items-center justify-center"
-                  >
-                    <i
-                      class="fas fa-user-astronaut text-6xl text-purple-300"
-                    ></i>
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Amazing quality! Turned my photo into a space explorer
-                      figurine that looks professionally designed. My kids love
-                      it!"
-                    </p>
-                    <p class="font-semibold">- Sarah M.</p>
-                  </div>
-                </div>
-              </div>
+          <article
+            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
+          >
+            <img
+              src="/images/Example4.jpg"
+              alt="Customer figurine example 4"
+              class="w-full h-52 object-cover rounded-xl"
+            />
+            <blockquote class="mt-3 text-sm opacity-90">
+              “Best gift ever for my birthday! My wife loved the figurine
+              design. It's now framed in our living room!”
+            </blockquote>
+            <div class="mt-3 text-xs opacity-70">— David K.</div>
+          </article>
 
-              <!-- Continue duplicates for smooth loop -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div
-                    class="h-64 bg-gradient-to-br from-indigo-800 to-purple-800 flex items-center justify-center"
-                  >
-                    <i class="fas fa-user-ninja text-6xl text-indigo-300"></i>
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Perfect for my gaming avatar! The ninja warrior style is
-                      exactly what I was looking for. Super fast generation
-                      too!"
-                    </p>
-                    <p class="font-semibold">- Mike T.</p>
-                  </div>
-                </div>
-              </div>
+          <article
+            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
+          >
+            <img
+              src="/images/Example5.jpg"
+              alt="Customer figurine example 5"
+              class="w-full h-52 object-cover rounded-xl"
+            />
+            <blockquote class="mt-3 text-sm opacity-90">
+              “Created a set of Figurines of myself in shape for my girl friend.
+              She went immeditately to a 3D Publisher with the image! Great
+              quality output.”
+            </blockquote>
+            <div class="mt-3 text-xs opacity-70">— Robert H.</div>
+          </article>
 
-              <!-- Testimonial 3 (duplicate) -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div
-                    class="h-64 bg-gradient-to-br from-pink-800 to-purple-800 flex items-center justify-center"
-                  >
-                    <i class="fas fa-user-tie text-6xl text-pink-300"></i>
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Used this for my LinkedIn profile makeover. The business
-                      pro figurine gives my profile a unique, memorable touch!"
-                    </p>
-                    <p class="font-semibold">- Jennifer L.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Testimonial 4 (duplicate) -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div
-                    class="h-64 bg-gradient-to-br from-purple-800 to-indigo-800 flex items-center justify-center"
-                  >
-                    <i
-                      class="fas fa-user-graduate text-6xl text-purple-300"
-                    ></i>
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Best graduation gift ever! My parents loved the figurine
-                      design. It's now framed in our living room!"
-                    </p>
-                    <p class="font-semibold">- David K.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Testimonial 5 (duplicate) -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div
-                    class="h-64 bg-gradient-to-br from-green-800 to-purple-800 flex items-center justify-center"
-                  >
-                    <i class="fas fa-user-md text-6xl text-green-300"></i>
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "Created a superhero doctor figurine for my nephew. He
-                      thinks I'm the coolest uncle now! Great quality output."
-                    </p>
-                    <p class="font-semibold">- Robert H.</p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Testimonial 6 (duplicate) -->
-              <div class="w-80 flex-shrink-0">
-                <div
-                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
-                >
-                  <div
-                    class="h-64 bg-gradient-to-br from-yellow-800 to-purple-800 flex items-center justify-center"
-                  >
-                    <i class="fas fa-user-secret text-6xl text-yellow-300"></i>
-                  </div>
-                  <div class="p-6">
-                    <div class="flex mb-3">
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                      <i class="fas fa-star text-yellow-400"></i>
-                    </div>
-                    <p class="text-sm text-purple-200 mb-3">
-                      "The spy theme turned out incredible! Using it for my
-                      gaming channel branding. Worth every penny!"
-                    </p>
-                    <p class="font-semibold">- Emily R.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <article
+            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
+          >
+            <img
+              src="/images/Example6.jpg"
+              alt="Customer figurine example 6"
+              class="w-full h-52 object-cover rounded-xl"
+            />
+            <blockquote class="mt-3 text-sm opacity-90">
+              “The spy theme turned out incredible! Using it for my gaming
+              channel branding. Worth every penny!”
+            </blockquote>
+            <div class="mt-3 text-xs opacity-70">— Emily R.</div>
+          </article>
         </div>
       </section>
 
@@ -1866,6 +1671,95 @@
         );
         paymentModal.classList.add("hidden");
       });
+    </script>
+    <script>
+      (() => {
+        const friction = 0.92; // inertia friction (lower = longer glide)
+        const wheelBoost = 0.9; // vertical wheel → horizontal speed multiplier
+
+        document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
+          // Improve touch behavior and selection
+          el.style.userSelect = "none";
+          el.style.touchAction = "pan-x";
+
+          let isDown = false,
+            startX = 0,
+            startLeft = 0;
+          let lastX = 0,
+            velocity = 0,
+            rafId = 0;
+
+          const stopMomentum = () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = 0;
+          };
+          const momentum = () => {
+            stopMomentum();
+            const step = () => {
+              el.scrollLeft -= velocity;
+              velocity *= friction;
+              if (Math.abs(velocity) > 0.5) rafId = requestAnimationFrame(step);
+            };
+            rafId = requestAnimationFrame(step);
+          };
+
+          el.addEventListener("pointerdown", (e) => {
+            isDown = true;
+            el.setPointerCapture?.(e.pointerId);
+            startX = e.clientX;
+            startLeft = el.scrollLeft;
+            lastX = e.clientX;
+            velocity = 0;
+            stopMomentum();
+            el.classList.add("dragging");
+          });
+
+          el.addEventListener("pointermove", (e) => {
+            if (!isDown) return;
+            const dx = e.clientX - startX;
+            el.scrollLeft = startLeft - dx;
+            velocity = e.clientX - lastX; // px per frame
+            lastX = e.clientX;
+          });
+
+          const endDrag = (e) => {
+            if (!isDown) return;
+            isDown = false;
+            el.releasePointerCapture?.(e.pointerId);
+            el.classList.remove("dragging");
+            momentum();
+          };
+          el.addEventListener("pointerup", endDrag);
+          el.addEventListener("pointercancel", endDrag);
+          el.addEventListener("pointerleave", () => {
+            if (isDown) endDrag({});
+          });
+
+          // Turn vertical wheel into horizontal movement (nice on laptop trackpads/mice)
+          el.addEventListener(
+            "wheel",
+            (e) => {
+              // If vertical scroll is dominant, convert to horizontal
+              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                el.scrollLeft += e.deltaY * wheelBoost;
+                e.preventDefault();
+              }
+            },
+            { passive: false }
+          );
+
+          // Optional: arrow keys for accessibility
+          el.tabIndex = 0;
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight") {
+              el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
+            }
+            if (e.key === "ArrowLeft") {
+              el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
+            }
+          });
+        });
+      })();
     </script>
   </body>
 </html>
