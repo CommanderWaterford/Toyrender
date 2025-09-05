@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Toyrender - Generador de Figuras con IA – Convierte Fotos en Figuras
+      Coleccionables
+    </title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Transforma tus fotos en impresionantes figuras coleccionables usando tecnología avanzada de IA. Crea diseños de figuras a escala 1:7 en segundos. Perfecto para coleccionistas, regalos y uso personal."
+    />
+    <meta
+      name="keywords"
+      content="figura IA, figuras coleccionables, foto a figura, figura 3D, figuras personalizadas, arte con IA, coleccionables digitales, figuras personalizadas, render de juguete, diseño de figura"
+    />
+    <meta name="author" content="Toyrender.com" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="es" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toyrender.com/" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Toyrender.com - Transforma tus Fotos en Figuras Coleccionables"
+    />
+    <meta
+      property="og:description"
+      content="Transforma tus fotos en impresionantes figuras coleccionables usando tecnología avanzada de IA. Crea diseños de figuras a escala 1:7 en segundos."
+    />
+    <meta property="og:url" content="https://toyrender.com/" />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta property="og:image" content="https://toyrender.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Servicio de transformación de fotos a figuras con IA"
+    />
+    <meta property="og:locale" content="es_ES" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Toyrender.com - Transforma tus Fotos en Figuras Coleccionables"
+    />
+    <meta
+      name="twitter:description"
+      content="Transforma tus fotos en impresionantes figuras coleccionables usando tecnología avanzada de IA. Crea diseños de figuras a escala 1:7 en segundos."
+    />
+    <meta name="twitter:image" content="https://toyrender.com/og-image.jpg" />
+    <meta
+      name="twitter:image:alt"
+      content="Servicio de transformación de fotos a figuras con IA"
+    />
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#9333ea" />
+    <meta name="msapplication-TileColor" content="#9333ea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Toyrender" />
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+        }
+      }
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: float 20s ease-in-out infinite;
+      }
+      .lang-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 28px;
+      }
+      .lang-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .lang-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(147, 51, 234, 0.3);
+        transition: 0.4s;
+        border-radius: 34px;
+        border: 1px solid rgba(147, 51, 234, 0.5);
+      }
+      .lang-slider:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 4px;
+        bottom: 3px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+      }
+      input:checked + .lang-slider {
+        background-color: rgba(236, 72, 153, 0.3);
+        border-color: rgba(236, 72, 153, 0.5);
+      }
+      input:checked + .lang-slider:before {
+        transform: translateX(32px);
+      }
+    </style>
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
+  >
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="blob w-96 h-96 bg-purple-600 -top-48 -left-48"></div>
+      <div
+        class="blob w-96 h-96 bg-indigo-600 top-1/2 -right-48"
+        style="animation-delay: 5s"
+      ></div>
+      <div
+        class="blob w-96 h-96 bg-pink-600 -bottom-48 left-1/3"
+        style="animation-delay: 10s"
+      ></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="relative z-10 px-6 py-4 lg:px-12"
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <i
+            class="fas fa-cube text-3xl text-purple-400"
+            aria-hidden="true"
+          ></i>
+          <span class="text-2xl font-bold gradient-text">Toyrender</span>
+        </div>
+        <div class="flex items-center space-x-6">
+          <!-- Language Toggle -->
+          <div class="flex items-center space-x-2">
+            <span class="text-sm font-medium">EN</span>
+            <label class="lang-switch">
+              <input type="checkbox" id="langToggle" checked />
+              <span class="lang-slider"></span>
+            </label>
+            <span class="text-sm font-medium">ES</span>
+          </div>
+
+          <button
+            id="creditsBtn"
+            class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
+            aria-label="View available credits"
+          >
+            <i class="fas fa-coins mr-2" aria-hidden="true"></i>
+            <span id="creditsCount">2</span>
+            <span data-lang="credits">Créditos Gratis</span>
+          </button>
+          <button
+            class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+            aria-label="Sign in to your account"
+          >
+            <i class="fas fa-user-circle mr-2" aria-hidden="true"></i
+            ><span data-lang="signIn">Iniciar Sesión</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main
+      class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-12"
+      role="main"
+    >
+      <!-- Hero Section -->
+      <section class="text-center mb-16" aria-labelledby="hero-title">
+        <h1 id="hero-title" class="text-5xl lg:text-7xl font-bold mb-6">
+          <span data-lang="heroTitle1">Transfórmate en una</span>
+          <span class="gradient-text" data-lang="heroTitle2"
+            >Figura Coleccionable</span
+          >
+        </h1>
+        <p
+          class="text-xl text-purple-200 mb-8 max-w-3xl mx-auto"
+          data-lang="heroDescription"
+        >
+          Con IA avanzada, convertimos tus fotos en diseños de figuras a escala
+          1:7 en segundos. ¡Perfecto para coleccionistas, regalos o solo por
+          diversión!
+        </p>
+        <div
+          class="flex flex-wrap justify-center gap-4 mb-8"
+          role="list"
+          aria-label="Key features"
+        >
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+            role="listitem"
+          >
+            <i class="fas fa-bolt mr-2 text-yellow-400" aria-hidden="true"></i
+            ><span data-lang="feature1">Generación Instantánea</span>
+          </div>
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+            role="listitem"
+          >
+            <i class="fas fa-magic mr-2 text-purple-400" aria-hidden="true"></i
+            ><span data-lang="feature2">Diseño con IA</span>
+          </div>
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+            role="listitem"
+          >
+            <i
+              class="fas fa-download mr-2 text-green-400"
+              aria-hidden="true"
+            ></i
+            ><span data-lang="feature3">Descarga en Alta Resolución</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upload Section -->
+      <section class="max-w-4xl mx-auto" aria-labelledby="upload-title">
+        <div
+          class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/30 pulse-glow"
+        >
+          <div
+            id="uploadArea"
+            class="border-3 border-dashed border-purple-500/50 rounded-2xl p-12 text-center hover:border-purple-400 transition-all cursor-pointer bg-purple-900/20 hover:bg-purple-900/30"
+            role="button"
+            tabindex="0"
+            aria-label="Upload photo area - click or drag and drop to upload"
+          >
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              class="hidden"
+              aria-label="Select image file"
+            />
+            <div class="float-animation inline-block mb-6">
+              <i
+                class="fas fa-camera text-6xl text-purple-400"
+                aria-hidden="true"
+              ></i>
+            </div>
+            <h3
+              id="upload-title"
+              class="text-2xl font-bold mb-4"
+              data-lang="uploadTitle"
+            >
+              Sube Tu Foto
+            </h3>
+            <p class="text-purple-300 mb-6" data-lang="uploadDescription">
+              Arrastra y suelta tu foto aquí o haz clic para buscar
+            </p>
+            <button
+              class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl"
+              aria-label="Choose photo to upload"
+            >
+              <i class="fas fa-upload mr-2" aria-hidden="true"></i
+              ><span data-lang="choosePhoto">Elegir Foto</span>
+            </button>
+            <p class="text-sm text-purple-400 mt-4" data-lang="fileSupport">
+              Soporta JPG, PNG hasta 10MB
+            </p>
+          </div>
+
+          <!-- Preview Section (Hidden by default) -->
+          <div id="previewSection" class="hidden">
+            <div class="grid lg:grid-cols-2 gap-8">
+              <div>
+                <h4
+                  class="text-lg font-semibold mb-3 text-purple-300"
+                  data-lang="originalPhoto"
+                >
+                  Foto Original
+                </h4>
+                <div class="rounded-xl overflow-hidden bg-black/30">
+                  <img
+                    id="originalPreview"
+                    src=""
+                    alt="Original photo uploaded by user"
+                    class="w-full h-64 object-cover"
+                  />
+                </div>
+              </div>
+              <div>
+                <h4
+                  class="text-lg font-semibold mb-3 text-purple-300"
+                  data-lang="figurinePreview"
+                >
+                  Vista Previa de Figura
+                </h4>
+                <div
+                  id="resultContainer"
+                  class="rounded-xl overflow-hidden bg-black/30 h-64 flex items-center justify-center"
+                >
+                  <div id="loadingSpinner" class="hidden">
+                    <i
+                      class="fas fa-spinner fa-spin text-4xl text-purple-400"
+                    ></i>
+                    <p class="mt-4 text-purple-300" data-lang="creating">
+                      Creando tu figura...
+                    </p>
+                  </div>
+                  <img
+                    id="resultPreview"
+                    src=""
+                    alt="AI-generated figurine design result"
+                    class="w-full h-64 object-cover hidden"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 flex gap-4 justify-center">
+              <button
+                id="generateBtn"
+                class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <i class="fas fa-magic mr-2"></i
+                ><span data-lang="generate">Generar Figura</span>
+              </button>
+              <button
+                id="downloadBtn"
+                class="hidden px-8 py-4 bg-green-600 rounded-xl text-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105"
+              >
+                <i class="fas fa-download mr-2"></i
+                ><span data-lang="download">Descargar</span>
+              </button>
+              <button
+                id="resetBtn"
+                class="px-8 py-4 bg-slate-700 rounded-xl text-lg font-semibold hover:bg-slate-600 transition-all"
+              >
+                <i class="fas fa-redo mr-2"></i
+                ><span data-lang="tryAnother">Probar Otra</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials Examples-->
+      <section class="mt-20" aria-labelledby="testimonials-title">
+        <h2
+          id="testimonials-title"
+          class="text-3xl font-bold text-center mb-12"
+          data-lang="examplesTitle"
+        >
+          Mira lo que Otros Crearon
+        </h2>
+
+        <!-- Horizontal Scrolling Testimonial Slider -->
+        <div class="relative overflow-hidden rounded-2xl">
+          <div class="flex scroll-container">
+            <!-- First set of testimonials -->
+            <div class="flex gap-6 min-w-max">
+              <!-- Testimonial 1 -->
+              <div class="w-80 flex-shrink-0">
+                <div
+                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
+                >
+                  <div
+                    class="h-64 bg-gradient-to-br from-purple-800 to-pink-800 flex items-center justify-center"
+                  >
+                    <i
+                      class="fas fa-user-astronaut text-6xl text-purple-300"
+                    ></i>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex mb-3">
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-sm text-purple-200 mb-3">
+                      "Amazing quality! Turned my photo into a space explorer
+                      figurine that looks professionally designed. My kids love
+                      it!"
+                    </p>
+                    <p class="font-semibold">- Sarah M.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div class="w-80 flex-shrink-0">
+                <div
+                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
+                >
+                  <div
+                    class="h-64 bg-gradient-to-br from-indigo-800 to-purple-800 flex items-center justify-center"
+                  >
+                    <i class="fas fa-user-ninja text-6xl text-indigo-300"></i>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex mb-3">
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-sm text-purple-200 mb-3">
+                      "Perfect for my gaming avatar! The ninja warrior style is
+                      exactly what I was looking for. Super fast generation
+                      too!"
+                    </p>
+                    <p class="font-semibold">- Mike T.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div class="w-80 flex-shrink-0">
+                <div
+                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
+                >
+                  <div
+                    class="h-64 bg-gradient-to-br from-pink-800 to-purple-800 flex items-center justify-center"
+                  >
+                    <i class="fas fa-user-tie text-6xl text-pink-300"></i>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex mb-3">
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-sm text-purple-200 mb-3">
+                      "Used this for my LinkedIn profile makeover. The business
+                      pro figurine gives my profile a unique, memorable touch!"
+                    </p>
+                    <p class="font-semibold">- Jennifer L.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Duplicate set for continuous scroll -->
+            <div class="flex gap-6 min-w-max">
+              <!-- Testimonial 1 -->
+              <div class="w-80 flex-shrink-0">
+                <div
+                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
+                >
+                  <div
+                    class="h-64 bg-gradient-to-br from-purple-800 to-pink-800 flex items-center justify-center"
+                  >
+                    <i
+                      class="fas fa-user-astronaut text-6xl text-purple-300"
+                    ></i>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex mb-3">
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-sm text-purple-200 mb-3">
+                      "Amazing quality! Turned my photo into a space explorer
+                      figurine that looks professionally designed. My kids love
+                      it!"
+                    </p>
+                    <p class="font-semibold">- Sarah M.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 2 -->
+              <div class="w-80 flex-shrink-0">
+                <div
+                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
+                >
+                  <div
+                    class="h-64 bg-gradient-to-br from-indigo-800 to-purple-800 flex items-center justify-center"
+                  >
+                    <i class="fas fa-user-ninja text-6xl text-indigo-300"></i>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex mb-3">
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-sm text-purple-200 mb-3">
+                      "Perfect for my gaming avatar! The ninja warrior style is
+                      exactly what I was looking for. Super fast generation
+                      too!"
+                    </p>
+                    <p class="font-semibold">- Mike T.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Testimonial 3 -->
+              <div class="w-80 flex-shrink-0">
+                <div
+                  class="bg-slate-800/50 backdrop-blur-xl rounded-2xl overflow-hidden border border-purple-500/30 hover:border-purple-400/50 transition-all"
+                >
+                  <div
+                    class="h-64 bg-gradient-to-br from-pink-800 to-purple-800 flex items-center justify-center"
+                  >
+                    <i class="fas fa-user-tie text-6xl text-pink-300"></i>
+                  </div>
+                  <div class="p-6">
+                    <div class="flex mb-3">
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                      <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                    <p class="text-sm text-purple-200 mb-3">
+                      "Used this for my LinkedIn profile makeover. The business
+                      pro figurine gives my profile a unique, memorable touch!"
+                    </p>
+                    <p class="font-semibold">- Jennifer L.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Improved "How It Works" Section -->
+      <section
+        id="learn"
+        class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 mt-24"
+      >
+        <div class="text-center">
+          <h2 class="text-3xl lg:text-4xl font-bold mb-4">
+            <span class="gradient-text" data-lang="howItWorksTitle1"
+              >Cómo Funciona</span
+            >
+            <span data-lang="howItWorksTitle2">en 3 Simples Pasos</span>
+          </h2>
+          <p
+            class="text-purple-200 max-w-3xl mx-auto"
+            data-lang="howItWorksDescription"
+          >
+            Convierte cualquier retrato nítido en un elegante concepto de figura
+            en segundos. Nuestro proceso está diseñado para ser rápido, fácil y
+            divertido.
+          </p>
+        </div>
+
+        <!-- Horizontal Step-by-Step Guide -->
+        <div class="relative mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Arrow connecting Step 1 and 2 -->
+          <div
+            class="hidden md:block absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 -mt-16 text-purple-500/50"
+          >
+            <i class="fas fa-arrow-right text-4xl"></i>
+          </div>
+          <!-- Arrow connecting Step 2 and 3 -->
+          <div
+            class="hidden md:block absolute top-1/2 right-1/3 transform translate-x-1/2 -translate-y-1/2 -mt-16 text-purple-500/50"
+          >
+            <i class="fas fa-arrow-right text-4xl"></i>
+          </div>
+
+          <!-- Step 1 -->
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6 flex flex-col items-center text-center"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 bg-purple-600 rounded-full text-2xl font-bold ring-4 ring-purple-600/30"
+            >
+              1
+            </div>
+            <h3 class="text-xl font-semibold mb-2" data-lang="step1Title">
+              Sube tu Foto
+            </h3>
+            <p class="text-purple-300 text-sm mb-4" data-lang="step1Desc">
+              Elige una foto nítida y de frente. Los archivos JPG o PNG
+              funcionan mejor.
+            </p>
+            <img
+              src="/img/howto-upload.webp"
+              alt="Sube una foto de retrato nítida"
+              class="rounded-lg w-full bg-black/20"
+            />
+          </div>
+
+          <!-- Step 2 -->
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6 flex flex-col items-center text-center"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 bg-purple-600 rounded-full text-2xl font-bold ring-4 ring-purple-600/30"
+            >
+              2
+            </div>
+            <h3 class="text-xl font-semibold mb-2" data-lang="step2Title">
+              Genera el Diseño
+            </h3>
+            <p class="text-purple-300 text-sm mb-4" data-lang="step2Desc">
+              Nuestra IA se pone a trabajar, transformando tu imagen en un
+              concepto de figura.
+            </p>
+            <img
+              src="/img/howto-generate.webp"
+              alt="La IA genera el diseño de la figura"
+              class="rounded-lg w-full bg-black/20"
+            />
+          </div>
+
+          <!-- Step 3 -->
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6 flex flex-col items-center text-center"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 bg-purple-600 rounded-full text-2xl font-bold ring-4 ring-purple-600/30"
+            >
+              3
+            </div>
+            <h3 class="text-xl font-semibold mb-2" data-lang="step3Title">
+              Descarga el Resultado
+            </h3>
+            <p class="text-purple-300 text-sm mb-4" data-lang="step3Desc">
+              Guarda tu imagen de alta resolución para uso personal o comercial.
+            </p>
+            <img
+              src="/img/howto-download.webp"
+              alt="Descarga la imagen final de alta resolución"
+              class="rounded-lg w-full bg-black/20"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing Section -->
+      <section class="mt-24 text-center" aria-labelledby="pricing-title">
+        <h2
+          id="pricing-title"
+          class="text-3xl font-bold mb-12"
+          data-lang="pricingTitle"
+        >
+          Precios Simples
+        </h2>
+        <div
+          class="max-w-2xl mx-auto grid md:grid-cols-2 gap-8"
+          role="list"
+          aria-label="Pricing plans"
+        >
+          <article
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/30 flex flex-col"
+            role="listitem"
+          >
+            <h3 class="text-2xl font-bold mb-4" data-lang="freeTrial">
+              Prueba Gratis
+            </h3>
+            <p class="text-4xl font-bold mb-4">$0</p>
+            <ul
+              class="space-y-3 mb-8 text-left flex-grow"
+              role="list"
+              aria-label="Free trial features"
+            >
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="free1">2 Generaciones de Figuras Gratis</span>
+              </li>
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="free2">Descargas en Alta Resolución</span>
+              </li>
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="free3">Procesamiento Instantáneo</span>
+              </li>
+            </ul>
+            <button
+              class="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all mt-auto"
+              data-lang="getStarted"
+              aria-label="Start with free trial"
+            >
+              Comenzar
+            </button>
+          </article>
+          <article
+            class="bg-gradient-to-br from-purple-800/50 to-pink-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-400/50 transform scale-105 flex flex-col"
+            role="listitem"
+          >
+            <div
+              class="bg-yellow-500 text-black text-sm font-bold px-3 py-1 rounded-full inline-block mb-4"
+              data-lang="popular"
+            >
+              POPULAR
+            </div>
+            <h3 class="text-2xl font-bold mb-4" data-lang="proPack">
+              Paquete Pro
+            </h3>
+            <p class="text-4xl font-bold mb-4">$5</p>
+            <ul
+              class="space-y-3 mb-8 text-left flex-grow"
+              role="list"
+              aria-label="Pro pack features"
+            >
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="pro1">5 Generaciones de Figuras</span>
+              </li>
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="pro2">Procesamiento Prioritario</span>
+              </li>
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="pro3">Múltiples Estilos</span>
+              </li>
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span data-lang="pro4">Licencia de Uso Comercial</span>
+              </li>
+            </ul>
+            <button
+              id="buyCreditsBtn"
+              class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 mt-auto"
+              data-lang="buyCredits"
+              aria-label="Purchase pro pack credits"
+            >
+              Comprar Créditos
+            </button>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Payment Modal (Hidden by default) -->
+    <div
+      id="paymentModal"
+      class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+    >
+      <div
+        class="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-purple-500/30"
+      >
+        <h3 class="text-2xl font-bold mb-6" data-lang="completePayment">
+          Completa Tu Compra
+        </h3>
+        <div class="bg-purple-900/30 rounded-lg p-4 mb-6">
+          <p class="text-sm text-purple-300 mb-2" data-lang="purchasing">
+            Estás comprando:
+          </p>
+          <p class="text-xl font-bold" data-lang="creditPackage">
+            5 Créditos de Figuras - $5.00
+          </p>
+        </div>
+        <form id="paymentForm">
+          <div class="mb-4">
+            <label class="block text-sm font-medium mb-2" data-lang="cardNumber"
+              >Número de Tarjeta</label
+            >
+            <input
+              type="text"
+              placeholder="1234 5678 9012 3456"
+              class="w-full px-4 py-3 bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-4 mb-4">
+            <div>
+              <label class="block text-sm font-medium mb-2" data-lang="expiry"
+                >Vencimiento</label
+              >
+              <input
+                type="text"
+                placeholder="MM/AA"
+                class="w-full px-4 py-3 bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2">CVV</label>
+              <input
+                type="text"
+                placeholder="123"
+                class="w-full px-4 py-3 bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <button
+              type="submit"
+              class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
+              data-lang="pay"
+            >
+              Pagar $5.00
+            </button>
+            <button
+              type="button"
+              id="cancelPayment"
+              class="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all"
+              data-lang="cancel"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+        <p class="text-xs text-purple-400 mt-4 text-center">
+          <i class="fas fa-lock mr-1"></i
+          ><span data-lang="securePayment">Pago seguro con Stripe</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer
+      class="relative z-10 mt-20 px-6 py-12 lg:px-12 border-t border-purple-800/30"
+      role="contentinfo"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <i
+            class="fas fa-cube text-2xl text-purple-400"
+            aria-hidden="true"
+          ></i>
+          <span class="text-xl font-bold gradient-text">Toyrender</span>
+        </div>
+        <p class="text-purple-300 mb-6" data-lang="copyright">
+          © 2025 Toyrender.com. Todos los derechos reservados.
+        </p>
+        <nav
+          class="flex justify-center space-x-6 text-purple-400"
+          role="navigation"
+          aria-label="Footer navigation"
+        >
+          <a
+            href="#"
+            class="hover:text-purple-300 transition-colors"
+            data-lang="terms"
+            >Términos</a
+          >
+          <a
+            href="#"
+            class="hover:text-purple-300 transition-colors"
+            data-lang="privacy"
+            >Privacidad</a
+          >
+          <a
+            href="#"
+            class="hover:text-purple-300 transition-colors"
+            data-lang="contact"
+            >Contacto</a
+          >
+          <a href="#" class="hover:text-purple-300 transition-colors">FAQ</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      // Language translations
+      const translations = {
+        en: {
+          credits: "Free Credits",
+          signIn: "Sign In",
+          heroTitle1: "Transform Yourself into a",
+          heroTitle2: "Collectible Figurine",
+          heroDescription:
+            "Powered by advanced AI, we turn your photos into stunning 1:7 scale figurine designs in seconds. Perfect for collectors, gifts, or just for fun!",
+          feature1: "Instant Generation",
+          feature2: "AI-Powered Design",
+          feature3: "High-Res Download",
+          uploadTitle: "Upload Your Photo",
+          uploadDescription: "Drag & drop your photo here or click to browse",
+          choosePhoto: "Choose Photo",
+          fileSupport: "Supports JPG, PNG up to 10MB",
+          originalPhoto: "Original Photo",
+          figurinePreview: "Figurine Preview",
+          creating: "Creating your figurine...",
+          generate: "Generate Figurine",
+          download: "Download",
+          tryAnother: "Try Another",
+          examplesTitle: "See What Others Created",
+          howItWorksTitle1: "How It Works",
+          howItWorksTitle2: "in 3 Simple Steps",
+          howItWorksDescription:
+            "Turn any clear portrait into a stylish figurine concept in seconds. Our process is designed to be fast, easy, and fun.",
+          step1Title: "Upload Photo",
+          step1Desc:
+            "Choose a clear, forward-facing photo. JPG or PNG files work best.",
+          step2Title: "Generate Design",
+          step2Desc:
+            "Our AI gets to work, transforming your image into a figurine concept.",
+          step3Title: "Download Result",
+          step3Desc:
+            "Save your high-resolution image for personal or commercial use.",
+          pricingTitle: "Simple Pricing",
+          freeTrial: "Free Trial",
+          free1: "2 Free Figurine Generations",
+          free2: "High-Resolution Downloads",
+          free3: "Instant Processing",
+          getStarted: "Get Started",
+          popular: "POPULAR",
+          proPack: "Pro Pack",
+          pro1: "5 Figurine Generations",
+          pro2: "Priority Processing",
+          pro3: "Multiple Styles",
+          pro4: "Commercial Use License",
+          buyCredits: "Buy Credits",
+          completePayment: "Complete Your Purchase",
+          purchasing: "You're purchasing:",
+          creditPackage: "5 Figurine Credits - $5.00",
+          cardNumber: "Card Number",
+          expiry: "Expiry",
+          pay: "Pay $5.00",
+          cancel: "Cancel",
+          securePayment: "Secure payment powered by Stripe",
+          copyright: "© 2025 Toyrender.com. All rights reserved.",
+          terms: "Terms",
+          privacy: "Privacy",
+          contact: "Contact",
+          noCreditsAlert:
+            "No credits remaining! Please purchase more credits to continue.",
+          paymentSuccessAlert:
+            "Payment successful! 5 credits have been added to your account.",
+          invalidFileAlert: "Please upload an image file",
+          fileSizeAlert: "File size must be less than 10MB",
+        },
+        es: {
+          credits: "Créditos Gratis",
+          signIn: "Iniciar Sesión",
+          heroTitle1: "Transfórmate en una",
+          heroTitle2: "Figura Coleccionable",
+          heroDescription:
+            "Con IA avanzada, convertimos tus fotos en diseños de figuras a escala 1:7 en segundos. ¡Perfecto para coleccionistas, regalos o solo por diversión!",
+          feature1: "Generación Instantánea",
+          feature2: "Diseño con IA",
+          feature3: "Descarga en Alta Resolución",
+          uploadTitle: "Sube Tu Foto",
+          uploadDescription:
+            "Arrastra y suelta tu foto aquí o haz clic para buscar",
+          choosePhoto: "Elegir Foto",
+          fileSupport: "Soporta JPG, PNG hasta 10MB",
+          originalPhoto: "Foto Original",
+          figurinePreview: "Vista Previa de Figura",
+          creating: "Creando tu figura...",
+          generate: "Generar Figura",
+          download: "Descargar",
+          tryAnother: "Probar Otra",
+          examplesTitle: "Mira lo que Otros Crearon",
+          howItWorksTitle1: "Cómo Funciona",
+          howItWorksTitle2: "en 3 Simples Pasos",
+          howItWorksDescription:
+            "Convierte cualquier retrato nítido en un elegante concepto de figura en segundos. Nuestro proceso está diseñado para ser rápido, fácil y divertido.",
+          step1Title: "Sube tu Foto",
+          step1Desc:
+            "Elige una foto nítida y de frente. Los archivos JPG o PNG funcionan mejor.",
+          step2Title: "Genera el Diseño",
+          step2Desc:
+            "Nuestra IA se pone a trabajar, transformando tu imagen en un concepto de figura.",
+          step3Title: "Descarga el Resultado",
+          step3Desc:
+            "Guarda tu imagen de alta resolución para uso personal o comercial.",
+          pricingTitle: "Precios Simples",
+          freeTrial: "Prueba Gratis",
+          free1: "2 Generaciones de Figuras Gratis",
+          free2: "Descargas en Alta Resolución",
+          free3: "Procesamiento Instantáneo",
+          getStarted: "Comenzar",
+          popular: "POPULAR",
+          proPack: "Paquete Pro",
+          pro1: "5 Generaciones de Figuras",
+          pro2: "Procesamiento Prioritario",
+          pro3: "Múltiples Estilos",
+          pro4: "Licencia de Uso Comercial",
+          buyCredits: "Comprar Créditos",
+          completePayment: "Completa Tu Compra",
+          purchasing: "Estás comprando:",
+          creditPackage: "5 Créditos de Figuras - $5.00",
+          cardNumber: "Número de Tarjeta",
+          expiry: "Vencimiento",
+          pay: "Pagar $5.00",
+          cancel: "Cancelar",
+          securePayment: "Pago seguro con Stripe",
+          copyright: "© 2025 Toyrender.com. Todos los derechos reservados.",
+          terms: "Términos",
+          privacy: "Privacidad",
+          contact: "Contacto",
+          noCreditsAlert:
+            "¡No quedan créditos! Por favor compra más créditos para continuar.",
+          paymentSuccessAlert:
+            "¡Pago exitoso! Se han añadido 5 créditos a tu cuenta.",
+          invalidFileAlert: "Por favor sube un archivo de imagen",
+          fileSizeAlert: "El archivo debe ser menor a 10MB",
+        },
+      };
+
+      // State management
+      let currentLang = "es";
+      let freeCredits = 2;
+      let currentFile = null;
+
+      // DOM elements
+      const langToggle = document.getElementById("langToggle");
+      const uploadArea = document.getElementById("uploadArea");
+      const fileInput = document.getElementById("fileInput");
+      const previewSection = document.getElementById("previewSection");
+      const originalPreview = document.getElementById("originalPreview");
+      const resultPreview = document.getElementById("resultPreview");
+      const loadingSpinner = document.getElementById("loadingSpinner");
+      const generateBtn = document.getElementById("generateBtn");
+      const downloadBtn = document.getElementById("downloadBtn");
+      const resetBtn = document.getElementById("resetBtn");
+      const creditsCount = document.getElementById("creditsCount");
+      const paymentModal = document.getElementById("paymentModal");
+      const buyCreditsBtn = document.getElementById("buyCreditsBtn");
+      const cancelPayment = document.getElementById("cancelPayment");
+      const paymentForm = document.getElementById("paymentForm");
+
+      // Language switching
+      function updateLanguage() {
+        currentLang = langToggle.checked ? "es" : "en";
+        document.documentElement.lang = currentLang;
+
+        document.querySelectorAll("[data-lang]").forEach((element) => {
+          const key = element.getAttribute("data-lang");
+          if (translations[currentLang] && translations[currentLang][key]) {
+            element.textContent = translations[currentLang][key];
+          }
+        });
+
+        document.title =
+          currentLang === "en"
+            ? "Toyrender AI Figurine Generator – Turn Photos into Collectible Figures"
+            : "Toyrender - Generador de Figuras con IA – Convierte Fotos en Figuras Coleccionables";
+      }
+
+      langToggle.addEventListener("change", updateLanguage);
+
+      // File upload handling
+      uploadArea.addEventListener("click", () => fileInput.click());
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("dragleave", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+          handleFile(files[0]);
+        }
+      });
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) {
+          handleFile(e.target.files[0]);
+        }
+      });
+
+      function handleFile(file) {
+        if (!file.type.startsWith("image/")) {
+          alert(translations[currentLang].invalidFileAlert);
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          alert(translations[currentLang].fileSizeAlert);
+          return;
+        }
+        currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          originalPreview.src = e.target.result;
+          uploadArea.classList.add("hidden");
+          previewSection.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Generate figurine
+      generateBtn.addEventListener("click", async () => {
+        if (freeCredits <= 0) {
+          alert(translations[currentLang].noCreditsAlert);
+          paymentModal.classList.remove("hidden");
+          return;
+        }
+        generateBtn.disabled = true;
+        loadingSpinner.classList.remove("hidden");
+        resultPreview.classList.add("hidden");
+        downloadBtn.classList.add("hidden");
+
+        setTimeout(() => {
+          resultPreview.src = originalPreview.src;
+          resultPreview.classList.remove("hidden");
+          loadingSpinner.classList.add("hidden");
+          downloadBtn.classList.remove("hidden");
+          generateBtn.disabled = false;
+          freeCredits--;
+          creditsCount.textContent = freeCredits;
+          if (freeCredits === 0) {
+            creditsCount.parentElement.classList.add(
+              "bg-red-600/30",
+              "border-red-500/50"
+            );
+            creditsCount.parentElement.classList.remove(
+              "bg-purple-600/30",
+              "border-purple-500/50"
+            );
+          }
+        }, 3000);
+      });
+
+      // Download functionality
+      downloadBtn.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.download = "figurine-render.png";
+        link.href = resultPreview.src;
+        link.click();
+      });
+
+      // Reset
+      resetBtn.addEventListener("click", () => {
+        uploadArea.classList.remove("hidden");
+        previewSection.classList.add("hidden");
+        fileInput.value = "";
+        currentFile = null;
+        resultPreview.src = "";
+        originalPreview.src = "";
+      });
+
+      // Payment handling
+      buyCreditsBtn.addEventListener("click", () =>
+        paymentModal.classList.remove("hidden")
+      );
+      cancelPayment.addEventListener("click", () =>
+        paymentModal.classList.add("hidden")
+      );
+      paymentForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert(translations[currentLang].paymentSuccessAlert);
+        freeCredits += 5;
+        creditsCount.textContent = freeCredits;
+        creditsCount.parentElement.classList.remove(
+          "bg-red-600/30",
+          "border-red-500/50"
+        );
+        creditsCount.parentElement.classList.add(
+          "bg-purple-600/30",
+          "border-purple-500/50"
+        );
+        paymentModal.classList.add("hidden");
+      });
+      paymentModal.addEventListener("click", (e) => {
+        if (e.target === paymentModal) {
+          paymentModal.classList.add("hidden");
+        }
+      });
+
+      // Initialize language on load
+      updateLanguage();
+    </script>
+  </body>
+</html>
