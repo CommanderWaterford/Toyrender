@@ -1,37 +1,124 @@
 // --- Imports ---
-require("dotenv").config();
+require("dotenv").config({ path: "/var/www/toyrender.com/.env" });
+console.log(
+  "API Key loaded:",
+  process.env.GEMINI_API_KEY
+    ? "Yes (length: " + process.env.GEMINI_API_KEY.length + ")"
+    : "No"
+);
+
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 const cors = require("cors");
 const helmet = require("helmet");
+const crypto = require("crypto");
+const sharp = require("sharp");
 const rateLimit = require("express-rate-limit");
-const { GoogleGenerativeAI } = require("@google/generative-ai"); // Correct SDK import
+const Bottleneck = require("bottleneck"); // keep if not already required at top
+const limiter = new Bottleneck({ maxConcurrent: 1, minTime: 1500 });
+const FIGURINE_PROMPT1 = `Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.`;
 
-// --- App Initialization & Security Middleware ---
+const { GoogleGenAI } = require("@google/genai");
+
+// --- App Initialization ---
 const app = express();
 const PORT = process.env.PORT || 3060;
-app.use(helmet());
-const corsOptions = { origin: process.env.CORS_ORIGIN || "*" };
+
+app.set("trust proxy", 1);
+
+// --- Security Middleware (Modified for proper static file serving) ---
+app.use(
+  helmet({
+    contentSecurityPolicy: false, // Disable CSP for now to avoid blocking scripts
+  })
+);
+
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || "*",
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+};
 app.use(cors(corsOptions));
+
+function parseQuotaViolations(err) {
+  const details = err?.error?.details || [];
+  const qf = details.find((d) => (d["@type"] || "").includes("QuotaFailure"));
+  const viol = qf?.violations || [];
+  const ids = viol.map((v) => v.quotaId || "");
+  return {
+    violations: viol,
+    isDaily: ids.some((id) => id.includes("PerDay")),
+    isPerMinute: ids.some((id) => id.includes("PerMinutePerProjectPerModel")),
+    isInputTokensPerMinute: ids.some((id) =>
+      id.toLowerCase().includes("inputtokenspermodelperminute")
+    ),
+  };
+}
+
+function retryDelayMs(err, def = 30000) {
+  const details = err?.error?.details || [];
+  const ri = details.find((d) => (d["@type"] || "").includes("RetryInfo"));
+  const sec = parseInt((ri?.retryDelay || "").match(/(\d+)s/)?.[1] || "", 10);
+  return Number.isFinite(sec) ? sec * 1000 : def;
+}
+
+// Retry ONLY when it's a per-minute issue; bail fast on daily cap
+async function withBackoff(fn, tries = 2) {
+  for (let i = 0; i < tries; i++) {
+    try {
+      return await fn();
+    } catch (e) {
+      if (e?.status !== 429) throw e;
+      const q = parseQuotaViolations(e);
+      console.warn("429 quota:", q);
+      if (q.isDaily) {
+        // daily cap can't be retried
+        const err = new Error("DAILY_QUOTA_EXCEEDED");
+        err.status = 429;
+        err.reason = "daily";
+        throw err;
+      }
+      await new Promise((r) => setTimeout(r, retryDelayMs(e, 30000)));
+    }
+  }
+  const err = new Error("RATE_LIMITED_AFTER_RETRIES");
+  err.status = 429;
+  throw err;
+}
+// --- Rate Limiting ---
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 10, // AI calls are expensive, so keep the limit reasonable
+  max: 10,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Too many requests, please try again in 15 minutes." },
 });
-app.use("/api/", apiLimiter);
-app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
-// --- Multer Configuration for Secure Uploads ---
-const uploadsDir = path.join(__dirname, "public/uploads");
-const resultsDir = path.join(__dirname, "public/results");
+// Apply rate limiter ONLY to API routes
+app.use("/api/", apiLimiter);
+
+// --- Body Parser ---
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// --- Static Files (IMPORTANT: Must come BEFORE API routes) ---
+// app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname)));
+
+// --- Multer Configuration ---
+// Debug first - add this at the top of your server file
+console.log("Current directory:", __dirname);
+console.log("Process CWD:", process.cwd());
+const publicDir = __dirname; // Already in public
+const uploadsDir = path.join(publicDir, "uploads");
+const resultsDir = path.join(publicDir, "results");
+
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 if (!fs.existsSync(resultsDir)) fs.mkdirSync(resultsDir, { recursive: true });
-const MAX_SIZE = parseInt(process.env.MAX_FILE_SIZE_MB) * 1024 * 1024;
+
+const MAX_SIZE = parseInt(process.env.MAX_FILE_SIZE_MB || 10) * 1024 * 1024;
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, uploadsDir),
@@ -58,9 +145,18 @@ const upload = multer({
 });
 
 // --- Google Gemini AI Initialization ---
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
 
-// Helper function to convert file buffer to GenerativePart
+console.log(
+  "GEMINI_KEY_SHA256_8:",
+  crypto
+    .createHash("sha256")
+    .update(process.env.GEMINI_API_KEY || "")
+    .digest("hex")
+    .slice(0, 8)
+);
+
+// Helper function
 function fileToGenerativePart(buffer, mimeType) {
   return {
     inlineData: {
@@ -70,89 +166,171 @@ function fileToGenerativePart(buffer, mimeType) {
   };
 }
 
-// --- API Route for Image Generation ---
-app.post("/api/generate", (req, res) => {
-  const multerUpload = upload.single("photo");
+function timeout(ms) {
+  return new Promise((_, rej) =>
+    setTimeout(() => rej(new Error("Request timed out")), ms)
+  );
+}
 
-  multerUpload(req, res, async function (err) {
-    if (err) {
-      return res.status(400).json({ error: err.message });
-    }
-    if (!req.file) {
-      return res.status(400).json({ error: "No image file uploaded." });
-    }
+// --- API Routes (IMPORTANT: Must come BEFORE catch-all route) ---
+app.post("/api/generate", upload.single("photo"), async (req, res) => {
+  console.log("=== /api/generate POST received ===");
+
+  if (!req.file) {
+    console.log("No file in request");
+    return res.status(400).json({ error: "No file uploaded" });
+  }
+
+  try {
+    // ⭐ CHANGE: use the uploaded file (not Example1.jpg) and downscale to cut input-tokens/min
 
     const inputPath = req.file.path;
+    const raw = fs.readFileSync(inputPath);
 
+    // Try to use sharp; if unavailable, fall back to original bytes
+    let resizedBuf = raw;
     try {
-      // 1. Initialize the correct Gemini model
-      // The model you specified is in preview. A stable public alternative is gemini-1.5-flash-latest.
-      // We will use your specified model name. If it fails, try "gemini-1.5-flash-latest".
-      const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash-latest",
-      });
-
-      // 2. Prepare the prompt and image data for the API
-      const imageBuffer = fs.readFileSync(inputPath);
-      const imagePart = fileToGenerativePart(imageBuffer, req.file.mimetype);
-      const promptText =
-        "A high-quality, 1:7 scale collectible figurine of the person in the image. The figure should be standing on a simple, circular white display base. Clean studio lighting, detailed 3D render, photorealistic style.";
-
-      const promptParts = [promptText, imagePart];
-
-      // 3. Call the Gemini API
-      console.log("Sending request to Google Gemini API...");
-      const result = await model.generateContent(promptParts);
-      const response = result.response;
-
-      // 4. Find and process the returned image data
-      const imagePartResponse = response.candidates[0].content.parts.find(
-        (part) => part.inlineData
+      // lazy require guards against “sharp is not defined” if the top import didn’t load
+      const s = sharp || require("sharp");
+      resizedBuf = await s(raw)
+        .resize({
+          width: 1280,
+          height: 1280,
+          fit: "inside",
+          withoutEnlargement: true,
+        })
+        .jpeg({ quality: 80 })
+        .toBuffer();
+    } catch (e) {
+      console.warn(
+        "sharp unavailable/failed, using original image:",
+        e.message
       );
-
-      if (!imagePartResponse || !imagePartResponse.inlineData) {
-        // If the model returns text instead of an image (e.g., for a safety reason), handle it gracefully.
-        const textResponse = response.text();
-        console.error(
-          "API did not return an image. Text response:",
-          textResponse
-        );
-        throw new Error(
-          "The AI model did not generate an image. It may have refused the request. Response: " +
-            textResponse
-        );
-      }
-
-      const imageData = imagePartResponse.inlineData.data;
-      const imageBufferOut = Buffer.from(imageData, "base64");
-
-      // 5. Save the generated image
-      const outputFilename = `result-${Date.now()}.png`;
-      const outputPath = path.join(resultsDir, outputFilename);
-      fs.writeFileSync(outputPath, imageBufferOut);
-
-      // 6. Clean up the original uploaded file
-      fs.unlinkSync(inputPath);
-
-      // 7. Send the URL of the new image back to the frontend
-      const resultUrl = `/results/${outputFilename}`;
-      return res.status(200).json({ imageUrl: resultUrl });
-    } catch (apiErr) {
-      console.error("Gemini API Error:", apiErr);
-      if (fs.existsSync(inputPath)) {
-        fs.unlinkSync(inputPath); // Clean up on error
-      }
-      return res
-        .status(500)
-        .json({ error: "Failed to generate image. " + apiErr.message });
     }
-  });
+
+    // ⭐ CHANGE: correct mime → we produced JPEG
+
+    const prompt =
+      (req.body.prompt && req.body.prompt.trim()) || FIGURINE_PROMPT1;
+
+    const parts = [
+      { text: prompt },
+      {
+        inlineData: {
+          mimeType: "image/jpeg",
+          data: resizedBuf.toString("base64"),
+        },
+      },
+    ];
+
+    // ⭐ CHANGE: call model with throttle + backoff; send a JSON response
+    const response = await limiter.schedule(() =>
+      withBackoff(() =>
+        ai.models.generateContent({
+          model: "gemini-2.5-flash-image-preview",
+          contents: [{ role: "user", parts }],
+        })
+      )
+    );
+
+    // Handle response (text or generated image)
+    const cand = response?.candidates?.[0]?.content?.parts || [];
+    let outImagePath = null;
+    let outText = "";
+
+    for (const part of cand) {
+      if (part.text) outText += part.text + "\n";
+      else if (part.inlineData?.data) {
+        const buffer = Buffer.from(part.inlineData.data, "base64");
+        const fname = `gemini-output-${Date.now()}.png`;
+        outImagePath = path.join(resultsDir, fname);
+        fs.writeFileSync(outImagePath, buffer);
+      }
+    }
+
+    return res.json({
+      ok: true,
+      text: outText.trim(),
+      imageUrl: outImagePath ? "/results/" + path.basename(outImagePath) : null,
+    });
+  } catch (e) {
+    console.error("Generation error:", e?.message || e);
+    // Pass through 429 so the client can show a clear message
+    return res.status(e?.status || 500).json({
+      ok: false,
+      status: e?.status || 500,
+      error: e?.message || "Generation failed",
+      reason: e?.reason || null, // "daily" when daily cap
+      details: e?.error?.details || null,
+    });
+  }
 });
 
-// --- Frontend & Server Startup ---
+app.get("/api/probe-image", async (_req, res) => {
+  try {
+    // 1x1 transparent PNG
+    const onePx =
+      "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNgYAAAAAMAASsJTYQAAAAASUVORK5CYII=";
+
+    const r = await ai.models.generateContent({
+      model: "gemini-2.5-flash-image-preview",
+      contents: [
+        {
+          role: "user",
+          parts: [
+            { text: "Generate a tiny sticker-style icon based on this pixel." },
+            { inlineData: { mimeType: "image/png", data: onePx } },
+          ],
+        },
+      ],
+    });
+
+    res.json({
+      ok: true,
+      got_candidates: Array.isArray(r?.candidates),
+    });
+  } catch (e) {
+    res.status(e?.status || 500).json({
+      ok: false,
+      status: e?.status || 500,
+      error: e?.message || "probe-image failed",
+      details: e?.error?.details || null,
+    });
+  }
+});
+
+// --- Test Route ---
+app.get("/api/probe", async (_req, res) => {
+  try {
+    const r = await ai.models.generateContent({
+      model: "gemini-2.5-flash",
+      contents: [{ role: "user", parts: [{ text: "ping" }] }],
+    });
+    res.json({ ok: true, message: "probe ok" });
+  } catch (e) {
+    res.status(e?.status || 500).json({
+      ok: false,
+      status: e?.status,
+      error: e?.message,
+      details: e?.error?.details || null,
+    });
+  }
+});
+
+// --- Catch-all route (MUST be LAST) ---
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
-app.listen(PORT, () => {
-  console.log(`Server is running securely on http://localhost:${PORT}`);
+
+// --- Error Handling Middleware ---
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: "Something went wrong!" });
 });
+
+// --- Server Startup ---
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
+server.requestTimeout = 300000; // 300s
+server.headersTimeout = 320000; // a bit higher than requestTimeout
