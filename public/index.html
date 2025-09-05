@@ -312,6 +312,27 @@
         opacity: 0.6;
         animation: float 20s ease-in-out infinite;
       }
+      /* Testimonials horizontal scroll */
+      @keyframes marquee {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+      .scroll-container {
+        will-change: transform;
+        animation: marquee 40s linear infinite;
+      }
+      .scroll-container:hover {
+        animation-play-state: paused;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-container {
+          animation: none;
+        }
+      }
     </style>
   </head>
   <body
