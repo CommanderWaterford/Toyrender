@@ -44,6 +44,7 @@
       content="AI-powered figurine transformation service"
     />
     <meta property="og:locale" content="en_US" />
+    <meta name="msvalidate.01" content="F4F1FB69A98B092B32B64CAE7FA3EE25" />
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -352,6 +353,10 @@
       }
       .testimonial-track.dragging {
         cursor: grabbing !important;
+      }
+
+      .testimonial-track.auto-scrolling {
+        scroll-snap-type: none;
       }
     </style>
     <script
@@ -1256,7 +1261,7 @@
                 <li>Backlight (window behind you) and dim rooms.</li>
                 <li>Motion blur or heavy filters/beauty effects.</li>
                 <li>Busy backgrounds that hide your outline.</li>
-                <li>Group shots (works best with one person).</li>
+                <li>Shots with little children (currently not allowed).</li>
               </ul>
             </div>
           </div>
@@ -1966,6 +1971,98 @@
               el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
           });
         });
+      })();
+
+      // autoscroll
+      /* ----------------- Testimonials auto-scroll (seamless loop) ----------------- */
+
+      // === AUTOPLAY testimonials (seamless + robust) ===
+      (() => {
+        const track = document.querySelector(
+          ".testimonial-track[data-drag-scroll]"
+        );
+        if (!track) return;
+
+        // Optional speed via data-auto-speed="0.6" (px per frame). Default ~0.5.
+        const speed = parseFloat(track.dataset.autoSpeed) || 0.5;
+
+        // Duplicate children once so we can loop seamlessly (idempotent).
+        if (!track.__duplicated) {
+          const kids = Array.from(track.children);
+          const frag = document.createDocumentFragment();
+          kids.forEach((k) => {
+            const clone = k.cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            frag.appendChild(clone);
+          });
+          track.appendChild(frag);
+          track.__duplicated = true;
+        }
+
+        let halfWidth = 0;
+        let playing = true; // force-start (ignore prefers-reduced-motion)
+
+        const measure = () => {
+          // Wait for images to layout
+          halfWidth = track.scrollWidth / 2;
+          // Only autoplay if actual overflow exists
+          playing = halfWidth > track.clientWidth + 2;
+          track.classList.toggle("auto-scrolling", playing); // disables snap while auto
+        };
+
+        // Run measure after load and on resize/layout changes
+        const afterLoad = () => {
+          measure();
+          // A few re-measures while images settle
+          setTimeout(measure, 200);
+          setTimeout(measure, 600);
+          setTimeout(measure, 1200);
+        };
+        if (document.readyState === "complete") afterLoad();
+        else window.addEventListener("load", afterLoad);
+
+        // Keep measuring if container/cards change size
+        const ro = new ResizeObserver(measure);
+        ro.observe(track);
+
+        // rAF loop
+        const step = () => {
+          if (playing) {
+            let next = track.scrollLeft + speed;
+            if (halfWidth > 0 && next >= halfWidth) next -= halfWidth; // seamless wrap
+            track.scrollLeft = next;
+          }
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+
+        // Pause on user interaction; resume after
+        const pause = () => (playing = false);
+        const resume = () => {
+          measure(); // recompute in case user repositioned
+          playing = halfWidth > track.clientWidth + 2;
+        };
+
+        ["mouseenter", "pointerdown", "focusin", "touchstart"].forEach((evt) =>
+          track.addEventListener(evt, pause, { passive: true })
+        );
+        [
+          "mouseleave",
+          "pointerup",
+          "focusout",
+          "touchend",
+          "touchcancel",
+        ].forEach((evt) =>
+          track.addEventListener(evt, resume, { passive: true })
+        );
+
+        // Arrow buttons should also pause
+        document
+          .querySelector("[data-track-left]")
+          ?.addEventListener("click", pause);
+        document
+          .querySelector("[data-track-right]")
+          ?.addEventListener("click", pause);
       })();
     </script>
   </body>

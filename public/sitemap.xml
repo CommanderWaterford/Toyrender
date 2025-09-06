@@ -1,69 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Homepage -->
+  <!-- Home (EN) -->
   <url>
     <loc>https://toyrender.com/</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2025-09-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
   </url>
 
-  <!-- Privacy Policy -->
+  <!-- Home (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/</loc>
+    <lastmod>2025-09-06</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
+  </url>
+
+  <!-- Privacy -->
   <url>
     <loc>https://toyrender.com/privacy.html</loc>
     <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/privacy.html"/>
   </url>
 
-  <!-- Terms of Service -->
+  <!-- Privacidad -->
+  <url>
+    <loc>https://toyrender.com/privacidad.html</loc>
+    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/privacy.html"/>
+  </url>
+
+  <!-- Terms -->
   <url>
     <loc>https://toyrender.com/terms.html</loc>
     <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
-  <!-- FAQ Section (if exists) -->
+  <!-- Contact (page) -->
   <url>
-    <loc>https://toyrender.com/#faq</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Contact Section (if exists) -->
-  <url>
-    <loc>https://toyrender.com/#contact</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
-  </url>
-
-  <!-- Pricing Section -->
-  <url>
-    <loc>https://toyrender.com/#pricing</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <!-- Examples Gallery Section --> 
- <url>
-    <loc>https://toyrender.com/#examples</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-  </url>
- <url>
     <loc>https://toyrender.com/contact</loc>
-    <lastmod>2025-09-07T12:30:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2025-09-06T12:30:00+00:00</lastmod>
   </url>
-
-
 </urlset>
