@@ -390,24 +390,33 @@
           ></i>
           <span class="text-2xl font-bold gradient-text">Toyrender</span>
         </div>
-        <div class="flex items-center space-x-6">
-          <button
-            id="creditsBtn"
-            class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
-            aria-label="View available credits"
-          >
-            <i class="fas fa-coins mr-2" aria-hidden="true"></i>
-            <span id="creditsCount">2</span>
-            <span>Free Credits</span>
-          </button>
-          <button
-            class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
-            aria-label="Sign in to your account"
-          >
-            <i class="fas fa-user-circle mr-2" aria-hidden="true"></i
-            ><span>Sign In</span>
-          </button>
-        </div>
+
+        <button
+          id="creditsBtn"
+          class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
+          aria-label="View available credits"
+        >
+          <i class="fas fa-coins mr-2" aria-hidden="true"></i>
+          <span id="creditsCount">0</span>
+          <span id="creditsLabel">Credits</span>
+        </button>
+
+        <button
+          id="signInBtn"
+          class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+          aria-label="Sign in to your account"
+        >
+          <i class="fas fa-user-circle mr-2" aria-hidden="true"></i
+          ><span id="authBtnText">Sign In</span>
+        </button>
+
+        <button
+          id="logoutBtn"
+          class="hidden px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all"
+          aria-label="Sign out"
+        >
+          <i class="fas fa-right-from-bracket mr-2"></i><span>Logout</span>
+        </button>
       </div>
     </nav>
 
@@ -879,6 +888,64 @@
         <p class="text-xs text-purple-400 mt-4 text-center">
           <i class="fas fa-lock mr-1"></i
           ><span>Secure payment powered by Stripe</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Auth Modal (Sign In / Register) -->
+    <div
+      id="authModal"
+      class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+    >
+      <div
+        class="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-purple-500/30"
+      >
+        <h3 class="text-2xl font-bold mb-6" id="authTitle">Sign in</h3>
+
+        <form id="authForm" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium mb-2">Email</label>
+            <input
+              id="authEmail"
+              type="email"
+              required
+              class="w-full px-4 py-3 bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-medium mb-2">Password</label>
+            <input
+              id="authPassword"
+              type="password"
+              required
+              minlength="6"
+              class="w-full px-4 py-3 bg-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+
+          <div class="flex gap-3">
+            <button
+              id="authSubmit"
+              type="submit"
+              class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all"
+            >
+              Continue
+            </button>
+            <button
+              type="button"
+              id="authCancel"
+              class="flex-1 py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <p class="text-sm text-purple-300 mt-4">
+          <span id="authToggleText">New here?</span>
+          <button id="authToggleBtn" class="underline hover:text-purple-200">
+            Create an account
+          </button>
         </p>
       </div>
     </div>
@@ -1494,61 +1561,216 @@
     </footer>
 
     <script>
-      // --- State Management ---
-      let freeCredits = 2;
+      /* ----------------------- Helpers ----------------------- */
+      const $ = (sel) => document.querySelector(sel);
+      const fetchJSON = async (url, opts = {}) => {
+        const res = await fetch(url, { credentials: "include", ...opts });
+        let data = null;
+        try {
+          data = await res.json();
+        } catch {}
+        if (!res.ok) {
+          const msg =
+            (data && (data.error || data.message)) ||
+            res.statusText ||
+            "Request failed";
+          const err = new Error(msg);
+          err.status = res.status;
+          err.data = data;
+          throw err;
+        }
+        return data;
+      };
+      function toast(msg) {
+        alert(msg);
+      } // keep it simple; swap for a nicer toast if you like
+
+      /* ----------------------- Auth & Credits UI ----------------------- */
+      let sessionUser = null;
+      let credits = {
+        free_remaining: 0,
+        paid_remaining: 0,
+        free_renew_utc: null,
+      };
+
+      async function refreshSession() {
+        try {
+          const r = await fetchJSON("/auth/me");
+          sessionUser = r.user;
+          credits = r.credits || { remaining: 0 };
+        } catch {
+          sessionUser = null;
+          credits = {
+            free_remaining: 0,
+            paid_remaining: 0,
+            free_renew_utc: null,
+          };
+        }
+        updateAuthUI();
+      }
+
+      function totalCredits() {
+        // credits now is { remaining }
+        return Number(credits?.remaining || 0);
+      }
+      function updateAuthUI() {
+        const total = totalCredits();
+        $("#creditsCount").textContent = total;
+        $("#creditsLabel").textContent = "Credits";
+
+        if (sessionUser) {
+          $("#authBtnText").textContent = sessionUser.email;
+          $("#logoutBtn").classList.remove("hidden");
+          $("#signInBtn").classList.add("bg-slate-700", "hover:bg-slate-600");
+          $("#signInBtn").classList.remove(
+            "bg-gradient-to-r",
+            "from-purple-600",
+            "to-pink-600",
+            "hover:from-purple-700",
+            "hover:to-pink-700"
+          );
+        } else {
+          $("#authBtnText").textContent = "Sign In";
+          $("#logoutBtn").classList.add("hidden");
+          $("#signInBtn").classList.remove(
+            "bg-slate-700",
+            "hover:bg-slate-600"
+          );
+          $("#signInBtn").classList.add(
+            "bg-gradient-to-r",
+            "from-purple-600",
+            "to-pink-600",
+            "hover:from-purple-700",
+            "hover:to-pink-700"
+          );
+        }
+
+        // Visual state if out of credits
+        const creditsBtn = $("#creditsBtn");
+        if (total <= 0) {
+          creditsBtn.classList.add("bg-red-600/30", "border-red-500/50");
+          creditsBtn.classList.remove(
+            "bg-purple-600/30",
+            "border-purple-500/50"
+          );
+        } else {
+          creditsBtn.classList.remove("bg-red-600/30", "border-red-500/50");
+          creditsBtn.classList.add("bg-purple-600/30", "border-purple-500/50");
+        }
+      }
+
+      /* ----------------------- Auth modal logic ----------------------- */
+      const authModal = $("#authModal");
+      const authTitle = $("#authTitle");
+      const authForm = $("#authForm");
+      const authEmail = $("#authEmail");
+      const authPass = $("#authPassword");
+      const authToggleBtn = $("#authToggleBtn");
+      const authToggleText = $("#authToggleText");
+      const authCancel = $("#authCancel");
+
+      let authMode = "login"; // or "register"
+
+      function openAuth(mode = "login") {
+        authMode = mode;
+        authTitle.textContent = mode === "login" ? "Sign in" : "Create account";
+        authToggleText.textContent =
+          mode === "login" ? "New here?" : "Already have an account?";
+        authToggleBtn.textContent =
+          mode === "login" ? "Create an account" : "Sign in";
+        authEmail.value = "";
+        authPass.value = "";
+        authModal.classList.remove("hidden");
+      }
+      function closeAuth() {
+        authModal.classList.add("hidden");
+      }
+
+      $("#signInBtn").addEventListener("click", () => openAuth("login"));
+      $("#logoutBtn").addEventListener("click", async () => {
+        try {
+          await fetchJSON("/auth/logout", { method: "POST" });
+        } catch {}
+        await refreshSession();
+        toast("Signed out");
+      });
+      authCancel.addEventListener("click", closeAuth);
+      authModal.addEventListener("click", (e) => {
+        if (e.target === authModal) closeAuth();
+      });
+      authToggleBtn.addEventListener("click", () =>
+        openAuth(authMode === "login" ? "register" : "login")
+      );
+
+      authForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const payload = {
+          email: authEmail.value.trim(),
+          password: authPass.value,
+        };
+        if (!payload.email || !payload.password) return;
+
+        try {
+          if (authMode === "login") {
+            await fetchJSON("/auth/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            toast("Welcome back!");
+          } else {
+            await fetchJSON("/auth/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            toast("Account created.");
+          }
+          closeAuth();
+          await refreshSession();
+        } catch (err) {
+          toast(err.message || "Authentication failed");
+        }
+      });
+
+      /* ----------------------- Upload & Generate ----------------------- */
+      const uploadArea = $("#uploadArea");
+      const fileInput = $("#fileInput");
+      const previewSection = $("#previewSection");
+      const originalPreview = $("#originalPreview");
+      const resultPreview = $("#resultPreview");
+      const loadingSpinner = $("#loadingSpinner");
+      const generateBtn = $("#generateBtn");
+      const downloadBtn = $("#downloadBtn");
+      const resetBtn = $("#resetBtn");
+
       let currentFile = null;
 
-      // --- DOM Elements ---
-      const uploadArea = document.getElementById("uploadArea");
-      const fileInput = document.getElementById("fileInput");
-      const previewSection = document.getElementById("previewSection");
-      const originalPreview = document.getElementById("originalPreview");
-      const resultPreview = document.getElementById("resultPreview");
-      const loadingSpinner = document.getElementById("loadingSpinner");
-      const generateBtn = document.getElementById("generateBtn");
-      const downloadBtn = document.getElementById("downloadBtn");
-      const resetBtn = document.getElementById("resetBtn");
-      const creditsCount = document.getElementById("creditsCount");
-      const paymentModal = document.getElementById("paymentModal");
-      const buyCreditsBtn = document.getElementById("buyCreditsBtn");
-      const cancelPayment = document.getElementById("cancelPayment");
-      const paymentForm = document.getElementById("paymentForm");
-
-      // --- File Upload Handling ---
       uploadArea.addEventListener("click", () => fileInput.click());
-
       uploadArea.addEventListener("dragover", (e) => {
         e.preventDefault();
         uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
       });
-
       uploadArea.addEventListener("dragleave", () => {
         uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
       });
-
       uploadArea.addEventListener("drop", (e) => {
         e.preventDefault();
         uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
         const files = e.dataTransfer.files;
-        if (files.length > 0) {
-          handleFile(files[0]);
-        }
+        if (files.length > 0) handleFile(files[0]);
       });
-
       fileInput.addEventListener("change", (e) => {
-        if (e.target.files.length > 0) {
-          handleFile(e.target.files[0]);
-        }
+        if (e.target.files.length > 0) handleFile(e.target.files[0]);
       });
 
       function handleFile(file) {
         if (!file.type.startsWith("image/")) {
-          alert("Please upload an image file.");
+          toast("Please upload an image file.");
           return;
         }
         if (file.size > 10 * 1024 * 1024) {
-          // 10MB limit
-          alert("File size must be less than 10MB.");
+          toast("File size must be less than 10MB.");
           return;
         }
 
@@ -1564,80 +1786,81 @@
         reader.readAsDataURL(file);
       }
 
-      // --- Generate Figurine (Connect to Backend) ---
       generateBtn.addEventListener("click", async () => {
-        if (freeCredits <= 0) {
-          alert(
-            "No credits remaining! Please purchase more credits to continue."
-          );
-          paymentModal.classList.remove("hidden");
+        if (!currentFile) {
+          toast("Please choose a file first.");
           return;
         }
-        if (!currentFile) {
-          alert("Please choose a file first.");
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
+        if (totalCredits() <= 0) {
+          toast("No credits remaining. Buy credits or try again tomorrow.");
+          // You can open your payment modal here if you want:
+          // $("#paymentModal").classList.remove("hidden");
           return;
         }
 
-        // Update UI for loading state
+        // Loading UI
         generateBtn.disabled = true;
         resetBtn.disabled = true;
         loadingSpinner.classList.remove("hidden");
         resultPreview.classList.add("hidden");
         downloadBtn.classList.add("hidden");
 
-        // Use FormData to send the file
         const formData = new FormData();
-        formData.append("photo", currentFile); // 'photo' must match the backend's upload.single('photo')
+        formData.append("photo", currentFile);
 
         try {
-          const response = await fetch("/api/generate", {
+          const res = await fetch("/api/generate", {
             method: "POST",
             body: formData,
+            credentials: "include",
           });
 
-          const data = await response.json();
+          const data = await res.json().catch(() => ({}));
 
-          if (!response.ok) {
-            // Display server error message to the user
-            throw new Error(
-              data.error || `HTTP error! Status: ${response.status}`
-            );
+          if (!res.ok) {
+            if (res.status === 401) {
+              openAuth("login");
+              throw new Error("Please sign in.");
+            }
+            if (res.status === 402) {
+              /* out of credits on server */ await refreshSession();
+              throw new Error(data.message || "Out of credits.");
+            }
+            if (res.status === 413) {
+              throw new Error("File too large.");
+            }
+            if (res.status === 429) {
+              throw new Error(data.error || "Rate limited or duplicate image.");
+            }
+            throw new Error(data.error || `HTTP ${res.status}`);
           }
 
-          // Success: Update UI with the result
-          resultPreview.src = data.imageUrl;
-          resultPreview.classList.remove("hidden");
-          downloadBtn.classList.remove("hidden");
-
-          // Deduct credit
-          freeCredits--;
-          creditsCount.textContent = freeCredits;
-          if (freeCredits === 0) {
-            creditsCount.parentElement.classList.add(
-              "bg-red-600/30",
-              "border-red-500/50"
-            );
-            creditsCount.parentElement.classList.remove(
-              "bg-purple-600/30",
-              "border-purple-500/50"
-            );
+          // Success
+          if (data.imageUrl) {
+            resultPreview.src = data.imageUrl;
+            resultPreview.classList.remove("hidden");
+            downloadBtn.classList.remove("hidden");
           }
-        } catch (error) {
-          console.error("Error during generation:", error);
-          alert("Generation failed: " + error.message);
+          // Update credits from server after a successful generation
+          await refreshSession();
+        } catch (err) {
+          console.error(err);
+          toast(err.message || "Generation failed");
         } finally {
-          // Reset UI state regardless of success or failure
           loadingSpinner.classList.add("hidden");
           generateBtn.disabled = false;
           resetBtn.disabled = false;
         }
       });
 
-      // --- Download & Reset ---
       downloadBtn.addEventListener("click", () => {
         const link = document.createElement("a");
         link.href = resultPreview.src;
-        link.download = "toyrender-figurine.png"; // Set a default filename
+        link.download = "toyrender-figurine.png";
         link.click();
       });
 
@@ -1650,39 +1873,24 @@
         resultPreview.src = "";
       });
 
-      // --- Payment Handling (Simulated) ---
-      buyCreditsBtn.addEventListener("click", () =>
-        paymentModal.classList.remove("hidden")
-      );
-      cancelPayment.addEventListener("click", () =>
-        paymentModal.classList.add("hidden")
-      );
-      paymentModal.addEventListener("click", (e) => {
-        if (e.target === paymentModal) paymentModal.classList.add("hidden");
+      // Optional: show a small dialog when clicking credits
+      $("#creditsBtn").addEventListener("click", () => {
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
+        toast(`Credits — ${credits.paid_remaining || 0}`);
       });
-      paymentForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        alert("Payment successful! 5 credits have been added to your account.");
-        freeCredits += 5;
-        creditsCount.textContent = freeCredits;
-        creditsCount.parentElement.classList.remove(
-          "bg-red-600/30",
-          "border-red-500/50"
-        );
-        creditsCount.parentElement.classList.add(
-          "bg-purple-600/30",
-          "border-purple-500/50"
-        );
-        paymentModal.classList.add("hidden");
-      });
-    </script>
-    <script>
+
+      /* ----------------------- Init ----------------------- */
+      refreshSession();
+
+      /* ----------------- Testimonials drag code ----------------- */
       (() => {
-        const friction = 0.92; // inertia friction (lower = longer glide)
-        const wheelBoost = 0.9; // vertical wheel → horizontal speed multiplier
+        const friction = 0.92;
+        const wheelBoost = 0.9;
 
         document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
-          // Improve touch behavior and selection
           el.style.userSelect = "none";
           el.style.touchAction = "pan-x";
 
@@ -1722,7 +1930,7 @@
             if (!isDown) return;
             const dx = e.clientX - startX;
             el.scrollLeft = startLeft - dx;
-            velocity = e.clientX - lastX; // px per frame
+            velocity = e.clientX - lastX;
             lastX = e.clientX;
           });
 
@@ -1739,11 +1947,9 @@
             if (isDown) endDrag({});
           });
 
-          // Turn vertical wheel into horizontal movement (nice on laptop trackpads/mice)
           el.addEventListener(
             "wheel",
             (e) => {
-              // If vertical scroll is dominant, convert to horizontal
               if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                 el.scrollLeft += e.deltaY * wheelBoost;
                 e.preventDefault();
@@ -1752,15 +1958,12 @@
             { passive: false }
           );
 
-          // Optional: arrow keys for accessibility
           el.tabIndex = 0;
           el.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowRight") {
+            if (e.key === "ArrowRight")
               el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
-            }
-            if (e.key === "ArrowLeft") {
+            if (e.key === "ArrowLeft")
               el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
-            }
           });
         });
       })();
