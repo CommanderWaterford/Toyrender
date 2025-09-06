@@ -18,6 +18,13 @@ const sharp = require("sharp");
 const rateLimit = require("express-rate-limit");
 const Bottleneck = require("bottleneck"); // keep if not already required at top
 const limiter = new Bottleneck({ maxConcurrent: 1, minTime: 1500 });
+const uploadLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: parseInt(process.env.MAX_UPLOADS_PER_15M || "12", 10), // POSTs per 15m per IP
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many uploads. Try again in ~15 minutes." },
+});
 const FIGURINE_PROMPT1 = `Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.`;
 
 const { GoogleGenAI } = require("@google/genai");
@@ -64,6 +71,14 @@ process.on("SIGINT", () => {
 process.on("SIGTERM", () => {
   genLogStream.end(() => process.exit(0));
 });
+
+function bodySizeGuard(req, res, next) {
+  const len = Number(req.get("content-length") || 0);
+  if (len && len > MAX_SIZE) {
+    return res.status(413).json({ error: "File too large" });
+  }
+  next();
+}
 
 function parseQuotaViolations(err) {
   const details = err?.error?.details || [];
@@ -159,10 +174,220 @@ if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
 if (!fs.existsSync(resultsDir)) fs.mkdirSync(resultsDir, { recursive: true });
 
 const MAX_SIZE = parseInt(process.env.MAX_FILE_SIZE_MB || 10) * 1024 * 1024;
+
+// ---------- Filename guard (drop near your multer config) ----------
+const forbiddenPrefixes = [
+  // “starts with” — conservative; keeps false positives low
+  "porn",
+  "porno",
+  "xxx",
+  "nsfw",
+  "nude",
+  "naked",
+  "erotic",
+  "erotica",
+  "explicit",
+  "adult",
+  // ES
+  "porno",
+  "desnudo",
+  "desnuda",
+  "desnudos",
+  "desnudas",
+  "erotico",
+  "erótico",
+  "sexual",
+  "sexo",
+  // DE
+  "porno",
+  "pornografie",
+  "nackt",
+  "erotik",
+  "sex",
+  // FR
+  "porno",
+  "pornographie",
+  "nu",
+  "nue",
+  "nus",
+  "érotique",
+  "erotique",
+  "sexe",
+  // PT/IT variants
+  "pornô",
+  "porno",
+  "nudez",
+  "nu",
+  "nua",
+  "nudo",
+  "nuda",
+  "nudi",
+  "nude",
+  "erotico",
+  "erótico",
+  "sessuale",
+  "sesso",
+];
+
+const forbiddenKeywords = [
+  // English
+  "porn",
+  "porno",
+  "pornography",
+  "nsfw",
+  "xxx",
+  "adult",
+  "explicit",
+  "lewd",
+  "hardcore",
+  "softcore",
+  "nude",
+  "nudes",
+  "naked",
+  "topless",
+  "bottomless",
+  "stripper",
+  "striptease",
+  "sex",
+  "sexual",
+  "sext",
+  "onlyfans",
+  "fansly",
+  "camgirl",
+  "webcam",
+  "escort",
+  "fetish",
+  "bdsm",
+  "blowjob",
+  "bj",
+  "handjob",
+  "anal",
+  "creampie",
+  "cum",
+  "cumshot",
+  "facial",
+  "gangbang",
+  // Spanish / Portuguese
+  "porno",
+  "pornografia",
+  "pornografía",
+  "nsfw",
+  "erotico",
+  "erótico",
+  "erotica",
+  "erótica",
+  "desnudo",
+  "desnuda",
+  "desnudos",
+  "desnudas",
+  "desnudez",
+  "nudez",
+  "sexo",
+  "sexual",
+  "webcam",
+  "escort",
+  "fetiche",
+  // German
+  "porno",
+  "pornografie",
+  "nackt",
+  "erotik",
+  "erotisch",
+  "sexuell",
+  "bdsm",
+  "sado",
+  "sex",
+  // French
+  "porno",
+  "pornographie",
+  "nu",
+  "nue",
+  "nus",
+  "nues",
+  "érotique",
+  "erotique",
+  "sexe",
+  "sexuel",
+  // Italian
+  "porno",
+  "pornografia",
+  "nudo",
+  "nuda",
+  "nudi",
+  "nude",
+  "erotico",
+  "sessuale",
+  "sesso",
+].map((s) => s.toLowerCase());
+
+// simple leetspeak map
+const leetMap = new Map(
+  Object.entries({
+    0: "o",
+    1: "i",
+    3: "e",
+    4: "a",
+    5: "s",
+    7: "t",
+    8: "b",
+    9: "g",
+    $: "s",
+    "@": "a",
+  })
+);
+
+function normalizeForCheck(name) {
+  // keep base name without extension
+  const base = (path.parse(name).name || "").toLowerCase();
+
+  // unicode normalize + remove diacritics
+  let s = base.normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
+
+  // swap obvious leetspeak
+  s = s.replace(/[01345789$@]/g, (ch) => leetMap.get(ch) || ch);
+
+  // turn separators to spaces so we keep word boundaries
+  s = s.replace(/[_\.\-\+]+/g, " ");
+
+  // collapse repeats
+  s = s.replace(/([a-z])\1{2,}/g, "$1$1"); // "pooorn" -> "poorn"
+
+  // keep only letters/spaces for tokenizing
+  s = s
+    .replace(/[^a-z\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return s;
+}
+
+function tokenSet(name) {
+  const n = normalizeForCheck(name);
+  return new Set(n.split(" ").filter(Boolean));
+}
+
+function isForbiddenFilename(original) {
+  const trimmed = (original || "").trim().toLowerCase();
+  const firstChunk = trimmed.split(/[^a-z0-9]+/i)[0] || "";
+  const tokens = tokenSet(original);
+
+  // 1) starts-with guard (original, lowercased)
+  if (forbiddenPrefixes.some((p) => firstChunk.startsWith(p))) return true;
+
+  // 2) token-anywhere guard (normalized tokens)
+  for (const t of tokens) {
+    if (forbiddenKeywords.includes(t)) return true;
+  }
+  return false;
+}
+// --------------------------------------------------------------------
+
+// Replace your multer config with this fileFilter
 const upload = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => cb(null, uploadsDir),
     filename: (req, file, cb) => {
+      // never persist the original name
       const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       cb(
         null,
@@ -173,14 +398,17 @@ const upload = multer({
   limits: { fileSize: MAX_SIZE },
   fileFilter: (req, file, cb) => {
     const allowedMimes = ["image/jpeg", "image/png", "image/webp"];
-    if (allowedMimes.includes(file.mimetype)) {
-      cb(null, true);
-    } else {
-      cb(
+    if (!allowedMimes.includes(file.mimetype)) {
+      return cb(
         new Error("Invalid file type. Only JPEG, PNG, and WebP are allowed."),
         false
       );
     }
+    // block special/explicit filenames
+    if (isForbiddenFilename(file.originalname)) {
+      return cb(new Error("Filename not allowed."), false);
+    }
+    cb(null, true);
   },
 });
 
@@ -213,154 +441,162 @@ function timeout(ms) {
 }
 
 // --- API Routes (IMPORTANT: Must come BEFORE catch-all route) ---
-app.post("/api/generate", upload.single("photo"), async (req, res) => {
-  console.log("=== /api/generate POST received ===");
+app.post(
+  "/api/generate",
+  uploadLimiter,
+  bodySizeGuard,
+  upload.single("photo"),
+  async (req, res) => {
+    console.log("=== /api/generate POST received ===");
 
-  const reqId =
-    (crypto.randomUUID && crypto.randomUUID()) ||
-    Date.now() + "-" + Math.random().toString(16).slice(2);
-  const t0 = Date.now();
+    const reqId =
+      (crypto.randomUUID && crypto.randomUUID()) ||
+      Date.now() + "-" + Math.random().toString(16).slice(2);
+    const t0 = Date.now();
 
-  if (!req.file) {
-    console.log("No file in request");
-    return res.status(400).json({ error: "No file uploaded" });
-  }
-
-  try {
-    // Read uploaded file
-    const inputPath = req.file.path;
-    const raw = fs.readFileSync(inputPath);
-
-    // Collect image metadata (best-effort)
-    let meta = {};
-    try {
-      const s = sharp || require("sharp");
-      meta = await s(raw).metadata(); // { format, width, height }
-    } catch (_) {
-      /* ignore */
+    if (!req.file) {
+      console.log("No file in request");
+      return res.status(400).json({ error: "No file uploaded" });
     }
 
-    // Resize/compress to reduce tokens/min
-    let resizedBuf = raw;
     try {
-      const s = sharp || require("sharp");
-      resizedBuf = await s(raw)
-        .resize({
-          width: 1280,
-          height: 1280,
-          fit: "inside",
-          withoutEnlargement: true,
-        })
-        .jpeg({ quality: 80 })
-        .toBuffer();
-    } catch (e) {
-      console.warn(
-        "sharp unavailable/failed, using original image:",
-        e.message
-      );
-    }
+      // Read uploaded file
+      const inputPath = req.file.path;
+      const raw = fs.readFileSync(inputPath);
 
-    // Prompt (default figurine prompt unless client sends one)
-    const prompt =
-      (req.body.prompt && req.body.prompt.trim()) || FIGURINE_PROMPT1;
-
-    // ---- LOG: start
-    logGen({
-      event: "gen_start",
-      reqId,
-      ip: req.ip,
-      key_fp: keyFingerprint(),
-      model: "gemini-2.5-flash-image-preview",
-      file: {
-        name: req.file.originalname,
-        savedAs: req.file.filename,
-        mimetype: req.file.mimetype,
-        size: req.file.size,
-        format: meta.format || null,
-        width: meta.width || null,
-        height: meta.height || null,
-      },
-      prompt_hash: hashPrompt(prompt),
-    });
-    // ---- /LOG
-
-    const parts = [
-      { text: prompt },
-      {
-        inlineData: {
-          mimeType: "image/jpeg",
-          data: resizedBuf.toString("base64"),
-        },
-      },
-    ];
-
-    // Call model with throttle + backoff
-    const response = await limiter.schedule(() =>
-      withBackoff(() =>
-        ai.models.generateContent({
-          model: "gemini-2.5-flash-image-preview",
-          contents: [{ role: "user", parts }],
-        })
-      )
-    );
-
-    // Extract outputs
-    const cand = response?.candidates?.[0]?.content?.parts || [];
-    let outImagePath = null;
-    let outText = "";
-
-    for (const part of cand) {
-      if (part.text) {
-        outText += part.text + "\n";
-      } else if (part.inlineData?.data) {
-        const buffer = Buffer.from(part.inlineData.data, "base64");
-        const fname = `gemini-output-${Date.now()}.png`;
-        outImagePath = path.join(resultsDir, fname);
-        fs.writeFileSync(outImagePath, buffer);
+      // Collect image metadata (best-effort)
+      let meta = {};
+      try {
+        const s = sharp || require("sharp");
+        meta = await s(raw).metadata(); // { format, width, height }
+      } catch (_) {
+        /* ignore */
       }
+
+      // Resize/compress to reduce tokens/min
+      let resizedBuf = raw;
+      try {
+        const s = sharp || require("sharp");
+        resizedBuf = await s(raw)
+          .resize({
+            width: 1280,
+            height: 1280,
+            fit: "inside",
+            withoutEnlargement: true,
+          })
+          .jpeg({ quality: 80 })
+          .toBuffer();
+      } catch (e) {
+        console.warn(
+          "sharp unavailable/failed, using original image:",
+          e.message
+        );
+      }
+
+      // Prompt (default figurine prompt unless client sends one)
+      const prompt =
+        (req.body.prompt && req.body.prompt.trim()) || FIGURINE_PROMPT1;
+
+      // ---- LOG: start
+      logGen({
+        event: "gen_start",
+        reqId,
+        ip: req.ip,
+        key_fp: keyFingerprint(),
+        model: "gemini-2.5-flash-image-preview",
+        file: {
+          name: req.file.originalname,
+          savedAs: req.file.filename,
+          mimetype: req.file.mimetype,
+          size: req.file.size,
+          format: meta.format || null,
+          width: meta.width || null,
+          height: meta.height || null,
+        },
+        prompt_hash: hashPrompt(prompt),
+      });
+      // ---- /LOG
+
+      const parts = [
+        { text: prompt },
+        {
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: resizedBuf.toString("base64"),
+          },
+        },
+      ];
+
+      // Call model with throttle + backoff
+      const response = await limiter.schedule(() =>
+        withBackoff(() =>
+          ai.models.generateContent({
+            model: "gemini-2.5-flash-image-preview",
+            contents: [{ role: "user", parts }],
+          })
+        )
+      );
+
+      // Extract outputs
+      const cand = response?.candidates?.[0]?.content?.parts || [];
+      let outImagePath = null;
+      let outText = "";
+
+      for (const part of cand) {
+        if (part.text) {
+          outText += part.text + "\n";
+        } else if (part.inlineData?.data) {
+          const buffer = Buffer.from(part.inlineData.data, "base64");
+          const fname = `gemini-output-${Date.now()}.png`;
+          outImagePath = path.join(resultsDir, fname);
+          fs.writeFileSync(outImagePath, buffer);
+        }
+      }
+
+      // ---- LOG: success
+      logGen({
+        event: "gen_success",
+        reqId,
+        duration_ms: Date.now() - t0,
+        output: {
+          image: outImagePath ? path.basename(outImagePath) : null,
+          text_len: outText.trim().length,
+        },
+      });
+      // ---- /LOG
+
+      return res.json({
+        ok: true,
+        text: outText.trim(),
+        imageUrl: outImagePath
+          ? "/results/" + path.basename(outImagePath)
+          : null,
+      });
+    } catch (e) {
+      // ---- LOG: error
+      const q = parseQuotaViolations(e);
+      logGen({
+        event: "gen_error",
+        reqId,
+        duration_ms: Date.now() - t0,
+        status: e?.status || 500,
+        message: e?.message || "Generation failed",
+        reason: e?.reason || null,
+        quota: q,
+      });
+      // ---- /LOG
+
+      console.error("Generation error:", e?.message || e);
+      return res.status(e?.status || 500).json({
+        ok: false,
+        status: e?.status || 500,
+        error: e?.message || "Generation failed",
+        reason: e?.reason || null,
+        details: e?.error?.details || null,
+      });
     }
-
-    // ---- LOG: success
-    logGen({
-      event: "gen_success",
-      reqId,
-      duration_ms: Date.now() - t0,
-      output: {
-        image: outImagePath ? path.basename(outImagePath) : null,
-        text_len: outText.trim().length,
-      },
-    });
-    // ---- /LOG
-
-    return res.json({
-      ok: true,
-      text: outText.trim(),
-      imageUrl: outImagePath ? "/results/" + path.basename(outImagePath) : null,
-    });
-  } catch (e) {
-    // ---- LOG: error
-    const q = parseQuotaViolations(e);
-    logGen({
-      event: "gen_error",
-      reqId,
-      duration_ms: Date.now() - t0,
-      status: e?.status || 500,
-      message: e?.message || "Generation failed",
-      reason: e?.reason || null,
-      quota: q,
-    });
-    // ---- /LOG
-
-    console.error("Generation error:", e?.message || e);
-    return res.status(e?.status || 500).json({
-      ok: false,
-      status: e?.status || 500,
-      error: e?.message || "Generation failed",
-      reason: e?.reason || null,
-      details: e?.error?.details || null,
-    });
   }
-});
+);
 
 // app.get("/api/probe-image", async (_req, res) => {
 //   try {
