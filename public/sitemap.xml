@@ -51,13 +51,19 @@
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
-
-  <!-- Examples Gallery Section -->
-  <url>
+  <!-- Examples Gallery Section --> 
+ <url>
     <loc>https://toyrender.com/#examples</loc>
     <lastmod>2025-09-04T17:30:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>
+ <url>
+    <loc>https://toyrender.com/contact</loc>
+    <lastmod>2025-09-07T12:30:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
 
 </urlset>
