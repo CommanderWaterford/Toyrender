@@ -777,6 +777,31 @@ if (process.env.EXTRA_DISPOSABLE_DOMAINS) {
     .forEach((d) => DISPOSABLE_DOMAINS.add(d));
 }
 
+// ---- Disposable email check (uses registrableDomain + blocklist) ----
+function isDisposable(email) {
+  if (!email || typeof email !== "string") return false;
+  const at = email.lastIndexOf("@");
+  if (at < 0) return false;
+
+  const hostRaw = email
+    .slice(at + 1)
+    .trim()
+    .toLowerCase();
+  if (!hostRaw) return false;
+
+  // base registrable, e.g. sub.mailinator.com -> mailinator.com
+  const base = registrableDomain(hostRaw);
+  if (!base) return false;
+
+  // match root (fast path)
+  if (DISPOSABLE_DOMAINS.has(base)) return true;
+
+  // extra safety: if someone listed an exact subdomain in env extension
+  if (DISPOSABLE_DOMAINS.has(hostRaw)) return true;
+
+  return false;
+}
+
 // Password policy
 function checkPassword(pwRaw, email = "") {
   // Don’t trim passwords; users may want leading/trailing spaces; but reject control chars
