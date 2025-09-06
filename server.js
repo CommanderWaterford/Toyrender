@@ -18,6 +18,8 @@ const session = require("express-session");
 const SQLiteStore = require("connect-sqlite3")(session);
 const bcrypt = require("bcrypt");
 const sqlite3 = require("sqlite3").verbose();
+const validator = require("validator");
+const zxcvbn = require("zxcvbn");
 const { GoogleGenAI } = require("@google/genai");
 
 // --- App init ---
@@ -354,12 +356,41 @@ function isForbiddenFilename(original) {
 }
 
 // --- Multer (storage + filters) ---
+function tsStampUTC(d = new Date()) {
+  const pad = (n) => String(n).padStart(2, "0");
+  return (
+    d.getUTCFullYear() +
+    pad(d.getUTCMonth() + 1) +
+    pad(d.getUTCDate()) +
+    "-" +
+    pad(d.getUTCHours()) +
+    pad(d.getUTCMinutes()) +
+    pad(d.getUTCSeconds()) +
+    "Z"
+  );
+}
+
+function uploadDest(_, __, cb) {
+  const d = new Date();
+  const dir = path.join(
+    UPLOADS_DIR,
+    String(d.getUTCFullYear()),
+    String(d.getUTCMonth() + 1).padStart(2, "0"),
+    String(d.getUTCDate()).padStart(2, "0")
+  );
+  fs.mkdir(dir, { recursive: true }, () => cb(null, dir));
+}
+
 const upload = multer({
   storage: multer.diskStorage({
-    destination: (req, file, cb) => cb(null, UPLOADS_DIR),
+    destination: uploadDest, // or: (_, __, cb) => cb(null, uploadsDir)
     filename: (req, file, cb) => {
-      const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
-      cb(null, file.fieldname + "-" + unique + path.extname(file.originalname));
+      const ext = path.extname(file.originalname).toLowerCase();
+      const name =
+        `${file.fieldname}-${tsStampUTC()}-` +
+        crypto.randomBytes(4).toString("hex") +
+        ext;
+      cb(null, name);
     },
   }),
   limits: { fileSize: MAX_SIZE },
@@ -508,56 +539,197 @@ const burstSlowdown = slowDown({
   delayMs: 250,
 });
 
+// Limit JSON body size a bit (put before routes)
+app.use(express.json({ limit: "100kb" }));
+app.use(express.urlencoded({ extended: true, limit: "100kb" }));
+
+// Per-route limiter for auth (IP-based)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 30, // 30 attempts per 15m per IP (register+login combined)
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Too many attempts. Try later." },
+});
+
+// Basic “slow down” after a handful of tries
+const authSlowdown = slowDown({
+  windowMs: 15 * 60 * 1000,
+  delayAfter: 10, // after 10 hits per window
+  delayMs: 250, // add 250ms per extra hit
+});
+
+function stripControlChars(s = "") {
+  // Remove invisible control chars & trim
+  return s.replace(/[\u0000-\u001F\u007F-\u009F]/g, "").trim();
+}
+
+function normalizeEmailStrict(emailRaw) {
+  const e = stripControlChars(emailRaw).toLowerCase();
+  // Don’t remove Gmail dots; keep user expectation intact
+  const norm = validator.normalizeEmail(e, {
+    gmail_remove_dots: false,
+    gmail_convert_googlemaildotcom: true,
+    outlookdotcom_remove_subaddress: true,
+    yahoo_remove_subaddress: true,
+    icloud_remove_subaddress: true,
+  });
+  if (!norm) return null;
+  if (norm.length > 190) return null; // match DB column
+  if (!validator.isEmail(norm, { allow_utf8_local_part: true })) return null;
+  return norm;
+}
+
+// Very small disposable domain blocklist (extend as you like)
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com",
+  "trashmail.com",
+  "10minutemail.com",
+  "guerrillamail.com",
+  "tempmailo.com",
+  "yopmail.com",
+  "getnada.com",
+  "sharklasers.com",
+]);
+function isDisposable(email) {
+  const domain = email.split("@")[1] || "";
+  return DISPOSABLE_DOMAINS.has(domain);
+}
+
+// Password policy
+function checkPassword(pwRaw, email = "") {
+  // Don’t trim passwords; users may want leading/trailing spaces; but reject control chars
+  const pw = pwRaw.replace(/[\u0000-\u001F\u007F-\u009F]/g, "");
+  if (pw.length < 8)
+    return { ok: false, err: "Password must be at least 8 characters." };
+  if (pw.length > 72) return { ok: false, err: "Password too long (max 72)." }; // bcrypt limit
+  const { score } = zxcvbn(pw, [email]);
+  if (score < 2)
+    return {
+      ok: false,
+      err: "Password too weak. Use more characters or add words.",
+    };
+  return { ok: true, pw };
+}
+
 // --- Auth routes ---
-app.post(["/auth/register", "/api/auth/register"], async (req, res) => {
-  try {
-    const { email, password } = req.body || {};
-    if (!email || !password)
-      return res.status(400).json({ error: "email and password required" });
+app.post(
+  ["/auth/register", "/api/auth/register"],
+  authLimiter,
+  authSlowdown,
+  async (req, res) => {
+    try {
+      // Enforce JSON
+      if (!/application\/json/i.test(req.headers["content-type"] || "")) {
+        return res.status(415).json({ error: "Use application/json" });
+      }
 
-    const existing = await get("SELECT id FROM users WHERE email = ?", [
-      email.toLowerCase(),
-    ]);
-    if (existing)
-      return res.status(409).json({ error: "Email already registered" });
+      const email = normalizeEmailStrict(req.body?.email || "");
+      const pwCheck = checkPassword(
+        String(req.body?.password || ""),
+        email || ""
+      );
+      if (!email) return res.status(400).json({ error: "Invalid email" });
+      if (isDisposable(email))
+        return res.status(400).json({ error: "Disposable email not allowed" });
+      if (!pwCheck.ok) return res.status(400).json({ error: pwCheck.err });
 
-    const hash = await bcrypt.hash(password, 12);
-    const r = await run(
-      "INSERT INTO users (email, password_hash) VALUES (?,?)",
-      [email.toLowerCase(), hash]
-    );
-    const userId = r.lastID;
+      // Prevent user enumeration timing leaks by doing a small fake hash even if user exists
+      const existing = await get("SELECT id FROM users WHERE email = ?", [
+        email,
+      ]);
+      if (existing) {
+        // Optional: respond 200 to avoid enumeration, but UX is worse.
+        // Here we keep 409 and still burn ~bcrypt time for parity.
+        await bcrypt.hash("dummyPasswordToNormalizeTiming", 12);
+        return res.status(409).json({ error: "Email already registered" });
+      }
 
-    // Create credits row: no daily free, only starter "paid" credits
-    await run(
-      "INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining) VALUES (?,?,?,?)",
-      [userId, 0, nextUtcMidnightISO(), STARTER_CREDITS] // free bucket is unused (0); renew_at kept to satisfy NOT NULL
-    );
+      const hash = await bcrypt.hash(pwCheck.pw, 12);
 
-    req.session.userId = userId;
-    return res.json({ ok: true, user: await userById(userId) });
-  } catch (e) {
-    return res.status(500).json({ error: e.message || "register failed" });
+      // Transaction: create user + starter credits atomically
+      await txn(async () => {
+        const r = await run(
+          "INSERT INTO users (email, password_hash) VALUES (?,?)",
+          [email, hash]
+        );
+        const userId = r.lastID;
+
+        await run(
+          "INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining) VALUES (?,?,?,?)",
+          [userId, 0, nextUtcMidnightISO(), STARTER_CREDITS] // “free” unused; we only use paid_remaining
+        );
+
+        if (req.session && typeof req.session.regenerate === "function") {
+          await new Promise((resolve, reject) =>
+            req.session.regenerate((err) => {
+              if (err) return reject(err);
+              req.session.userId = userId;
+              resolve();
+            })
+          );
+        } else if (req.session) {
+          req.session.userId = userId;
+        } else {
+          throw new Error("Session not initialized");
+        }
+      });
+
+      res
+        .status(201)
+        .json({ ok: true, user: await userById(req.session.userId) });
+    } catch (e) {
+      res.status(500).json({ error: e.message || "register failed" });
+    }
   }
-});
+);
 
-app.post(["/auth/login", "/api/auth/login"], async (req, res) => {
-  try {
-    const { email, password } = req.body || {};
-    if (!email || !password)
-      return res.status(400).json({ error: "email and password required" });
-    const user = await get("SELECT * FROM users WHERE email = ?", [
-      email.toLowerCase(),
-    ]);
-    if (!user) return res.status(401).json({ error: "Invalid credentials" });
-    const ok = await bcrypt.compare(password, user.password_hash);
-    if (!ok) return res.status(401).json({ error: "Invalid credentials" });
-    req.session.userId = user.id;
-    return res.json({ ok: true, user: await userById(user.id) });
-  } catch (e) {
-    return res.status(500).json({ error: e.message || "login failed" });
+app.post(
+  ["/auth/login", "/api/auth/login"],
+  authLimiter,
+  authSlowdown,
+  async (req, res) => {
+    try {
+      if (!/application\/json/i.test(req.headers["content-type"] || "")) {
+        return res.status(415).json({ error: "Use application/json" });
+      }
+      const email = normalizeEmailStrict(req.body?.email || "");
+      const password = String(req.body?.password || "").replace(
+        /[\u0000-\u001F\u007F-\u009F]/g,
+        ""
+      );
+      if (!email || !password)
+        return res.status(400).json({ error: "email and password required" });
+
+      const user = await get("SELECT * FROM users WHERE email = ?", [email]);
+      // Compare with a dummy hash to normalize timing if user not found
+      const hash =
+        user?.password_hash ||
+        "$2b$12$C2wI3ipYv9a7dZlXf5sA3eVn0vU2gkTFQH/2K4kR0fF6qS9sC8F7y"; // random valid bcrypt
+      const ok = await bcrypt.compare(password, hash);
+      if (!user || !ok)
+        return res.status(401).json({ error: "Invalid credentials" });
+
+      if (req.session && typeof req.session.regenerate === "function") {
+        await new Promise((resolve, reject) =>
+          req.session.regenerate((err) => {
+            if (err) return reject(err);
+            req.session.userId = user.id; // <-- login uses user.id
+            resolve();
+          })
+        );
+      } else if (req.session) {
+        req.session.userId = user.id;
+      } else {
+        throw new Error("Session not initialized");
+      }
+
+      res.json({ ok: true, user: await userById(req.session.userId) });
+    } catch (e) {
+      res.status(500).json({ error: e.message || "login failed" });
+    }
   }
-});
+);
 
 app.post(["/auth/logout", "/api/auth/logout"], (req, res) => {
   req.session.destroy(() => res.json({ ok: true }));
