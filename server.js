@@ -580,20 +580,201 @@ function normalizeEmailStrict(emailRaw) {
   return norm;
 }
 
-// Very small disposable domain blocklist (extend as you like)
+// ---- Disposable email detection ----
+const punycode = require("punycode/"); // built-in shim; no config needed
+let psl = null;
+try {
+  psl = require("psl");
+} catch (_) {
+  /* optional */
+}
+
+// Normalizes a host and returns its registrable base (eTLD+1).
+function registrableDomain(host) {
+  const ascii = punycode.toASCII(
+    String(host || "")
+      .toLowerCase()
+      .trim()
+  );
+  if (!ascii) return "";
+  if (psl) {
+    const parsed = psl.parse(ascii);
+    return parsed.domain || ascii;
+  }
+  // Fallback (not perfect): handle common 2-level public suffixes
+  const parts = ascii.split(".");
+  if (parts.length <= 2) return ascii;
+  const twoLevel = new Set([
+    "co.uk",
+    "org.uk",
+    "ac.uk",
+    "gov.uk",
+    "com.au",
+    "net.au",
+    "org.au",
+    "co.jp",
+    "co.kr",
+    "co.in",
+    "co.id",
+    "com.br",
+    "com.mx",
+    "com.tr",
+    "com.sg",
+  ]);
+  const last2 = parts.slice(-2).join(".");
+  const last3 = parts.slice(-3).join(".");
+  return twoLevel.has(last3) ? last3 : last2;
+}
+
+// blocklist (roots only; subdomains will match automatically)
 const DISPOSABLE_DOMAINS = new Set([
-  "mailinator.com",
-  "trashmail.com",
-  "10minutemail.com",
+  // GuerrillaMail family
   "guerrillamail.com",
-  "tempmailo.com",
-  "yopmail.com",
-  "getnada.com",
   "sharklasers.com",
+  "grr.la",
+  "guerrillamail.de",
+  "guerrillamail.org",
+  "guerrillamail.net",
+  "guerrillamailblock.com",
+
+  // Mailinator
+  "mailinator.com",
+  "mailinator.net",
+  "mailinator.org",
+  "mailinator2.com",
+
+  // YOPmail family
+  "yopmail.com",
+  "yopmail.fr",
+  "yopmail.net",
+  "cool.fr.nf",
+  "jetable.fr.nf",
+  "nospam.ze.tc",
+  "courriel.fr.nf",
+  "moncourrier.fr.nf",
+
+  // 10MinuteMail & friends
+  "10minutemail.com",
+  "10minutemail.net",
+  "10minutemail.co.uk",
+  "10minemail.com",
+  "10minutemail.org",
+  "mvrht.net",
+
+  // Temp-Mail family
+  "temp-mail.org",
+  "temp-mail.io",
+  "temp-mail.com",
+  "tempmailo.com",
+  "tempmail.email",
+  "tempmail.plus",
+  "tempmail.net",
+  "tempail.com",
+  "tempm.com",
+  "mail.tm",
+
+  // Nada / DropMail / Mailsac-like
+  "getnada.com",
+  "nada.ltd",
+  "dropmail.me",
+  "mailsac.com",
+
+  // Mohmal / Moakt
+  "mohmal.com",
+  "moakt.com",
+  "tmailt.com",
+  "tmpmail.org",
+
+  // Dispostable / Maildrop / MailCatch
+  "dispostable.com",
+  "maildrop.cc",
+  "mailcatch.com",
+  "mailcatch.co",
+
+  // Mailnesia / MintEmail / MeltMail
+  "mailnesia.com",
+  "mintemail.com",
+  "meltmail.com",
+
+  // Throwaway / Trashmail families
+  "throwawaymail.com",
+  "trashmail.com",
+  "trashmail.de",
+  "trashmail.me",
+  "trash-mail.com",
+  "trashmail.ws",
+  "mytrashmail.com",
+  "fakeinbox.com",
+  "fakeinbox.org",
+
+  // Fakemail generators
+  "fakemail.net",
+  "fakemailgenerator.com",
+  "emailtemporanea.com",
+  "emailtemporanee.com",
+  "emailtemporario.com.br",
+  "tempinbox.com",
+  "spam4.me",
+
+  // Spamgourmet & variants
+  "spamgourmet.com",
+  "spamgourmet.net",
+  "antichef.net",
+  "dfgh.net",
+
+  // 33mail
+  "33mail.com",
+
+  // Harakirimail / Guerrilla-like
+  "harakirimail.com",
+  "mytemp.email",
+
+  // GetAirMail
+  "getairmail.com",
+  "airmail.cc",
+
+  // Mohmal alternates
+  "mailmoakt.com",
+  "bareed.ws",
+  "tmpmail.net",
+
+  // Mail7 / TMail
+  "mail7.io",
+  "tmail.ws",
+
+  // OwlyMail / LinshiMail / Onetime
+  "owlymail.com",
+  "linshiyouxiang.net",
+  "onetime.email",
+
+  // Other common providers seen in abuse lists
+  "maildrop.top",
+  "yopmail.top",
+  "tempr.email",
+  "mailpoof.com",
+  "anonymbox.com",
+  "inboxbear.com",
+  "inboxkitten.com",
+  "spamdecoy.net",
+  "spambog.com",
+  "spambog.de",
+  "spambog.ru",
+  "spambox.us",
+  "mohmal.in",
+  "echomail.xyz",
+  "mailnull.com",
+  "mail-temporaire.com",
+  "kamdemail.com",
+  "dismail.de",
+  "mailhub.pro",
 ]);
-function isDisposable(email) {
-  const domain = email.split("@")[1] || "";
-  return DISPOSABLE_DOMAINS.has(domain);
+
+// Allow ops to extend at runtime via env
+if (process.env.EXTRA_DISPOSABLE_DOMAINS) {
+  process.env.EXTRA_DISPOSABLE_DOMAINS.split(",")
+    .map((s) => s.trim().toLowerCase())
+    .filter(Boolean)
+    .forEach((d) => DISPOSABLE_DOMAINS.add(d));
 }
 
 // Password policy
