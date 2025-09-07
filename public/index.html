@@ -358,6 +358,146 @@
       .testimonial-track.auto-scrolling {
         scroll-snap-type: none;
       }
+
+      .testimonials-section {
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        color: white;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-weight: 700;
+        text-align: center;
+        margin-bottom: 60px;
+        line-height: 1.2;
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        padding: 0 20px;
+      }
+
+      .testimonial-card {
+        background: rgba(30, 30, 45, 0.6);
+        backdrop-filter: blur(10px);
+        border: 2px solid;
+        border-image: linear-gradient(135deg, #ff6b6b, #ff8e53, #feca57) 1;
+        border-radius: 20px;
+        padding: 35px 30px;
+        position: relative;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .testimonial-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 20px;
+        padding: 2px;
+        background: linear-gradient(135deg, #ff6b6b, #ff8e53, #feca57);
+        -webkit-mask: linear-gradient(#fff 0 0) content-box,
+          linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0.7;
+      }
+
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
+      }
+
+      .stars {
+        display: flex;
+        gap: 4px;
+        margin-bottom: 20px;
+      }
+
+      .star {
+        font-size: 20px;
+        color: #ffd700;
+      }
+
+      .star.empty {
+        color: #4a4a5e;
+      }
+
+      .testimonial-text {
+        color: #e0e0e0;
+        font-size: 17px;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        min-height: 120px;
+      }
+
+      .customer-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+      }
+
+      .customer-name {
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+      }
+
+      .verified-badge {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(76, 175, 80, 0.15);
+        padding: 5px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(76, 175, 80, 0.3);
+      }
+
+      .verified-icon {
+        width: 14px;
+        height: 14px;
+        background: #4caf50;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+      }
+
+      .verified-text {
+        color: #4caf50;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      @media (max-width: 768px) {
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+          padding: 0;
+        }
+
+        .testimonial-card {
+          padding: 25px 20px;
+        }
+
+        .section-title {
+          margin-bottom: 40px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .testimonials-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
     </style>
     <script
       src="https://analytics.ahrefs.com/analytics.js"
@@ -1244,6 +1384,85 @@
           </article>
         </div>
 
+        <!-- Testimonials-->
+
+        <div class="testimonials-section">
+          <h2 class="section-title">
+            Customers talking about their figurines images
+          </h2>
+
+          <div class="testimonials-grid">
+            <div class="testimonial-card">
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+              <p class="testimonial-text">
+                "Toyrender is absolutely incredible! I transformed photos of my
+                family into collectible figurines that look professional. As a
+                designer, I use it to prototype character designs before
+                commissioning 3D models. Game changer!"
+              </p>
+              <div class="customer-info">
+                <span class="customer-name">Marcus Chen</span>
+                <div class="verified-badge">
+                  <div class="verified-icon">✓</div>
+                  <span class="verified-text">Verified Purchase</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+              </div>
+              <p class="testimonial-text">
+                "Best gift idea ever! Created figurines of me and my boyfriend
+                in different themes - superhero, medieval, cyberpunk. The
+                quality blew us away. All our friends want their own now. Worth
+                every penny!"
+              </p>
+              <div class="customer-info">
+                <span class="customer-name">Sofia Martinez</span>
+                <div class="verified-badge">
+                  <div class="verified-icon">✓</div>
+                  <span class="verified-text">Verified Purchase</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="stars">
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star empty">★</span>
+              </div>
+              <p class="testimonial-text">
+                "Good quality = great results. Initially struggled with lighting
+                in my photos, but once I followed the tips, the figurines came
+                out stunning. The AI is surprisingly accurate with facial
+                features. Support team was very helpful!"
+              </p>
+              <div class="customer-info">
+                <span class="customer-name">Alex Thompson</span>
+                <div class="verified-badge">
+                  <div class="verified-icon">✓</div>
+                  <span class="verified-text">Verified Purchase</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Quality Tips -->
         <div class="mt-12">
           <h3 class="text-2xl font-semibold mb-3">Quality Tips</h3>
@@ -1260,8 +1479,7 @@
                   Camera at arm’s length; keep your face centered and sharp.
                 </li>
                 <li>
-                  Face fully visible (no sunglasses); neutral or simple
-                  background.
+                  Face fully visible; neutral or simple background.
                 </li>
                 <li>Upload a clear JPG/PNG up to 10&nbsp;MB.</li>
               </ul>
