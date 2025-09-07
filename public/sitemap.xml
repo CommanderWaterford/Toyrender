@@ -7,7 +7,7 @@
   <!-- Home (EN) -->
   <url>
     <loc>https://toyrender.com/</loc>
-    <lastmod>2025-09-06</lastmod>
+    <lastmod>2025-09-07</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
@@ -16,7 +16,7 @@
   <!-- Home (ES) -->
   <url>
     <loc>https://toyrender.com/es/</loc>
-    <lastmod>2025-09-06</lastmod>
+    <lastmod>2025-09-07</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
@@ -25,63 +25,63 @@
   <!-- Privacy -->
   <url>
     <loc>https://toyrender.com/privacy.html</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/privacidad.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/privacy.html"/>
+    <lastmod>2025-09-07T17:30:00+00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/privacy"/>
   </url>
 
   <!-- Privacidad -->
   <url>
     <loc>https://toyrender.com/privacidad.html</loc>
     <lastmod>2025-09-06T17:30:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/privacy.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/privacidad.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/privacidad"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/privacy"/>
   </url>
 
 <!-- FAQ -->
   <url>
     <loc>https://toyrender.com/faq.html</loc>
     <lastmod>2025-09-06T17:30:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/faq"/>
   </url>
 
   <url>
-    <loc>https://toyrender.com/es/faq.html</loc>
+    <loc>https://toyrender.com/es/faq</loc>
     <lastmod>2025-09-06T17:30:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/faq.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/faq"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/faq"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/faq"/>
   </url>
 
 <!-- Gallery-->
 <url>
     <loc>https://toyrender.com/gallery.html</loc>
     <lastmod>2025-09-06T17:40:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery"/>
   </url>
 <url>
     <loc>https://toyrender.com/galeria.html</loc>
     <lastmod>2025-09-06T17:50:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery"/>
   </url>
 
   <!-- Terms -->
   <url>
-    <loc>https://toyrender.com/terms.html</loc>
-    <lastmod>2025-09-04T17:30:00+00:00</lastmod>
+    <loc>https://toyrender.com/terms</loc>
+    <lastmod>2025-09-07T17:30:00+00:00</lastmod>
   </url>
 
   <!-- Contact (page) -->
   <url>
     <loc>https://toyrender.com/contact</loc>
-    <lastmod>2025-09-06T12:30:00+00:00</lastmod>
+    <lastmod>2025-09-07T12:30:00+00:00</lastmod>
   </url>
 </urlset>
