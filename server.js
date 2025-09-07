@@ -21,10 +21,15 @@ const sqlite3 = require("sqlite3").verbose();
 const validator = require("validator");
 const zxcvbn = require("zxcvbn");
 const { GoogleGenAI } = require("@google/genai");
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // --- App init ---
 const app = express();
 const PORT = parseInt(process.env.PORT || "3060", 10);
+// Right after you define PORT
+const BASE_URL = "https://toyrender.com";
+
 app.set("trust proxy", 1);
 
 // --- Security middleware ---
@@ -47,6 +52,128 @@ app.use(
     allowedHeaders: ["Content-Type"],
     credentials: true,
   })
+);
+
+// --- Stripe Webhook (must receive RAW body) ---
+
+app.post(
+  "/payments/webhook",
+  express.raw({ type: "application/json" }),
+  async (req, res) => {
+    const sig = req.headers["stripe-signature"];
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(
+        req.body,
+        sig,
+        process.env.STRIPE_WEBHOOK_SECRET
+      );
+    } catch (err) {
+      console.warn("⚠️  Webhook signature verification failed.", err.message);
+      return res.status(400).send(`Webhook Error: ${err.message}`);
+    }
+
+    try {
+      console.log("Stripe webhook event:", event.type);
+      if (event.type === "checkout.session.completed") {
+        const session = event.data.object;
+
+        // Only award on paid sessions
+        if (session.payment_status !== "paid") {
+          console.log("Webhook: session not paid, skipping.", {
+            id: session.id,
+            status: session.payment_status,
+          });
+          return res.json({ received: true, skipped: "not paid" });
+        }
+
+        const userId = Number(
+          session.metadata?.userId || session.client_reference_id
+        );
+        const credits = Number(session.metadata?.credits || 10);
+        const amount = Number(session.amount_total || 500); // cents
+        const currency = String(session.currency || "usd").toLowerCase();
+
+        // Use payment_intent as the unique idempotency key (best across events)
+        const idempotencyKey = String(session.payment_intent || session.id);
+
+        if (userId && credits > 0) {
+          console.log("Granting credits from webhook", {
+            userId,
+            credits,
+            eventId: idempotencyKey,
+          });
+          await grantCreditsAfterPayment({
+            eventId: idempotencyKey,
+            userId,
+            amount,
+            currency,
+            credits,
+          });
+        } else {
+          console.error("Webhook missing metadata userId/credits", {
+            metadata: session.metadata,
+            client_reference_id: session.client_reference_id,
+          });
+        }
+      }
+
+      res.json({ received: true });
+    } catch (err) {
+      console.error("Webhook handler error:", err);
+      res.status(500).send("Webhook handler failed");
+    }
+  }
+);
+
+app.post(
+  "/api/payments/confirm",
+  express.json(),
+  ensureAuth,
+  async (req, res) => {
+    try {
+      const sessionId = req.body?.session_id || req.query?.session_id;
+      if (!sessionId)
+        return res.status(400).json({ error: "session_id required" });
+
+      const session = await stripe.checkout.sessions.retrieve(sessionId);
+
+      if (session.mode !== "payment")
+        return res.status(400).json({ error: "Not a payment session" });
+      if (session.payment_status !== "paid")
+        return res.status(409).json({ error: "Session not paid" });
+
+      const userIdFromSession = Number(
+        session.metadata?.userId || session.client_reference_id
+      );
+      if (userIdFromSession !== req.session.userId)
+        return res
+          .status(403)
+          .json({ error: "Session does not belong to you" });
+
+      const credits = Number(session.metadata?.credits || 10);
+      const amount = Number(session.amount_total || 500);
+      const currency = String(session.currency || "usd").toLowerCase();
+      const idempotencyKey = String(session.payment_intent || session.id);
+
+      await grantCreditsAfterPayment({
+        eventId: idempotencyKey,
+        userId: req.session.userId,
+        amount,
+        currency,
+        credits,
+      });
+
+      const uc = await get(
+        "SELECT paid_remaining FROM user_credits WHERE user_id=?",
+        [req.session.userId]
+      );
+      res.json({ ok: true, paid_remaining: uc?.paid_remaining || 0 });
+    } catch (e) {
+      console.error("confirm error:", e?.message || e);
+      res.status(500).json({ error: e?.message || "confirm failed" });
+    }
+  }
 );
 
 // --- Body parsers ---
@@ -173,6 +300,18 @@ async function txn(fn) {
       FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
     )
   `);
+
+  await run(`
+  CREATE TABLE IF NOT EXISTS payments (
+    id TEXT PRIMARY KEY,            -- Stripe event id (idempotency)
+    user_id INTEGER NOT NULL,
+    amount INTEGER NOT NULL,        -- cents
+    currency TEXT NOT NULL,
+    credits_added INTEGER NOT NULL,
+    created_at TEXT NOT NULL DEFAULT (datetime('now')),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  )
+`);
 })().catch((e) => {
   console.error("DB init error:", e);
   process.exit(1);
@@ -540,8 +679,8 @@ const burstSlowdown = slowDown({
 });
 
 // Limit JSON body size a bit (put before routes)
-app.use(express.json({ limit: "100kb" }));
-app.use(express.urlencoded({ extended: true, limit: "100kb" }));
+// app.use(express.json({ limit: "100kb" }));
+// app.use(express.urlencoded({ extended: true, limit: "100kb" }));
 
 // Per-route limiter for auth (IP-based)
 const authLimiter = rateLimit({
@@ -818,6 +957,122 @@ function checkPassword(pwRaw, email = "") {
   return { ok: true, pw };
 }
 
+async function grantCreditsAfterPayment({
+  eventId,
+  userId,
+  amount,
+  currency,
+  credits,
+}) {
+  return txn(async () => {
+    // idempotency: skip if this event was already processed
+    const already = await get("SELECT 1 FROM payments WHERE id = ?", [eventId]);
+    if (already) return { ok: true, deduped: true };
+
+    // ensure the user_credits row exists
+    const uc = await get("SELECT 1 FROM user_credits WHERE user_id = ?", [
+      userId,
+    ]);
+    if (!uc) {
+      await run(
+        "INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining) VALUES (?,?,?,?)",
+        [userId, 0, nextUtcMidnightISO(), 0]
+      );
+    }
+
+    // add credits
+    await run(
+      "UPDATE user_credits SET paid_remaining = paid_remaining + ?, updated_at = datetime('now') WHERE user_id = ?",
+      [credits, userId]
+    );
+
+    // record payment
+    await run(
+      `INSERT INTO payments (id, user_id, amount, currency, credits_added)
+       VALUES (?,?,?,?,?)`,
+      [eventId, userId, amount, currency, credits]
+    );
+
+    return { ok: true };
+  });
+}
+
+app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
+  try {
+    if (!process.env.STRIPE_SECRET_KEY)
+      throw new Error("Missing STRIPE_SECRET_KEY");
+    if (!process.env.STRIPE_PRICE_PRO_PACK)
+      throw new Error("Missing STRIPE_PRICE_PRO_PACK");
+
+    const userId = req.session.userId;
+    const user = await userById(userId);
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      line_items: [{ price: process.env.STRIPE_PRICE_PRO_PACK, quantity: 1 }],
+      customer_email: user.email,
+
+      // keep BOTH for redundancy; you'll read either in webhook/confirm
+      client_reference_id: String(userId),
+      metadata: {
+        userId: String(userId),
+        credits: "10",
+        package: "pro_pack_10_credits",
+      },
+
+      allow_promotion_codes: true,
+      billing_address_collection: "auto",
+      automatic_tax: { enabled: true },
+
+      // send them to your success endpoint with {CHECKOUT_SESSION_ID}
+      success_url: `${BASE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${BASE_URL}/?checkout_status=cancel`,
+    });
+
+    res.json({ id: session.id, url: session.url });
+  } catch (err) {
+    console.error("checkout create error:", err?.message || err);
+    res
+      .status(500)
+      .json({ error: err?.message || "Unable to start checkout." });
+  }
+});
+
+app.get("/checkout/success", ensureAuth, (req, res) => {
+  const sid = (req.query.session_id || "").toString();
+  res.send(`
+    <!doctype html>
+    <meta charset="utf-8">
+    <title>Finalizing your credits…</title>
+    <body style="font-family:system-ui; color:#e5e7eb; background:#0f172a; text-align:center; padding:40px">
+      <h1>🔄 Finalizing your credits…</h1>
+      <p>Please wait a moment.</p>
+      <script>
+        (async () => {
+          try {
+            const r = await fetch('/api/payments/confirm', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'include',
+              body: JSON.stringify({ session_id: ${JSON.stringify(sid)} })
+            });
+            // ignore response – the next page will fetch fresh credits
+          } catch (e) {}
+          location.href = '/';
+        })();
+      </script>
+    </body>
+  `);
+});
+
+app.get("/config.js", (_req, res) => {
+  const pk = process.env.STRIPE_PUBLISHABLE_KEY || "";
+  res.set("Cache-Control", "public, max-age=300, must-revalidate"); // optional
+  res
+    .type("application/javascript")
+    .send(`window.STRIPE_PK = ${JSON.stringify(pk)};`);
+});
+
 // --- Auth routes ---
 app.post(
   ["/auth/register", "/api/auth/register"],
@@ -942,6 +1197,8 @@ app.post(["/auth/logout", "/api/auth/logout"], (req, res) => {
 });
 
 app.get(["/auth/me", "/api/auth/me"], async (req, res) => {
+  res.set("Cache-Control", "no-store"); // <— add this
+
   if (!req.session?.userId)
     return res.json({ ok: true, user: null, credits: { remaining: 0 } });
 

@@ -504,6 +504,8 @@
       data-key="nbbMIaMmoBy8I696zAoHgw"
       async
     ></script>
+    <script src="https://js.stripe.com/v3"></script>
+    <script src="/config.js"></script>
   </head>
   <body
     class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
@@ -1870,7 +1872,7 @@
       };
       function toast(msg) {
         alert(msg);
-      } // keep it simple; swap for a nicer toast if you like
+      }
 
       /* ----------------------- Auth & Credits UI ----------------------- */
       let sessionUser = null;
@@ -1897,9 +1899,14 @@
       }
 
       function totalCredits() {
-        // credits now is { remaining }
-        return Number(credits?.remaining || 0);
+        const c = credits || {};
+        // support all shapes: {remaining} OR {free_remaining, paid_remaining}
+        if (typeof c.remaining === "number") return c.remaining;
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        return free + paid;
       }
+
       function updateAuthUI() {
         const total = totalCredits();
         $("#creditsCount").textContent = total;
@@ -2166,7 +2173,15 @@
           openAuth("login");
           return;
         }
-        toast(`Credits — ${credits.paid_remaining || 0}`);
+        const c = credits || {};
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        const total = totalCredits();
+        toast(
+          `Credits — Total: ${total}${
+            free || paid ? ` (free: ${free}, paid: ${paid})` : ""
+          }`
+        );
       });
 
       /* ----------------------- Init ----------------------- */
@@ -2346,6 +2361,51 @@
           .querySelector("[data-track-right]")
           ?.addEventListener("click", pause);
       })();
+
+      // ---- Stripe init (must come before using `stripe`) ----
+      if (!window.Stripe) {
+        console.error("Stripe.js failed to load");
+      }
+      if (!window.STRIPE_PK) {
+        console.error("Missing publishable key from /config.js");
+      }
+      const stripe = Stripe(window.STRIPE_PK);
+
+      // STRIPE INTEGRATION
+
+      document
+        .getElementById("buyCreditsBtn")
+        .addEventListener("click", async () => {
+          try {
+            if (!sessionUser) {
+              openAuth("login");
+              return;
+            }
+            const data = await fetchJSON("/api/payments/checkout", {
+              method: "POST",
+            });
+
+            // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
+            if (data?.url) {
+              window.location.assign(data.url);
+              return;
+            }
+            // Fallback to Stripe.js
+            if (data?.id) {
+              const { error } = await stripe.redirectToCheckout({
+                sessionId: data.id,
+              });
+              if (error)
+                throw new Error(error.message || "Checkout could not start.");
+              return;
+            }
+
+            throw new Error("No checkout URL or session id from server.");
+          } catch (e) {
+            console.error("Checkout failed:", e);
+            toast(e.message || "Failed to start checkout.");
+          }
+        });
     </script>
   </body>
 </html>
