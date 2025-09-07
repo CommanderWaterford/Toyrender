@@ -528,6 +528,7 @@
       aria-label="Main navigation"
     >
       <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <!-- Left: Brand -->
         <div class="flex items-center space-x-2">
           <i
             class="fas fa-cube text-3xl text-purple-400"
@@ -536,32 +537,59 @@
           <span class="text-2xl font-bold gradient-text">Toyrender</span>
         </div>
 
-        <button
-          id="creditsBtn"
-          class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
-          aria-label="View available credits"
-        >
-          <i class="fas fa-coins mr-2" aria-hidden="true"></i>
-          <span id="creditsCount">0</span>
-          <span id="creditsLabel">Credits</span>
-        </button>
+        <!-- Right: Credits + Mini Nav + Auth -->
+        <div class="flex items-center gap-3">
+          <!-- Credits -->
+          <button
+            id="creditsBtn"
+            class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
+            aria-label="View available credits"
+          >
+            <i class="fas fa-coins mr-2" aria-hidden="true"></i>
+            <span id="creditsCount">0</span>
+            <span id="creditsLabel">Credits</span>
+          </button>
 
-        <button
-          id="signInBtn"
-          class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
-          aria-label="Sign in to your account"
-        >
-          <i class="fas fa-user-circle mr-2" aria-hidden="true"></i
-          ><span id="authBtnText">Sign In</span>
-        </button>
+          <!-- Tiny Nav (shows from sm and up) -->
+          <nav
+            class="hidden sm:flex items-center gap-2 text-sm text-purple-200/90"
+            aria-label="Quick links"
+          >
+            <a
+              href="/gallery.html"
+              class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >Gallery</a
+            >
+            <a
+              href="/faq.html"
+              class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >FAQ</a
+            >
+            <a
+              href="#pricing-title"
+              class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >Pricing</a
+            >
+          </nav>
 
-        <button
-          id="logoutBtn"
-          class="hidden px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all"
-          aria-label="Sign out"
-        >
-          <i class="fas fa-right-from-bracket mr-2"></i><span>Logout</span>
-        </button>
+          <!-- Auth -->
+          <button
+            id="signInBtn"
+            class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+            aria-label="Sign in to your account"
+          >
+            <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
+            <span id="authBtnText">Sign In</span>
+          </button>
+
+          <button
+            id="logoutBtn"
+            class="hidden px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all"
+            aria-label="Sign out"
+          >
+            <i class="fas fa-right-from-bracket mr-2"></i><span>Logout</span>
+          </button>
+        </div>
       </div>
     </nav>
 
