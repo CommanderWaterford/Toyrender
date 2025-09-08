@@ -221,12 +221,40 @@ const LOG_DIR = path.join(__dirname, "_logs");
 if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
 const GEN_LOG_PATH = path.join(LOG_DIR, "generation.ndjson");
 const genLogStream = fs.createWriteStream(GEN_LOG_PATH, { flags: "a" });
-function logGen(obj) {
+
+// --- REPLACE THE OLD logGen FUNCTION WITH THIS ---
+function logGen(data) {
   try {
-    obj.ts = new Date().toISOString();
-    genLogStream.write(JSON.stringify(obj) + "\n");
-  } catch {}
+    const ts = new Date().toISOString();
+    const { event, reqId, duration_ms, userEmail, file, output, error } = data;
+
+    let logLine = `[${ts}] EVENT: ${event.toUpperCase()} | REQ: ${reqId} | USER: ${userEmail}`;
+
+    if (duration_ms) {
+      logLine += ` | DURATION: ${duration_ms}ms`;
+    }
+
+    if (file) {
+      logLine += ` | FILE: "${file.name}" (${(file.size / 1024).toFixed(
+        2
+      )} KB)`;
+    }
+
+    if (output && output.image) {
+      logLine += ` | OUTPUT: ${output.image}`;
+    }
+
+    if (error) {
+      logLine += ` | ERROR: ${error.message || "Unknown Error"}`;
+    }
+
+    genLogStream.write(logLine + "\n");
+  } catch (err) {
+    console.error("!!! FAILED TO WRITE TO GENERATION LOG !!!", err);
+  }
 }
+// --- END OF REPLACEMENT ---
+
 process.on("SIGINT", () => genLogStream.end(() => process.exit(0)));
 process.on("SIGTERM", () => genLogStream.end(() => process.exit(0)));
 
@@ -1240,6 +1268,17 @@ app.post(
   upload.single("photo"),
   async (req, res) => {
     const userId = req.session.userId;
+    // --- ADD THIS BLOCK TO GET USER EMAIL ---
+    let userEmail = "unknown"; // Default value in case of an error
+    try {
+      const user = await get("SELECT email FROM users WHERE id = ?", [userId]);
+      if (user) {
+        userEmail = user.email;
+      }
+    } catch (dbError) {
+      console.error("Error fetching user email for logging:", dbError);
+    }
+
     const reqId =
       (crypto.randomUUID && crypto.randomUUID()) ||
       Date.now() + "-" + Math.random().toString(16).slice(2);
@@ -1355,10 +1394,11 @@ app.post(
       ]);
 
       // stream log
-      logGen({
+      const logData = {
         event: "gen_success",
         reqId,
         duration_ms: Date.now() - t0,
+        userEmail: userEmail,
         output: {
           image: outImagePath ? path.basename(outImagePath) : null,
           text_len: outText.trim().length,
@@ -1373,7 +1413,8 @@ app.post(
           height: meta.height || null,
         },
         user_id: userId,
-      });
+      };
+      logGen(logData);
 
       return res.json({
         ok: true,
@@ -1401,7 +1442,7 @@ app.post(
         details: e?.error?.details || null,
       });
     } finally {
-      if (inputPath) fs.unlink(inputPath, () => {}); // disk hygiene: always remove upload
+      // if (inputPath) fs.unlink(inputPath, () => {}); // disk hygiene: always remove upload
     }
   }
 );
