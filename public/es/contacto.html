@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Contáctanos – Soporte del Generador de Figuras con IA de Toyrender
+    </title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Ponte en contacto con el soporte de Toyrender. ¿Preguntas sobre la generación de figuras con IA, facturación o problemas técnicos? Estamos aquí para ayudarte con un soporte rápido y amigable."
+    />
+    <meta
+      name="keywords"
+      content="soporte Toyrender, contactar IA de figuras, servicio al cliente, soporte técnico, ayuda de facturación, soporte de arte con IA"
+    />
+    <meta name="author" content="Toyrender.com" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toyrender.com/es/contacto" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Contactar con Soporte de Toyrender - Ayuda del Generador de Figuras con IA"
+    />
+    <meta
+      property="og:description"
+      content="Ponte en contacto con el soporte de Toyrender si tienes preguntas sobre la generación de figuras con IA, facturación o problemas técnicos."
+    />
+    <meta property="og:url" content="https://toyrender.com/es/contacto" />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta property="og:image" content="https://toyrender.com/og-image.jpg" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Contactar con Soporte de Toyrender - Ayuda del Generador de Figuras con IA"
+    />
+    <meta
+      name="twitter:description"
+      content="Ponte en contacto con el soporte de Toyrender si tienes preguntas sobre la generación de figuras con IA, facturación o problemas técnicos."
+    />
+    <meta name="twitter:image" content="https://toyrender.com/og-image.jpg" />
+
+    <!-- Theme and mobile app meta tags -->
+    <meta name="theme-color" content="#9333ea" />
+    <meta name="msapplication-TileColor" content="#9333ea" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Toyrender" />
+
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+        }
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      .fade-in-up {
+        animation: fadeInUp 0.6s ease-out forwards;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: float 20s ease-in-out infinite;
+      }
+      .form-input {
+        background: rgba(15, 23, 42, 0.6);
+        border: 1px solid rgba(139, 92, 246, 0.3);
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+      }
+      .form-input:focus {
+        outline: none;
+        border-color: rgba(139, 92, 246, 0.8);
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        background: rgba(15, 23, 42, 0.8);
+      }
+      .form-input::placeholder {
+        color: rgba(196, 181, 253, 0.6);
+      }
+      @keyframes slideInDown {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .success-message {
+        animation: slideInDown 0.5s ease-out;
+      }
+    </style>
+
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      async
+    ></script>
+  </head>
+
+  <body
+    class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
+  >
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="blob w-96 h-96 bg-purple-600 -top-48 -left-48"></div>
+      <div
+        class="blob w-96 h-96 bg-indigo-600 top-1/2 -right-48"
+        style="animation-delay: 5s"
+      ></div>
+      <div
+        class="blob w-96 h-96 bg-pink-600 -bottom-48 left-1/3"
+        style="animation-delay: 10s"
+      ></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav
+      class="relative z-10 px-6 py-4 lg:px-12"
+      role="navigation"
+      aria-label="Navegación principal"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+          <a
+            href="/es/"
+            class="flex items-center space-x-2 hover:opacity-80 transition-opacity"
+          >
+            <i
+              class="fas fa-cube text-3xl text-purple-400"
+              aria-hidden="true"
+            ></i>
+            <span class="text-2xl font-bold gradient-text">Toyrender</span>
+          </a>
+        </div>
+        <div class="flex items-center space-x-6">
+          <a
+            href="/es/"
+            class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
+          >
+            <i class="fas fa-home mr-2" aria-hidden="true"></i>
+            <span>Volver al Inicio</span>
+          </a>
+          <button
+            class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+            aria-label="Inicia sesión en tu cuenta"
+          >
+            <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
+            <span>Iniciar Sesión</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main
+      class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-12"
+      role="main"
+    >
+      <!-- Hero Section -->
+      <section
+        class="text-center mb-16 fade-in-up"
+        aria-labelledby="contact-title"
+      >
+        <h1 id="contact-title" class="text-5xl lg:text-6xl font-bold mb-6">
+          <span class="gradient-text">Ponte en Contacto</span>
+        </h1>
+        <p class="text-xl text-purple-200 mb-8 max-w-3xl mx-auto">
+          ¿Tienes preguntas sobre la generación de figuras con IA? ¿Necesitas
+          ayuda con tu cuenta? ¡Estamos aquí para ayudarte a crear figuras de
+          colección increíbles!
+        </p>
+        <div
+          class="flex flex-wrap justify-center gap-4 mb-8"
+          role="list"
+          aria-label="Métodos de contacto"
+        >
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+            role="listitem"
+          >
+            <i class="fas fa-clock mr-2 text-green-400" aria-hidden="true"></i>
+            <span>Respondemos en menos de 24 horas</span>
+          </div>
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+            role="listitem"
+          >
+            <i class="fas fa-headset mr-2 text-blue-400" aria-hidden="true"></i>
+            <span>Equipo de soporte amigable</span>
+          </div>
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+            role="listitem"
+          >
+            <i
+              class="fas fa-shield-alt mr-2 text-yellow-400"
+              aria-hidden="true"
+            ></i>
+            <span>Seguro y privado</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Form Section -->
+      <section class="max-w-4xl mx-auto mb-16" aria-labelledby="form-title">
+        <div
+          class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/30 pulse-glow"
+        >
+          <!-- Success Message (Hidden by default) -->
+          <div
+            id="successMessage"
+            class="hidden success-message mb-8 p-6 bg-green-600/20 border border-green-500/50 rounded-2xl text-center"
+          >
+            <i class="fas fa-check-circle text-3xl text-green-400 mb-3"></i>
+            <h3 class="text-xl font-semibold text-green-300 mb-2">
+              ¡Mensaje Enviado con Éxito!
+            </h3>
+            <p class="text-green-200">
+              ¡Gracias por contactarnos! Te responderemos en menos de 24 horas.
+            </p>
+          </div>
+
+          <div class="grid lg:grid-cols-2 gap-12">
+            <!-- Contact Form -->
+            <div>
+              <h2 id="form-title" class="text-3xl font-bold mb-6">
+                Envíanos un mensaje
+              </h2>
+              <form id="contactForm" class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label
+                      for="firstName"
+                      class="block text-sm font-medium text-purple-300 mb-2"
+                      >Nombre *</label
+                    >
+                    <input
+                      type="text"
+                      id="firstName"
+                      name="firstName"
+                      required
+                      class="form-input w-full px-4 py-3 rounded-lg text-white placeholder:text-purple-300/60"
+                      placeholder="Tu nombre"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="lastName"
+                      class="block text-sm font-medium text-purple-300 mb-2"
+                      >Apellido *</label
+                    >
+                    <input
+                      type="text"
+                      id="lastName"
+                      name="lastName"
+                      required
+                      class="form-input w-full px-4 py-3 rounded-lg text-white placeholder:text-purple-300/60"
+                      placeholder="Tu apellido"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-purple-300 mb-2"
+                    >Correo Electrónico *</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="form-input w-full px-4 py-3 rounded-lg text-white placeholder:text-purple-300/60"
+                    placeholder="tu.correo@ejemplo.com"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    for="subject"
+                    class="block text-sm font-medium text-purple-300 mb-2"
+                    >Asunto *</label
+                  >
+                  <select
+                    id="subject"
+                    name="subject"
+                    required
+                    class="form-input w-full px-4 py-3 rounded-lg text-white"
+                  >
+                    <option value="">Elige un tema...</option>
+                    <option value="technical">Soporte Técnico</option>
+                    <option value="billing">Facturación y Créditos</option>
+                    <option value="feedback">Comentarios y Sugerencias</option>
+                    <option value="business">Consulta de Negocios</option>
+                    <option value="other">Otro</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label
+                    for="message"
+                    class="block text-sm font-medium text-purple-300 mb-2"
+                    >Mensaje *</label
+                  >
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                    class="form-input w-full px-4 py-3 rounded-lg text-white placeholder:text-purple-300/60 resize-vertical"
+                    placeholder="Describe tu pregunta o problema en detalle..."
+                  ></textarea>
+                </div>
+
+                <div class="flex items-start space-x-3">
+                  <input
+                    type="checkbox"
+                    id="privacy"
+                    name="privacy"
+                    required
+                    class="mt-1 w-4 h-4 rounded border-purple-500/50 bg-purple-900/30 text-purple-600 focus:ring-purple-500 focus:ring-offset-0"
+                  />
+                  <label for="privacy" class="text-sm text-purple-300">
+                    Acepto la
+                    <a
+                      href="/es/privacy"
+                      class="text-purple-400 hover:text-purple-300 underline"
+                      >Política de Privacidad</a
+                    >
+                    y entiendo que mi información se usará para responder a mi
+                    consulta. *
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  id="submitBtn"
+                  class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                >
+                  <i class="fas fa-paper-plane mr-2"></i>
+                  <span id="submitText">Enviar Mensaje</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Contact Info & FAQ -->
+            <div class="space-y-8">
+              <!-- Quick Contact Info -->
+              <div>
+                <h3 class="text-2xl font-bold mb-4">
+                  Otras formas de contactarnos
+                </h3>
+                <div class="space-y-4">
+                  <div
+                    class="flex items-start space-x-4 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20"
+                  >
+                    <i
+                      class="fas fa-envelope text-2xl text-purple-400 mt-1"
+                    ></i>
+                    <div>
+                      <h4 class="font-semibold text-purple-300">
+                        Soporte por Email
+                      </h4>
+                      <p class="text-purple-200 text-sm">info@toyrender.com</p>
+                      <p class="text-purple-400 text-xs">
+                        Para problemas detallados, puedes enviar capturas de
+                        pantalla
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-start space-x-4 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20"
+                  >
+                    <i
+                      class="fas fa-question-circle text-2xl text-blue-400 mt-1"
+                    ></i>
+                    <div>
+                      <h4 class="font-semibold text-purple-300">
+                        Preguntas Rápidas
+                      </h4>
+                      <p class="text-purple-200 text-sm">
+                        Consulta nuestra sección de
+                        <a
+                          href="/es/#faq"
+                          class="text-purple-400 hover:text-purple-300 underline"
+                          >Preguntas Frecuentes</a
+                        >
+                      </p>
+                      <p class="text-purple-400 text-xs">
+                        La mayoría de las preguntas comunes se responden al
+                        instante
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="flex items-start space-x-4 p-4 bg-purple-900/20 rounded-lg border border-purple-500/20"
+                  >
+                    <i class="fas fa-clock text-2xl text-green-400 mt-1"></i>
+                    <div>
+                      <h4 class="font-semibold text-purple-300">
+                        Tiempo de Respuesta
+                      </h4>
+                      <p class="text-purple-200 text-sm">
+                        Generalmente en menos de 24 horas
+                      </p>
+                      <p class="text-purple-400 text-xs">
+                        Respuestas más rápidas de lunes a viernes
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Quick Help -->
+              <div>
+                <h3 class="text-2xl font-bold mb-4">Antes de contactarnos</h3>
+                <div class="space-y-3">
+                  <details
+                    class="group bg-purple-900/20 rounded-lg border border-purple-500/20"
+                  >
+                    <summary
+                      class="flex cursor-pointer items-center justify-between p-4"
+                    >
+                      <span class="font-semibold text-purple-300"
+                        >¿La generación no funciona?</span
+                      >
+                      <span
+                        class="ml-4 transition-transform group-open:rotate-180"
+                        aria-hidden="true"
+                        >⌄</span
+                      >
+                    </summary>
+                    <div class="px-4 pb-4 text-purple-200 text-sm">
+                      Intenta refrescar la página, verifica tu conexión a
+                      internet y asegúrate de que tu imagen pese menos de 10 MB.
+                      Las fotos claras y bien iluminadas funcionan mejor.
+                    </div>
+                  </details>
+
+                  <details
+                    class="group bg-purple-900/20 rounded-lg border border-purple-500/20"
+                  >
+                    <summary
+                      class="flex cursor-pointer items-center justify-between p-4"
+                    >
+                      <span class="font-semibold text-purple-300"
+                        >¿Faltan créditos?</span
+                      >
+                      <span
+                        class="ml-4 transition-transform group-open:rotate-180"
+                        aria-hidden="true"
+                        >⌄</span
+                      >
+                    </summary>
+                    <div class="px-4 pb-4 text-purple-200 text-sm">
+                      Los créditos están vinculados a tu cuenta. Si iniciaste
+                      sesión con un método diferente o borraste los datos del
+                      navegador, contáctanos con los detalles de tu pago.
+                    </div>
+                  </details>
+
+                  <details
+                    class="group bg-purple-900/20 rounded-lg border border-purple-500/20"
+                  >
+                    <summary
+                      class="flex cursor-pointer items-center justify-between p-4"
+                    >
+                      <span class="font-semibold text-purple-300"
+                        >¿Problemas de calidad?</span
+                      >
+                      <span
+                        class="ml-4 transition-transform group-open:rotate-180"
+                        aria-hidden="true"
+                        >⌄</span
+                      >
+                    </summary>
+                    <div class="px-4 pb-4 text-purple-200 text-sm">
+                      Cuando nos contactes, incluye tu foto original y el
+                      resultado generado. Te daremos consejos para obtener
+                      mejores resultados o te reembolsaremos los créditos.
+                    </div>
+                  </details>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO Content Section -->
+      <section class="max-w-4xl mx-auto" aria-labelledby="about-title">
+        <div
+          class="bg-slate-800/30 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/20"
+        >
+          <h2 id="about-title" class="text-3xl font-bold mb-6 gradient-text">
+            Acerca del Generador de Figuras con IA de Toyrender
+          </h2>
+
+          <div class="prose prose-lg text-purple-200 max-w-none space-y-6">
+            <p>
+              Toyrender es el generador de figuras líder impulsado por IA que
+              transforma fotos comunes en impresionantes diseños de figuras de
+              colección. Nuestra avanzada tecnología de inteligencia artificial
+              se especializa en crear conceptos de figuras a escala 1:7 de alta
+              calidad a partir de fotografías de retratos, facilitando a
+              coleccionistas, artistas y entusiastas la visualización de sus
+              personajes y personas favoritas como figuras detalladas.
+            </p>
+
+            <p>
+              Nuestro generador de figuras con IA utiliza algoritmos de
+              aprendizaje automático de vanguardia para analizar rasgos
+              faciales, ropa y poses de las fotos subidas, y luego los convierte
+              en diseños de figuras de calidad profesional. Ya sea que busques
+              crear figuras personalizadas para videojuegos, cosplay de anime,
+              conmemoraciones de graduación o ideas de regalos únicos, Toyrender
+              ofrece resultados excepcionales en menos de un minuto.
+            </p>
+
+            <h3 class="text-2xl font-semibold text-purple-300 mt-8 mb-4">
+              ¿Por qué elegir Toyrender para la creación de figuras con IA?
+            </h3>
+
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+              <div>
+                <h4 class="text-lg font-semibold text-purple-300 mb-2">
+                  Tecnología de IA Avanzada
+                </h4>
+                <p class="text-sm">
+                  Nuestros modelos de IA patentados están entrenados
+                  específicamente para el diseño de figuras, asegurando
+                  proporciones precisas, texturas detalladas e iluminación
+                  realista que capturan la esencia de las figuras de colección.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-semibold text-purple-300 mb-2">
+                  Múltiples Opciones de Estilo
+                </h4>
+                <p class="text-sm">
+                  Desde héroes de anime y temas ciberpunk hasta estilos
+                  profesionales y de graduación, nuestra IA puede adaptar tu
+                  foto para que coincida con cualquier estética o género de
+                  figura.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-semibold text-purple-300 mb-2">
+                  Resultados en Alta Resolución
+                </h4>
+                <p class="text-sm">
+                  Todos los diseños de figuras generados se entregan en formato
+                  de alta resolución, perfectos para impresión, referencia de
+                  modelado 3D, portafolios digitales o uso comercial con nuestra
+                  licencia Pro.
+                </p>
+              </div>
+
+              <div>
+                <h4 class="text-lg font-semibold text-purple-300 mb-2">
+                  Generación Instantánea
+                </h4>
+                <p class="text-sm">
+                  A diferencia de los servicios de diseño de figuras
+                  tradicionales que tardan semanas, nuestro generador de figuras
+                  con IA crea resultados profesionales en segundos, lo que lo
+                  hace perfecto para prototipos rápidos y proyectos creativos.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-2xl font-semibold text-purple-300 mt-8 mb-4">
+              Casos de Uso Populares para Figuras Generadas con IA
+            </h3>
+
+            <p>
+              Nuestro generador de figuras con IA sirve para una amplia gama de
+              aplicaciones creativas y comerciales. Los desarrolladores de
+              videojuegos usan nuestro servicio para crear arte conceptual de
+              personajes y materiales promocionales. Los cosplayers generan
+              vistas previas de sus diseños de vestuario como figuras antes de
+              invertir en materiales. Los creadores de contenido y streamers
+              usan nuestras figuras de IA para la marca de su canal, creación de
+              avatares y diseño de mercancía. Quienes buscan regalos crean arte
+              de figuras personalizadas para aniversarios, cumpleaños y
+              ocasiones especiales.
+            </p>
+
+            <p>
+              La tecnología detrás de Toyrender combina visión por computadora,
+              principios de modelado 3D e IA generativa para comprender los
+              matices del diseño de figuras. Nuestra IA reconoce puntos de
+              referencia faciales, detalles de la ropa y dinámicas de la pose
+              para crear figuras que mantienen la personalidad y características
+              de la foto original, adaptándolas a las proporciones y estilo
+              icónicos de las figuras de colección.
+            </p>
+
+            <h3 class="text-2xl font-semibold text-purple-300 mt-8 mb-4">
+              Contacta a Nuestro Equipo de Soporte de Figuras con IA
+            </h3>
+
+            <p>
+              Ya sea que necesites asistencia técnica con la carga de fotos,
+              tengas preguntas sobre nuestro proceso de generación de figuras
+              con IA o desees explorar opciones de licencia comercial, nuestro
+              equipo de soporte dedicado está aquí para ayudarte. Nos
+              enorgullecemos de brindar asistencia rápida y experta para
+              garantizar que obtengas los mejores resultados posibles de nuestro
+              generador de figuras con IA.
+            </p>
+
+            <p>
+              Para obtener resultados óptimos con nuestro generador de figuras
+              con IA, recomendamos subir fotos de retratos claras y bien
+              iluminadas en formato JPG o PNG. Nuestra IA funciona mejor con
+              fotos frontales donde los rasgos faciales son claramente visibles.
+              La tecnología puede manejar diversas condiciones de iluminación y
+              fondos, pero los fondos más simples tienden a producir diseños de
+              figuras más limpios.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="relative z-10 mt-20 px-6 py-12 lg:px-12 border-t border-purple-800/30"
+      role="contentinfo"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <i
+            class="fas fa-cube text-2xl text-purple-400"
+            aria-hidden="true"
+          ></i>
+          <span class="text-xl font-bold gradient-text">Toyrender</span>
+        </div>
+        <p class="text-purple-300 mb-6">
+          © 2025 Toyrender.com. Todos los derechos reservados.
+        </p>
+        <nav
+          class="flex justify-center space-x-6 text-purple-400"
+          role="navigation"
+          aria-label="Navegación del pie de página"
+        >
+          <a href="/es/" class="hover:text-purple-300 transition-colors"
+            >Inicio</a
+          >
+          <a href="/es/terms" class="hover:text-purple-300 transition-colors"
+            >Términos</a
+          >
+          <a href="/es/privacy" class="hover:text-purple-300 transition-colors"
+            >Privacidad</a
+          >
+          <a href="/es/contacto" class="hover:text-purple-300 transition-colors"
+            >Contacto</a
+          >
+          <a href="/es/#faq" class="hover:text-purple-300 transition-colors"
+            >Preguntas Frecuentes</a
+          >
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      // Form handling
+      const contactForm = document.getElementById("contactForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const submitText = document.getElementById("submitText");
+      const successMessage = document.getElementById("successMessage");
+
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // Update button state
+        submitBtn.disabled = true;
+        submitText.innerHTML =
+          '<i class="fas fa-spinner fa-spin mr-2"></i>Enviando...';
+
+        // Get form data
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+
+        try {
+          // Simulate API call (replace with actual endpoint)
+          await new Promise((resolve) => setTimeout(resolve, 2000));
+
+          // Show success message
+          successMessage.classList.remove("hidden");
+          contactForm.reset();
+
+          // Scroll to success message
+          successMessage.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+
+          // Hide success message after 8 seconds
+          setTimeout(() => {
+            successMessage.classList.add("hidden");
+          }, 8000);
+        } catch (error) {
+          alert(
+            "Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo o envíanos un correo electrónico directamente a support@toyrender.com"
+          );
+        } finally {
+          // Reset button state
+          submitBtn.disabled = false;
+          submitText.innerHTML =
+            '<i class="fas fa-paper-plane mr-2"></i>Enviar Mensaje';
+        }
+      });
+
+      // Add some interactive feedback for form fields
+      const formInputs = document.querySelectorAll(".form-input");
+      formInputs.forEach((input) => {
+        input.addEventListener("focus", () => {
+          input.parentElement.style.transform = "scale(1.02)";
+        });
+
+        input.addEventListener("blur", () => {
+          input.parentElement.style.transform = "scale(1)";
+        });
+      });
+
+      // Add fade-in animation on scroll for better UX
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.querySelectorAll("section").forEach((section) => {
+        section.style.opacity = "0";
+        section.style.transform = "translateY(20px)";
+        section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>

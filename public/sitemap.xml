@@ -88,5 +88,35 @@
   <url>
     <loc>https://toyrender.com/contact</loc>
     <lastmod>2025-09-07T12:30:00+00:00</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/contact"/>
+  </url>
+
+  <!-- Contacto (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/contacto.html</loc>
+    <lastmod>2025-09-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/contacto.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/contact"/>
+  </url>
+
+  <!-- Gallery (ES .html explicit) -->
+  <url>
+    <loc>https://toyrender.com/es/galeria.html</loc>
+    <lastmod>2025-09-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery.html"/>
+  </url>
+
+  <!-- Home (ES index.html explicit) -->
+  <url>
+    <loc>https://toyrender.com/es/index.html</loc>
+    <lastmod>2025-09-09</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
   </url>
 </urlset>
