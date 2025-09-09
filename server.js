@@ -291,6 +291,52 @@ async function txn(fn) {
   }
 }
 
+// ApplyWaterMark Function
+async function applyWatermark(imagePath) {
+  try {
+    // Create watermark SVG with your branding
+    const watermarkSVG = Buffer.from(`
+      <svg width="300" height="80" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#9333ea;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="300" height="80" rx="10" fill="rgba(0,0,0,0.7)"/>
+        <text x="150" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="url(#grad)" text-anchor="middle">
+          Toyrender.com
+        </text>
+        <text x="150" y="60" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)" text-anchor="middle">
+          Buy credits for watermark-free images
+        </text>
+      </svg>
+    `);
+
+    // Read the original image
+    const imageBuffer = await fs.promises.readFile(imagePath);
+
+    // Apply watermark using sharp
+    const watermarkedBuffer = await sharp(imageBuffer)
+      .composite([
+        {
+          input: watermarkSVG,
+          gravity: "southeast", // Position in bottom-right corner
+          blend: "over",
+        },
+      ])
+      .toBuffer();
+
+    // Write back to the same file
+    await fs.promises.writeFile(imagePath, watermarkedBuffer);
+
+    return true;
+  } catch (error) {
+    console.error("Error applying watermark:", error);
+    return false;
+  }
+}
+
 // --- DB schema ---
 (async () => {
   await run(`
