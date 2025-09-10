@@ -768,7 +768,7 @@
       </p>
 
       <!-- WOMAN: Original + 10 styles -->
-      <section aria-labelledby="example-woman2">
+      <section aria-labelledby="example-woman">
         <h3 id="example-woman" class="text-2xl font-semibold mb-4">
           Example Set — Woman
         </h3>
@@ -930,7 +930,7 @@
           >
             <img
               src="/images/dating-photos/Nina.jpg"
-              alt="Original portrait photo — Mona"
+              alt="Original portrait photo — Nina"
               class="w-full h-auto object-cover"
               width="640"
               height="800"
@@ -955,7 +955,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo1.jpg"
                 alt="Nina Style 1"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="1"
                 width="640"
                 height="800"
@@ -972,7 +972,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo2.jpg"
                 alt="Nina Style 2"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="2"
                 width="640"
                 height="800"
@@ -989,7 +989,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo3.jpg"
                 alt="Nina Style 3"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="3"
                 width="640"
                 height="800"
@@ -1006,7 +1006,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo4.jpg"
                 alt="Nina Style 4"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="4"
                 width="640"
                 height="800"
@@ -1023,7 +1023,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo5.jpg"
                 alt="Nina Style 5"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="5"
                 width="640"
                 height="800"
@@ -1040,7 +1040,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo6.jpg"
                 alt="Nina Style 6"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="6"
                 width="640"
                 height="800"
@@ -1057,7 +1057,7 @@
                 src="/images/dating-photos/Nina-Dating-Photo7.jpg"
                 alt="Nina Style 7"
                 class="w-full h-auto object-cover lb"
-                data-gallery="woman"
+                data-gallery="nina"
                 data-index="7"
                 width="640"
                 height="800"
@@ -1065,6 +1065,40 @@
               />
               <figcaption class="p-3 text-sm text-purple-200">
                 Nina Style 7
+              </figcaption>
+            </figure>
+            <figure
+              class="bg-slate-800/50 border border-purple-500/30 rounded-xl overflow-hidden"
+            >
+              <img
+                src="/images/dating-photos/Nina-Dating-Photo8.jpg"
+                alt="Nina Style 8"
+                class="w-full h-auto object-cover lb"
+                data-gallery="nina"
+                data-index="8"
+                width="640"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption class="p-3 text-sm text-purple-200">
+                Nina Style 8
+              </figcaption>
+            </figure>
+            <figure
+              class="bg-slate-800/50 border border-purple-500/30 rounded-xl overflow-hidden"
+            >
+              <img
+                src="/images/dating-photos/Nina-Dating-Photo9.jpg"
+                alt="Nina Style 9"
+                class="w-full h-auto object-cover lb"
+                data-gallery="nina"
+                data-index="9"
+                width="640"
+                height="800"
+                loading="lazy"
+              />
+              <figcaption class="p-3 text-sm text-purple-200">
+                Nina Style 9
               </figcaption>
             </figure>
           </div>
@@ -1739,7 +1773,10 @@
 
       document.querySelectorAll("img.lb").forEach((img) => {
         img.addEventListener("click", () => {
-          openLB(img.dataset.gallery, parseInt(img.dataset.index, 10) || 1);
+          const gallery = img.dataset.gallery;
+          const items = getGallery(gallery); // Array from querySelectorAll
+          const index = items.indexOf(img) + 1; // 1-based index for openLB
+          openLB(gallery, index);
         });
         img.style.cursor = "zoom-in";
       });
