@@ -1305,6 +1305,9 @@ app.get("/api/probe", async (_req, res) => {
 });
 
 // --- Generate route ---
+// Modify the /api/generate endpoint (around line 1100-1200)
+// Replace the existing endpoint with this updated version:
+
 app.post(
   "/api/generate",
   ensureAuth,
@@ -1314,8 +1317,8 @@ app.post(
   upload.single("photo"),
   async (req, res) => {
     const userId = req.session.userId;
-    // --- ADD THIS BLOCK TO GET USER EMAIL ---
-    let userEmail = "unknown"; // Default value in case of an error
+    // Get user email for logging
+    let userEmail = "unknown";
     try {
       const user = await get("SELECT email FROM users WHERE id = ?", [userId]);
       if (user) {
@@ -1361,6 +1364,24 @@ app.post(
           message: "Upgrade or wait until tomorrow.",
         });
       }
+
+      // Check if this was a free credit (for watermarking decision)
+      // Since you're using STARTER_CREDITS in paid_remaining, we need to track differently
+      // Get current user credits to determine if they have purchased credits
+      const userCredits = await get(
+        "SELECT paid_remaining FROM user_credits WHERE user_id = ?",
+        [userId]
+      );
+
+      // Check if user has made any payments
+      const hasPayments = await get(
+        "SELECT id FROM payments WHERE user_id = ? LIMIT 1",
+        [userId]
+      );
+
+      // User is on free trial if they have no payment history and only starter credits
+      const isFreeTrial =
+        !hasPayments && userCredits.paid_remaining <= STARTER_CREDITS;
 
       // Log start
       await run(
@@ -1431,6 +1452,21 @@ app.post(
           const fname = `gemini-output-${Date.now()}.png`;
           outImagePath = path.join(RESULTS_DIR, fname);
           fs.writeFileSync(outImagePath, buffer);
+
+          // APPLY WATERMARK FOR FREE TRIAL USERS
+          if (isFreeTrial && outImagePath) {
+            console.log(`Applying watermark for free trial user: ${userEmail}`);
+            try {
+              await applyWatermark(outImagePath);
+              console.log(`Watermark applied successfully to ${fname}`);
+            } catch (watermarkError) {
+              console.error(
+                `Failed to apply watermark to ${fname}:`,
+                watermarkError
+              );
+              // Continue even if watermark fails - don't break the user experience
+            }
+          }
         }
       }
 
@@ -1448,6 +1484,7 @@ app.post(
         output: {
           image: outImagePath ? path.basename(outImagePath) : null,
           text_len: outText.trim().length,
+          watermarked: isFreeTrial, // Log whether image was watermarked
         },
         file: {
           name: req.file.originalname,
@@ -1459,6 +1496,7 @@ app.post(
           height: meta.height || null,
         },
         user_id: userId,
+        is_free_trial: isFreeTrial,
       };
       logGen(logData);
 
@@ -1468,6 +1506,7 @@ app.post(
         imageUrl: outImagePath
           ? "/results/" + path.basename(outImagePath)
           : null,
+        watermarked: isFreeTrial, // Let frontend know if image was watermarked
       });
     } catch (e) {
       // refund on failure
@@ -1477,9 +1516,20 @@ app.post(
         ]);
       } catch {}
       try {
-        await refundCredit(userId, 1, "free");
+        await refundCredit(userId, 1);
       } catch {}
       console.error("Generation error:", e?.message || e);
+
+      // Log error
+      logGen({
+        event: "gen_error",
+        reqId,
+        duration_ms: Date.now() - t0,
+        userEmail: userEmail,
+        error: { message: e?.message || "Unknown error" },
+        user_id: userId,
+      });
+
       return res.status(e?.status || 500).json({
         ok: false,
         status: e?.status || 500,
