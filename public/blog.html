@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toyrender Blog – Guides, Tips & Updates</title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Toyrender Blog: practical guides, photo tips, and updates to get the best results from the AI Figurine Generator."
+    />
+    <link rel="canonical" href="https://toyrender.com/blog/" />
+    <link rel="alternate" href="https://toyrender.com/blog/" hreflang="en" />
+    <link rel="alternate" href="https://toyrender.com/es/blog/" hreflang="es" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Toyrender Blog – Guides, Tips & Updates"
+    />
+    <meta
+      property="og:description"
+      content="Practical guides, photo tips, and updates to get the best results from the AI Figurine Generator."
+    />
+    <meta property="og:url" content="https://toyrender.com/blog/" />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta property="og:image" content="https://toyrender.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Toyrender Blog – Guides, Tips & Updates"
+    />
+    <meta
+      name="twitter:description"
+      content="Practical guides, photo tips, and updates to get the best results from the AI Figurine Generator."
+    />
+    <meta name="twitter:image" content="https://toyrender.com/og-image.jpg" />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#9333ea" />
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script" />
+    <link
+      rel="preload"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      as="style"
+    />
+
+    <!-- Styles / Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: float 20s ease-in-out infinite;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
+
+    <!-- JSON-LD (Blog + ItemList) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Blog",
+            "@id": "https://toyrender.com/blog/#blog",
+            "name": "Toyrender Blog",
+            "url": "https://toyrender.com/blog/",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Toyrender",
+              "url": "https://toyrender.com"
+            }
+          },
+          {
+            "@type": "ItemList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "url": "https://toyrender.com/perfect-source-photo-ai-enhancement.html",
+                "name": "Perfect Source Photo for AI Enhancement: A Step-by-Step Guide"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "url": "https://toyrender.com/dating-photos.html",
+                "name": "Tasteful, Non-Nude Dating Photos: 10 Classy Styles in Minutes"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "url": "https://toyrender.com/why-dating-photos-matter-statistics.html",
+                "name": "Why Dating Photos Matter: 2025 Statistics"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
+  >
+    <!-- Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="blob w-96 h-96 bg-purple-600 -top-48 -left-48"></div>
+      <div
+        class="blob w-96 h-96 bg-indigo-600 top-1/2 -right-48"
+        style="animation-delay: 5s"
+      ></div>
+      <div
+        class="blob w-96 h-96 bg-pink-600 -bottom-48 left-1/3"
+        style="animation-delay: 10s"
+      ></div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="relative z-10 px-6 py-4 lg:px-12" aria-label="Main navigation">
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="/" class="flex items-center space-x-2">
+          <i class="fas fa-cube text-3xl text-purple-400"></i>
+          <span class="text-2xl font-bold gradient-text">Toyrender</span>
+        </a>
+        <div class="flex items-center gap-2 text-sm text-purple-200/90">
+          <a
+            href="/gallery"
+            class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >Gallery</a
+          >
+          <a
+            href="/blog"
+            class="px-3 py-1 rounded-md bg-white/10 text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >Blog</a
+          >
+          <a
+            href="/faq"
+            class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >FAQ</a
+          >
+          <a
+            href="/#pricing-title"
+            class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >Pricing</a
+          >
+          <a
+            href="/es/blog/"
+            class="ml-2 px-3 py-1 rounded-md border border-white/10 hover:bg-white/10"
+            hreflang="es"
+            aria-label="Ver el blog en Español"
+            >ES</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main -->
+    <main class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-16">
+      <!-- Hero -->
+      <section class="text-center mt-8 mb-12">
+        <h1 class="text-4xl lg:text-6xl font-extrabold mb-4">
+          <span class="gradient-text">Toyrender Blog</span>
+        </h1>
+        <p class="text-purple-200 max-w-2xl mx-auto">
+          Practical guides, photo tips, and updates to help you get the most out
+          of the AI Figurine Generator.
+        </p>
+      </section>
+
+      <!-- Posts grid -->
+      <section aria-label="Blog posts">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Post 1 -->
+          <article
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+          >
+            <a href="/perfect-source-photo-ai-enhancement.html" class="block">
+              <img
+                src="/images/blog/perfect-source-photo.jpg"
+                alt="Perfect source photo example with good lighting"
+                class="w-full h-44 object-cover"
+                loading="lazy"
+              />
+            </a>
+            <div class="p-5 flex-1 flex flex-col">
+              <div class="flex items-center gap-2 text-xs text-purple-300">
+                <span
+                  class="px-2 py-0.5 rounded-full bg-purple-900/40 border border-purple-700/40"
+                  >Guide</span
+                >
+                <time datetime="2025-09-01" class="opacity-80"
+                  >Sep 1, 2025</time
+                >
+              </div>
+              <h2 class="text-xl font-semibold mt-2">
+                <a
+                  href="/perfect-source-photo-ai-enhancement.html"
+                  class="hover:underline"
+                >
+                  Perfect Source Photo for AI Enhancement: A Step-by-Step Guide
+                </a>
+              </h2>
+              <p class="text-purple-200 text-sm mt-2 flex-1">
+                Learn how to take the perfect source photo for AI enhancement.
+                Step-by-step guide with lighting tips, camera settings, and
+                common mistakes to avoid for best AI photo results.
+              </p>
+              <div class="mt-4">
+                <a
+                  href="/perfect-source-photo-ai-enhancement.html"
+                  class="text-sm text-purple-300 hover:text-white underline"
+                  >Read article</a
+                >
+                <span class="mx-2 opacity-40">·</span>
+                <a
+                  href="/es/perfect-source-photo-ai-enhancement.html"
+                  class="text-sm text-purple-300 hover:text-white underline"
+                  hreflang="es"
+                  >Leer en Español</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 2 -->
+          <article
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+          >
+            <a href="/dating-photos.html" class="block">
+              <img
+                src="/images/blog/dating-photos.jpg"
+                alt="Tasteful, non-nude dating photo styles collage"
+                class="w-full h-44 object-cover"
+                loading="lazy"
+              />
+            </a>
+            <div class="p-5 flex-1 flex flex-col">
+              <div class="flex items-center gap-2 text-xs text-purple-300">
+                <span
+                  class="px-2 py-0.5 rounded-full bg-purple-900/40 border border-purple-700/40"
+                  >Ideas</span
+                >
+                <time datetime="2025-09-05" class="opacity-80"
+                  >Sep 5, 2025</time
+                >
+              </div>
+              <h2 class="text-xl font-semibold mt-2">
+                <a href="/dating-photos.html" class="hover:underline">
+                  Tasteful, Non-Nude Dating Photos: 10 Classy Styles in Minutes
+                </a>
+              </h2>
+              <p class="text-purple-200 text-sm mt-2 flex-1">
+                Gift a tasteful, non-nude photo set: upload one portrait and get
+                10 intimate, classy styles in under a minute each. Great for
+                anniversaries, partners, or dating profiles.
+              </p>
+              <div class="mt-4">
+                <a
+                  href="/dating-photos.html"
+                  class="text-sm text-purple-300 hover:text-white underline"
+                  >Read article</a
+                >
+                <span class="mx-2 opacity-40">·</span>
+                <a
+                  href="/es/dating-photos.html"
+                  class="text-sm text-purple-300 hover:text-white underline"
+                  hreflang="es"
+                  >Leer en Español</a
+                >
+              </div>
+            </div>
+          </article>
+
+          <!-- Post 3 -->
+          <article
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+          >
+            <a href="/why-dating-photos-matter-statistics.html" class="block">
+              <img
+                src="/images/blog/dating-stats.jpg"
+                alt="Statistics charts illustrating dating photo performance"
+                class="w-full h-44 object-cover"
+                loading="lazy"
+              />
+            </a>
+            <div class="p-5 flex-1 flex flex-col">
+              <div class="flex items-center gap-2 text-xs text-purple-300">
+                <span
+                  class="px-2 py-0.5 rounded-full bg-purple-900/40 border border-purple-700/40"
+                  >Insights</span
+                >
+                <time datetime="2025-09-08" class="opacity-80"
+                  >Sep 8, 2025</time
+                >
+              </div>
+              <h2 class="text-xl font-semibold mt-2">
+                <a
+                  href="/why-dating-photos-matter-statistics.html"
+                  class="hover:underline"
+                >
+                  Why Dating Photos Matter: 2025 Statistics
+                </a>
+              </h2>
+              <p class="text-purple-200 text-sm mt-2 flex-1">
+                Discover why dating photos are crucial for success on Tinder,
+                Bumble, and Hinge. Backed by 2025 statistics showing you have
+                less than 1 second to make an impression.
+              </p>
+              <div class="mt-4">
+                <a
+                  href="/why-dating-photos-matter-statistics.html"
+                  class="text-sm text-purple-300 hover:text-white underline"
+                  >Read article</a
+                >
+                <span class="mx-2 opacity-40">·</span>
+                <a
+                  href="/es/why-dating-photos-matter-statistics.html"
+                  class="text-sm text-purple-300 hover:text-white underline"
+                  hreflang="es"
+                  >Leer en Español</a
+                >
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Optional pagination placeholder -->
+        <div class="mt-10 flex justify-center">
+          <nav
+            class="inline-flex rounded-lg overflow-hidden border border-white/10"
+            aria-label="Pagination"
+          >
+            <a class="px-4 py-2 bg-white/5 pointer-events-none opacity-60"
+              >Prev</a
+            >
+            <span class="px-4 py-2 bg-white/10">1</span>
+            <a class="px-4 py-2 hover:bg-white/10" href="#">2</a>
+            <a class="px-4 py-2 hover:bg-white/10" href="#">3</a>
+            <a class="px-4 py-2 hover:bg-white/10" href="#">Next</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="relative z-10 mt-12 px-6 py-12 lg:px-12 border-t border-purple-800/30"
+      role="contentinfo"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <i class="fas fa-cube text-2xl text-purple-400"></i>
+          <span class="text-xl font-bold gradient-text">Toyrender</span>
+        </div>
+        <p class="text-purple-300 mb-6">
+          © 2025 Toyrender.com. All rights reserved.
+        </p>
+        <nav
+          class="flex justify-center flex-wrap gap-6 text-purple-400"
+          aria-label="Footer navigation"
+        >
+          <a href="/gallery" class="hover:text-purple-300">Gallery</a>
+          <a href="/blog" class="hover:text-purple-300">Blog</a>
+          <a href="/contact" class="hover:text-purple-300">Contact</a>
+          <a href="/faq" class="hover:text-purple-300">FAQ</a>
+          <a href="/privacy.html" class="hover:text-purple-300">Privacy</a>
+          <a href="/terms.html" class="hover:text-purple-300">Terms</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

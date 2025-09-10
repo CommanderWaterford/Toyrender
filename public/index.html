@@ -498,6 +498,27 @@
           grid-template-columns: repeat(3, 1fr);
         }
       }
+
+      .google-auth-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 12px 16px;
+        background: white;
+        border: 1px solid #dadce0;
+        border-radius: 8px;
+        color: #3c4043;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.2s, box-shadow 0.2s;
+      }
+
+      .google-auth-btn:hover {
+        background-color: #f8f9fa;
+        box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3);
+      }
     </style>
     <script
       src="https://analytics.ahrefs.com/analytics.js"
@@ -575,6 +596,11 @@
               href="/gallery"
               class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
               >Gallery</a
+            >
+            <a
+              href="/blog"
+              class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >Blog</a
             >
             <a
               href="/faq"
@@ -1130,6 +1156,9 @@
     </div>
 
     <!-- Auth Modal (Sign In / Register) -->
+    <!-- Add this to your index.html in the auth modal section (replace the existing authModal div around line 2800) -->
+
+    <!-- Auth Modal (Sign In / Register) -->
     <div
       id="authModal"
       class="hidden fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-6"
@@ -1138,6 +1167,51 @@
         class="bg-slate-800 rounded-2xl p-8 max-w-md w-full border border-purple-500/30"
       >
         <h3 class="text-2xl font-bold mb-6" id="authTitle">Sign in</h3>
+
+        <!-- Google Sign-in Button -->
+        <button
+          id="googleSignInBtn"
+          type="button"
+          class="google-auth-btn mb-4"
+          onclick="window.location.href='/auth/google'"
+        >
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+            style="margin-right: 8px"
+          >
+            <path
+              fill="#4285F4"
+              d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z"
+            />
+            <path
+              fill="#34A853"
+              d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z"
+            />
+            <path
+              fill="#FBBC05"
+              d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042l3.007-2.332z"
+            />
+            <path
+              fill="#EA4335"
+              d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z"
+            />
+          </svg>
+          Sign in with Google
+        </button>
+
+        <!-- Divider -->
+        <div class="relative my-6">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-slate-600"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-4 bg-slate-800 text-slate-400"
+              >Or continue with email</span
+            >
+          </div>
+        </div>
 
         <form id="authForm" class="space-y-4">
           <div>
@@ -1184,8 +1258,126 @@
             Create an account
           </button>
         </p>
+
+        <!-- Privacy note -->
+        <p class="text-xs text-slate-500 mt-4 text-center">
+          By continuing, you agree to our Terms of Service and Privacy Policy
+        </p>
       </div>
     </div>
+
+    <!-- Update the JavaScript section to handle Google auth callbacks -->
+    <script>
+      // Add this to your existing JavaScript section, after the auth modal code
+
+      // Check for Google auth success/error on page load
+      window.addEventListener("DOMContentLoaded", async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Handle Google auth callbacks
+        if (urlParams.get("auth_status") === "success") {
+          await refreshSession();
+          toast("Successfully signed in with Google!");
+          // Clean up URL
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        } else if (urlParams.get("auth_error") === "google_failed") {
+          toast("Google sign-in failed. Please try again.");
+          // Clean up URL
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        }
+
+        // Handle Stripe checkout cancellation
+        if (urlParams.get("checkout_status") === "cancel") {
+          toast("Checkout cancelled.");
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        }
+      });
+
+      // Update the updateAuthUI function to show auth method
+      function updateAuthUI() {
+        const total = totalCredits();
+        $("#creditsCount").textContent = total;
+        $("#creditsLabel").textContent = "Credits";
+
+        if (sessionUser) {
+          // Check if Google user (you might want to add this info from backend)
+          const displayText =
+            sessionUser.authMethod === "google"
+              ? `${sessionUser.email} (Google)`
+              : sessionUser.email;
+
+          $("#authBtnText").textContent = displayText;
+          $("#logoutBtn").classList.remove("hidden");
+          $("#signInBtn").classList.add("bg-slate-700", "hover:bg-slate-600");
+          $("#signInBtn").classList.remove(
+            "bg-gradient-to-r",
+            "from-purple-600",
+            "to-pink-600",
+            "hover:from-purple-700",
+            "hover:to-pink-700"
+          );
+        } else {
+          $("#authBtnText").textContent = "Sign In";
+          $("#logoutBtn").classList.add("hidden");
+          $("#signInBtn").classList.remove(
+            "bg-slate-700",
+            "hover:bg-slate-600"
+          );
+          $("#signInBtn").classList.add(
+            "bg-gradient-to-r",
+            "from-purple-600",
+            "to-pink-600",
+            "hover:from-purple-700",
+            "hover:to-pink-700"
+          );
+        }
+
+        // Visual state if out of credits
+        const creditsBtn = $("#creditsBtn");
+        if (total <= 0) {
+          creditsBtn.classList.add("bg-red-600/30", "border-red-500/50");
+          creditsBtn.classList.remove(
+            "bg-purple-600/30",
+            "border-purple-500/50"
+          );
+        } else {
+          creditsBtn.classList.remove("bg-red-600/30", "border-red-500/50");
+          creditsBtn.classList.add("bg-purple-600/30", "border-purple-500/50");
+        }
+      }
+
+      // Update the credits display to show Google users differently
+      $("#creditsBtn").addEventListener("click", () => {
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
+        const c = credits || {};
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        const total = totalCredits();
+        const authType =
+          sessionUser.authMethod === "google" ? " (Google Account)" : "";
+
+        toast(
+          `Credits${authType} — Total: ${total}${
+            free || paid ? ` (free: ${free}, paid: ${paid})` : ""
+          }`
+        );
+      });
+    </script>
 
     <!-- How it works-->
     <!-- Indexable Content Section -->
@@ -1863,6 +2055,9 @@
         >
           <a href="gallery" class="hover:text-purple-300 transition-colors"
             >Gallery</a
+          >
+          <a href="blog" class="hover:text-purple-300 transition-colors"
+            >Blog</a
           >
           <a href="#" class="hover:text-purple-300 transition-colors">Terms</a>
           <a href="#" class="hover:text-purple-300 transition-colors"

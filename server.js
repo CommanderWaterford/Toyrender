@@ -24,6 +24,9 @@ const { GoogleGenAI } = require("@google/genai");
 const Stripe = require("stripe");
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
+const passport = require("passport");
+const GoogleStrategy = require("passport-google-oauth20").Strategy;
+
 // --- App init ---
 const app = express();
 const PORT = parseInt(process.env.PORT || "3060", 10);
@@ -203,6 +206,92 @@ app.use(
     },
     name: "sid",
   })
+);
+
+// Initialize Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Passport serialization
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await get("SELECT id, email, role FROM users WHERE id = ?", [
+      id,
+    ]);
+    done(null, user);
+  } catch (err) {
+    done(err, null);
+  }
+});
+
+// Configure Google OAuth Strategy
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      callbackURL: `${BASE_URL}/auth/google/callback`,
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      try {
+        // Extract email from Google profile
+        const email = profile.emails?.[0]?.value?.toLowerCase();
+        if (!email) {
+          return done(new Error("No email from Google"), null);
+        }
+
+        // Check if email is disposable
+        if (isDisposable(email)) {
+          return done(new Error("Disposable email not allowed"), null);
+        }
+
+        // Start transaction
+        const result = await txn(async () => {
+          // Check if user already exists
+          let user = await get("SELECT * FROM users WHERE email = ?", [email]);
+
+          if (!user) {
+            // Create new user with Google auth (no password)
+            const r = await run(
+              `INSERT INTO users (email, password_hash, verified_at, role) 
+             VALUES (?, ?, datetime('now'), 'user')`,
+              [email, "GOOGLE_AUTH"] // Special marker instead of password hash
+            );
+
+            const userId = r.lastID;
+
+            // Create initial credits for new user
+            await run(
+              `INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining) 
+             VALUES (?,?,?,?)`,
+              [userId, 0, nextUtcMidnightISO(), STARTER_CREDITS]
+            );
+
+            user = await get("SELECT * FROM users WHERE id = ?", [userId]);
+          } else if (user.password_hash === "GOOGLE_AUTH") {
+            // User exists and uses Google auth - just log them in
+          } else {
+            // User exists with email/password - link their Google account
+            // Optional: You might want to require password verification first
+            await run(
+              "UPDATE users SET verified_at = datetime('now') WHERE id = ?",
+              [user.id]
+            );
+          }
+
+          return user;
+        });
+
+        return done(null, result);
+      } catch (err) {
+        return done(err, null);
+      }
+    }
+  )
 );
 
 // --- Paths ---
@@ -1345,11 +1434,37 @@ app.post(
 );
 
 app.post(["/auth/logout", "/api/auth/logout"], (req, res) => {
-  req.session.destroy(() => res.json({ ok: true }));
+  req.logout((err) => {
+    req.session.destroy(() => {
+      res.json({ ok: true });
+    });
+  });
 });
 
+// Initiate Google OAuth flow
+app.get(
+  "/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"],
+    prompt: "select_account", // Always show account selector
+  })
+);
+
+// Google OAuth callback
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    failureRedirect: "/?auth_error=google_failed",
+  }),
+  (req, res) => {
+    // Successful authentication
+    req.session.userId = req.user.id;
+    res.redirect("/?auth_status=success");
+  }
+);
+
 app.get(["/auth/me", "/api/auth/me"], async (req, res) => {
-  res.set("Cache-Control", "no-store"); // <— add this
+  res.set("Cache-Control", "no-store");
 
   if (!req.session?.userId)
     return res.json({ ok: true, user: null, credits: { remaining: 0 } });
@@ -1360,9 +1475,18 @@ app.get(["/auth/me", "/api/auth/me"], async (req, res) => {
     [req.session.userId]
   );
 
+  // Check if user uses Google auth
+  const authMethod = await get("SELECT password_hash FROM users WHERE id = ?", [
+    req.session.userId,
+  ]);
+
   return res.json({
     ok: true,
-    user,
+    user: {
+      ...user,
+      authMethod:
+        authMethod?.password_hash === "GOOGLE_AUTH" ? "google" : "email",
+    },
     credits: { remaining: uc ? uc.paid_remaining : 0 },
   });
 });
