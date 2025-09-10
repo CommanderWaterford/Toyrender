@@ -119,4 +119,10 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
   </url>
+
+  <!-- Dating Photos Set -->
+  <url>
+    <loc>https://toyrender.com/dating-photos.html</loc>
+    <lastmod>2025-09-10</lastmod>
+  </url>
 </urlset>

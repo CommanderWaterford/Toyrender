@@ -13,7 +13,7 @@
       content="Gift a tasteful, non-nude photo set: upload one portrait and get 10 intimate, classy styles in under a minute each. Great for anniversaries, partners, or dating profiles."
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://toyrender.com/intimate-theme-set/" />
+    <link rel="canonical" href="https://toyrender.com/dating-photos/" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -25,10 +25,7 @@
       property="og:description"
       content="Upload one portrait. Get 10 stylish, intimate-but-PG-13 looks. Perfect gift for your partner or standout dating photos."
     />
-    <meta
-      property="og:url"
-      content="https://toyrender.com/intimate-theme-set/"
-    />
+    <meta property="og:url" content="https://toyrender.com/dating-photos/" />
     <meta property="og:site_name" content="Toyrender" />
     <meta
       property="og:image"
@@ -85,8 +82,8 @@
           },
           {
             "@type": "WebPage",
-            "@id": "https://toyrender.com/intimate-theme-set/#webpage",
-            "url": "https://toyrender.com/intimate-theme-set/",
+            "@id": "https://toyrender.com/dating-photos/#webpage",
+            "url": "https://toyrender.com/dating-photos/",
             "name": "Tasteful Intimate Theme Set (Non-Nude) – 10 Styles in Minutes",
             "isPartOf": { "@id": "https://toyrender.com/#org" },
             "description": "Upload one portrait. Get 10 intimate-but-PG-13 looks. Great for gifts or dating profiles.",
@@ -94,7 +91,7 @@
           },
           {
             "@type": "Product",
-            "@id": "https://toyrender.com/intimate-theme-set/#product",
+            "@id": "https://toyrender.com/dating-photos/#product",
             "name": "Intimate Theme Set (Non-Nude, 18+)",
             "brand": { "@type": "Brand", "name": "Toyrender" },
             "category": "Digital image",
@@ -104,7 +101,7 @@
               "price": "5.00",
               "priceCurrency": "USD",
               "availability": "https://schema.org/InStock",
-              "url": "https://toyrender.com/intimate-theme-set/#pricing"
+              "url": "https://toyrender.com/dating-photos/#pricing"
             },
             "isFamilyFriendly": false
           },
@@ -441,50 +438,61 @@
     </header>
 
     <!-- Hero -->
-    <section class="max-w-7xl mx-auto px-6 pt-6 pb-10">
+
+    <section
+      class="max-w-7xl mx-auto px-6 pt-6 pb-10"
+      itemscope
+      itemtype="https://schema.org/Product"
+    >
       <div class="grid lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight">
+        <header>
+          <h1
+            class="text-4xl lg:text-6xl font-extrabold leading-tight"
+            itemprop="name"
+          >
             Tasteful, <span class="gradient-text">Intimate</span> (Non-Nude)
-            Theme Set — <br />10 Styles from 1 Photo
+            Photo Enhancement — <br />10 Styles from 1 Photo
           </h1>
-          <p class="mt-5 text-purple-200 text-lg">
+          <p class="mt-5 text-purple-200 text-lg" itemprop="description">
             Upload a single portrait and receive a curated set of
-            <strong>10 classy looks</strong> in under a minute each. Thoughtful
-            gift for your partner, or standout photos for Tinder/Bumble — all
-            <strong>18+, PG-13, non-nude</strong>.
+            <strong>10 classy photo styles</strong> in under a minute each.
+            Perfect for
+            <strong>professional headshots, dating profiles, or gifts</strong> —
+            all <strong>appropriate, tasteful, non-nude content</strong>.
           </p>
           <div class="mt-6 flex flex-wrap gap-3">
             <a
               id="cta"
               href="#upload"
               class="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 font-semibold"
-              >Start with a Photo</a
+              aria-label="Start creating enhanced photos from your portrait"
+              >Start with Your Photo</a
             >
             <a
               href="#examples"
               class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20"
-              >View Examples</a
+              aria-label="View example photo enhancements"
+              >View Style Examples</a
             >
           </div>
           <p class="mt-3 text-xs text-purple-300">
-            We do not allow explicit content or minors. Please submit only your
-            own photos.
+            Safe, appropriate content only. Submit your own photos for best
+            results.
           </p>
-        </div>
-        <div
+        </header>
+        <figure
           class="rounded-2xl overflow-hidden border border-white/10 shadow-xl"
         >
-          <!-- Featured banner image -->
           <img
-            src="/images/hero/intimate-banner.jpg"
-            alt="Collage preview of tasteful intimate styles, non-nude"
+            src="/images/hero/photo-enhancement-styles.jpg"
+            alt="Before and after comparison showing 10 different tasteful photo styles generated from one portrait"
             class="w-full h-full object-cover"
             width="1200"
             height="900"
             loading="eager"
+            itemprop="image"
           />
-        </div>
+        </figure>
       </div>
     </section>
 
