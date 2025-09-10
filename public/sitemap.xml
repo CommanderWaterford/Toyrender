@@ -125,4 +125,11 @@
     <loc>https://toyrender.com/dating-photos.html</loc>
     <lastmod>2025-09-10</lastmod>
   </url>
+
+  <!-- Blog Article: Why Dating Photos Matter -->
+  <url>
+    <loc>https://toyrender.com/blog/why-dating-photos-matter-statistics/</loc>
+    <lastmod>2025-09-10</lastmod>
+    <priority>0.70</priority>
+  </url>
 </urlset>

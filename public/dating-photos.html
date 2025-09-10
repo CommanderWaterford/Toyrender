@@ -65,6 +65,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+
     <!-- JSON-LD -->
     <script type="application/ld+json">
       {
@@ -260,6 +262,273 @@
                 }
               }
             ]
+          }
+        ]
+      }
+    </script>
+    <!-- Add these script tags to your <head> section, after your existing JSON-LD -->
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this service explicit or NSFW?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. All generated content is tasteful, non-nude, and PG-13 appropriate. We create elegant portraits with stylish outfits like robes, silk shirts, blazers, or cozy knitwear. We strictly prohibit and do not generate explicit content."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast is the AI photo generation process?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Each style typically renders in 30-60 seconds with priority processing. You'll receive all 10 styles within 5-10 minutes total. Free trial generations may take slightly longer during peak times."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I use these AI-generated photos on dating apps like Tinder or Bumble?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Many customers use these for Tinder, Hinge, Bumble, and other dating platforms. They're designed to be eye-catching yet appropriate. However, check each platform's specific guidelines about AI-enhanced photos."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What makes a good source photo for AI enhancement?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Best results come from clear, well-lit portraits with your face fully visible, neutral or simple backgrounds, natural expressions, and photos taken straight-on or at a slight angle. Avoid heavy filters, sunglasses, or group photos. We accept JPG, JPEG, PNG, and WebP formats up to 10MB."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I own the rights to the AI-generated images?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. With the paid package, you receive full commercial rights to use the generated images however you wish. You can post them on social media, use them professionally, or gift them to someone special."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data secure and private?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. We use industry-standard encryption for all uploads and processing. Your photos are never shared with third parties, never used for AI training, and are automatically deleted from our servers within 24 hours after processing."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What's the cost for the AI dating photo service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "The Intimate Theme Set with 10 AI-generated styles costs $7.99 as a one-time purchase. There's also a free trial option that provides 2 preview generations with watermarks. No subscriptions or hidden fees."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I get a refund if I'm not satisfied?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Due to the instant digital nature of the service, we generally don't offer refunds once generation is complete. However, if there's a technical issue with your order, contact support within 48 hours and we'll make it right or regenerate your set if needed."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Who can use this AI photo enhancement service?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Only adults 18+ may submit photos. You must submit your own photos or have explicit permission from the subject. We strictly prohibit images of minors or any inappropriate content."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What resolution are the AI-generated dating photos?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Generated images are delivered in high resolution (typically 1024x1024 or higher), suitable for printing or digital use. The exact dimensions may vary slightly based on the style applied."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <!-- HowTo Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Create AI-Enhanced Dating Photos",
+        "description": "Transform a single portrait into 10 professional, tasteful dating photo styles using AI technology in just minutes.",
+        "image": {
+          "@type": "ImageObject",
+          "url": "https://toyrender.com/images/dating-photos/merged-image.jpg",
+          "height": "1000",
+          "width": "1200"
+        },
+        "estimatedCost": {
+          "@type": "MonetaryAmount",
+          "currency": "USD",
+          "value": "7.99"
+        },
+        "totalTime": "PT10M",
+        "supply": [
+          {
+            "@type": "HowToSupply",
+            "name": "Clear portrait photo",
+            "requiredQuantity": 1,
+            "estimatedCost": {
+              "@type": "MonetaryAmount",
+              "currency": "USD",
+              "value": "0"
+            }
+          },
+          {
+            "@type": "HowToSupply",
+            "name": "Computer or mobile device with internet",
+            "requiredQuantity": 1
+          }
+        ],
+        "tool": [
+          {
+            "@type": "HowToTool",
+            "name": "Toyrender AI Photo Generator",
+            "url": "https://toyrender.com/dating-photos/"
+          }
+        ],
+        "step": [
+          {
+            "@type": "HowToStep",
+            "name": "Prepare your photo",
+            "text": "Select a clear, well-lit portrait photo with your face fully visible. Ensure it's in JPG, PNG, or WebP format and under 10MB. Best results come from photos with neutral backgrounds and natural expressions.",
+            "image": "https://toyrender.com/images/dating-photos/Mona.jpg",
+            "url": "https://toyrender.com/dating-photos/#upload"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Upload your portrait",
+            "text": "Click the 'Choose Photo' button and select your prepared portrait from your device. The upload will begin automatically.",
+            "image": "https://toyrender.com/images/upload-interface.jpg",
+            "url": "https://toyrender.com/dating-photos/#upload"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Choose your package",
+            "text": "Select either the free trial (2 watermarked previews) or the full Intimate Theme Set ($7.99) for 10 high-resolution, watermark-free styles.",
+            "url": "https://toyrender.com/dating-photos/#pricing"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "AI processes your photo",
+            "text": "Our AI analyzes your portrait and applies 10 different tasteful, non-nude styles including robes, silk, blazers, cozy knits, and studio lighting effects. Each style takes 30-60 seconds to generate.",
+            "image": "https://toyrender.com/images/processing-animation.gif"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Review generated styles",
+            "text": "Preview all 10 AI-generated styles in your browser. Each image maintains your facial features while applying different clothing, poses, and lighting scenarios.",
+            "image": "https://toyrender.com/images/dating-photos/merged-image.jpg"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Download your photos",
+            "text": "Download all 10 high-resolution images to your device. Paid users receive watermark-free images with full commercial usage rights.",
+            "url": "https://toyrender.com/dating-photos/#download"
+          },
+          {
+            "@type": "HowToStep",
+            "name": "Use your new photos",
+            "text": "Upload your favorite AI-enhanced photos to dating apps like Tinder, Bumble, or Hinge, use them on social media, or share them as gifts. You have full rights to use them however you wish.",
+            "image": "https://toyrender.com/images/dating-apps-mockup.jpg"
+          }
+        ],
+        "yield": "10 professionally styled dating photos",
+        "performTime": "PT5M"
+      }
+    </script>
+
+    <!-- Service Schema (Additional for better local/service SEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "AI Photo Enhancement for Dating Profiles",
+        "provider": {
+          "@type": "Organization",
+          "name": "Toyrender",
+          "url": "https://toyrender.com",
+          "logo": "https://toyrender.com/logo.png"
+        },
+        "name": "AI Dating Photos Generator",
+        "description": "Transform one portrait into 10 tasteful, non-nude dating photo styles using advanced AI technology. Perfect for dating apps, social media, and professional use.",
+        "url": "https://toyrender.com/dating-photos/",
+        "areaServed": {
+          "@type": "Country",
+          "name": "Worldwide"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Dating Photo Packages",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "name": "Free Trial",
+              "price": "0",
+              "priceCurrency": "USD",
+              "description": "2 preview generations with watermarks"
+            },
+            {
+              "@type": "Offer",
+              "name": "Intimate Theme Set",
+              "price": "7.99",
+              "priceCurrency": "USD",
+              "description": "10 high-resolution styles, watermark-free, commercial license included"
+            }
+          ]
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "2847",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "potentialAction": {
+          "@type": "BuyAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://toyrender.com/dating-photos/",
+            "actionPlatform": [
+              "http://schema.org/DesktopWebPlatform",
+              "http://schema.org/MobileWebPlatform"
+            ]
+          }
+        }
+      }
+    </script>
+
+    <!-- BreadcrumbList Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://toyrender.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI Dating Photos",
+            "item": "https://toyrender.com/dating-photos/"
           }
         ]
       }
