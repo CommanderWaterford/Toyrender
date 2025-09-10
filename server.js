@@ -293,9 +293,22 @@ async function txn(fn) {
 
 // ApplyWaterMark Function
 async function applyWatermark(imagePath) {
+  // === OPACITY CONTROLS ===
+  // Adjust these values between 0 (fully transparent) and 1 (fully opaque)
+
+  // CENTER WATERMARK OPACITY
+  const CENTER_TEXT_OPACITY = 0.3; // Main "TOYRENDER.COM" text opacity (0.4 = 40% visible)
+  const CENTER_SUBTITLE_OPACITY = 0.3; // "FREE TRIAL" text opacity
+  const CENTER_STROKE_OPACITY = 0.3; // Border around center text
+  const CENTER_SHADOW_OPACITY = 0.5; // Drop shadow opacity
+
+  // CORNER WATERMARK OPACITY
+  const CORNER_BACKGROUND_OPACITY = 0.7; // Black background box opacity
+  const CORNER_SUBTITLE_OPACITY = 0.8; // "Buy credits..." text opacity
+
   try {
-    // Create watermark SVG with your branding
-    const watermarkSVG = Buffer.from(`
+    // Create bottom-right watermark SVG
+    const cornerWatermarkSVG = Buffer.from(`
       <svg width="300" height="80" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -303,12 +316,37 @@ async function applyWatermark(imagePath) {
             <stop offset="100%" style="stop-color:#ec4899;stop-opacity:1" />
           </linearGradient>
         </defs>
-        <rect x="0" y="0" width="300" height="80" rx="10" fill="rgba(0,0,0,0.7)"/>
+        <rect x="0" y="0" width="300" height="80" rx="10" fill="rgba(0,0,0,${CORNER_BACKGROUND_OPACITY})"/>
         <text x="150" y="35" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="url(#grad)" text-anchor="middle">
           Toyrender.com
         </text>
-        <text x="150" y="60" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.8)" text-anchor="middle">
+        <text x="150" y="60" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,${CORNER_SUBTITLE_OPACITY})" text-anchor="middle">
           Buy credits for watermark-free images
+        </text>
+      </svg>
+    `);
+
+    // Create center watermark SVG with adjustable opacity
+    const centerWatermarkSVG = Buffer.from(`
+      <svg width="400" height="120" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#ffffff;stop-opacity:${CENTER_TEXT_OPACITY}" />
+            <stop offset="50%" style="stop-color:#9333ea;stop-opacity:${CENTER_TEXT_OPACITY}" />
+            <stop offset="100%" style="stop-color:#ec4899;stop-opacity:${CENTER_TEXT_OPACITY}" />
+          </linearGradient>
+          <filter id="shadow">
+            <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="${CENTER_SHADOW_OPACITY}"/>
+          </filter>
+        </defs>
+        <text x="200" y="60" font-family="Arial, sans-serif" font-size="48" font-weight="bold" 
+              fill="url(#centerGrad)" text-anchor="middle" filter="url(#shadow)" 
+              stroke="rgba(255,255,255,${CENTER_STROKE_OPACITY})" stroke-width="1">
+          TOYRENDER.COM
+        </text>
+        <text x="200" y="90" font-family="Arial, sans-serif" font-size="18" 
+              fill="rgba(255,255,255,${CENTER_SUBTITLE_OPACITY})" text-anchor="middle" filter="url(#shadow)">
+          FREE TRIAL
         </text>
       </svg>
     `);
@@ -316,12 +354,49 @@ async function applyWatermark(imagePath) {
     // Read the original image
     const imageBuffer = await fs.promises.readFile(imagePath);
 
-    // Apply watermark using sharp
+    // Get image metadata to determine if we need to resize the center watermark
+    const metadata = await sharp(imageBuffer).metadata();
+
+    // Scale center watermark based on image size
+    let centerWatermarkBuffer = centerWatermarkSVG;
+    if (metadata.width && metadata.width < 800) {
+      // Create a smaller version for smaller images (with same opacity settings)
+      centerWatermarkBuffer = Buffer.from(`
+        <svg width="250" height="80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="centerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#ffffff;stop-opacity:${CENTER_TEXT_OPACITY}" />
+              <stop offset="50%" style="stop-color:#9333ea;stop-opacity:${CENTER_TEXT_OPACITY}" />
+              <stop offset="100%" style="stop-color:#ec4899;stop-opacity:${CENTER_TEXT_OPACITY}" />
+            </linearGradient>
+            <filter id="shadow">
+              <feDropShadow dx="1" dy="1" stdDeviation="2" flood-opacity="${CENTER_SHADOW_OPACITY}"/>
+            </filter>
+          </defs>
+          <text x="125" y="40" font-family="Arial, sans-serif" font-size="30" font-weight="bold" 
+                fill="url(#centerGrad)" text-anchor="middle" filter="url(#shadow)" 
+                stroke="rgba(255,255,255,${CENTER_STROKE_OPACITY})" stroke-width="1">
+            TOYRENDER.COM
+          </text>
+          <text x="125" y="60" font-family="Arial, sans-serif" font-size="14" 
+                fill="rgba(255,255,255,${CENTER_SUBTITLE_OPACITY})" text-anchor="middle" filter="url(#shadow)">
+            FREE TRIAL
+          </text>
+        </svg>
+      `);
+    }
+
+    // Apply both watermarks using sharp
     const watermarkedBuffer = await sharp(imageBuffer)
       .composite([
         {
-          input: watermarkSVG,
-          gravity: "southeast", // Position in bottom-right corner
+          input: centerWatermarkBuffer,
+          gravity: "center",
+          blend: "over",
+        },
+        {
+          input: cornerWatermarkSVG,
+          gravity: "southeast",
           blend: "over",
         },
       ])
@@ -330,9 +405,12 @@ async function applyWatermark(imagePath) {
     // Write back to the same file
     await fs.promises.writeFile(imagePath, watermarkedBuffer);
 
+    console.log(
+      `Dual watermarks applied successfully to ${path.basename(imagePath)}`
+    );
     return true;
   } catch (error) {
-    console.error("Error applying watermark:", error);
+    console.error("Error applying watermarks:", error);
     return false;
   }
 }
