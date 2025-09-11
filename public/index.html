@@ -148,7 +148,7 @@
             "offers": {
               "@type": "AggregateOffer",
               "lowPrice": "0",
-              "highPrice": "5",
+              "highPrice": "7.99",
               "priceCurrency": "USD",
               "offerCount": "2"
             }
@@ -215,7 +215,7 @@
             "name": "Can I choose styles or themes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Currently this is not possible. We'll render your photo in seven pre-defined styles with the pro Pack."
+              "text": "Yes, of course. We'll render your photo in seven pre-defined styles with the pro Pack."
             }
           },
           {
@@ -255,7 +255,7 @@
             "name": "Can I upload photos of children or multiple people?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Works best with a single person. For minors, only a parent or legal guardian may upload photos. Avoid group shots for best results."
+              "text": "Works best with a single person but groups are possible as well. For minors, only a parent or legal guardian may upload photos. "
             }
           },
           {
@@ -2113,20 +2113,22 @@
           role="navigation"
           aria-label="Footer navigation"
         >
-          <a href="gallery" class="hover:text-purple-300 transition-colors"
+          <a href="/gallery" class="hover:text-purple-300 transition-colors"
             >Gallery</a
           >
-          <a href="blog" class="hover:text-purple-300 transition-colors"
+          <a href="/blog" class="hover:text-purple-300 transition-colors"
             >Blog</a
           >
-          <a href="#" class="hover:text-purple-300 transition-colors">Terms</a>
-          <a href="#" class="hover:text-purple-300 transition-colors"
+          <a href="/terms" class="hover:text-purple-300 transition-colors"
+            >Terms</a
+          >
+          <a href="/privacy" class="hover:text-purple-300 transition-colors"
             >Privacy</a
           >
-          <a href="contact" class="hover:text-purple-300 transition-colors"
+          <a href="/contact" class="hover:text-purple-300 transition-colors"
             >Contact</a
           >
-          <a href="faq" class="hover:text-purple-300 transition-colors">FAQ</a>
+          <a href="/faq" class="hover:text-purple-300 transition-colors">FAQ</a>
         </nav>
       </div>
     </footer>
@@ -2420,6 +2422,8 @@
             resultPreview.src = data.imageUrl;
             resultPreview.classList.remove("hidden");
             downloadBtn.classList.remove("hidden");
+            // ✅ GA4: generation succeeded
+            gtag("event", "generate_success");
           }
           // Update credits from server after a successful generation
           await refreshSession();
