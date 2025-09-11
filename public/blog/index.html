@@ -13,6 +13,11 @@
     <link rel="canonical" href="https://toyrender.com/blog/" />
     <link rel="alternate" href="https://toyrender.com/blog/" hreflang="en" />
     <link rel="alternate" href="https://toyrender.com/es/blog/" hreflang="es" />
+    <link
+      rel="alternate"
+      href="https://toyrender.com/blog/"
+      hreflang="x-default"
+    />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Twitter -->
@@ -31,6 +36,11 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_ES" />
+    <meta
+      property="og:image:alt"
+      content="Toyrender AI figurine generator blog"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
@@ -85,54 +95,92 @@
       }
     </style>
 
-    <!-- JSON-LD (Blog + ItemList) -->
+    <!-- JSON-LD Enhanced: WebSite, WebPage (CollectionPage), Blog, BreadcrumbList, ItemList -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": "Blog",
-            "@id": "https://toyrender.com/blog/#blog",
-            "name": "Toyrender Blog",
-            "url": "https://toyrender.com/blog/",
-            "publisher": {
-              "@type": "Organization",
-              "name": "Toyrender",
-              "url": "https://toyrender.com"
+            "@type": "WebSite",
+            "@id": "https://toyrender.com/#website",
+            "url": "https://toyrender.com/",
+            "name": "Toyrender",
+            "inLanguage": "en",
+            "publisher": { "@type": "Organization", "name": "Toyrender" },
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://toyrender.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
             }
           },
           {
-            "@type": "ItemList",
+            "@type": "CollectionPage",
+            "@id": "https://toyrender.com/blog/#webpage",
+            "url": "https://toyrender.com/blog/",
+            "name": "Toyrender Blog – Guides, Tips & Updates",
+            "isPartOf": { "@id": "https://toyrender.com/#website" },
+            "inLanguage": "en",
+            "description": "Toyrender Blog: practical guides, photo tips, and updates to get the best results from the AI Figurine Generator.",
+            "breadcrumb": { "@id": "https://toyrender.com/blog/#breadcrumb" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://toyrender.com/blog/#breadcrumb",
             "itemListElement": [
               {
                 "@type": "ListItem",
                 "position": 1,
-                "url": "https://toyrender.com/perfect-source-photo-ai-enhancement.html",
-                "name": "Perfect Source Photo for AI Enhancement: A Step-by-Step Guide"
+                "name": "Home",
+                "item": "https://toyrender.com/"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
-                "url": "https://toyrender.com/dating-photos.html",
-                "name": "Tasteful, Non-Nude Dating Photos: 10 Classy Styles in Minutes"
+                "name": "Blog",
+                "item": "https://toyrender.com/blog/"
+              }
+            ]
+          },
+          {
+            "@type": "Blog",
+            "@id": "https://toyrender.com/blog/#blog",
+            "name": "Toyrender Blog",
+            "url": "https://toyrender.com/blog/",
+            "publisher": { "@type": "Organization", "name": "Toyrender" }
+          },
+          {
+            "@type": "ItemList",
+            "@id": "https://toyrender.com/blog/#posts",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Perfect Source Photo for AI Enhancement: A Step-by-Step Guide",
+                "url": "https://toyrender.com/perfect-source-photo-ai-enhancement.html"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tasteful, Non-Nude Dating Photos: 10 Classy Styles in Minutes",
+                "url": "https://toyrender.com/dating-photos.html"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
-                "url": "https://toyrender.com/why-dating-photos-matter-statistics.html",
-                "name": "Why Dating Photos Matter: 2025 Statistics"
+                "name": "Why Dating Photos Matter: 2025 Statistics",
+                "url": "https://toyrender.com/why-dating-photos-matter-statistics.html"
               },
               {
                 "@type": "ListItem",
                 "position": 4,
-                "url": "https://toyrender.com/blog/at-home-dating-photos-10-minute-setup/",
-                "name": "At-Home Dating Photos in 10 Minutes (Window Light + Phone)"
+                "name": "At-Home Dating Photos in 10 Minutes (Window Light + Phone)",
+                "url": "https://toyrender.com/blog/at-home-dating-photos-10-minute-setup/"
               },
               {
                 "@type": "ListItem",
                 "position": 5,
-                "url": "https://toyrender.com/blog/top-5-tinder-photo-tips-2025/",
-                "name": "Top 5 Tips to Make Your Tinder Photos Stand Out (2025 Guide)"
+                "name": "Top 5 Tips to Make Your Tinder Photos Stand Out (2025 Guide)",
+                "url": "https://toyrender.com/blog/top-5-tinder-photo-tips-2025/"
               }
             ]
           }
