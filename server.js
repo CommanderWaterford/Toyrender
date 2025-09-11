@@ -58,13 +58,13 @@ app.use(
 );
 
 // --- Stripe Webhook (must receive RAW body) ---
-
 app.post(
   "/payments/webhook",
   express.raw({ type: "application/json" }),
   async (req, res) => {
     const sig = req.headers["stripe-signature"];
     let event;
+
     try {
       event = stripe.webhooks.constructEvent(
         req.body,
@@ -73,86 +73,205 @@ app.post(
       );
     } catch (err) {
       console.warn("⚠️  Webhook signature verification failed.", err.message);
+      logPayment({
+        event: "webhook_verification_failed",
+        error: err.message,
+      });
       return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
     try {
       console.log("Stripe webhook event:", event.type);
+
+      // Log all webhook events for audit trail
+      logPayment({
+        event: `webhook_${event.type}`,
+        metadata: { eventId: event.id },
+      });
+
       if (event.type === "checkout.session.completed") {
         const session = event.data.object;
+        const userId = Number(
+          session.metadata?.userId || session.client_reference_id
+        );
+        const credits = Number(session.metadata?.credits || 10);
+        const amount = Number(session.amount_total || 500);
+        const currency = String(session.currency || "usd").toLowerCase();
+        const idempotencyKey = String(session.payment_intent || session.id);
 
-        // Only award on paid sessions
+        // Get user email for logging
+        let userEmail = "unknown";
+        if (userId) {
+          const user = await get("SELECT email FROM users WHERE id = ?", [
+            userId,
+          ]);
+          if (user) userEmail = user.email;
+        }
+
+        // Log payment completion attempt
+        logPayment({
+          event: "payment_processing",
+          sessionId: session.id,
+          userId,
+          userEmail,
+          amount,
+          currency,
+          credits,
+          status: session.payment_status,
+        });
+
         if (session.payment_status !== "paid") {
-          console.log("Webhook: session not paid, skipping.", {
-            id: session.id,
+          logPayment({
+            event: "payment_not_completed",
+            sessionId: session.id,
+            userId,
+            userEmail,
             status: session.payment_status,
           });
           return res.json({ received: true, skipped: "not paid" });
         }
 
-        const userId = Number(
-          session.metadata?.userId || session.client_reference_id
-        );
-        const credits = Number(session.metadata?.credits || 10);
-        const amount = Number(session.amount_total || 500); // cents
-        const currency = String(session.currency || "usd").toLowerCase();
-
-        // Use payment_intent as the unique idempotency key (best across events)
-        const idempotencyKey = String(session.payment_intent || session.id);
-
         if (userId && credits > 0) {
-          console.log("Granting credits from webhook", {
-            userId,
-            credits,
-            eventId: idempotencyKey,
-          });
-          await grantCreditsAfterPayment({
+          const result = await grantCreditsAfterPayment({
             eventId: idempotencyKey,
             userId,
             amount,
             currency,
             credits,
           });
+
+          // Log successful payment and credit grant
+          logPayment({
+            event: result.deduped ? "payment_duplicate" : "payment_success",
+            sessionId: session.id,
+            userId,
+            userEmail,
+            amount,
+            currency,
+            credits,
+            status: "completed",
+          });
+
+          console.log(
+            `✅ Payment successful: User ${userEmail} (ID: ${userId}) purchased ${credits} credits for ${
+              amount / 100
+            } ${currency.toUpperCase()}`
+          );
         } else {
-          console.error("Webhook missing metadata userId/credits", {
+          logPayment({
+            event: "payment_missing_metadata",
+            sessionId: session.id,
+            error: "Missing userId or credits in metadata",
             metadata: session.metadata,
-            client_reference_id: session.client_reference_id,
           });
         }
       }
 
+      // Log other important webhook events
+      if (event.type === "payment_intent.payment_failed") {
+        const intent = event.data.object;
+        logPayment({
+          event: "payment_failed",
+          sessionId: intent.id,
+          error: intent.last_payment_error?.message || "Payment failed",
+          amount: intent.amount,
+          currency: intent.currency,
+        });
+      }
+
+      if (event.type === "checkout.session.expired") {
+        const session = event.data.object;
+        const userId = Number(
+          session.metadata?.userId || session.client_reference_id
+        );
+        logPayment({
+          event: "checkout_expired",
+          sessionId: session.id,
+          userId,
+          metadata: session.metadata,
+        });
+      }
+
       res.json({ received: true });
     } catch (err) {
+      logPayment({
+        event: "webhook_handler_error",
+        error: err?.message || "Unknown error",
+      });
       console.error("Webhook handler error:", err);
       res.status(500).send("Webhook handler failed");
     }
   }
 );
 
+// Payment Confirm Route
 app.post(
   "/api/payments/confirm",
   express.json(),
   ensureAuth,
   async (req, res) => {
+    const userId = req.session.userId;
+    let userEmail = "unknown";
+
     try {
+      const user = await get("SELECT email FROM users WHERE id = ?", [userId]);
+      if (user) userEmail = user.email;
+
       const sessionId = req.body?.session_id || req.query?.session_id;
-      if (!sessionId)
+      if (!sessionId) {
+        logPayment({
+          event: "confirm_missing_session",
+          userId,
+          userEmail,
+        });
         return res.status(400).json({ error: "session_id required" });
+      }
+
+      logPayment({
+        event: "payment_confirm_attempt",
+        sessionId,
+        userId,
+        userEmail,
+      });
 
       const session = await stripe.checkout.sessions.retrieve(sessionId);
 
-      if (session.mode !== "payment")
+      if (session.mode !== "payment") {
+        logPayment({
+          event: "confirm_not_payment",
+          sessionId,
+          userId,
+          userEmail,
+        });
         return res.status(400).json({ error: "Not a payment session" });
-      if (session.payment_status !== "paid")
+      }
+
+      if (session.payment_status !== "paid") {
+        logPayment({
+          event: "confirm_not_paid",
+          sessionId,
+          userId,
+          userEmail,
+          status: session.payment_status,
+        });
         return res.status(409).json({ error: "Session not paid" });
+      }
 
       const userIdFromSession = Number(
         session.metadata?.userId || session.client_reference_id
       );
-      if (userIdFromSession !== req.session.userId)
+      if (userIdFromSession !== userId) {
+        logPayment({
+          event: "confirm_user_mismatch",
+          sessionId,
+          userId,
+          userEmail,
+          error: `Session belongs to user ${userIdFromSession}, not ${userId}`,
+        });
         return res
           .status(403)
           .json({ error: "Session does not belong to you" });
+      }
 
       const credits = Number(session.metadata?.credits || 10);
       const amount = Number(session.amount_total || 500);
@@ -161,18 +280,36 @@ app.post(
 
       await grantCreditsAfterPayment({
         eventId: idempotencyKey,
-        userId: req.session.userId,
+        userId,
         amount,
         currency,
         credits,
       });
 
+      logPayment({
+        event: "payment_confirmed",
+        sessionId,
+        userId,
+        userEmail,
+        amount,
+        currency,
+        credits,
+        status: "success",
+      });
+
       const uc = await get(
         "SELECT paid_remaining FROM user_credits WHERE user_id=?",
-        [req.session.userId]
+        [userId]
       );
+
       res.json({ ok: true, paid_remaining: uc?.paid_remaining || 0 });
     } catch (e) {
+      logPayment({
+        event: "confirm_error",
+        userId,
+        userEmail,
+        error: e?.message || "Confirm failed",
+      });
       console.error("confirm error:", e?.message || e);
       res.status(500).json({ error: e?.message || "confirm failed" });
     }
@@ -311,7 +448,10 @@ if (!fs.existsSync(LOG_DIR)) fs.mkdirSync(LOG_DIR, { recursive: true });
 const GEN_LOG_PATH = path.join(LOG_DIR, "generation.ndjson");
 const genLogStream = fs.createWriteStream(GEN_LOG_PATH, { flags: "a" });
 
-// --- REPLACE THE OLD logGen FUNCTION WITH THIS ---
+const PAYMENT_LOG_PATH = path.join(LOG_DIR, "payments.ndjson");
+const paymentLogStream = fs.createWriteStream(PAYMENT_LOG_PATH, { flags: "a" });
+
+// --- logGen FUNCTION ---
 function logGen(data) {
   try {
     const ts = new Date().toISOString();
@@ -342,10 +482,52 @@ function logGen(data) {
     console.error("!!! FAILED TO WRITE TO GENERATION LOG !!!", err);
   }
 }
-// --- END OF REPLACEMENT ---
 
-process.on("SIGINT", () => genLogStream.end(() => process.exit(0)));
-process.on("SIGTERM", () => genLogStream.end(() => process.exit(0)));
+// payment logging function
+function logPayment(data) {
+  try {
+    const ts = new Date().toISOString();
+    const {
+      event,
+      sessionId,
+      userId,
+      userEmail,
+      amount,
+      currency,
+      credits,
+      status,
+      error,
+      metadata,
+    } = data;
+
+    let logLine = `[${ts}] EVENT: ${event.toUpperCase()}`;
+
+    if (sessionId) logLine += ` | SESSION: ${sessionId}`;
+    if (userId) logLine += ` | USER_ID: ${userId}`;
+    if (userEmail) logLine += ` | EMAIL: ${userEmail}`;
+    if (amount) logLine += ` | AMOUNT: ${amount} ${currency || "USD"}`;
+    if (credits) logLine += ` | CREDITS: ${credits}`;
+    if (status) logLine += ` | STATUS: ${status}`;
+    if (metadata) logLine += ` | META: ${JSON.stringify(metadata)}`;
+    if (error) logLine += ` | ERROR: ${error}`;
+
+    paymentLogStream.write(logLine + "\n");
+
+    // Also write to console for immediate visibility
+    console.log(`💳 Payment Event: ${logLine}`);
+  } catch (err) {
+    console.error("!!! FAILED TO WRITE TO PAYMENT LOG !!!", err);
+  }
+}
+
+process.on("SIGINT", () => {
+  genLogStream.end();
+  paymentLogStream.end(() => process.exit(0));
+});
+process.on("SIGTERM", () => {
+  genLogStream.end();
+  paymentLogStream.end(() => process.exit(0));
+});
 
 // --- SQLite helpers ---
 const DB_PATH = path.join(DATA_DIR, "app.sqlite");
@@ -1239,39 +1421,62 @@ async function grantCreditsAfterPayment({
 }
 
 app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
+  const userId = req.session.userId;
+  let userEmail = "unknown";
+
   try {
     if (!process.env.STRIPE_SECRET_KEY)
       throw new Error("Missing STRIPE_SECRET_KEY");
     if (!process.env.STRIPE_PRICE_PRO_PACK)
       throw new Error("Missing STRIPE_PRICE_PRO_PACK");
 
-    const userId = req.session.userId;
     const user = await userById(userId);
+    userEmail = user.email;
+
+    // Log checkout attempt
+    logPayment({
+      event: "checkout_attempted",
+      userId,
+      userEmail,
+      metadata: { package: "pro_pack_10_credits" },
+    });
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [{ price: process.env.STRIPE_PRICE_PRO_PACK, quantity: 1 }],
       customer_email: user.email,
-
-      // keep BOTH for redundancy; you'll read either in webhook/confirm
       client_reference_id: String(userId),
       metadata: {
         userId: String(userId),
         credits: "10",
         package: "pro_pack_10_credits",
       },
-
       allow_promotion_codes: true,
       billing_address_collection: "auto",
       automatic_tax: { enabled: true },
-
-      // send them to your success endpoint with {CHECKOUT_SESSION_ID}
       success_url: `${BASE_URL}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${BASE_URL}/?checkout_status=cancel`,
     });
 
+    // Log successful checkout session creation
+    logPayment({
+      event: "checkout_session_created",
+      sessionId: session.id,
+      userId,
+      userEmail,
+      status: "pending",
+    });
+
     res.json({ id: session.id, url: session.url });
   } catch (err) {
+    // Log checkout failure
+    logPayment({
+      event: "checkout_failed",
+      userId,
+      userEmail,
+      error: err?.message || "Unknown error",
+    });
+
     console.error("checkout create error:", err?.message || err);
     res
       .status(500)
