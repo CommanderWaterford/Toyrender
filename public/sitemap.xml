@@ -131,6 +131,19 @@
     <loc>https://toyrender.com/blog/why-dating-photos-matter-statistics/</loc>
     <lastmod>2025-09-10</lastmod>
     <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/why-dating-photos-matter-statistics/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/por-que-fotos-para-citas-son-cruciales/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/why-dating-photos-matter-statistics/"/>
+  </url>
+
+  <!-- Artículo Blog (ES): Por Qué Fotos para Citas Son Cruciales -->
+  <url>
+    <loc>https://toyrender.com/es/por-que-fotos-para-citas-son-cruciales/</loc>
+    <lastmod>2025-09-10</lastmod>
+    <priority>0.70</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/why-dating-photos-matter-statistics/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/por-que-fotos-para-citas-son-cruciales/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/why-dating-photos-matter-statistics/"/>
   </url>
 
   <!-- Blog Article: Perfect Source Photo for AI Enhancement -->
@@ -153,5 +166,25 @@
     <loc>https://toyrender.com/blog/at-home-dating-photos-10-minute-setup/</loc>
     <lastmod>2025-09-11</lastmod>
     <priority>0.65</priority>
+  </url>
+
+  <!-- Blog Article: Top 5 Tinder Photo Tips 2025 -->
+  <url>
+    <loc>https://toyrender.com/blog/top-5-tinder-photo-tips-2025/</loc>
+    <lastmod>2025-09-11</lastmod>
+    <priority>0.66</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/top-5-tinder-photo-tips-2025/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/top-5-tinder-photo-consejos-2025/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/top-5-tinder-photo-tips-2025/"/>
+  </url>
+
+  <!-- Artículo Blog (ES): Los 5 Mejores Consejos Fotos Tinder 2025 -->
+  <url>
+    <loc>https://toyrender.com/es/top-5-tinder-photo-consejos-2025/</loc>
+    <lastmod>2025-09-11</lastmod>
+    <priority>0.66</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/top-5-tinder-photo-tips-2025/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/top-5-tinder-photo-consejos-2025/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/top-5-tinder-photo-tips-2025/"/>
   </url>
 </urlset>
