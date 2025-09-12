@@ -208,4 +208,11 @@
       <lastmod>2025-09-12</lastmod>
       <priority>0.66</priority>
     </url>
+
+  <!-- Tool: AI Background Remover -->
+  <url>
+    <loc>https://toyrender.com/ai-background-remover.html</loc>
+    <lastmod>2025-09-12</lastmod>
+    <priority>0.68</priority>
+  </url>
 </urlset>

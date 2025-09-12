@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      AI Background Remover – Free & Instant PNG Creator | Toyrender
+    </title>
+
+    <!-- SEO Meta Tags for Background Remover -->
+    <meta
+      name="description"
+      content="Instantly remove the background from any photo for free. Our AI tool, powered by Google's latest models, creates a transparent PNG in seconds. Perfect for e-commerce, marketing, and creative projects."
+    />
+    <meta
+      name="keywords"
+      content="background remover, remove background, transparent background, png creator, ai background removal, free background remover, cut out image, photo editor, google ai"
+    />
+    <meta name="author" content="Toyrender.com" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link
+      rel="canonical"
+      href="https://toyrender.com/ai-background-remover.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://toyrender.com/ai-background-remover.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://toyrender.com/ai-background-remover.html"
+    />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="AI Background Remover – Free & Instant | Toyrender"
+    />
+    <meta
+      property="og:description"
+      content="Instantly remove the background from any photo for free using advanced AI. Create high-resolution transparent PNGs in just a few seconds."
+    />
+    <meta
+      property="og:url"
+      content="https://toyrender.com/ai-background-remover.html"
+    />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta
+      property="og:image"
+      content="https://toyrender.com/og-image-bg-remover.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="An image with its background being removed by AI."
+    />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="AI Background Remover – Free & Instant | Toyrender"
+    />
+    <meta
+      name="twitter:description"
+      content="Instantly remove the background from any photo for free using advanced AI. Create high-resolution transparent PNGs in just a few seconds."
+    />
+    <meta
+      name="twitter:image"
+      content="https://toyrender.com/og-image-bg-remover.jpg"
+    />
+
+    <!-- JSON-LD Structured Data for the Tool -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Background Remover",
+        "url": "https://toyrender.com/ai-background-remover.html",
+        "description": "A free tool that uses Google's AI to automatically remove the background from images, creating a transparent PNG.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Free to Use",
+          "Instant Background Removal",
+          "AI-Powered",
+          "High-Resolution PNG Output",
+          "No Sign-up Required"
+        ],
+        "publisher": {
+          "@type": "Organization",
+          "name": "Toyrender"
+        }
+      }
+    </script>
+    <!-- JSON-LD: FAQ for background remover -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is the AI background remover free?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. The tool is 100% free to use and generates high‑resolution PNG outputs without watermarks."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Which file formats are supported?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "You can upload JPG, PNG or WEBP images up to 10MB. Output is always a transparent PNG."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are uploaded photos stored?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Images are processed and automatically deleted within about one hour; we do not use them for training."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How fast is the background removal?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Most images process in a few seconds depending on file size and server load."
+            }
+          }
+        ]
+      }
+    </script>
+    <!-- JSON-LD: Breadcrumbs -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://toyrender.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "AI Background Remover",
+            "item": "https://toyrender.com/ai-background-remover.html"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Inherited Styles and Scripts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Inherited styles from main page for consistency */
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(5deg);
+        }
+      }
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+        }
+      }
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: float 20s ease-in-out infinite;
+      }
+      /* NEW STYLE: Checkerboard background for transparent results */
+      .checkerboard-bg {
+        background-image: linear-gradient(45deg, #4a5568 25%, transparent 25%),
+          linear-gradient(-45deg, #4a5568 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, #4a5568 75%),
+          linear-gradient(-45deg, transparent 75%, #4a5568 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+        background-color: #2d3748;
+      }
+    </style>
+    <!-- Analytics and other scripts from main page -->
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      async
+    ></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-78RSLH46CX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-78RSLH46CX");
+    </script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
+  >
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="blob w-96 h-96 bg-purple-600 -top-48 -left-48"></div>
+      <div
+        class="blob w-96 h-96 bg-indigo-600 top-1/2 -right-48"
+        style="animation-delay: 5s"
+      ></div>
+      <div
+        class="blob w-96 h-96 bg-pink-600 -bottom-48 left-1/3"
+        style="animation-delay: 10s"
+      ></div>
+    </div>
+
+    <!-- Navigation (Reused from main page for consistency) -->
+    <nav
+      class="relative z-10 px-6 py-4 lg:px-12"
+      role="navigation"
+      aria-label="Main navigation"
+    >
+      <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <!-- Brand -->
+        <a href="/" class="flex items-center space-x-2">
+          <i
+            class="fas fa-cube text-3xl text-purple-400"
+            aria-hidden="true"
+          ></i>
+          <span class="text-2xl font-bold gradient-text">Toyrender</span>
+        </a>
+
+        <!-- Main Navigation Links -->
+        <div class="flex items-center gap-4 text-sm text-purple-200/90">
+          <a
+            href="/"
+            class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            >Figurine Generator</a
+          >
+          <a
+            href="/ai-background-remover.html"
+            class="px-4 py-2 bg-gradient-to-r from-green-500 to-teal-500 rounded-lg text-white font-semibold hover:from-green-600 hover:to-teal-600 transition-all transform hover:scale-105 flex items-center"
+            aria-current="page"
+          >
+            <i class="fas fa-wand-magic-sparkles mr-2"></i>
+            <span>AI Background Remover</span>
+          </a>
+          <a
+            href="/gallery"
+            class="hidden sm:block px-3 py-1 rounded-md hover:text-white hover:bg-white/10"
+            >Gallery</a
+          >
+          <a
+            href="/faq"
+            class="hidden sm:block px-3 py-1 rounded-md hover:text-white hover:bg-white/10"
+            >FAQ</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main
+      class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-12"
+      role="main"
+    >
+      <!-- Hero Section -->
+      <section class="text-center mb-16" aria-labelledby="hero-title">
+        <h1 id="hero-title" class="text-5xl lg:text-7xl font-bold mb-6">
+          <span>Free AI</span>
+          <span class="gradient-text">Background Remover</span>
+        </h1>
+        <p class="text-xl text-purple-200 mb-8 max-w-3xl mx-auto">
+          Instantly remove the background from any image with a single click.
+          Powered by Google's latest AI models to give you a perfect,
+          high-quality cutout in seconds.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 mb-8" role="list">
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+          >
+            <i class="fas fa-check-circle mr-2 text-green-400"></i>
+            <span>100% Free</span>
+          </div>
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+          >
+            <i class="fas fa-bolt mr-2 text-yellow-400"></i>
+            <span>Instant Results</span>
+          </div>
+          <div
+            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
+          >
+            <i class="fas fa-download mr-2 text-blue-400"></i>
+            <span>High-Res PNG Download</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Upload & Process Section -->
+      <section class="max-w-4xl mx-auto" aria-labelledby="upload-title">
+        <div
+          class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/30 pulse-glow"
+        >
+          <!-- Upload Area -->
+          <div
+            id="uploadArea"
+            class="border-3 border-dashed border-purple-500/50 rounded-2xl p-12 text-center hover:border-purple-400 transition-all cursor-pointer bg-purple-900/20 hover:bg-purple-900/30"
+          >
+            <input type="file" id="fileInput" accept="image/*" class="hidden" />
+            <div class="float-animation inline-block mb-6">
+              <i class="fas fa-image text-6xl text-purple-400"></i>
+            </div>
+            <h3 id="upload-title" class="text-2xl font-bold mb-4">
+              Upload an Image to Get Started
+            </h3>
+            <p class="text-purple-300 mb-6">
+              Drag & drop your photo here or click to browse
+            </p>
+            <button
+              class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl"
+            >
+              <i class="fas fa-upload mr-2"></i>Choose Photo
+            </button>
+            <p class="text-sm text-purple-400 mt-4">
+              Supports JPG, PNG, WEBP up to 10MB
+            </p>
+          </div>
+
+          <!-- Preview & Result Section (Hidden by default) -->
+          <div id="previewSection" class="hidden">
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+              <div>
+                <h4 class="text-lg font-semibold mb-3 text-purple-300">
+                  Original Photo
+                </h4>
+                <div class="rounded-xl overflow-hidden bg-black/30">
+                  <img
+                    id="originalPreview"
+                    src=""
+                    alt="Original photo uploaded by user"
+                    class="w-full h-auto object-contain"
+                  />
+                </div>
+              </div>
+              <div>
+                <h4 class="text-lg font-semibold mb-3 text-purple-300">
+                  Background Removed
+                </h4>
+                <div
+                  id="resultContainer"
+                  class="rounded-xl overflow-hidden checkerboard-bg h-full min-h-[250px] flex items-center justify-center p-4"
+                >
+                  <div id="loadingSpinner" class="hidden text-center">
+                    <i
+                      class="fas fa-spinner fa-spin text-4xl text-purple-400"
+                    ></i>
+                    <p class="mt-4 text-purple-300">Removing background...</p>
+                  </div>
+                  <img
+                    id="resultPreview"
+                    src=""
+                    alt="Image with background removed"
+                    class="max-w-full max-h-full object-contain hidden"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+              <button
+                id="generateBtn"
+                class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <i class="fas fa-wand-magic-sparkles mr-2"></i>
+                <span>Remove Background</span>
+              </button>
+              <button
+                id="downloadBtn"
+                class="hidden px-8 py-4 bg-green-600 rounded-xl text-lg font-semibold hover:bg-green-700 transition-all transform hover:scale-105"
+              >
+                <i class="fas fa-download mr-2"></i>Download PNG
+              </button>
+              <button
+                id="resetBtn"
+                class="px-8 py-4 bg-slate-700 rounded-xl text-lg font-semibold hover:bg-slate-600 transition-all"
+              >
+                <i class="fas fa-redo mr-2"></i>Upload Another
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="mt-24 text-center" aria-labelledby="how-it-works-title">
+        <h2 id="how-it-works-title" class="text-3xl font-bold mb-4">
+          <span class="gradient-text">How It Works</span> in 3 Simple Steps
+        </h2>
+        <p class="text-purple-200 max-w-3xl mx-auto mb-12">
+          Our process is designed to be fast, easy, and intuitive.
+        </p>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6 text-center"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 bg-purple-600 rounded-full text-2xl font-bold ring-4 ring-purple-600/30 mx-auto"
+            >
+              1
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Upload Your Image</h3>
+            <p class="text-purple-300">
+              Drag and drop a file or click to select an image from your device.
+            </p>
+          </div>
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6 text-center"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 bg-purple-600 rounded-full text-2xl font-bold ring-4 ring-purple-600/30 mx-auto"
+            >
+              2
+            </div>
+            <h3 class="text-xl font-semibold mb-2">AI Removes Background</h3>
+            <p class="text-purple-300">
+              Our AI automatically detects and removes the background with
+              precision.
+            </p>
+          </div>
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6 text-center"
+          >
+            <div
+              class="flex items-center justify-center w-16 h-16 mb-4 bg-purple-600 rounded-full text-2xl font-bold ring-4 ring-purple-600/30 mx-auto"
+            >
+              3
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Download Your PNG</h3>
+            <p class="text-purple-300">
+              Get a high-resolution image with a transparent background, ready
+              to use.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Use Cases Section -->
+      <section class="mt-24" aria-labelledby="use-cases-title">
+        <header class="text-center mb-12">
+          <h2 id="use-cases-title" class="text-3xl font-bold mb-4">
+            <span class="gradient-text">Perfect For Any Project</span>
+          </h2>
+          <p class="text-purple-200 max-w-3xl mx-auto">
+            Create professional-looking images for e-commerce, marketing,
+            design, and personal use.
+          </p>
+        </header>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6"
+          >
+            <i class="fas fa-shopping-cart text-3xl text-purple-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">E-commerce</h3>
+            <p class="text-purple-200 text-sm">
+              Create clean, white-background product photos for Amazon, Shopify,
+              and other marketplaces to boost sales.
+            </p>
+          </div>
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6"
+          >
+            <i class="fas fa-palette text-3xl text-purple-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Graphic Design</h3>
+            <p class="text-purple-200 text-sm">
+              Easily isolate objects and people to use in logos, banners,
+              posters, and other creative designs.
+            </p>
+          </div>
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6"
+          >
+            <i class="fas fa-share-alt text-3xl text-purple-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Social Media</h3>
+            <p class="text-purple-200 text-sm">
+              Make your profile pictures, thumbnails, and posts pop with custom
+              backgrounds and professional cutouts.
+            </p>
+          </div>
+          <div
+            class="bg-slate-800/50 border border-purple-500/30 rounded-xl p-6"
+          >
+            <i class="fas fa-user-circle text-3xl text-purple-400 mb-4"></i>
+            <h3 class="text-xl font-semibold mb-2">Personal Use</h3>
+            <p class="text-purple-200 text-sm">
+              Create fun collages, personalized greeting cards, or just clean up
+              your favorite photos for a polished look.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section
+        id="faq"
+        class="mt-24 max-w-4xl mx-auto"
+        aria-labelledby="faq-title"
+      >
+        <h2 id="faq-title" class="text-3xl font-bold mb-8 text-center">
+          Frequently Asked Questions
+        </h2>
+        <div class="space-y-4">
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >Is this tool really free?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              Yes, our AI Background Remover is 100% free to use for any
+              purpose, including commercial projects.
+            </div>
+          </details>
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >What file formats do you support?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              You can upload images in JPG, PNG, and WEBP formats. The output
+              will always be a high-resolution PNG file with a transparent
+              background.
+            </div>
+          </details>
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >Are my uploaded images stored?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              Your privacy is important to us. Uploaded images are processed by
+              the AI and then automatically deleted from our servers within one
+              hour. We do not store or share your images.
+            </div>
+          </details>
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >What is the maximum image resolution and file size?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              You can upload images up to 10MB. The output resolution will match
+              the original image, ensuring high-quality results for your
+              projects.
+            </div>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer (Reused from main page) -->
+    <footer
+      class="relative z-10 mt-20 px-6 py-12 lg:px-12 border-t border-purple-800/30"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <i class="fas fa-cube text-2xl text-purple-400"></i>
+          <span class="text-xl font-bold gradient-text">Toyrender</span>
+        </div>
+        <p class="text-purple-300 mb-6">
+          © 2025 Toyrender.com. All rights reserved.
+        </p>
+        <nav
+          class="flex justify-center flex-wrap gap-x-6 gap-y-2 text-purple-400"
+        >
+          <a href="/" class="hover:text-purple-300">Figurine Generator</a>
+          <a href="/gallery" class="hover:text-purple-300">Gallery</a>
+          <a href="/terms" class="hover:text-purple-300">Terms</a>
+          <a href="/privacy" class="hover:text-purple-300">Privacy</a>
+          <a href="/contact" class="hover:text-purple-300">Contact</a>
+          <a href="/faq" class="hover:text-purple-300">FAQ</a>
+        </nav>
+        <div class="mt-8 text-sm text-purple-400">
+          <a
+            href="/blog/why-dating-photos-matter-statistics/"
+            class="underline hover:text-purple-200 mr-4"
+            >Why Dating Photos Matter</a
+          >
+          <a
+            href="/blog/top-5-tinder-photo-tips-2025/"
+            class="underline hover:text-purple-200 mr-4"
+            >Tinder Photo Tips 2025</a
+          >
+          <a
+            href="/blog/at-home-dating-photos-10-minute-setup/"
+            class="underline hover:text-purple-200"
+            >At-Home Setup Guide</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const $ = (sel) => document.querySelector(sel);
+      function toast(msg) {
+        alert(msg);
+      }
+
+      /* ----------------------- Upload & Generate Logic ----------------------- */
+      const uploadArea = $("#uploadArea");
+      const fileInput = $("#fileInput");
+      const previewSection = $("#previewSection");
+      const originalPreview = $("#originalPreview");
+      const resultContainer = $("#resultContainer");
+      const resultPreview = $("#resultPreview");
+      const loadingSpinner = $("#loadingSpinner");
+      const generateBtn = $("#generateBtn");
+      const downloadBtn = $("#downloadBtn");
+      const resetBtn = $("#resetBtn");
+
+      let currentFile = null;
+
+      // Event listeners for file input
+      uploadArea.addEventListener("click", () => fileInput.click());
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+        if (e.dataTransfer.files.length > 0)
+          handleFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) handleFile(e.target.files[0]);
+      });
+
+      function handleFile(file) {
+        if (!file.type.startsWith("image/")) {
+          toast("Please upload an image file.");
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          // 10MB
+          toast("File size must be less than 10MB.");
+          return;
+        }
+        currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          originalPreview.src = e.target.result;
+          uploadArea.classList.add("hidden");
+          previewSection.classList.remove("hidden");
+          generateBtn.disabled = false;
+          downloadBtn.classList.add("hidden");
+          resultPreview.classList.add("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Main function to remove the background
+      generateBtn.addEventListener("click", async () => {
+        if (!currentFile) {
+          toast("Please choose a file first.");
+          return;
+        }
+
+        // --- UI Changes for Loading State ---
+        generateBtn.disabled = true;
+        resetBtn.disabled = true;
+        loadingSpinner.classList.remove("hidden");
+        resultPreview.classList.add("hidden");
+        downloadBtn.classList.add("hidden");
+
+        const formData = new FormData();
+        formData.append("photo", currentFile);
+
+        try {
+          // --- IMPORTANT: API Endpoint ---
+          // This should point to your backend endpoint for background removal.
+          const res = await fetch("/api/remove-background", {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await res.json().catch(() => ({})); // Handle cases where response is not JSON
+
+          if (!res.ok) {
+            // Handle specific errors from the backend
+            throw new Error(data.error || `Error: ${res.statusText}`);
+          }
+
+          // --- Success ---
+          if (data.imageUrl) {
+            resultPreview.src = data.imageUrl;
+            resultPreview.classList.remove("hidden");
+            downloadBtn.classList.remove("hidden");
+          } else {
+            throw new Error("API did not return an image URL.");
+          }
+        } catch (err) {
+          console.error("Background removal failed:", err);
+          toast(err.message || "An error occurred. Please try again.");
+        } finally {
+          // --- Revert UI from Loading State ---
+          loadingSpinner.classList.add("hidden");
+          resetBtn.disabled = false;
+        }
+      });
+
+      // Download button functionality
+      downloadBtn.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = resultPreview.src;
+        // Suggest a filename for the download
+        link.download = "background-removed-toyrender.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+
+      // Reset button functionality
+      resetBtn.addEventListener("click", () => {
+        uploadArea.classList.remove("hidden");
+        previewSection.classList.add("hidden");
+        fileInput.value = ""; // Clear file input
+        currentFile = null;
+        originalPreview.src = "";
+        resultPreview.src = "";
+        generateBtn.disabled = false;
+        downloadBtn.classList.add("hidden");
+        resultPreview.classList.add("hidden");
+      });
+    </script>
+  </body>
+</html>
