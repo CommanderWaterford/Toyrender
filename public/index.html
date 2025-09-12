@@ -401,6 +401,7 @@
         background: linear-gradient(135deg, #ff6b6b, #ff8e53, #feca57);
         -webkit-mask: linear-gradient(#fff 0 0) content-box,
           linear-gradient(#fff 0 0);
+        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
         -webkit-mask-composite: xor;
         mask-composite: exclude;
         opacity: 0.7;
@@ -574,6 +575,34 @@
         .style-option span {
           font-size: 0.75rem;
         }
+      }
+
+      .pack-results-viewer {
+        width: 100%;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .pack-thumb {
+        border: 2px solid transparent;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        opacity: 0.7;
+      }
+
+      .pack-thumb:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .pack-thumb.active {
+        border-color: #9333ea;
+        opacity: 1;
+      }
+
+      .pack-progress-dot {
+        transition: all 0.3s ease;
       }
     </style>
     <script
@@ -919,16 +948,55 @@
               </h4>
               <div class="grid grid-cols-3 gap-3">
                 <button class="style-option" data-style="dating1">
-                  <i class="fas fa-smile"></i>
-                  <span>Casual Confident</span>
+                  <i class="fas fa-bed"></i>
+                  <span>Morning Glow</span>
                 </button>
                 <button class="style-option" data-style="dating2">
-                  <i class="fas fa-fire"></i>
-                  <span>Adventure Ready</span>
+                  <i class="fas fa-smile-wink"></i>
+                  <span>Playful Charm</span>
                 </button>
                 <button class="style-option" data-style="dating3">
-                  <i class="fas fa-star-half-alt"></i>
-                  <span>Sophisticated</span>
+                  <i class="fas fa-gem"></i>
+                  <span>Evening Elegance</span>
+                </button>
+                <button class="style-option" data-style="dating4">
+                  <i class="fas fa-sun"></i>
+                  <span>Carefree Summer</span>
+                </button>
+                <button class="style-option" data-style="dating5">
+                  <i class="fas fa-spa"></i>
+                  <span>Artistic Sensual</span>
+                </button>
+                <button class="style-option" data-style="dating6">
+                  <i class="fas fa-moon"></i>
+                  <span>Confident Intimate</span>
+                </button>
+              </div>
+
+              <div
+                class="mt-4 p-4 bg-gradient-to-r from-pink-900/30 to-red-900/30 rounded-xl border border-pink-500/30"
+              >
+                <button
+                  id="dating9PackBtn"
+                  class="w-full style-option"
+                  data-style="dating-pack"
+                >
+                  <div class="flex items-center justify-center gap-3">
+                    <i class="fas fa-fire-flame-curved text-2xl"></i>
+                    <div>
+                      <span class="block text-base font-bold"
+                        >Dating Photo Pack</span
+                      >
+                      <span class="block text-xs text-purple-300 mt-1"
+                        >Generate all 6 dating styles at once (uses 6
+                        credits)</span
+                      >
+                    </div>
+                    <span
+                      class="px-3 py-1 bg-pink-600/50 rounded-full text-sm font-bold"
+                      >BEST VALUE</span
+                    >
+                  </div>
                 </button>
               </div>
             </div>
@@ -2331,7 +2399,7 @@
 
       let selectedStyle = "figurine1";
 
-      // Updated style prompts mapping - 16 total options
+      // Updated style prompts mapping - 19 total options (10 figurine, 6 dating, 3 business)
       const stylePrompts = {
         // 10 Figurine Styles
         figurine1:
@@ -2365,6 +2433,12 @@
         dating2: `Prompt: An adorable and heartwarming photograph of the woman (preserving hair color/style, eye color), with a sweet, playful smile and a hint of charm, playfully peeking over the top of a fluffy, oversized comforter in a brightly lit, cozy bedroom. She is dressed in comfortable yet charming loungewear (e.g., silk camisole, soft knit top). Her eyes sparkle with warmth and affection as she looks directly at the camera. Soft, warm, diffused natural light fills the room, creating an inviting and comfortable atmosphere. Scattered lightly on the comforter are a few delicate rose petals. The background is a tastefully blurred, homey bedroom, perhaps with a sunbeam on a nearby wall. The image conveys affection, tenderness, and a charming playfulness, perfect for a social media share or a personal gift. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy background (beyond soft comfort), harsh lighting, anxious or aggressive expression, unrealistic proportions, visible tattoos (unless specified)." Options: Woman gently blowing a kiss towards the camera (blurred motion); a personalized, small framed photo (blurred image) on a nearby nightstand; a stack of favorite books and a warm beverage nearby.`,
 
         dating3: `Prompt: A professional, hyperrealistic photograph of the woman (preserving hair color/style, eye color), captured in a moment of elegant preparation for an evening out. She is seated or standing gracefully at a luxurious vanity table or in a chic dressing area, perhaps delicately applying lipstick or adjusting a piece of fine jewelry. She wears a sophisticated silk robe or a form-fitting, elegant dress that subtly accentuates her. Her gaze is confident and alluring, meeting her reflection in a softly lit mirror or looking thoughtfully towards the camera. The background features blurred, upscale decor like shimmering perfume bottles, delicate floral arrangements, and rich textures. Soft, warm, indirect lighting (like a vanity light or evening lamp) creates a luxurious glow and intimate highlights, evoking anticipation, with a shallow depth-of-field. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or cluttered vanity, harsh or unflattering lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)." Options: Woman holding a delicate clutch purse; a subtle reflection of a cityscape at dusk in the background mirror; a personalized, elegant note card (blurred text) lying on the vanity.`,
+
+        dating4: `Prompt: An energetic and enchanting photograph of a woman (preserving hair color/style, eye color), captured in a moment of playful, lighthearted motion, perhaps twirling gently, tossing her hair back with a laugh, or playfully reaching out towards the camera. She is dressed in a light, flowing summer dress or a soft, denim-and-lace ensemble that moves with her, hinting at her form. The setting is a vibrant, sun-drenched outdoor location, like a blooming garden, a pristine beach with gentle waves, or a cheerful, airy patio. Bright, natural daylight creates sparkling highlights and a joyous, carefree atmosphere. Her expression is genuinely happy, with a flirty smile and sparkling eyes. The background is beautifully blurred, adding to the dynamic and inviting feel, with subtle motion blur on her hair or dress to emphasize movement.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, stiff pose, harsh shadows, explicit nudity, aggressive or crude gestures, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman holding a delicate wildflower bouquet," "Subtle sun flare effect in the background," "A tiny, barely visible anklet or bracelet accessory."`,
+
+        dating5: `Prompt: A sensual and artistic photograph of the person (preserving hair color/style, eye color), captured in an intimate moment of self-reflection or gentle touch. She is sitting or kneeling gracefully, perhaps with her back partially turned, subtly revealing the curve of her back, shoulder, or the delicate line of her neck. Her hair is artfully styled to highlight these areas, perhaps partially undone or swept to one side. She is dressed in a soft, luxurious silk slip or a delicate, unfastened robe. The setting is minimalist and elegant, like a high-end bedroom or a spa-like bathroom, with a large, antique-style mirror in the soft-focused background or as a framing element. Soft, ambient lighting creates gentle contrasts and emphasizes skin texture. The mood is one of serene introspection, quiet beauty, and sophisticated sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cluttered background, harsh lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "A delicate string of pearls or a simple necklace resting on her back," "Subtle steam effect in a bathroom setting," "A single, flickering candle creating a warm glow."`,
+
+        dating6: `Prompt: An intimately captivating, hyperrealistic photograph of a woman (preserving hair color/style, eye color), seated casually yet gracefully on the edge of a bed, dressed in an oversized, soft cotton shirt or a man's unbuttoned dress shirt, subtly revealing a bare shoulder, a glimpse of her back, or the graceful line of her leg. Her hair is beautifully disheveled, as if just woken, and she turns her head slightly towards the camera with a confident, slightly mischievous, and warmly inviting smile. One hand might be playfully running through her hair or resting on her thigh. The luxurious bedding (silk or high-thread-count cotton) is slightly rumpled around her. The scene is bathed in soft, warm, diffused morning light, creating a dreamy, intimate glow. The background is a tastefully blurred bedroom, emphasizing comfort and personal space. The mood is one of relaxed sensuality, approachable charm, and confident vulnerability, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty bedding, harsh or cold lighting, aggressive or crude pose,unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing a delicate, minimalist necklace," "A personalized, sleek mug of coffee on a nearby nightstand," "A glimpse of a luxurious robe casually draped over a chair."`,
 
         // Business Headshot Styles
         business1:
@@ -2566,6 +2640,7 @@
         reader.readAsDataURL(file);
       }
 
+      // Generate button handler (restored wrapper)
       generateBtn.addEventListener("click", async () => {
         if (!currentFile) {
           toast("Please choose a file first.");
@@ -2592,6 +2667,13 @@
 
         // Use the selected style's prompt
         const prompt = stylePrompts[selectedStyle];
+        if (!prompt) {
+          toast("Selected style not available yet. Please choose another.");
+          loadingSpinner.classList.add("hidden");
+          generateBtn.disabled = false;
+          resetBtn.disabled = false;
+          return;
+        }
         formData.append("prompt", prompt);
 
         try {
