@@ -194,4 +194,18 @@
     <lastmod>2025-09-11</lastmod>
     <priority>0.64</priority>
   </url>
+
+  <!-- Blog Article: AI Couple Photos Guide -->
+  <url>
+    <loc>https://toyrender.com/blog/ai-couple-photos-online/</loc>
+    <lastmod>2025-09-12</lastmod>
+    <priority>0.66</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/ai-couple-photos-online/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/ai-couple-photos-online/"/>
+  </url>
+    <url>
+      <loc>https://toyrender.com/blog/how-to-upscale-ai-photos/</loc>
+      <lastmod>2025-09-12</lastmod>
+      <priority>0.66</priority>
+    </url>
 </urlset>
