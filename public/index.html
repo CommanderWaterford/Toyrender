@@ -872,20 +872,20 @@
               </h4>
               <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <button class="style-option active" data-style="figurine1">
-                  <i class="fas fa-cube"></i>
-                  <span>Classic Figurine</span>
+                  <i class="fas fa-coffee"></i>
+                  <span>Lifestyle Shot</span>
                 </button>
                 <button class="style-option" data-style="figurine2">
-                  <i class="fas fa-star"></i>
-                  <span>Anime Style</span>
+                  <i class="fas fa-desktop"></i>
+                  <span>Desk Display</span>
                 </button>
                 <button class="style-option" data-style="figurine3">
-                  <i class="fas fa-robot"></i>
-                  <span>Cyberpunk</span>
+                  <i class="fas fa-flask"></i>
+                  <span>Workshop Setup</span>
                 </button>
                 <button class="style-option" data-style="figurine4">
-                  <i class="fas fa-mask"></i>
-                  <span>Superhero</span>
+                  <i class="fas fa-building-columns"></i>
+                  <span>Museum Quality</span>
                 </button>
               </div>
             </div>
@@ -1589,7 +1589,7 @@
     <!-- How it works-->
     <!-- Indexable Content Section -->
     <section
-      id="learn"
+      id="how-it-works"
       class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 mt-16"
     >
       <h2 class="text-3xl lg:text-4xl font-bold mb-6">
@@ -2281,281 +2281,283 @@
     </footer>
 
     <script>
-            /* ----------------------- Helpers ----------------------- */
-            const $ = (sel) => document.querySelector(sel);
-            const fetchJSON = async (url, opts = {}) => {
-              const res = await fetch(url, { credentials: "include", ...opts });
-              let data = null;
-              try {
-                data = await res.json();
-              } catch {}
-              if (!res.ok) {
-                const msg =
-                  (data && (data.error || data.message)) ||
-                  res.statusText ||
-                  "Request failed";
-                const err = new Error(msg);
-                err.status = res.status;
-                err.data = data;
-                throw err;
-              }
-              return data;
-            };
-            function toast(msg) {
-              alert(msg);
-            }
+      /* ----------------------- Helpers ----------------------- */
+      const $ = (sel) => document.querySelector(sel);
+      const fetchJSON = async (url, opts = {}) => {
+        const res = await fetch(url, { credentials: "include", ...opts });
+        let data = null;
+        try {
+          data = await res.json();
+        } catch {}
+        if (!res.ok) {
+          const msg =
+            (data && (data.error || data.message)) ||
+            res.statusText ||
+            "Request failed";
+          const err = new Error(msg);
+          err.status = res.status;
+          err.data = data;
+          throw err;
+        }
+        return data;
+      };
+      function toast(msg) {
+        alert(msg);
+      }
 
-            let selectedStyle = "figurine1";
+      let selectedStyle = "figurine1";
 
-            // Style prompts mapping - 10 total options
-            const stylePrompts = {
-              // 4 Figurine Styles
-              figurine1:
-                "Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.",
+      // Style prompts mapping - 10 total options
 
-              figurine2:
-                "Create a 1/7 scale anime-style figurine with vibrant colors, large expressive eyes, dynamic hair, exaggerated features, and Japanese anime aesthetic. The figurine is placed on a computer desk with a round transparent acrylic base. Include typical anime figure packaging box with character art in manga style. The computer screen shows the 3D modeling process. The packaging features two-dimensional flat illustrations.",
+      // Updated style prompts mapping - 10 total options
+      const stylePrompts = {
+        // 4 Figurine Styles
+        figurine1:
+          "Create a 1/7-scale figurine in a coffee-table lifestyle shoot. The figure stands on a round transparent acrylic base (no text) on a terrazzo tabletop. Soft morning light, plants and a book stack in the background. The packaging with flat 2D art sits casually next to it. Editorial, magazine-style composition.",
 
-              figurine3:
-                "Create a 1/7 scale cyberpunk-themed figurine with neon accents, tech augmentations, holographic elements, LED lights effect, and futuristic clothing. The figurine has a transparent base on a computer desk. Include futuristic packaging design with holographic effects. The computer screen displays the 3D modeling process. Dark urban setting with neon glow.",
+        figurine2:
+          "Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.",
 
-              figurine4:
-                "Create a 1/7 scale superhero figurine with dynamic action pose, cape, mask, muscular build, emblematic costume, and heroic stance. The figurine stands on a transparent base on a computer desk. Include comic book style packaging with action graphics. The computer screen displays the 3D modeling process. Dramatic lighting and power effects.",
+        figurine3:
+          "Create a 1/7-scale figurine in a resin-printing cleanup area. Ultrasonic cleaner, isopropyl bottles, nitrile gloves. On the monitor: support removal preview. Box with flat 2D art on a shelf in the back.",
 
-              // 3 Dating Photo Styles
-              dating1:
-                "Professional dating profile photo with casual confident style. Natural smile, trendy casual outfit, relaxed pose, warm lighting, outdoor cafe or park setting. Approachable and friendly vibe. High-quality portrait photography style optimized for dating apps like Tinder and Bumble.",
+        figurine4:
+          "Create a 1/7-scale figurine on a museum registration table. Cotton gloves, acid-free tissue, accession tag (blank). A small acrylic vitrine nearby. Wall behind features large flat concept illustrations (no text).",
 
-              dating2:
-                "Adventure-ready dating profile photo. Active lifestyle theme, sporty casual wear, energetic expression, outdoor adventure background like hiking trail or beach. Shows fun, spontaneous personality. Dynamic composition perfect for attracting matches on dating apps.",
+        // 3 Dating Photo Styles
+        dating1:
+          "Professional dating profile photo with casual confident style. Natural smile, trendy casual outfit, relaxed pose, warm lighting, outdoor cafe or park setting. Approachable and friendly vibe. High-quality portrait photography style optimized for dating apps like Tinder and Bumble.",
 
-              dating3:
-                "Sophisticated dating profile photo. Elegant smart-casual attire, mysterious subtle smile, artistic lighting, upscale urban or wine bar background. Refined and intriguing presence. Premium portrait style that stands out on dating platforms like Hinge.",
+        dating2:
+          "Adventure-ready dating profile photo. Active lifestyle theme, sporty casual wear, energetic expression, outdoor adventure background like hiking trail or beach. Shows fun, spontaneous personality. Dynamic composition perfect for attracting matches on dating apps.",
 
-              // 3 Business Headshot Styles
-              business1:
-                "Corporate professional headshot. Formal business attire, confident direct gaze, neutral office background, perfect lighting. LinkedIn-optimized portrait. Clean, trustworthy appearance ideal for corporate profiles and professional networking.",
+        dating3:
+          "Sophisticated dating profile photo. Elegant smart-casual attire, mysterious subtle smile, artistic lighting, upscale urban or wine bar background. Refined and intriguing presence. Premium portrait style that stands out on dating platforms like Hinge.",
 
-              business2:
-                "Executive leadership headshot. Premium suit, authoritative yet approachable expression, modern office or cityscape background. Power pose with crossed arms or thoughtful gesture. High-end photography style for C-suite and senior management profiles.",
+        // 3 Business Headshot Styles
+        business1:
+          "Corporate professional headshot. Formal business attire, confident direct gaze, neutral office background, perfect lighting. LinkedIn-optimized portrait. Clean, trustworthy appearance ideal for corporate profiles and professional networking.",
 
-              business3:
-                "Approachable business headshot. Business casual attire, warm genuine smile, bright modern workspace background. Friendly and collaborative vibe. Perfect for consultants, freelancers, and client-facing professionals on LinkedIn and company websites.",
-            };
+        business2:
+          "Executive leadership headshot. Premium suit, authoritative yet approachable expression, modern office or cityscape background. Power pose with crossed arms or thoughtful gesture. High-end photography style for C-suite and senior management profiles.",
 
-            // Initialize style selection
-            function initStyleSelection() {
-              // Handle style option clicks
-              document.querySelectorAll(".style-option").forEach((button) => {
-                button.addEventListener("click", function () {
-                  // Remove active from all buttons
-                  document
-                    .querySelectorAll(".style-option")
-                    .forEach((btn) => btn.classList.remove("active"));
-                  // Add active to clicked button
-                  this.classList.add("active");
-                  // Update selected style
-                  selectedStyle = this.dataset.style;
-                });
-              });
+        business3:
+          "Approachable business headshot. Business casual attire, warm genuine smile, bright modern workspace background. Friendly and collaborative vibe. Perfect for consultants, freelancers, and client-facing professionals on LinkedIn and company websites.",
+      };
 
-              // Handle continue button
-              const continueBtn = document.getElementById("continueToPreview");
-              if (continueBtn) {
-                continueBtn.addEventListener("click", function () {
-                  document
-                    .getElementById("styleSelectionSection")
-                    .classList.add("hidden");
-                  previewSection.classList.remove("hidden");
-                });
-              }
-            }
+      // Initialize style selection
+      function initStyleSelection() {
+        // Handle style option clicks
+        document.querySelectorAll(".style-option").forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active from all buttons
+            document
+              .querySelectorAll(".style-option")
+              .forEach((btn) => btn.classList.remove("active"));
+            // Add active to clicked button
+            this.classList.add("active");
+            // Update selected style
+            selectedStyle = this.dataset.style;
+          });
+        });
 
-            /* ----------------------- Auth & Credits UI ----------------------- */
-            let sessionUser = null;
-            let credits = {
-              free_remaining: 0,
-              paid_remaining: 0,
-              free_renew_utc: null,
-            };
+        // Handle continue button
+        const continueBtn = document.getElementById("continueToPreview");
+        if (continueBtn) {
+          continueBtn.addEventListener("click", function () {
+            document
+              .getElementById("styleSelectionSection")
+              .classList.add("hidden");
+            previewSection.classList.remove("hidden");
+          });
+        }
+      }
 
-            async function refreshSession() {
-              try {
-                const r = await fetchJSON("/auth/me");
-                sessionUser = r.user;
-                credits = r.credits || { remaining: 0 };
-              } catch {
-                sessionUser = null;
-                credits = {
-                  free_remaining: 0,
-                  paid_remaining: 0,
-                  free_renew_utc: null,
-                };
-              }
-              updateAuthUI();
-            }
+      /* ----------------------- Auth & Credits UI ----------------------- */
+      let sessionUser = null;
+      let credits = {
+        free_remaining: 0,
+        paid_remaining: 0,
+        free_renew_utc: null,
+      };
 
-            function totalCredits() {
-              const c = credits || {};
-              // support all shapes: {remaining} OR {free_remaining, paid_remaining}
-              if (typeof c.remaining === "number") return c.remaining;
-              const free = Number(c.free_remaining || 0);
-              const paid = Number(c.paid_remaining || 0);
-              return free + paid;
-            }
+      async function refreshSession() {
+        try {
+          const r = await fetchJSON("/auth/me");
+          sessionUser = r.user;
+          credits = r.credits || { remaining: 0 };
+        } catch {
+          sessionUser = null;
+          credits = {
+            free_remaining: 0,
+            paid_remaining: 0,
+            free_renew_utc: null,
+          };
+        }
+        updateAuthUI();
+      }
 
-            function updateAuthUI() {
-              const total = totalCredits();
-              $("#creditsCount").textContent = total;
-              $("#creditsLabel").textContent = "Credits";
+      function totalCredits() {
+        const c = credits || {};
+        // support all shapes: {remaining} OR {free_remaining, paid_remaining}
+        if (typeof c.remaining === "number") return c.remaining;
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        return free + paid;
+      }
 
-              if (sessionUser) {
-                $("#authBtnText").textContent = sessionUser.email;
-                $("#logoutBtn").classList.remove("hidden");
-                $("#signInBtn").classList.add("bg-slate-700", "hover:bg-slate-600");
-                $("#signInBtn").classList.remove(
-                  "bg-gradient-to-r",
-                  "from-purple-600",
-                  "to-pink-600",
-                  "hover:from-purple-700",
-                  "hover:to-pink-700"
-                );
-              } else {
-                $("#authBtnText").textContent = "Sign In";
-                $("#logoutBtn").classList.add("hidden");
-                $("#signInBtn").classList.remove(
-                  "bg-slate-700",
-                  "hover:bg-slate-600"
-                );
-                $("#signInBtn").classList.add(
-                  "bg-gradient-to-r",
-                  "from-purple-600",
-                  "to-pink-600",
-                  "hover:from-purple-700",
-                  "hover:to-pink-700"
-                );
-              }
+      function updateAuthUI() {
+        const total = totalCredits();
+        $("#creditsCount").textContent = total;
+        $("#creditsLabel").textContent = "Credits";
 
-              // Visual state if out of credits
-              const creditsBtn = $("#creditsBtn");
-              if (total <= 0) {
-                creditsBtn.classList.add("bg-red-600/30", "border-red-500/50");
-                creditsBtn.classList.remove(
-                  "bg-purple-600/30",
-                  "border-purple-500/50"
-                );
-              } else {
-                creditsBtn.classList.remove("bg-red-600/30", "border-red-500/50");
-                creditsBtn.classList.add("bg-purple-600/30", "border-purple-500/50");
-              }
-            }
+        if (sessionUser) {
+          $("#authBtnText").textContent = sessionUser.email;
+          $("#logoutBtn").classList.remove("hidden");
+          $("#signInBtn").classList.add("bg-slate-700", "hover:bg-slate-600");
+          $("#signInBtn").classList.remove(
+            "bg-gradient-to-r",
+            "from-purple-600",
+            "to-pink-600",
+            "hover:from-purple-700",
+            "hover:to-pink-700"
+          );
+        } else {
+          $("#authBtnText").textContent = "Sign In";
+          $("#logoutBtn").classList.add("hidden");
+          $("#signInBtn").classList.remove(
+            "bg-slate-700",
+            "hover:bg-slate-600"
+          );
+          $("#signInBtn").classList.add(
+            "bg-gradient-to-r",
+            "from-purple-600",
+            "to-pink-600",
+            "hover:from-purple-700",
+            "hover:to-pink-700"
+          );
+        }
 
-            /* ----------------------- Auth modal logic ----------------------- */
-            const authModal = $("#authModal");
-            const authTitle = $("#authTitle");
-            const authForm = $("#authForm");
-            const authEmail = $("#authEmail");
-            const authPass = $("#authPassword");
-            const authToggleBtn = $("#authToggleBtn");
-            const authToggleText = $("#authToggleText");
-            const authCancel = $("#authCancel");
+        // Visual state if out of credits
+        const creditsBtn = $("#creditsBtn");
+        if (total <= 0) {
+          creditsBtn.classList.add("bg-red-600/30", "border-red-500/50");
+          creditsBtn.classList.remove(
+            "bg-purple-600/30",
+            "border-purple-500/50"
+          );
+        } else {
+          creditsBtn.classList.remove("bg-red-600/30", "border-red-500/50");
+          creditsBtn.classList.add("bg-purple-600/30", "border-purple-500/50");
+        }
+      }
 
-            let authMode = "login"; // or "register"
+      /* ----------------------- Auth modal logic ----------------------- */
+      const authModal = $("#authModal");
+      const authTitle = $("#authTitle");
+      const authForm = $("#authForm");
+      const authEmail = $("#authEmail");
+      const authPass = $("#authPassword");
+      const authToggleBtn = $("#authToggleBtn");
+      const authToggleText = $("#authToggleText");
+      const authCancel = $("#authCancel");
 
-            function openAuth(mode = "login") {
-              authMode = mode;
-              authTitle.textContent = mode === "login" ? "Sign in" : "Create account";
-              authToggleText.textContent =
-                mode === "login" ? "New here?" : "Already have an account?";
-              authToggleBtn.textContent =
-                mode === "login" ? "Create an account" : "Sign in";
-              authEmail.value = "";
-              authPass.value = "";
-              authModal.classList.remove("hidden");
-            }
-            function closeAuth() {
-              authModal.classList.add("hidden");
-            }
+      let authMode = "login"; // or "register"
 
-            $("#signInBtn").addEventListener("click", () => openAuth("login"));
-            $("#logoutBtn").addEventListener("click", async () => {
-              try {
-                await fetchJSON("/auth/logout", { method: "POST" });
-              } catch {}
-              await refreshSession();
-              toast("Signed out");
+      function openAuth(mode = "login") {
+        authMode = mode;
+        authTitle.textContent = mode === "login" ? "Sign in" : "Create account";
+        authToggleText.textContent =
+          mode === "login" ? "New here?" : "Already have an account?";
+        authToggleBtn.textContent =
+          mode === "login" ? "Create an account" : "Sign in";
+        authEmail.value = "";
+        authPass.value = "";
+        authModal.classList.remove("hidden");
+      }
+      function closeAuth() {
+        authModal.classList.add("hidden");
+      }
+
+      $("#signInBtn").addEventListener("click", () => openAuth("login"));
+      $("#logoutBtn").addEventListener("click", async () => {
+        try {
+          await fetchJSON("/auth/logout", { method: "POST" });
+        } catch {}
+        await refreshSession();
+        toast("Signed out");
+      });
+      authCancel.addEventListener("click", closeAuth);
+      authModal.addEventListener("click", (e) => {
+        if (e.target === authModal) closeAuth();
+      });
+      authToggleBtn.addEventListener("click", () =>
+        openAuth(authMode === "login" ? "register" : "login")
+      );
+
+      authForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const payload = {
+          email: authEmail.value.trim(),
+          password: authPass.value,
+        };
+        if (!payload.email || !payload.password) return;
+
+        try {
+          if (authMode === "login") {
+            await fetchJSON("/auth/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
             });
-            authCancel.addEventListener("click", closeAuth);
-            authModal.addEventListener("click", (e) => {
-              if (e.target === authModal) closeAuth();
+            toast("Welcome back!");
+          } else {
+            await fetchJSON("/auth/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
             });
-            authToggleBtn.addEventListener("click", () =>
-              openAuth(authMode === "login" ? "register" : "login")
-            );
+            toast("Account created.");
+          }
+          closeAuth();
+          await refreshSession();
+        } catch (err) {
+          toast(err.message || "Authentication failed");
+        }
+      });
 
-            authForm.addEventListener("submit", async (e) => {
-              e.preventDefault();
-              const payload = {
-                email: authEmail.value.trim(),
-                password: authPass.value,
-              };
-              if (!payload.email || !payload.password) return;
+      /* ----------------------- Upload & Generate ----------------------- */
+      const uploadArea = $("#uploadArea");
+      const fileInput = $("#fileInput");
+      const previewSection = $("#previewSection");
+      const originalPreview = $("#originalPreview");
+      const resultPreview = $("#resultPreview");
+      const loadingSpinner = $("#loadingSpinner");
+      const generateBtn = $("#generateBtn");
+      const downloadBtn = $("#downloadBtn");
+      const resetBtn = $("#resetBtn");
 
-              try {
-                if (authMode === "login") {
-                  await fetchJSON("/auth/login", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                  });
-                  toast("Welcome back!");
-                } else {
-                  await fetchJSON("/auth/register", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(payload),
-                  });
-                  toast("Account created.");
-                }
-                closeAuth();
-                await refreshSession();
-              } catch (err) {
-                toast(err.message || "Authentication failed");
-              }
-            });
+      let currentFile = null;
 
-            /* ----------------------- Upload & Generate ----------------------- */
-            const uploadArea = $("#uploadArea");
-            const fileInput = $("#fileInput");
-            const previewSection = $("#previewSection");
-            const originalPreview = $("#originalPreview");
-            const resultPreview = $("#resultPreview");
-            const loadingSpinner = $("#loadingSpinner");
-            const generateBtn = $("#generateBtn");
-            const downloadBtn = $("#downloadBtn");
-            const resetBtn = $("#resetBtn");
+      uploadArea.addEventListener("click", () => fileInput.click());
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+        const files = e.dataTransfer.files;
+        if (files.length > 0) handleFile(files[0]);
+      });
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) handleFile(e.target.files[0]);
+      });
 
-            let currentFile = null;
-
-            uploadArea.addEventListener("click", () => fileInput.click());
-            uploadArea.addEventListener("dragover", (e) => {
-              e.preventDefault();
-              uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
-            });
-            uploadArea.addEventListener("dragleave", () => {
-              uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
-            });
-            uploadArea.addEventListener("drop", (e) => {
-              e.preventDefault();
-              uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
-              const files = e.dataTransfer.files;
-              if (files.length > 0) handleFile(files[0]);
-            });
-            fileInput.addEventListener("change", (e) => {
-              if (e.target.files.length > 0) handleFile(e.target.files[0]);
-            });
-
-           function handleFile(file) {
+      function handleFile(file) {
         if (!file.type.startsWith("image/")) {
           toast("Please upload an image file.");
           return;
@@ -2564,403 +2566,370 @@
           toast("File size must be less than 10MB.");
           return;
         }
-
         currentFile = file;
         const reader = new FileReader();
         reader.onload = (e) => {
           originalPreview.src = e.target.result;
-          // Show style selection instead of going directly to preview
           uploadArea.classList.add("hidden");
-
-          // Make sure this element exists!
           const styleSection = document.getElementById("styleSelectionSection");
-          if (styleSection) {
-            styleSection.classList.remove("hidden");
-          } else {
-            console.error("styleSelectionSection not found!");
-            // Fallback to old behavior
-            previewSection.classList.remove("hidden");
-          }
-
+          if (styleSection) styleSection.classList.remove("hidden");
           previewSection.classList.add("hidden");
         };
         reader.readAsDataURL(file);
       }
-              if (!file.type.startsWith("image/")) {
-                toast("Please upload an image file.");
-                return;
-              }
-              if (file.size > 10 * 1024 * 1024) {
-                toast("File size must be less than 10MB.");
-                return;
-              }
 
-              currentFile = file;
-              const reader = new FileReader();
-              reader.onload = (e) => {
-                originalPreview.src = e.target.result;
-                // Show style selection instead of going directly to preview
-                uploadArea.classList.add("hidden");
-                document
-                  .getElementById("styleSelectionSection")
-                  .classList.remove("hidden");
-                previewSection.classList.add("hidden");
-              };
-              reader.readAsDataURL(file);
+      generateBtn.addEventListener("click", async () => {
+        if (!currentFile) {
+          toast("Please choose a file first.");
+          return;
+        }
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
+        if (totalCredits() <= 0) {
+          toast("No credits remaining. Buy credits or try again tomorrow.");
+          return;
+        }
+
+        // Loading UI
+        generateBtn.disabled = true;
+        resetBtn.disabled = true;
+        loadingSpinner.classList.remove("hidden");
+        resultPreview.classList.add("hidden");
+        downloadBtn.classList.add("hidden");
+
+        const formData = new FormData();
+        formData.append("photo", currentFile);
+
+        // Use the selected style's prompt
+        const prompt = stylePrompts[selectedStyle];
+        formData.append("prompt", prompt);
+
+        try {
+          const res = await fetch("/api/generate", {
+            method: "POST",
+            body: formData,
+            credentials: "include",
+          });
+
+          const data = await res.json().catch(() => ({}));
+
+          if (!res.ok) {
+            if (res.status === 401) {
+              openAuth("login");
+              throw new Error("Please sign in.");
+            }
+            if (res.status === 402) {
+              await refreshSession();
+              throw new Error(data.message || "Out of credits.");
+            }
+            if (res.status === 413) {
+              throw new Error("File too large.");
+            }
+            if (res.status === 429) {
+              throw new Error(data.error || "Rate limited or duplicate image.");
+            }
+            throw new Error(data.error || `HTTP ${res.status}`);
+          }
+
+          // Success
+          if (data.imageUrl) {
+            resultPreview.src = data.imageUrl;
+            resultPreview.classList.remove("hidden");
+            downloadBtn.classList.remove("hidden");
+            // Track which style was used
+            gtag("event", "generate_success", {
+              style: selectedStyle,
+              category: selectedStyle.startsWith("figurine")
+                ? "figurine"
+                : selectedStyle.startsWith("dating")
+                ? "dating"
+                : "business",
+            });
+          }
+          await refreshSession();
+        } catch (err) {
+          console.error(err);
+          toast(err.message || "Generation failed");
+        } finally {
+          loadingSpinner.classList.add("hidden");
+          generateBtn.disabled = false;
+          resetBtn.disabled = false;
+        }
+      });
+
+      downloadBtn.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = resultPreview.src;
+        link.download = "toyrender-figurine.png";
+        link.click();
+      });
+
+      resetBtn.addEventListener("click", () => {
+        uploadArea.classList.remove("hidden");
+        previewSection.classList.add("hidden");
+        document
+          .getElementById("styleSelectionSection")
+          .classList.add("hidden");
+        fileInput.value = "";
+        currentFile = null;
+        originalPreview.src = "";
+        resultPreview.src = "";
+
+        // Reset style selection to figurine1
+        selectedStyle = "figurine1";
+        document.querySelectorAll(".style-option").forEach((button) => {
+          button.classList.remove("active");
+          if (button.dataset.style === "figurine1") {
+            button.classList.add("active");
+          }
+        });
+      });
+
+      // Optional: show a small dialog when clicking credits
+      $("#creditsBtn").addEventListener("click", () => {
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
+        const c = credits || {};
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        const total = totalCredits();
+        toast(
+          `Credits — Total: ${total}${
+            free || paid ? ` (free: ${free}, paid: ${paid})` : ""
+          }`
+        );
+      });
+
+      /* ----------------------- Init ----------------------- */
+      // Initialize on DOM load
+      document.addEventListener("DOMContentLoaded", function () {
+        initStyleSelection();
+      });
+      refreshSession();
+
+      /* ----------------- Testimonials drag code ----------------- */
+      (() => {
+        const friction = 0.92;
+        const wheelBoost = 0.9;
+
+        document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
+          el.style.userSelect = "none";
+          el.style.touchAction = "pan-x";
+
+          let isDown = false,
+            startX = 0,
+            startLeft = 0;
+          let lastX = 0,
+            velocity = 0,
+            rafId = 0;
+
+          const stopMomentum = () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = 0;
+          };
+          const momentum = () => {
+            stopMomentum();
+            const step = () => {
+              el.scrollLeft -= velocity;
+              velocity *= friction;
+              if (Math.abs(velocity) > 0.5) rafId = requestAnimationFrame(step);
+            };
+            rafId = requestAnimationFrame(step);
+          };
+
+          el.addEventListener("pointerdown", (e) => {
+            isDown = true;
+            el.setPointerCapture?.(e.pointerId);
+            startX = e.clientX;
+            startLeft = el.scrollLeft;
+            lastX = e.clientX;
+            velocity = 0;
+            stopMomentum();
+            el.classList.add("dragging");
+          });
+
+          el.addEventListener("pointermove", (e) => {
+            if (!isDown) return;
+            const dx = e.clientX - startX;
+            el.scrollLeft = startLeft - dx;
+            velocity = e.clientX - lastX;
+            lastX = e.clientX;
+          });
+
+          const endDrag = (e) => {
+            if (!isDown) return;
+            isDown = false;
+            el.releasePointerCapture?.(e.pointerId);
+            el.classList.remove("dragging");
+            momentum();
+          };
+          el.addEventListener("pointerup", endDrag);
+          el.addEventListener("pointercancel", endDrag);
+          el.addEventListener("pointerleave", () => {
+            if (isDown) endDrag({});
+          });
+
+          el.addEventListener(
+            "wheel",
+            (e) => {
+              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                el.scrollLeft += e.deltaY * wheelBoost;
+                e.preventDefault();
+              }
+            },
+            { passive: false }
+          );
+
+          el.tabIndex = 0;
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight")
+              el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
+            if (e.key === "ArrowLeft")
+              el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
+          });
+        });
+      })();
+
+      // autoscroll
+      /* ----------------- Testimonials auto-scroll (seamless loop) ----------------- */
+
+      // === AUTOPLAY testimonials (seamless + robust) ===
+      (() => {
+        const track = document.querySelector(
+          ".testimonial-track[data-drag-scroll]"
+        );
+        if (!track) return;
+
+        // Optional speed via data-auto-speed="0.6" (px per frame). Default ~0.5.
+        const speed = parseFloat(track.dataset.autoSpeed) || 0.5;
+
+        // Duplicate children once so we can loop seamlessly (idempotent).
+        if (!track.__duplicated) {
+          const kids = Array.from(track.children);
+          const frag = document.createDocumentFragment();
+          kids.forEach((k) => {
+            const clone = k.cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            frag.appendChild(clone);
+          });
+          track.appendChild(frag);
+          track.__duplicated = true;
+        }
+
+        let halfWidth = 0;
+        let playing = true; // force-start (ignore prefers-reduced-motion)
+
+        const measure = () => {
+          // Wait for images to layout
+          halfWidth = track.scrollWidth / 2;
+          // Only autoplay if actual overflow exists
+          playing = halfWidth > track.clientWidth + 2;
+          track.classList.toggle("auto-scrolling", playing); // disables snap while auto
+        };
+
+        // Run measure after load and on resize/layout changes
+        const afterLoad = () => {
+          measure();
+          // A few re-measures while images settle
+          setTimeout(measure, 200);
+          setTimeout(measure, 600);
+          setTimeout(measure, 1200);
+        };
+        if (document.readyState === "complete") afterLoad();
+        else window.addEventListener("load", afterLoad);
+
+        // Keep measuring if container/cards change size
+        const ro = new ResizeObserver(measure);
+        ro.observe(track);
+
+        // rAF loop
+        const step = () => {
+          if (playing) {
+            let next = track.scrollLeft + speed;
+            if (halfWidth > 0 && next >= halfWidth) next -= halfWidth; // seamless wrap
+            track.scrollLeft = next;
+          }
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+
+        // Pause on user interaction; resume after
+        const pause = () => (playing = false);
+        const resume = () => {
+          measure(); // recompute in case user repositioned
+          playing = halfWidth > track.clientWidth + 2;
+        };
+
+        ["mouseenter", "pointerdown", "focusin", "touchstart"].forEach((evt) =>
+          track.addEventListener(evt, pause, { passive: true })
+        );
+        [
+          "mouseleave",
+          "pointerup",
+          "focusout",
+          "touchend",
+          "touchcancel",
+        ].forEach((evt) =>
+          track.addEventListener(evt, resume, { passive: true })
+        );
+
+        // Arrow buttons should also pause
+        document
+          .querySelector("[data-track-left]")
+          ?.addEventListener("click", pause);
+        document
+          .querySelector("[data-track-right]")
+          ?.addEventListener("click", pause);
+      })();
+
+      // ---- Stripe init (must come before using `stripe`) ----
+      if (!window.Stripe) {
+        console.error("Stripe.js failed to load");
+      }
+      if (!window.STRIPE_PK) {
+        console.error("Missing publishable key from /config.js");
+      }
+      const stripe = Stripe(window.STRIPE_PK);
+
+      // STRIPE INTEGRATION
+
+      document
+        .getElementById("buyCreditsBtn")
+        .addEventListener("click", async () => {
+          try {
+            if (!sessionUser) {
+              openAuth("login");
+              return;
+            }
+            const data = await fetchJSON("/api/payments/checkout", {
+              method: "POST",
+            });
+
+            // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
+            if (data?.url) {
+              window.location.assign(data.url);
+              return;
+            }
+            // Fallback to Stripe.js
+            if (data?.id) {
+              const { error } = await stripe.redirectToCheckout({
+                sessionId: data.id,
+              });
+              if (error)
+                throw new Error(error.message || "Checkout could not start.");
+              return;
             }
 
-            generateBtn.addEventListener("click", async () => {
-              if (!currentFile) {
-                toast("Please choose a file first.");
-                return;
-              }
-              if (!sessionUser) {
-                openAuth("login");
-                return;
-              }
-              if (totalCredits() <= 0) {
-                toast("No credits remaining. Buy credits or try again tomorrow.");
-                return;
-              }
-
-              // Loading UI
-              generateBtn.disabled = true;
-              resetBtn.disabled = true;
-              loadingSpinner.classList.remove("hidden");
-              resultPreview.classList.add("hidden");
-              downloadBtn.classList.add("hidden");
-
-              const formData = new FormData();
-              formData.append("photo", currentFile);
-
-              // Use the selected style's prompt
-              const prompt = stylePrompts[selectedStyle];
-              formData.append("prompt", prompt);
-
-              try {
-                const res = await fetch("/api/generate", {
-                  method: "POST",
-                  body: formData,
-                  credentials: "include",
-                });
-
-                const data = await res.json().catch(() => ({}));
-
-                if (!res.ok) {
-                  if (res.status === 401) {
-                    openAuth("login");
-                    throw new Error("Please sign in.");
-                  }
-                  if (res.status === 402) {
-                    await refreshSession();
-                    throw new Error(data.message || "Out of credits.");
-                  }
-                  if (res.status === 413) {
-                    throw new Error("File too large.");
-                  }
-                  if (res.status === 429) {
-                    throw new Error(data.error || "Rate limited or duplicate image.");
-                  }
-                  throw new Error(data.error || `HTTP ${res.status}`);
-                }
-
-                // Success
-                if (data.imageUrl) {
-                  resultPreview.src = data.imageUrl;
-                  resultPreview.classList.remove("hidden");
-                  downloadBtn.classList.remove("hidden");
-                  // Track which style was used
-                  gtag("event", "generate_success", {
-                    style: selectedStyle,
-                    category: selectedStyle.startsWith("figurine")
-                      ? "figurine"
-                      : selectedStyle.startsWith("dating")
-                      ? "dating"
-                      : "business",
-                  });
-                }
-                await refreshSession();
-              } catch (err) {
-                console.error(err);
-                toast(err.message || "Generation failed");
-              } finally {
-                loadingSpinner.classList.add("hidden");
-                generateBtn.disabled = false;
-                resetBtn.disabled = false;
-              }
-            });
-
-            downloadBtn.addEventListener("click", () => {
-              const link = document.createElement("a");
-              link.href = resultPreview.src;
-              link.download = "toyrender-figurine.png";
-              link.click();
-            });
-
-            resetBtn.addEventListener("click", () => {
-              uploadArea.classList.remove("hidden");
-              previewSection.classList.add("hidden");
-              document
-                .getElementById("styleSelectionSection")
-                .classList.add("hidden");
-              fileInput.value = "";
-              currentFile = null;
-              originalPreview.src = "";
-              resultPreview.src = "";
-
-              // Reset style selection to figurine1
-              selectedStyle = "figurine1";
-              document.querySelectorAll(".style-option").forEach((button) => {
-                button.classList.remove("active");
-                if (button.dataset.style === "figurine1") {
-                  button.classList.add("active");
-                }
-              });
-            });
-
-            // Optional: show a small dialog when clicking credits
-            $("#creditsBtn").addEventListener("click", () => {
-              if (!sessionUser) {
-                openAuth("login");
-                return;
-              }
-              const c = credits || {};
-              const free = Number(c.free_remaining || 0);
-              const paid = Number(c.paid_remaining || 0);
-              const total = totalCredits();
-              toast(
-                `Credits — Total: ${total}${
-                  free || paid ? ` (free: ${free}, paid: ${paid})` : ""
-                }`
-              );
-            });
-
-            /* ----------------------- Init ----------------------- */
-            // Initialize on DOM load
-            document.addEventListener("DOMContentLoaded", function () {
-              initStyleSelection();
-            });
-            refreshSession();
-
-            /* ----------------- Testimonials drag code ----------------- */
-            (() => {
-              const friction = 0.92;
-              const wheelBoost = 0.9;
-
-              document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
-                el.style.userSelect = "none";
-                el.style.touchAction = "pan-x";
-
-                let isDown = false,
-                  startX = 0,
-                  startLeft = 0;
-                let lastX = 0,
-                  velocity = 0,
-                  rafId = 0;
-
-                const stopMomentum = () => {
-                  if (rafId) cancelAnimationFrame(rafId);
-                  rafId = 0;
-                };
-                const momentum = () => {
-                  stopMomentum();
-                  const step = () => {
-                    el.scrollLeft -= velocity;
-                    velocity *= friction;
-                    if (Math.abs(velocity) > 0.5) rafId = requestAnimationFrame(step);
-                  };
-                  rafId = requestAnimationFrame(step);
-                };
-
-                el.addEventListener("pointerdown", (e) => {
-                  isDown = true;
-                  el.setPointerCapture?.(e.pointerId);
-                  startX = e.clientX;
-                  startLeft = el.scrollLeft;
-                  lastX = e.clientX;
-                  velocity = 0;
-                  stopMomentum();
-                  el.classList.add("dragging");
-                });
-
-                el.addEventListener("pointermove", (e) => {
-                  if (!isDown) return;
-                  const dx = e.clientX - startX;
-                  el.scrollLeft = startLeft - dx;
-                  velocity = e.clientX - lastX;
-                  lastX = e.clientX;
-                });
-
-                const endDrag = (e) => {
-                  if (!isDown) return;
-                  isDown = false;
-                  el.releasePointerCapture?.(e.pointerId);
-                  el.classList.remove("dragging");
-                  momentum();
-                };
-                el.addEventListener("pointerup", endDrag);
-                el.addEventListener("pointercancel", endDrag);
-                el.addEventListener("pointerleave", () => {
-                  if (isDown) endDrag({});
-                });
-
-                el.addEventListener(
-                  "wheel",
-                  (e) => {
-                    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                      el.scrollLeft += e.deltaY * wheelBoost;
-                      e.preventDefault();
-                    }
-                  },
-                  { passive: false }
-                );
-
-                el.tabIndex = 0;
-                el.addEventListener("keydown", (e) => {
-                  if (e.key === "ArrowRight")
-                    el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
-                  if (e.key === "ArrowLeft")
-                    el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
-                });
-              });
-            })();
-
-            // autoscroll
-            /* ----------------- Testimonials auto-scroll (seamless loop) ----------------- */
-
-            // === AUTOPLAY testimonials (seamless + robust) ===
-            (() => {
-              const track = document.querySelector(
-                ".testimonial-track[data-drag-scroll]"
-              );
-              if (!track) return;
-
-              // Optional speed via data-auto-speed="0.6" (px per frame). Default ~0.5.
-              const speed = parseFloat(track.dataset.autoSpeed) || 0.5;
-
-              // Duplicate children once so we can loop seamlessly (idempotent).
-              if (!track.__duplicated) {
-                const kids = Array.from(track.children);
-                const frag = document.createDocumentFragment();
-                kids.forEach((k) => {
-                  const clone = k.cloneNode(true);
-                  clone.setAttribute("aria-hidden", "true");
-                  frag.appendChild(clone);
-                });
-                track.appendChild(frag);
-                track.__duplicated = true;
-              }
-
-              let halfWidth = 0;
-              let playing = true; // force-start (ignore prefers-reduced-motion)
-
-              const measure = () => {
-                // Wait for images to layout
-                halfWidth = track.scrollWidth / 2;
-                // Only autoplay if actual overflow exists
-                playing = halfWidth > track.clientWidth + 2;
-                track.classList.toggle("auto-scrolling", playing); // disables snap while auto
-              };
-
-              // Run measure after load and on resize/layout changes
-              const afterLoad = () => {
-                measure();
-                // A few re-measures while images settle
-                setTimeout(measure, 200);
-                setTimeout(measure, 600);
-                setTimeout(measure, 1200);
-              };
-              if (document.readyState === "complete") afterLoad();
-              else window.addEventListener("load", afterLoad);
-
-              // Keep measuring if container/cards change size
-              const ro = new ResizeObserver(measure);
-              ro.observe(track);
-
-              // rAF loop
-              const step = () => {
-                if (playing) {
-                  let next = track.scrollLeft + speed;
-                  if (halfWidth > 0 && next >= halfWidth) next -= halfWidth; // seamless wrap
-                  track.scrollLeft = next;
-                }
-                requestAnimationFrame(step);
-              };
-              requestAnimationFrame(step);
-
-              // Pause on user interaction; resume after
-              const pause = () => (playing = false);
-              const resume = () => {
-                measure(); // recompute in case user repositioned
-                playing = halfWidth > track.clientWidth + 2;
-              };
-
-              ["mouseenter", "pointerdown", "focusin", "touchstart"].forEach((evt) =>
-                track.addEventListener(evt, pause, { passive: true })
-              );
-              [
-                "mouseleave",
-                "pointerup",
-                "focusout",
-                "touchend",
-                "touchcancel",
-              ].forEach((evt) =>
-                track.addEventListener(evt, resume, { passive: true })
-              );
-
-              // Arrow buttons should also pause
-              document
-                .querySelector("[data-track-left]")
-                ?.addEventListener("click", pause);
-              document
-                .querySelector("[data-track-right]")
-                ?.addEventListener("click", pause);
-            })();
-
-            // ---- Stripe init (must come before using `stripe`) ----
-            if (!window.Stripe) {
-              console.error("Stripe.js failed to load");
-            }
-            if (!window.STRIPE_PK) {
-              console.error("Missing publishable key from /config.js");
-            }
-            const stripe = Stripe(window.STRIPE_PK);
-
-            // STRIPE INTEGRATION
-
-            document
-              .getElementById("buyCreditsBtn")
-              .addEventListener("click", async () => {
-                try {
-                  if (!sessionUser) {
-                    openAuth("login");
-                    return;
-                  }
-                  const data = await fetchJSON("/api/payments/checkout", {
-                    method: "POST",
-                  });
-
-                  // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
-                  if (data?.url) {
-                    window.location.assign(data.url);
-                    return;
-                  }
-                  // Fallback to Stripe.js
-                  if (data?.id) {
-                    const { error } = await stripe.redirectToCheckout({
-                      sessionId: data.id,
-                    });
-                    if (error)
-                      throw new Error(error.message || "Checkout could not start.");
-                    return;
-                  }
-
-                  throw new Error("No checkout URL or session id from server.");
-                } catch (e) {
-                  console.error("Checkout failed:", e);
-                  toast(e.message || "Failed to start checkout.");
-                }
-              });
+            throw new Error("No checkout URL or session id from server.");
+          } catch (e) {
+            console.error("Checkout failed:", e);
+            toast(e.message || "Failed to start checkout.");
+          }
+        });
     </script>
   </body>
 </html>
