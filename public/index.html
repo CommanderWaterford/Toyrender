@@ -680,7 +680,12 @@
             <a
               href="/gallery"
               class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              >Gallery</a
+              >Figurine Gallery</a
+            >
+            <a
+              href="/dating-photos-gallery"
+              class="px-3 py-1 rounded-md hover:text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              >Dating Photo Gallery</a
             >
             <a
               href="/dating-photos"
@@ -1216,16 +1221,22 @@
         </div>
         <!-- Gallery CTA Button -->
         <div class="w-full flex justify-center mt-6 pb-2">
-          <a
-            href="/gallery"
-            class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-sm tracking-wide hover:from-purple-700 hover:to-pink-700 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-slate-900"
-            aria-label="View more pet portrait examples in the gallery"
-          >
-            Want to see more examples?
-            <span class="underline decoration-white/40 hover:decoration-white"
-              >Check out our Gallery!</span
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href="/gallery"
+              class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-sm tracking-wide hover:from-purple-700 hover:to-pink-700 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-slate-900"
+              aria-label="View more figurine examples in the gallery"
             >
-          </a>
+              More Figurine Examples →
+            </a>
+            <a
+              href="/dating-photos-gallery"
+              class="px-6 py-3 bg-gradient-to-r from-pink-600 to-red-600 rounded-full font-semibold text-sm tracking-wide hover:from-pink-700 hover:to-red-700 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-slate-900"
+              aria-label="View dating photo style examples gallery"
+            >
+              View Dating Photo Gallery →
+            </a>
+          </div>
         </div>
       </section>
 
@@ -2353,7 +2364,10 @@
           aria-label="Footer navigation"
         >
           <a href="/gallery" class="hover:text-purple-300 transition-colors"
-            >Gallery</a
+            >Figurine Gallery</a
+          >
+          <a href="/dating-photos-gallery" class="hover:text-purple-300 transition-colors"
+            >Dating Photo Gallery</a
           >
           <a href="/blog" class="hover:text-purple-300 transition-colors"
             >Blog</a
@@ -2373,322 +2387,320 @@
     </footer>
 
     <script>
-                /* ----------------------- Helpers ----------------------- */
-                const $ = (sel) => document.querySelector(sel);
-                const fetchJSON = async (url, opts = {}) => {
-                  const res = await fetch(url, { credentials: "include", ...opts });
-                  let data = null;
-                  try {
-                    data = await res.json();
-                  } catch {}
-                  if (!res.ok) {
-                    const msg =
-                      (data && (data.error || data.message)) ||
-                      res.statusText ||
-                      "Request failed";
-                    const err = new Error(msg);
-                    err.status = res.status;
-                    err.data = data;
-                    throw err;
-                  }
-                  return data;
-                };
-                function toast(msg) {
-                  alert(msg);
-                }
+      /* ----------------------- Helpers ----------------------- */
+      const $ = (sel) => document.querySelector(sel);
+      const fetchJSON = async (url, opts = {}) => {
+        const res = await fetch(url, { credentials: "include", ...opts });
+        let data = null;
+        try {
+          data = await res.json();
+        } catch {}
+        if (!res.ok) {
+          const msg =
+            (data && (data.error || data.message)) ||
+            res.statusText ||
+            "Request failed";
+          const err = new Error(msg);
+          err.status = res.status;
+          err.data = data;
+          throw err;
+        }
+        return data;
+      };
+      function toast(msg) {
+        alert(msg);
+      }
 
-                let selectedStyle = "figurine1";
+      let selectedStyle = "figurine1";
 
-                // Variable to track if we're doing a pack generation
-                let isPackGeneration = false;
-                let packResults = [];
-                let currentPackIndex = 0;
+      // Variable to track if we're doing a pack generation
+      let isPackGeneration = false;
+      let packResults = [];
+      let currentPackIndex = 0;
 
-                // Updated style prompts mapping - 19 total options (10 figurine, 6 dating, 3 business)
-                const stylePrompts = {
-                  // 10 Figurine Styles
-                  figurine1:
-                    "Create a 1/7-scale figurine in a coffee-table lifestyle shoot. The figure stands on a round transparent acrylic base (no text) on a terrazzo tabletop. Soft morning light, plants and a book stack in the background. The packaging with flat 2D art sits casually next to it. Editorial, magazine-style composition.",
+      // Updated style prompts mapping - 19 total options (10 figurine, 6 dating, 3 business)
+      const stylePrompts = {
+        // 10 Figurine Styles
+        figurine1:
+          "Create a 1/7-scale figurine in a coffee-table lifestyle shoot. The figure stands on a round transparent acrylic base (no text) on a terrazzo tabletop. Soft morning light, plants and a book stack in the background. The packaging with flat 2D art sits casually next to it. Editorial, magazine-style composition.",
 
-                  figurine2:
-                    "Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.",
+        figurine2:
+          "Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.",
 
-                  figurine3:
-                    "Create a 1/7-scale figurine in a resin-printing cleanup area. Ultrasonic cleaner, isopropyl bottles, nitrile gloves. On the monitor: support removal preview. Box with flat 2D art on a shelf in the back.",
+        figurine3:
+          "Create a 1/7-scale figurine in a resin-printing cleanup area. Ultrasonic cleaner, isopropyl bottles, nitrile gloves. On the monitor: support removal preview. Box with flat 2D art on a shelf in the back.",
 
-                  figurine4:
-                    "Create a 1/7-scale figurine on a museum registration table. Cotton gloves, acid-free tissue, accession tag (blank). A small acrylic vitrine nearby. Wall behind features large flat concept illustrations (no text).",
+        figurine4:
+          "Create a 1/7-scale figurine on a museum registration table. Cotton gloves, acid-free tissue, accession tag (blank). A small acrylic vitrine nearby. Wall behind features large flat concept illustrations (no text).",
 
-                  figurine5:
-                    "Create a 1/7-scale figurine in a boutique retail window. Elevated matte plinth, reflected city lights at dusk, antitheft wire barely visible. Stacked boxed units with flat 2D art in a tidy pyramid.",
+        figurine5:
+          "Create a 1/7-scale figurine in a boutique retail window. Elevated matte plinth, reflected city lights at dusk, antitheft wire barely visible. Stacked boxed units with flat 2D art in a tidy pyramid.",
 
-                  figurine6:
-                    "Create a 1/7-scale figurine in a collector's Detolf cabinet. LED strips top and bottom, other figures blurred on neighboring shelves. One packaging box with flat 2D art sits centered behind.",
+        figurine6:
+          "Create a 1/7-scale figurine in a collector's Detolf cabinet. LED strips top and bottom, other figures blurred on neighboring shelves. One packaging box with flat 2D art sits centered behind.",
 
-                  figurine7:
-                    "A vibrant, nostalgic photograph of a 1/7-scale stylized collectible figurine, standing heroically atop a meticulously crafted, working miniature arcade cabinet from the 1980s. The figurine is positioned on its round transparent acrylic base (no text). The arcade cabinet's screen flickers with bright, pixelated retro game graphics, casting a dynamic, colorful glow onto the figurine and the surrounding area. The setting is a dimly lit, authentic retro arcade environment, with faint reflections of other cabinet screens visible in the background. Scattered around the base of the arcade cabinet are a few vintage arcade tokens and a half-eaten bag of classic candy. A specially designed, retro-themed packaging box, featuring bold, era-appropriate flat 2D art, leans casually against the side of the arcade machine, blending seamlessly with the nostalgic aesthetic. The composition is dynamic, energetic, and rich with period detail, evoking pure 80s/90s nostalgia.",
+        figurine7:
+          "A vibrant, nostalgic photograph of a 1/7-scale stylized collectible figurine, standing heroically atop a meticulously crafted, working miniature arcade cabinet from the 1980s. The figurine is positioned on its round transparent acrylic base (no text). The arcade cabinet's screen flickers with bright, pixelated retro game graphics, casting a dynamic, colorful glow onto the figurine and the surrounding area. The setting is a dimly lit, authentic retro arcade environment, with faint reflections of other cabinet screens visible in the background. Scattered around the base of the arcade cabinet are a few vintage arcade tokens and a half-eaten bag of classic candy. A specially designed, retro-themed packaging box, featuring bold, era-appropriate flat 2D art, leans casually against the side of the arcade machine, blending seamlessly with the nostalgic aesthetic. The composition is dynamic, energetic, and rich with period detail, evoking pure 80s/90s nostalgia.",
 
-                  figurine8:
-                    "Create a 1/7-scale figurine on a color-checker backdrop. Include swatch cards, gray card, and a spectrophotometer. Monitor shows node-based look-dev graph of the figurine materials. Packaging stands upright to the right.",
+        figurine8:
+          "Create a 1/7-scale figurine on a color-checker backdrop. Include swatch cards, gray card, and a spectrophotometer. Monitor shows node-based look-dev graph of the figurine materials. Packaging stands upright to the right.",
 
-                  figurine9: `Prompt: A dramatic, hyperrealistic photograph of a pristine 1/7-scale rare collectible figurine (preserving fur color/markings), presented under focused, museum-style spot lighting in an exclusive auction house preview. The figurine stands on its round transparent acrylic base (no text) atop a dark, polished mahogany display table. Surrounding it are other blurred, high-value collectibles in glass cases, and a subtle velvet rope demarcation. A crisp, minimalist auction catalog, open to the figurine's entry (no legible text), lies nearby. In the deep, soft-focused background, discerning collectors in elegant attire are subtly visible. The lighting is sophisticated and theatrical, emphasizing exclusivity and the figurine's prestige.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cheap display, messy background, blurred figurine, harsh reflections."\nOptions: "A small, engraved brass lot number tag (digital/printable)", "Subtle, shimmering light reflecting off the figurine's surface."`,
+        figurine9: `Prompt: A dramatic, hyperrealistic photograph of a pristine 1/7-scale rare collectible figurine (preserving fur color/markings), presented under focused, museum-style spot lighting in an exclusive auction house preview. The figurine stands on its round transparent acrylic base (no text) atop a dark, polished mahogany display table. Surrounding it are other blurred, high-value collectibles in glass cases, and a subtle velvet rope demarcation. A crisp, minimalist auction catalog, open to the figurine's entry (no legible text), lies nearby. In the deep, soft-focused background, discerning collectors in elegant attire are subtly visible. The lighting is sophisticated and theatrical, emphasizing exclusivity and the figurine's prestige.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cheap display, messy background, blurred figurine, harsh reflections."\nOptions: "A small, engraved brass lot number tag (digital/printable)", "Subtle, shimmering light reflecting off the figurine's surface."`,
 
-                  dating1: `Prompt: A professional, hyperrealistic photograph capturing the woman (preserving hair color/style, eye color), lounging intimately on luxurious, slightly rumpled white silk sheets. Her body is artfully draped and partially covered by a soft, oversized white button-down shirt or silk robe, revealing a bare shoulder or leg. She gazes softly towards the camera with a tender, inviting, and slightly playful expression, as if just waking up. Soft, warm, diffused morning sunlight streams through a sheer window, creating a luminous, ethereal glow and gentle highlights on her skin. A single, long-stemmed red rose lies casually on the pillow nearby. The composition is clean, airy, and deeply intimate, evoking a feeling of romantic connection and sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty sheets, harsh or artificial lighting, aggressive or stressed expression, explicit nudity, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing underwear", "A personalized, handwritten 'love note' (blurred text) casually folded on the bedside table", "A steaming cup of gourmet coffee on a nearby minimalist nightstand."`,
+        dating1: `Prompt: A professional, hyperrealistic photograph capturing the woman (preserving hair color/style, eye color), lounging intimately on luxurious, slightly rumpled white silk sheets. Her body is artfully draped and partially covered by a soft, oversized white button-down shirt or silk robe, revealing a bare shoulder or leg. She gazes softly towards the camera with a tender, inviting, and slightly playful expression, as if just waking up. Soft, warm, diffused morning sunlight streams through a sheer window, creating a luminous, ethereal glow and gentle highlights on her skin. A single, long-stemmed red rose lies casually on the pillow nearby. The composition is clean, airy, and deeply intimate, evoking a feeling of romantic connection and sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty sheets, harsh or artificial lighting, aggressive or stressed expression, explicit nudity, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing underwear", "A personalized, handwritten 'love note' (blurred text) casually folded on the bedside table", "A steaming cup of gourmet coffee on a nearby minimalist nightstand."`,
 
-                  dating2: `Prompt: An adorable and heartwarming photograph of the woman (preserving hair color/style, eye color), with a sweet, playful smile and a hint of charm, playfully peeking over the top of a fluffy, oversized comforter in a brightly lit, cozy bedroom. She is dressed in comfortable yet charming loungewear (e.g., silk camisole, soft knit top). Her eyes sparkle with warmth and affection as she looks directly at the camera. Soft, warm, diffused natural light fills the room, creating an inviting and comfortable atmosphere. Scattered lightly on the comforter are a few delicate rose petals. The background is a tastefully blurred, homey bedroom, perhaps with a sunbeam on a nearby wall. The image conveys affection, tenderness, and a charming playfulness, perfect for a social media share or a personal gift. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy background (beyond soft comfort), harsh lighting, anxious or aggressive expression, unrealistic proportions, visible tattoos (unless specified)." Options: Woman gently blowing a kiss towards the camera (blurred motion); a personalized, small framed photo (blurred image) on a nearby nightstand; a stack of favorite books and a warm beverage nearby.`,
+        dating2: `Prompt: An adorable and heartwarming photograph of the woman (preserving hair color/style, eye color), with a sweet, playful smile and a hint of charm, playfully peeking over the top of a fluffy, oversized comforter in a brightly lit, cozy bedroom. She is dressed in comfortable yet charming loungewear (e.g., silk camisole, soft knit top). Her eyes sparkle with warmth and affection as she looks directly at the camera. Soft, warm, diffused natural light fills the room, creating an inviting and comfortable atmosphere. Scattered lightly on the comforter are a few delicate rose petals. The background is a tastefully blurred, homey bedroom, perhaps with a sunbeam on a nearby wall. The image conveys affection, tenderness, and a charming playfulness, perfect for a social media share or a personal gift. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy background (beyond soft comfort), harsh lighting, anxious or aggressive expression, unrealistic proportions, visible tattoos (unless specified)." Options: Woman gently blowing a kiss towards the camera (blurred motion); a personalized, small framed photo (blurred image) on a nearby nightstand; a stack of favorite books and a warm beverage nearby.`,
 
-                  dating3: `Prompt: A professional, hyperrealistic photograph of the woman (preserving hair color/style, eye color), captured in a moment of elegant preparation for an evening out. She is seated or standing gracefully at a luxurious vanity table or in a chic dressing area, perhaps delicately applying lipstick or adjusting a piece of fine jewelry. She wears a sophisticated silk robe or a form-fitting, elegant dress that subtly accentuates her. Her gaze is confident and alluring, meeting her reflection in a softly lit mirror or looking thoughtfully towards the camera. The background features blurred, upscale decor like shimmering perfume bottles, delicate floral arrangements, and rich textures. Soft, warm, indirect lighting (like a vanity light or evening lamp) creates a luxurious glow and intimate highlights, evoking anticipation, with a shallow depth-of-field. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or cluttered vanity, harsh or unflattering lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)." Options: Woman holding a delicate clutch purse; a subtle reflection of a cityscape at dusk in the background mirror; a personalized, elegant note card (blurred text) lying on the vanity.`,
+        dating3: `Prompt: A professional, hyperrealistic photograph of the woman (preserving hair color/style, eye color), captured in a moment of elegant preparation for an evening out. She is seated or standing gracefully at a luxurious vanity table or in a chic dressing area, perhaps delicately applying lipstick or adjusting a piece of fine jewelry. She wears a sophisticated silk robe or a form-fitting, elegant dress that subtly accentuates her. Her gaze is confident and alluring, meeting her reflection in a softly lit mirror or looking thoughtfully towards the camera. The background features blurred, upscale decor like shimmering perfume bottles, delicate floral arrangements, and rich textures. Soft, warm, indirect lighting (like a vanity light or evening lamp) creates a luxurious glow and intimate highlights, evoking anticipation, with a shallow depth-of-field. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or cluttered vanity, harsh or unflattering lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)." Options: Woman holding a delicate clutch purse; a subtle reflection of a cityscape at dusk in the background mirror; a personalized, elegant note card (blurred text) lying on the vanity.`,
 
-                  dating4: `Prompt: An energetic and enchanting photograph of a woman (preserving hair color/style, eye color), captured in a moment of playful, lighthearted motion, perhaps twirling gently, tossing her hair back with a laugh, or playfully reaching out towards the camera. She is dressed in a light, flowing summer dress or a soft, denim-and-lace ensemble that moves with her, hinting at her form. The setting is a vibrant, sun-drenched outdoor location, like a blooming garden, a pristine beach with gentle waves, or a cheerful, airy patio. Bright, natural daylight creates sparkling highlights and a joyous, carefree atmosphere. Her expression is genuinely happy, with a flirty smile and sparkling eyes. The background is beautifully blurred, adding to the dynamic and inviting feel, with subtle motion blur on her hair or dress to emphasize movement.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, stiff pose, harsh shadows, explicit nudity, aggressive or crude gestures, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman holding a delicate wildflower bouquet," "Subtle sun flare effect in the background," "A tiny, barely visible anklet or bracelet accessory."`,
+        dating4: `Prompt: An energetic and enchanting photograph of a woman (preserving hair color/style, eye color), captured in a moment of playful, lighthearted motion, perhaps twirling gently, tossing her hair back with a laugh, or playfully reaching out towards the camera. She is dressed in a light, flowing summer dress or a soft, denim-and-lace ensemble that moves with her, hinting at her form. The setting is a vibrant, sun-drenched outdoor location, like a blooming garden, a pristine beach with gentle waves, or a cheerful, airy patio. Bright, natural daylight creates sparkling highlights and a joyous, carefree atmosphere. Her expression is genuinely happy, with a flirty smile and sparkling eyes. The background is beautifully blurred, adding to the dynamic and inviting feel, with subtle motion blur on her hair or dress to emphasize movement.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, stiff pose, harsh shadows, explicit nudity, aggressive or crude gestures, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman holding a delicate wildflower bouquet," "Subtle sun flare effect in the background," "A tiny, barely visible anklet or bracelet accessory."`,
 
-                  dating5: `Prompt: A sensual and artistic photograph of the person (preserving hair color/style, eye color), captured in an intimate moment of self-reflection or gentle touch. She is sitting or kneeling gracefully, perhaps with her back partially turned, subtly revealing the curve of her back, shoulder, or the delicate line of her neck. Her hair is artfully styled to highlight these areas, perhaps partially undone or swept to one side. She is dressed in a soft, luxurious silk slip or a delicate, unfastened robe. The setting is minimalist and elegant, like a high-end bedroom or a spa-like bathroom, with a large, antique-style mirror in the soft-focused background or as a framing element. Soft, ambient lighting creates gentle contrasts and emphasizes skin texture. The mood is one of serene introspection, quiet beauty, and sophisticated sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cluttered background, harsh lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "A delicate string of pearls or a simple necklace resting on her back," "Subtle steam effect in a bathroom setting," "A single, flickering candle creating a warm glow."`,
+        dating5: `Prompt: A sensual and artistic photograph of the person (preserving hair color/style, eye color), captured in an intimate moment of self-reflection or gentle touch. She is sitting or kneeling gracefully, perhaps with her back partially turned, subtly revealing the curve of her back, shoulder, or the delicate line of her neck. Her hair is artfully styled to highlight these areas, perhaps partially undone or swept to one side. She is dressed in a soft, luxurious silk slip or a delicate, unfastened robe. The setting is minimalist and elegant, like a high-end bedroom or a spa-like bathroom, with a large, antique-style mirror in the soft-focused background or as a framing element. Soft, ambient lighting creates gentle contrasts and emphasizes skin texture. The mood is one of serene introspection, quiet beauty, and sophisticated sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cluttered background, harsh lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "A delicate string of pearls or a simple necklace resting on her back," "Subtle steam effect in a bathroom setting," "A single, flickering candle creating a warm glow."`,
 
-                  dating6: `Prompt: An intimately captivating, hyperrealistic photograph of a woman (preserving hair color/style, eye color), seated casually yet gracefully on the edge of a bed, dressed in an oversized, soft cotton shirt or a man's unbuttoned dress shirt, subtly revealing a bare shoulder, a glimpse of her back, or the graceful line of her leg. Her hair is beautifully disheveled, as if just woken, and she turns her head slightly towards the camera with a confident, slightly mischievous, and warmly inviting smile. One hand might be playfully running through her hair or resting on her thigh. The luxurious bedding (silk or high-thread-count cotton) is slightly rumpled around her. The scene is bathed in soft, warm, diffused morning light, creating a dreamy, intimate glow. The background is a tastefully blurred bedroom, emphasizing comfort and personal space. The mood is one of relaxed sensuality, approachable charm, and confident vulnerability, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty bedding, harsh or cold lighting, aggressive or crude pose,unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing a delicate, minimalist necklace," "A personalized, sleek mug of coffee on a nearby nightstand," "A glimpse of a luxurious robe casually draped over a chair."`,
+        dating6: `Prompt: An intimately captivating, hyperrealistic photograph of a woman (preserving hair color/style, eye color), seated casually yet gracefully on the edge of a bed, dressed in an oversized, soft cotton shirt or a man's unbuttoned dress shirt, subtly revealing a bare shoulder, a glimpse of her back, or the graceful line of her leg. Her hair is beautifully disheveled, as if just woken, and she turns her head slightly towards the camera with a confident, slightly mischievous, and warmly inviting smile. One hand might be playfully running through her hair or resting on her thigh. The luxurious bedding (silk or high-thread-count cotton) is slightly rumpled around her. The scene is bathed in soft, warm, diffused morning light, creating a dreamy, intimate glow. The background is a tastefully blurred bedroom, emphasizing comfort and personal space. The mood is one of relaxed sensuality, approachable charm, and confident vulnerability, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty bedding, harsh or cold lighting, aggressive or crude pose,unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing a delicate, minimalist necklace," "A personalized, sleek mug of coffee on a nearby nightstand," "A glimpse of a luxurious robe casually draped over a chair."`,
 
-                  // Business Headshot Styles
-                  business1:
-                    "Corporate professional headshot. Formal business attire, confident direct gaze, neutral office background, perfect lighting. LinkedIn-optimized portrait. Clean, trustworthy appearance ideal for corporate profiles and professional networking.",
+        // Business Headshot Styles
+        business1:
+          "Corporate professional headshot. Formal business attire, confident direct gaze, neutral office background, perfect lighting. LinkedIn-optimized portrait. Clean, trustworthy appearance ideal for corporate profiles and professional networking.",
 
-                  business2:
-                    "Executive leadership headshot. Premium suit, authoritative yet approachable expression, modern office or cityscape background. Power pose with crossed arms or thoughtful gesture. High-end photography style for C-suite and senior management profiles.",
+        business2:
+          "Executive leadership headshot. Premium suit, authoritative yet approachable expression, modern office or cityscape background. Power pose with crossed arms or thoughtful gesture. High-end photography style for C-suite and senior management profiles.",
 
-                  business3:
-                    "Approachable business headshot. Business casual attire, warm genuine smile, bright modern workspace background. Friendly and collaborative vibe. Perfect for consultants, freelancers, and client-facing professionals on LinkedIn and company websites.",
-                };
+        business3:
+          "Approachable business headshot. Business casual attire, warm genuine smile, bright modern workspace background. Friendly and collaborative vibe. Perfect for consultants, freelancers, and client-facing professionals on LinkedIn and company websites.",
+      };
 
-                // Initialize style selection
-                function initStyleSelection() {
-                  // Handle style option clicks
-                  document.querySelectorAll(".style-option").forEach((button) => {
-                    button.addEventListener("click", function () {
-                      // Remove active from all buttons
-                      document
-                        .querySelectorAll(".style-option")
-                        .forEach((btn) => btn.classList.remove("active"));
-                      // Add active to clicked button
-                      this.classList.add("active");
-                      // Update selected style
-                      selectedStyle = this.dataset.style;
-                    });
-                  });
+      // Initialize style selection
+      function initStyleSelection() {
+        // Handle style option clicks
+        document.querySelectorAll(".style-option").forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active from all buttons
+            document
+              .querySelectorAll(".style-option")
+              .forEach((btn) => btn.classList.remove("active"));
+            // Add active to clicked button
+            this.classList.add("active");
+            // Update selected style
+            selectedStyle = this.dataset.style;
+          });
+        });
 
-                  document
-                    .getElementById("dating9PackBtn")
-                    ?.addEventListener("click", function () {
-                      // Remove active from all buttons
-                      document
-                        .querySelectorAll(".style-option")
-                        .forEach((btn) => btn.classList.remove("active"));
-                      // Add active to pack button
-                      this.classList.add("active");
-                      selectedStyle = "dating-pack";
-                      isPackGeneration = true;
-                    });
+        document
+          .getElementById("dating9PackBtn")
+          ?.addEventListener("click", function () {
+            // Remove active from all buttons
+            document
+              .querySelectorAll(".style-option")
+              .forEach((btn) => btn.classList.remove("active"));
+            // Add active to pack button
+            this.classList.add("active");
+            selectedStyle = "dating-pack";
+            isPackGeneration = true;
+          });
 
-                  // Handle continue button
-                  const continueBtn = document.getElementById("continueToPreview");
-                  if (continueBtn) {
-                    continueBtn.addEventListener("click", function () {
-                      document
-                        .getElementById("styleSelectionSection")
-                        .classList.add("hidden");
-                      previewSection.classList.remove("hidden");
-                    });
-                  }
-                }
+        // Handle continue button
+        const continueBtn = document.getElementById("continueToPreview");
+        if (continueBtn) {
+          continueBtn.addEventListener("click", function () {
+            document
+              .getElementById("styleSelectionSection")
+              .classList.add("hidden");
+            previewSection.classList.remove("hidden");
+          });
+        }
+      }
 
-                /* ----------------------- Auth & Credits UI ----------------------- */
-                let sessionUser = null;
-                let credits = {
-                  free_remaining: 0,
-                  paid_remaining: 0,
-                  free_renew_utc: null,
-                };
+      /* ----------------------- Auth & Credits UI ----------------------- */
+      let sessionUser = null;
+      let credits = {
+        free_remaining: 0,
+        paid_remaining: 0,
+        free_renew_utc: null,
+      };
 
-                async function refreshSession() {
-                  try {
-                    const r = await fetchJSON("/auth/me");
-                    sessionUser = r.user;
-                    credits = r.credits || { remaining: 0 };
-                  } catch {
-                    sessionUser = null;
-                    credits = {
-                      free_remaining: 0,
-                      paid_remaining: 0,
-                      free_renew_utc: null,
-                    };
-                  }
-                  updateAuthUI();
-                }
+      async function refreshSession() {
+        try {
+          const r = await fetchJSON("/auth/me");
+          sessionUser = r.user;
+          credits = r.credits || { remaining: 0 };
+        } catch {
+          sessionUser = null;
+          credits = {
+            free_remaining: 0,
+            paid_remaining: 0,
+            free_renew_utc: null,
+          };
+        }
+        updateAuthUI();
+      }
 
-                function totalCredits() {
-                  const c = credits || {};
-                  // support all shapes: {remaining} OR {free_remaining, paid_remaining}
-                  if (typeof c.remaining === "number") return c.remaining;
-                  const free = Number(c.free_remaining || 0);
-                  const paid = Number(c.paid_remaining || 0);
-                  return free + paid;
-                }
+      function totalCredits() {
+        const c = credits || {};
+        // support all shapes: {remaining} OR {free_remaining, paid_remaining}
+        if (typeof c.remaining === "number") return c.remaining;
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        return free + paid;
+      }
 
-                // (Removed duplicate updateAuthUI definition; primary version earlier includes Google account labeling)
+      // (Removed duplicate updateAuthUI definition; primary version earlier includes Google account labeling)
 
-                /* ----------------------- Auth modal logic ----------------------- */
-                const authModal = $("#authModal");
-                const authTitle = $("#authTitle");
-                const authForm = $("#authForm");
-                const authEmail = $("#authEmail");
-                const authPass = $("#authPassword");
-                const authToggleBtn = $("#authToggleBtn");
-                const authToggleText = $("#authToggleText");
-                const authCancel = $("#authCancel");
+      /* ----------------------- Auth modal logic ----------------------- */
+      const authModal = $("#authModal");
+      const authTitle = $("#authTitle");
+      const authForm = $("#authForm");
+      const authEmail = $("#authEmail");
+      const authPass = $("#authPassword");
+      const authToggleBtn = $("#authToggleBtn");
+      const authToggleText = $("#authToggleText");
+      const authCancel = $("#authCancel");
 
-                let authMode = "login"; // or "register"
+      let authMode = "login"; // or "register"
 
-                function openAuth(mode = "login") {
-                  authMode = mode;
-                  authTitle.textContent = mode === "login" ? "Sign in" : "Create account";
-                  authToggleText.textContent =
-                    mode === "login" ? "New here?" : "Already have an account?";
-                  authToggleBtn.textContent =
-                    mode === "login" ? "Create an account" : "Sign in";
-                  authEmail.value = "";
-                  authPass.value = "";
-                  authModal.classList.remove("hidden");
-                }
-                function closeAuth() {
-                  authModal.classList.add("hidden");
-                }
+      function openAuth(mode = "login") {
+        authMode = mode;
+        authTitle.textContent = mode === "login" ? "Sign in" : "Create account";
+        authToggleText.textContent =
+          mode === "login" ? "New here?" : "Already have an account?";
+        authToggleBtn.textContent =
+          mode === "login" ? "Create an account" : "Sign in";
+        authEmail.value = "";
+        authPass.value = "";
+        authModal.classList.remove("hidden");
+      }
+      function closeAuth() {
+        authModal.classList.add("hidden");
+      }
 
-                $("#signInBtn").addEventListener("click", () => openAuth("login"));
-                $("#logoutBtn").addEventListener("click", async () => {
-                  try {
-                    await fetchJSON("/auth/logout", { method: "POST" });
-                  } catch {}
-                  await refreshSession();
-                  toast("Signed out");
-                });
-                authCancel.addEventListener("click", closeAuth);
-                authModal.addEventListener("click", (e) => {
-                  if (e.target === authModal) closeAuth();
-                });
-                authToggleBtn.addEventListener("click", () =>
-                  openAuth(authMode === "login" ? "register" : "login")
-                );
+      $("#signInBtn").addEventListener("click", () => openAuth("login"));
+      $("#logoutBtn").addEventListener("click", async () => {
+        try {
+          await fetchJSON("/auth/logout", { method: "POST" });
+        } catch {}
+        await refreshSession();
+        toast("Signed out");
+      });
+      authCancel.addEventListener("click", closeAuth);
+      authModal.addEventListener("click", (e) => {
+        if (e.target === authModal) closeAuth();
+      });
+      authToggleBtn.addEventListener("click", () =>
+        openAuth(authMode === "login" ? "register" : "login")
+      );
 
-                authForm.addEventListener("submit", async (e) => {
-                  e.preventDefault();
-                  const payload = {
-                    email: authEmail.value.trim(),
-                    password: authPass.value,
-                  };
-                  if (!payload.email || !payload.password) return;
+      authForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const payload = {
+          email: authEmail.value.trim(),
+          password: authPass.value,
+        };
+        if (!payload.email || !payload.password) return;
 
-                  try {
-                    if (authMode === "login") {
-                      await fetchJSON("/auth/login", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload),
-                      });
-                      toast("Welcome back!");
-                    } else {
-                      await fetchJSON("/auth/register", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(payload),
-                      });
-                      toast("Account created.");
-                    }
-                    closeAuth();
-                    await refreshSession();
-                  } catch (err) {
-                    toast(err.message || "Authentication failed");
-                  }
-                });
+        try {
+          if (authMode === "login") {
+            await fetchJSON("/auth/login", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            toast("Welcome back!");
+          } else {
+            await fetchJSON("/auth/register", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            toast("Account created.");
+          }
+          closeAuth();
+          await refreshSession();
+        } catch (err) {
+          toast(err.message || "Authentication failed");
+        }
+      });
 
-                /* ----------------------- Upload & Generate ----------------------- */
-                const uploadArea = $("#uploadArea");
-                const fileInput = $("#fileInput");
-                const previewSection = $("#previewSection");
-                const originalPreview = $("#originalPreview");
-                const resultPreview = $("#resultPreview");
-                const loadingSpinner = $("#loadingSpinner");
-                const generateBtn = $("#generateBtn");
-                const downloadBtn = $("#downloadBtn");
-                const resetBtn = $("#resetBtn");
+      /* ----------------------- Upload & Generate ----------------------- */
+      const uploadArea = $("#uploadArea");
+      const fileInput = $("#fileInput");
+      const previewSection = $("#previewSection");
+      const originalPreview = $("#originalPreview");
+      const resultPreview = $("#resultPreview");
+      const loadingSpinner = $("#loadingSpinner");
+      const generateBtn = $("#generateBtn");
+      const downloadBtn = $("#downloadBtn");
+      const resetBtn = $("#resetBtn");
 
-                let currentFile = null;
+      let currentFile = null;
 
-                uploadArea.addEventListener("click", () => fileInput.click());
-                uploadArea.addEventListener("dragover", (e) => {
-                  e.preventDefault();
-                  uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
-                });
-                uploadArea.addEventListener("dragleave", () => {
-                  uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
-                });
-                uploadArea.addEventListener("drop", (e) => {
-                  e.preventDefault();
-                  uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
-                  const files = e.dataTransfer.files;
-                  if (files.length > 0) handleFile(files[0]);
-                });
-                fileInput.addEventListener("change", (e) => {
-                  if (e.target.files.length > 0) handleFile(e.target.files[0]);
-                });
+      uploadArea.addEventListener("click", () => fileInput.click());
+      uploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        uploadArea.classList.add("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("dragleave", () => {
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+      });
+      uploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove("border-purple-400", "bg-purple-900/40");
+        const files = e.dataTransfer.files;
+        if (files.length > 0) handleFile(files[0]);
+      });
+      fileInput.addEventListener("change", (e) => {
+        if (e.target.files.length > 0) handleFile(e.target.files[0]);
+      });
 
-                function handleFile(file) {
-                  if (!file.type.startsWith("image/")) {
-                    toast("Please upload an image file.");
-                    return;
-                  }
-                  if (file.size > 10 * 1024 * 1024) {
-                    toast("File size must be less than 10MB.");
-                    return;
-                  }
-                  currentFile = file;
-                  const reader = new FileReader();
-                  reader.onload = (e) => {
-                    originalPreview.src = e.target.result;
-                    uploadArea.classList.add("hidden");
-                    const styleSection = document.getElementById("styleSelectionSection");
-                    if (styleSection) styleSection.classList.remove("hidden");
-                    previewSection.classList.add("hidden");
-                  };
-                  reader.readAsDataURL(file);
-                }
+      function handleFile(file) {
+        if (!file.type.startsWith("image/")) {
+          toast("Please upload an image file.");
+          return;
+        }
+        if (file.size > 10 * 1024 * 1024) {
+          toast("File size must be less than 10MB.");
+          return;
+        }
+        currentFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          originalPreview.src = e.target.result;
+          uploadArea.classList.add("hidden");
+          const styleSection = document.getElementById("styleSelectionSection");
+          if (styleSection) styleSection.classList.remove("hidden");
+          previewSection.classList.add("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
 
-                // Generate button handler (restored wrapper)
+      // Generate button handler (restored wrapper)
 
-                  generateBtn.addEventListener("click", async () => {
-                    if (!currentFile) {
-                      toast("Please choose a file first.");
-                      return;
-                    }
-                    if (!sessionUser) {
-                      openAuth("login");
-                      return;
-                    }
+      generateBtn.addEventListener("click", async () => {
+        if (!currentFile) {
+          toast("Please choose a file first.");
+          return;
+        }
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
 
-                    // Check credits based on selection
-                    const requiredCredits = selectedStyle === "dating-pack" ? 6 : 1;
-                    if (totalCredits() < requiredCredits) {
-                      toast(
-                        `Not enough credits. You need ${requiredCredits} credits for this option.`
-                      );
-                      return;
-                    }
+        // Check credits based on selection
+        const requiredCredits = selectedStyle === "dating-pack" ? 6 : 1;
+        if (totalCredits() < requiredCredits) {
+          toast(
+            `Not enough credits. You need ${requiredCredits} credits for this option.`
+          );
+          return;
+        }
 
-                    if (selectedStyle === "dating-pack") {
-                      // Generate pack of 6 dating photos
-                      await generateDatingPack();
-                    } else {
-                      // Regular single generation
-                      await generateSingle();
-                    }
-                  });
-
-
+        if (selectedStyle === "dating-pack") {
+          // Generate pack of 6 dating photos
+          await generateDatingPack();
+        } else {
+          // Regular single generation
+          await generateSingle();
+        }
+      });
 
       // Add the missing generateSingle function
       async function generateSingle() {
@@ -2746,7 +2758,7 @@
             resultPreview.classList.remove("hidden");
             downloadBtn.classList.remove("hidden");
             // Track which style was used (check if gtag exists)
-            if (typeof gtag !== 'undefined') {
+            if (typeof gtag !== "undefined") {
               gtag("event", "generate_success", {
                 style: selectedStyle,
                 category: selectedStyle.startsWith("figurine")
@@ -2768,72 +2780,71 @@
         }
       }
 
-                // (Removed duplicate generation logic block)
+      // (Removed duplicate generation logic block)
 
-                downloadBtn.addEventListener("click", () => {
-                  const link = document.createElement("a");
-                  link.href = resultPreview.src;
-                  link.download = "toyrender-figurine.png";
-                  link.click();
-                });
+      downloadBtn.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = resultPreview.src;
+        link.download = "toyrender-figurine.png";
+        link.click();
+      });
 
-                 function getStyleName(style) {
-                    const names = {
-                      dating1: "Morning Glow",
-                      dating2: "Playful Charm",
-                      dating3: "Evening Elegance",
-                      dating4: "Carefree Summer",
-                      dating5: "Artistic Sensual",
-                      dating6: "Confident Intimate",
-                    };
-                    return names[style] || style;
-                  }
+      function getStyleName(style) {
+        const names = {
+          dating1: "Morning Glow",
+          dating2: "Playful Charm",
+          dating3: "Evening Elegance",
+          dating4: "Carefree Summer",
+          dating5: "Artistic Sensual",
+          dating6: "Confident Intimate",
+        };
+        return names[style] || style;
+      }
 
+      resetBtn.addEventListener("click", () => {
+        uploadArea.classList.remove("hidden");
+        previewSection.classList.add("hidden");
+        document
+          .getElementById("styleSelectionSection")
+          .classList.add("hidden");
+        fileInput.value = "";
+        currentFile = null;
+        originalPreview.src = "";
+        resultPreview.src = "";
 
-                resetBtn.addEventListener("click", () => {
-                  uploadArea.classList.remove("hidden");
-                  previewSection.classList.add("hidden");
-                  document
-                    .getElementById("styleSelectionSection")
-                    .classList.add("hidden");
-                  fileInput.value = "";
-                  currentFile = null;
-                  originalPreview.src = "";
-                  resultPreview.src = "";
+        // Reset style selection to figurine1
+        selectedStyle = "figurine1";
+        document.querySelectorAll(".style-option").forEach((button) => {
+          button.classList.remove("active");
+          if (button.dataset.style === "figurine1") {
+            button.classList.add("active");
+          }
+        });
+      });
 
-                  // Reset style selection to figurine1
-                  selectedStyle = "figurine1";
-                  document.querySelectorAll(".style-option").forEach((button) => {
-                    button.classList.remove("active");
-                    if (button.dataset.style === "figurine1") {
-                      button.classList.add("active");
-                    }
-                  });
-                });
+      async function generateDatingPack() {
+        const datingStyles = [
+          "dating1",
+          "dating2",
+          "dating3",
+          "dating4",
+          "dating5",
+          "dating6",
+        ];
+        packResults = [];
 
-                async function generateDatingPack() {
-                  const datingStyles = [
-                    "dating1",
-                    "dating2",
-                    "dating3",
-                    "dating4",
-                    "dating5",
-                    "dating6",
-                  ];
-                  packResults = [];
+        // Update UI for pack generation
+        generateBtn.disabled = true;
+        resetBtn.disabled = true;
+        loadingSpinner.classList.remove("hidden");
+        resultPreview.classList.add("hidden");
+        downloadBtn.classList.add("hidden");
 
-                  // Update UI for pack generation
-                  generateBtn.disabled = true;
-                  resetBtn.disabled = true;
-                  loadingSpinner.classList.remove("hidden");
-                  resultPreview.classList.add("hidden");
-                  downloadBtn.classList.add("hidden");
-
-                  // Add pack progress indicator
-                  const progressDiv = document.createElement("div");
-                  progressDiv.id = "packProgress";
-                  progressDiv.className = "text-center mt-4";
-                  progressDiv.innerHTML = `
+        // Add pack progress indicator
+        const progressDiv = document.createElement("div");
+        progressDiv.id = "packProgress";
+        progressDiv.className = "text-center mt-4";
+        progressDiv.innerHTML = `
               <p class="text-purple-300 mb-2">Generating Dating Photo Pack...</p>
               <div class="flex justify-center gap-2">
                 ${datingStyles
@@ -2845,74 +2856,74 @@
               </div>
               <p class="text-sm text-purple-400 mt-2">This will use 6 credits total</p>
             `;
-                  loadingSpinner.appendChild(progressDiv);
+        loadingSpinner.appendChild(progressDiv);
 
-                  try {
-                    // Generate each style
-                    for (let i = 0; i < datingStyles.length; i++) {
-                      const style = datingStyles[i];
-                      const dot = progressDiv.querySelector(`[data-index="${i}"]`);
-                      dot.classList.add("bg-yellow-500", "animate-pulse");
+        try {
+          // Generate each style
+          for (let i = 0; i < datingStyles.length; i++) {
+            const style = datingStyles[i];
+            const dot = progressDiv.querySelector(`[data-index="${i}"]`);
+            dot.classList.add("bg-yellow-500", "animate-pulse");
 
-                      const formData = new FormData();
-                      formData.append("photo", currentFile);
-                      // Use the actual prompt for each style, not the style name
-                      formData.append("prompt", stylePrompts[style]);
+            const formData = new FormData();
+            formData.append("photo", currentFile);
+            // Use the actual prompt for each style, not the style name
+            formData.append("prompt", stylePrompts[style]);
 
-                      const res = await fetch("/api/generate", {
-                        method: "POST",
-                        body: formData,
-                        credentials: "include",
-                      });
+            const res = await fetch("/api/generate", {
+              method: "POST",
+              body: formData,
+              credentials: "include",
+            });
 
-                      const data = await res.json().catch(() => ({}));
+            const data = await res.json().catch(() => ({}));
 
-                      if (res.ok && data.imageUrl) {
-                        packResults.push({
-                          style: style,
-                          url: data.imageUrl,
-                          name: getStyleName(style),
-                        });
-                        dot.classList.remove("bg-yellow-500", "animate-pulse");
-                        dot.classList.add("bg-green-500");
-                      } else {
-                        dot.classList.remove("bg-yellow-500", "animate-pulse");
-                        dot.classList.add("bg-red-500");
-                        // Log error but continue with other generations
-                        console.error(
-                          `Failed to generate ${style}:`,
-                          data.error || res.statusText
-                        );
-                      }
-                    }
+            if (res.ok && data.imageUrl) {
+              packResults.push({
+                style: style,
+                url: data.imageUrl,
+                name: getStyleName(style),
+              });
+              dot.classList.remove("bg-yellow-500", "animate-pulse");
+              dot.classList.add("bg-green-500");
+            } else {
+              dot.classList.remove("bg-yellow-500", "animate-pulse");
+              dot.classList.add("bg-red-500");
+              // Log error but continue with other generations
+              console.error(
+                `Failed to generate ${style}:`,
+                data.error || res.statusText
+              );
+            }
+          }
 
-                    // Show pack results viewer
-                    if (packResults.length > 0) {
-                      showPackResults();
-                    } else {
-                      toast("Pack generation failed. Please try again.");
-                    }
-                    await refreshSession();
-                  } catch (err) {
-                    console.error(err);
-                    toast(err.message || "Pack generation failed");
-                  } finally {
-                    loadingSpinner.classList.add("hidden");
-                    generateBtn.disabled = false;
-                    resetBtn.disabled = false;
-                    progressDiv?.remove();
-                  }
-                }
+          // Show pack results viewer
+          if (packResults.length > 0) {
+            showPackResults();
+          } else {
+            toast("Pack generation failed. Please try again.");
+          }
+          await refreshSession();
+        } catch (err) {
+          console.error(err);
+          toast(err.message || "Pack generation failed");
+        } finally {
+          loadingSpinner.classList.add("hidden");
+          generateBtn.disabled = false;
+          resetBtn.disabled = false;
+          progressDiv?.remove();
+        }
+      }
 
-                function showPackResults() {
-                  if (packResults.length === 0) return;
+      function showPackResults() {
+        if (packResults.length === 0) return;
 
-                  // Hide loading spinner
-                  loadingSpinner.classList.add("hidden");
+        // Hide loading spinner
+        loadingSpinner.classList.add("hidden");
 
-                  // Create pack viewer UI
-                  const resultContainer = document.getElementById("resultContainer");
-                  resultContainer.innerHTML = `
+        // Create pack viewer UI
+        const resultContainer = document.getElementById("resultContainer");
+        resultContainer.innerHTML = `
               <div class="pack-results-viewer">
                 <div class="text-center mb-4">
                   <h3 class="text-xl font-bold mb-2">Your Dating Photo Pack</h3>
@@ -2933,8 +2944,8 @@
                   </div>
                 </div>
                 <img id="packMainImage" src="${packResults[0].url}" alt="${
-                    packResults[0].name
-                  }" class="w-full h-auto rounded-xl">
+          packResults[0].name
+        }" class="w-full h-auto rounded-xl">
                 <p class="text-center mt-2 text-purple-300" id="packImageName">${
                   packResults[0].name
                 }</p>
@@ -2949,298 +2960,298 @@
               </div>
             `;
 
-                  // Add thumbnail click handlers
-                  resultContainer.querySelectorAll(".pack-thumb").forEach((btn) => {
-                    btn.addEventListener("click", function () {
-                      const index = parseInt(this.dataset.index);
-                      currentPackIndex = index;
+        // Add thumbnail click handlers
+        resultContainer.querySelectorAll(".pack-thumb").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const index = parseInt(this.dataset.index);
+            currentPackIndex = index;
 
-                      // Update active state
-                      resultContainer
-                        .querySelectorAll(".pack-thumb")
-                        .forEach((b) => b.classList.remove("active"));
-                      this.classList.add("active");
+            // Update active state
+            resultContainer
+              .querySelectorAll(".pack-thumb")
+              .forEach((b) => b.classList.remove("active"));
+            this.classList.add("active");
 
-                      // Update main image
-                      document.getElementById("packMainImage").src =
-                        packResults[index].url;
-                      document.getElementById("packImageName").textContent =
-                        packResults[index].name;
-                    });
-                  });
+            // Update main image
+            document.getElementById("packMainImage").src =
+              packResults[index].url;
+            document.getElementById("packImageName").textContent =
+              packResults[index].name;
+          });
+        });
 
-                  // Download current handler
-                  document
-                    .getElementById("downloadCurrentBtn")
-                    ?.addEventListener("click", () => {
-                      const current = packResults[currentPackIndex];
-                      const link = document.createElement("a");
-                      link.href = current.url;
-                      link.download = `dating-photo-${current.style}.png`;
-                      link.click();
-                    });
+        // Download current handler
+        document
+          .getElementById("downloadCurrentBtn")
+          ?.addEventListener("click", () => {
+            const current = packResults[currentPackIndex];
+            const link = document.createElement("a");
+            link.href = current.url;
+            link.download = `dating-photo-${current.style}.png`;
+            link.click();
+          });
 
-                  // Download all handler (would need server-side ZIP generation)
-                  document
-                    .getElementById("downloadAllBtn")
-                    ?.addEventListener("click", async () => {
-                      // This would require server-side implementation to create a ZIP
-                      toast("Downloading all images... (Feature coming soon)");
-                      // For now, download them one by one
-                      packResults.forEach((result, i) => {
-                        setTimeout(() => {
-                          const link = document.createElement("a");
-                          link.href = result.url;
-                          link.download = `dating-photo-${result.style}.png`;
-                          link.click();
-                        }, i * 500); // Stagger downloads
-                      });
-                    });
-                }
+        // Download all handler (would need server-side ZIP generation)
+        document
+          .getElementById("downloadAllBtn")
+          ?.addEventListener("click", async () => {
+            // This would require server-side implementation to create a ZIP
+            toast("Downloading all images... (Feature coming soon)");
+            // For now, download them one by one
+            packResults.forEach((result, i) => {
+              setTimeout(() => {
+                const link = document.createElement("a");
+                link.href = result.url;
+                link.download = `dating-photo-${result.style}.png`;
+                link.click();
+              }, i * 500); // Stagger downloads
+            });
+          });
+      }
 
-                // Optional: show a small dialog when clicking credits
-                $("#creditsBtn").addEventListener("click", () => {
-                  if (!sessionUser) {
-                    openAuth("login");
-                    return;
-                  }
-                  const c = credits || {};
-                  const free = Number(c.free_remaining || 0);
-                  const paid = Number(c.paid_remaining || 0);
-                  const total = totalCredits();
-                  toast(
-                    `Credits — Total: ${total}${
-                      free || paid ? ` (free: ${free}, paid: ${paid})` : ""
-                    }`
-                  );
-                });
+      // Optional: show a small dialog when clicking credits
+      $("#creditsBtn").addEventListener("click", () => {
+        if (!sessionUser) {
+          openAuth("login");
+          return;
+        }
+        const c = credits || {};
+        const free = Number(c.free_remaining || 0);
+        const paid = Number(c.paid_remaining || 0);
+        const total = totalCredits();
+        toast(
+          `Credits — Total: ${total}${
+            free || paid ? ` (free: ${free}, paid: ${paid})` : ""
+          }`
+        );
+      });
 
-                /* ----------------------- Init ----------------------- */
-                // Initialize on DOM load
-                document.addEventListener("DOMContentLoaded", function () {
-                  initStyleSelection();
-                });
-                refreshSession();
+      /* ----------------------- Init ----------------------- */
+      // Initialize on DOM load
+      document.addEventListener("DOMContentLoaded", function () {
+        initStyleSelection();
+      });
+      refreshSession();
 
-                /* ----------------- Testimonials drag code ----------------- */
-                (() => {
-                  const friction = 0.92;
-                  const wheelBoost = 0.9;
+      /* ----------------- Testimonials drag code ----------------- */
+      (() => {
+        const friction = 0.92;
+        const wheelBoost = 0.9;
 
-                  document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
-                    el.style.userSelect = "none";
-                    el.style.touchAction = "pan-x";
+        document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
+          el.style.userSelect = "none";
+          el.style.touchAction = "pan-x";
 
-                    let isDown = false,
-                      startX = 0,
-                      startLeft = 0;
-                    let lastX = 0,
-                      velocity = 0,
-                      rafId = 0;
+          let isDown = false,
+            startX = 0,
+            startLeft = 0;
+          let lastX = 0,
+            velocity = 0,
+            rafId = 0;
 
-                    const stopMomentum = () => {
-                      if (rafId) cancelAnimationFrame(rafId);
-                      rafId = 0;
-                    };
-                    const momentum = () => {
-                      stopMomentum();
-                      const step = () => {
-                        el.scrollLeft -= velocity;
-                        velocity *= friction;
-                        if (Math.abs(velocity) > 0.5) rafId = requestAnimationFrame(step);
-                      };
-                      rafId = requestAnimationFrame(step);
-                    };
+          const stopMomentum = () => {
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = 0;
+          };
+          const momentum = () => {
+            stopMomentum();
+            const step = () => {
+              el.scrollLeft -= velocity;
+              velocity *= friction;
+              if (Math.abs(velocity) > 0.5) rafId = requestAnimationFrame(step);
+            };
+            rafId = requestAnimationFrame(step);
+          };
 
-                    el.addEventListener("pointerdown", (e) => {
-                      isDown = true;
-                      el.setPointerCapture?.(e.pointerId);
-                      startX = e.clientX;
-                      startLeft = el.scrollLeft;
-                      lastX = e.clientX;
-                      velocity = 0;
-                      stopMomentum();
-                      el.classList.add("dragging");
-                    });
+          el.addEventListener("pointerdown", (e) => {
+            isDown = true;
+            el.setPointerCapture?.(e.pointerId);
+            startX = e.clientX;
+            startLeft = el.scrollLeft;
+            lastX = e.clientX;
+            velocity = 0;
+            stopMomentum();
+            el.classList.add("dragging");
+          });
 
-                    el.addEventListener("pointermove", (e) => {
-                      if (!isDown) return;
-                      const dx = e.clientX - startX;
-                      el.scrollLeft = startLeft - dx;
-                      velocity = e.clientX - lastX;
-                      lastX = e.clientX;
-                    });
+          el.addEventListener("pointermove", (e) => {
+            if (!isDown) return;
+            const dx = e.clientX - startX;
+            el.scrollLeft = startLeft - dx;
+            velocity = e.clientX - lastX;
+            lastX = e.clientX;
+          });
 
-                    const endDrag = (e) => {
-                      if (!isDown) return;
-                      isDown = false;
-                      el.releasePointerCapture?.(e.pointerId);
-                      el.classList.remove("dragging");
-                      momentum();
-                    };
-                    el.addEventListener("pointerup", endDrag);
-                    el.addEventListener("pointercancel", endDrag);
-                    el.addEventListener("pointerleave", () => {
-                      if (isDown) endDrag({});
-                    });
+          const endDrag = (e) => {
+            if (!isDown) return;
+            isDown = false;
+            el.releasePointerCapture?.(e.pointerId);
+            el.classList.remove("dragging");
+            momentum();
+          };
+          el.addEventListener("pointerup", endDrag);
+          el.addEventListener("pointercancel", endDrag);
+          el.addEventListener("pointerleave", () => {
+            if (isDown) endDrag({});
+          });
 
-                    el.addEventListener(
-                      "wheel",
-                      (e) => {
-                        if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                          el.scrollLeft += e.deltaY * wheelBoost;
-                          e.preventDefault();
-                        }
-                      },
-                      { passive: false }
-                    );
+          el.addEventListener(
+            "wheel",
+            (e) => {
+              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                el.scrollLeft += e.deltaY * wheelBoost;
+                e.preventDefault();
+              }
+            },
+            { passive: false }
+          );
 
-                    el.tabIndex = 0;
-                    el.addEventListener("keydown", (e) => {
-                      if (e.key === "ArrowRight")
-                        el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
-                      if (e.key === "ArrowLeft")
-                        el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
-                    });
-                  });
-                })();
+          el.tabIndex = 0;
+          el.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight")
+              el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
+            if (e.key === "ArrowLeft")
+              el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
+          });
+        });
+      })();
 
-                // autoscroll
-                /* ----------------- Testimonials auto-scroll (seamless loop) ----------------- */
+      // autoscroll
+      /* ----------------- Testimonials auto-scroll (seamless loop) ----------------- */
 
-                // === AUTOPLAY testimonials (seamless + robust) ===
-                (() => {
-                  const track = document.querySelector(
-                    ".testimonial-track[data-drag-scroll]"
-                  );
-                  if (!track) return;
+      // === AUTOPLAY testimonials (seamless + robust) ===
+      (() => {
+        const track = document.querySelector(
+          ".testimonial-track[data-drag-scroll]"
+        );
+        if (!track) return;
 
-                  // Optional speed via data-auto-speed="0.6" (px per frame). Default ~0.5.
-                  const speed = parseFloat(track.dataset.autoSpeed) || 0.5;
+        // Optional speed via data-auto-speed="0.6" (px per frame). Default ~0.5.
+        const speed = parseFloat(track.dataset.autoSpeed) || 0.5;
 
-                  // Duplicate children once so we can loop seamlessly (idempotent).
-                  if (!track.__duplicated) {
-                    const kids = Array.from(track.children);
-                    const frag = document.createDocumentFragment();
-                    kids.forEach((k) => {
-                      const clone = k.cloneNode(true);
-                      clone.setAttribute("aria-hidden", "true");
-                      frag.appendChild(clone);
-                    });
-                    track.appendChild(frag);
-                    track.__duplicated = true;
-                  }
+        // Duplicate children once so we can loop seamlessly (idempotent).
+        if (!track.__duplicated) {
+          const kids = Array.from(track.children);
+          const frag = document.createDocumentFragment();
+          kids.forEach((k) => {
+            const clone = k.cloneNode(true);
+            clone.setAttribute("aria-hidden", "true");
+            frag.appendChild(clone);
+          });
+          track.appendChild(frag);
+          track.__duplicated = true;
+        }
 
-                  let halfWidth = 0;
-                  let playing = true; // force-start (ignore prefers-reduced-motion)
+        let halfWidth = 0;
+        let playing = true; // force-start (ignore prefers-reduced-motion)
 
-                  const measure = () => {
-                    // Wait for images to layout
-                    halfWidth = track.scrollWidth / 2;
-                    // Only autoplay if actual overflow exists
-                    playing = halfWidth > track.clientWidth + 2;
-                    track.classList.toggle("auto-scrolling", playing); // disables snap while auto
-                  };
+        const measure = () => {
+          // Wait for images to layout
+          halfWidth = track.scrollWidth / 2;
+          // Only autoplay if actual overflow exists
+          playing = halfWidth > track.clientWidth + 2;
+          track.classList.toggle("auto-scrolling", playing); // disables snap while auto
+        };
 
-                  // Run measure after load and on resize/layout changes
-                  const afterLoad = () => {
-                    measure();
-                    // A few re-measures while images settle
-                    setTimeout(measure, 200);
-                    setTimeout(measure, 600);
-                    setTimeout(measure, 1200);
-                  };
-                  if (document.readyState === "complete") afterLoad();
-                  else window.addEventListener("load", afterLoad);
+        // Run measure after load and on resize/layout changes
+        const afterLoad = () => {
+          measure();
+          // A few re-measures while images settle
+          setTimeout(measure, 200);
+          setTimeout(measure, 600);
+          setTimeout(measure, 1200);
+        };
+        if (document.readyState === "complete") afterLoad();
+        else window.addEventListener("load", afterLoad);
 
-                  // Keep measuring if container/cards change size
-                  const ro = new ResizeObserver(measure);
-                  ro.observe(track);
+        // Keep measuring if container/cards change size
+        const ro = new ResizeObserver(measure);
+        ro.observe(track);
 
-                  // rAF loop
-                  const step = () => {
-                    if (playing) {
-                      let next = track.scrollLeft + speed;
-                      if (halfWidth > 0 && next >= halfWidth) next -= halfWidth; // seamless wrap
-                      track.scrollLeft = next;
-                    }
-                    requestAnimationFrame(step);
-                  };
-                  requestAnimationFrame(step);
+        // rAF loop
+        const step = () => {
+          if (playing) {
+            let next = track.scrollLeft + speed;
+            if (halfWidth > 0 && next >= halfWidth) next -= halfWidth; // seamless wrap
+            track.scrollLeft = next;
+          }
+          requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
 
-                  // Pause on user interaction; resume after
-                  const pause = () => (playing = false);
-                  const resume = () => {
-                    measure(); // recompute in case user repositioned
-                    playing = halfWidth > track.clientWidth + 2;
-                  };
+        // Pause on user interaction; resume after
+        const pause = () => (playing = false);
+        const resume = () => {
+          measure(); // recompute in case user repositioned
+          playing = halfWidth > track.clientWidth + 2;
+        };
 
-                  ["mouseenter", "pointerdown", "focusin", "touchstart"].forEach((evt) =>
-                    track.addEventListener(evt, pause, { passive: true })
-                  );
-                  [
-                    "mouseleave",
-                    "pointerup",
-                    "focusout",
-                    "touchend",
-                    "touchcancel",
-                  ].forEach((evt) =>
-                    track.addEventListener(evt, resume, { passive: true })
-                  );
+        ["mouseenter", "pointerdown", "focusin", "touchstart"].forEach((evt) =>
+          track.addEventListener(evt, pause, { passive: true })
+        );
+        [
+          "mouseleave",
+          "pointerup",
+          "focusout",
+          "touchend",
+          "touchcancel",
+        ].forEach((evt) =>
+          track.addEventListener(evt, resume, { passive: true })
+        );
 
-                  // Arrow buttons should also pause
-                  document
-                    .querySelector("[data-track-left]")
-                    ?.addEventListener("click", pause);
-                  document
-                    .querySelector("[data-track-right]")
-                    ?.addEventListener("click", pause);
-                })();
+        // Arrow buttons should also pause
+        document
+          .querySelector("[data-track-left]")
+          ?.addEventListener("click", pause);
+        document
+          .querySelector("[data-track-right]")
+          ?.addEventListener("click", pause);
+      })();
 
-                // ---- Stripe init (must come before using `stripe`) ----
-                if (!window.Stripe) {
-                  console.error("Stripe.js failed to load");
-                }
-                if (!window.STRIPE_PK) {
-                  console.error("Missing publishable key from /config.js");
-                }
-                const stripe = Stripe(window.STRIPE_PK);
+      // ---- Stripe init (must come before using `stripe`) ----
+      if (!window.Stripe) {
+        console.error("Stripe.js failed to load");
+      }
+      if (!window.STRIPE_PK) {
+        console.error("Missing publishable key from /config.js");
+      }
+      const stripe = Stripe(window.STRIPE_PK);
 
-                // STRIPE INTEGRATION
+      // STRIPE INTEGRATION
 
-                document
-                  .getElementById("buyCreditsBtn")
-                  .addEventListener("click", async () => {
-                    try {
-                      if (!sessionUser) {
-                        openAuth("login");
-                        return;
-                      }
-                      const data = await fetchJSON("/api/payments/checkout", {
-                        method: "POST",
-                      });
+      document
+        .getElementById("buyCreditsBtn")
+        .addEventListener("click", async () => {
+          try {
+            if (!sessionUser) {
+              openAuth("login");
+              return;
+            }
+            const data = await fetchJSON("/api/payments/checkout", {
+              method: "POST",
+            });
 
-                      // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
-                      if (data?.url) {
-                        window.location.assign(data.url);
-                        return;
-                      }
-                      // Fallback to Stripe.js
-                      if (data?.id) {
-                        const { error } = await stripe.redirectToCheckout({
-                          sessionId: data.id,
-                        });
-                        if (error)
-                          throw new Error(error.message || "Checkout could not start.");
-                        return;
-                      }
+            // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
+            if (data?.url) {
+              window.location.assign(data.url);
+              return;
+            }
+            // Fallback to Stripe.js
+            if (data?.id) {
+              const { error } = await stripe.redirectToCheckout({
+                sessionId: data.id,
+              });
+              if (error)
+                throw new Error(error.message || "Checkout could not start.");
+              return;
+            }
 
-                      throw new Error("No checkout URL or session id from server.");
-                    } catch (e) {
-                      console.error("Checkout failed:", e);
-                      toast(e.message || "Failed to start checkout.");
-                    }
-                  });
+            throw new Error("No checkout URL or session id from server.");
+          } catch (e) {
+            console.error("Checkout failed:", e);
+            toast(e.message || "Failed to start checkout.");
+          }
+        });
     </script>
   </body>
 </html>
