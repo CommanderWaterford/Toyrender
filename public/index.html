@@ -870,7 +870,7 @@
               <h4 class="text-lg font-semibold mb-3 text-purple-300">
                 <i class="fas fa-cube mr-2"></i>Figurine Styles
               </h4>
-              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <button class="style-option active" data-style="figurine1">
                   <i class="fas fa-coffee"></i>
                   <span>Lifestyle Shot</span>
@@ -886,6 +886,30 @@
                 <button class="style-option" data-style="figurine4">
                   <i class="fas fa-building-columns"></i>
                   <span>Museum Quality</span>
+                </button>
+                <button class="style-option" data-style="figurine5">
+                  <i class="fas fa-store"></i>
+                  <span>Retail Window</span>
+                </button>
+                <button class="style-option" data-style="figurine6">
+                  <i class="fas fa-th-large"></i>
+                  <span>Display Cabinet</span>
+                </button>
+                <button class="style-option" data-style="figurine7">
+                  <i class="fas fa-video"></i>
+                  <span>Unboxing Setup</span>
+                </button>
+                <button class="style-option" data-style="figurine8">
+                  <i class="fas fa-palette"></i>
+                  <span>Color Check</span>
+                </button>
+                <button class="style-option" data-style="figurine9">
+                  <i class="fas fa-drafting-compass"></i>
+                  <span>Architect Desk</span>
+                </button>
+                <button class="style-option" data-style="figurine10">
+                  <i class="fas fa-broadcast-tower"></i>
+                  <span>Livestream Studio</span>
                 </button>
               </div>
             </div>
@@ -2307,11 +2331,9 @@
 
       let selectedStyle = "figurine1";
 
-      // Style prompts mapping - 10 total options
-
-      // Updated style prompts mapping - 10 total options
+      // Updated style prompts mapping - 16 total options
       const stylePrompts = {
-        // 4 Figurine Styles
+        // 10 Figurine Styles
         figurine1:
           "Create a 1/7-scale figurine in a coffee-table lifestyle shoot. The figure stands on a round transparent acrylic base (no text) on a terrazzo tabletop. Soft morning light, plants and a book stack in the background. The packaging with flat 2D art sits casually next to it. Editorial, magazine-style composition.",
 
@@ -2324,17 +2346,32 @@
         figurine4:
           "Create a 1/7-scale figurine on a museum registration table. Cotton gloves, acid-free tissue, accession tag (blank). A small acrylic vitrine nearby. Wall behind features large flat concept illustrations (no text).",
 
-        // 3 Dating Photo Styles
-        dating1:
-          "Professional dating profile photo with casual confident style. Natural smile, trendy casual outfit, relaxed pose, warm lighting, outdoor cafe or park setting. Approachable and friendly vibe. High-quality portrait photography style optimized for dating apps like Tinder and Bumble.",
+        figurine5:
+          "Create a 1/7-scale figurine in a boutique retail window. Elevated matte plinth, reflected city lights at dusk, antitheft wire barely visible. Stacked boxed units with flat 2D art in a tidy pyramid.",
 
-        dating2:
-          "Adventure-ready dating profile photo. Active lifestyle theme, sporty casual wear, energetic expression, outdoor adventure background like hiking trail or beach. Shows fun, spontaneous personality. Dynamic composition perfect for attracting matches on dating apps.",
+        figurine6:
+          "Create a 1/7-scale figurine in a collector's Detolf cabinet. LED strips top and bottom, other figures blurred on neighboring shelves. One packaging box with flat 2D art sits centered behind.",
 
-        dating3:
-          "Sophisticated dating profile photo. Elegant smart-casual attire, mysterious subtle smile, artistic lighting, upscale urban or wine bar background. Refined and intriguing presence. Premium portrait style that stands out on dating platforms like Hinge.",
+        figurine7:
+          "Create a 1/7-scale figurine in a tabletop unboxing reel setup. Phone on overhead arm, soft ring light reflection on the acrylic base. Blister, clamshell, alternate heads/hands symmetrically laid out. Box with flat 2D art half-opened.",
 
-        // 3 Business Headshot Styles
+        figurine8:
+          "Create a 1/7-scale figurine on a color-checker backdrop. Include swatch cards, gray card, and a spectrophotometer. Monitor shows node-based look-dev graph of the figurine materials. Packaging stands upright to the right.",
+
+        figurine9:
+          "Create a 1/7-scale figurine on an architect desk. Drafting lamp, vellum sheet with silhouette turnarounds (no text), scale rulers. Packaging with flat 2D art propped by binder clips.",
+
+        figurine10:
+          "Create a 1/7-scale figurine in a livestream studio. Shotgun mic, key + fill + backlight, chat window blurred on a side monitor. The other monitor shows the 3D sculpt viewport. Box with flat 2D art against an acoustic panel.",
+
+        // Dating Photo Styles
+        dating1: `Prompt: A professional, hyperrealistic photograph capturing the woman (preserving hair color/style, eye color), lounging intimately on luxurious, slightly rumpled white silk sheets. Her body is artfully draped and partially covered by a soft, oversized white button-down shirt or silk robe, revealing a bare shoulder or leg. She gazes softly towards the camera with a tender, inviting, and slightly playful expression, as if just waking up. Soft, warm, diffused morning sunlight streams through a sheer window, creating a luminous, ethereal glow and gentle highlights on her skin. A single, long-stemmed red rose lies casually on the pillow nearby. The composition is clean, airy, evoking a feeling of romantic connection, with a shallow depth-of-field. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty sheets, harsh or artificial lighting, aggressive or stressed expression, unrealistic proportions, visible tattoos (unless specified)." Options: Woman wearing underwear; a personalized, handwritten 'love note' (blurred text) casually folded on the bedside table; a steaming cup of gourmet coffee on a nearby minimalist nightstand.`,
+
+        dating2: `Prompt: An adorable and heartwarming photograph of the woman (preserving hair color/style, eye color), with a sweet, playful smile and a hint of charm, playfully peeking over the top of a fluffy, oversized comforter in a brightly lit, cozy bedroom. She is dressed in comfortable yet charming loungewear (e.g., silk camisole, soft knit top). Her eyes sparkle with warmth and affection as she looks directly at the camera. Soft, warm, diffused natural light fills the room, creating an inviting and comfortable atmosphere. Scattered lightly on the comforter are a few delicate rose petals. The background is a tastefully blurred, homey bedroom, perhaps with a sunbeam on a nearby wall. The image conveys affection, tenderness, and a charming playfulness, perfect for a social media share or a personal gift. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy background (beyond soft comfort), harsh lighting, anxious or aggressive expression, unrealistic proportions, visible tattoos (unless specified)." Options: Woman gently blowing a kiss towards the camera (blurred motion); a personalized, small framed photo (blurred image) on a nearby nightstand; a stack of favorite books and a warm beverage nearby.`,
+
+        dating3: `Prompt: A professional, hyperrealistic photograph of the woman (preserving hair color/style, eye color), captured in a moment of elegant preparation for an evening out. She is seated or standing gracefully at a luxurious vanity table or in a chic dressing area, perhaps delicately applying lipstick or adjusting a piece of fine jewelry. She wears a sophisticated silk robe or a form-fitting, elegant dress that subtly accentuates her. Her gaze is confident and alluring, meeting her reflection in a softly lit mirror or looking thoughtfully towards the camera. The background features blurred, upscale decor like shimmering perfume bottles, delicate floral arrangements, and rich textures. Soft, warm, indirect lighting (like a vanity light or evening lamp) creates a luxurious glow and intimate highlights, evoking anticipation, with a shallow depth-of-field. Negatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or cluttered vanity, harsh or unflattering lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)." Options: Woman holding a delicate clutch purse; a subtle reflection of a cityscape at dusk in the background mirror; a personalized, elegant note card (blurred text) lying on the vanity.`,
+
+        // Business Headshot Styles
         business1:
           "Corporate professional headshot. Formal business attire, confident direct gaze, neutral office background, perfect lighting. LinkedIn-optimized portrait. Clean, trustworthy appearance ideal for corporate profiles and professional networking.",
 
