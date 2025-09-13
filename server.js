@@ -1982,17 +1982,6 @@ app.post(
         .digest("hex")
         .slice(0, 16);
 
-      // Consume one credit
-      const credit = await consumeCredits(userId, 1);
-      if (!credit.ok) {
-        fs.unlink(inputPath, () => {});
-        return res.status(402).json({
-          error: "Out of credits",
-          retryAfterSec: credit.retryAfterSec,
-          message: "Upgrade or wait until tomorrow.",
-        });
-      }
-
       // Check if user is on free trial (for watermarking)
       const userCredits = await get(
         "SELECT paid_remaining FROM user_credits WHERE user_id = ?",
@@ -2012,6 +2001,7 @@ app.post(
           userId,
           reqId,
           "started",
+          0,
           imgHash16,
           req.file.size,
           req.ip,
@@ -2084,19 +2074,6 @@ app.post(
             fs.writeFileSync(outImagePath, buffer);
           }
 
-          // Apply watermark for free trial users
-          if (isFreeTrial && outImagePath) {
-            console.log(`Applying watermark for free trial user: ${userEmail}`);
-            try {
-              await applyWatermark(outImagePath);
-              console.log(`Watermark applied successfully to ${fname}`);
-            } catch (watermarkError) {
-              console.error(
-                `Failed to apply watermark to ${fname}:`,
-                watermarkError
-              );
-            }
-          }
           break; // Only process the first image
         }
       }
@@ -2112,7 +2089,7 @@ app.post(
 
       // Log to generation stream
       const logData = {
-        event: "bg_removal_success",
+        event: "bg_removal_success_free",
         reqId,
         duration_ms: Date.now() - t0,
         userEmail: userEmail,
@@ -2130,7 +2107,7 @@ app.post(
           height: meta.height || null,
         },
         user_id: userId,
-        is_free_trial: isFreeTrial,
+        cost: 0
       };
       logGen(logData);
 
@@ -2140,16 +2117,7 @@ app.post(
         watermarked: isFreeTrial,
       });
     } catch (e) {
-      // Refund credit on failure
-      try {
-        await run("UPDATE gen_events SET status='error' WHERE req_id=?", [
-          reqId,
-        ]);
-      } catch {}
-
-      try {
-        await refundCredit(userId, 1);
-      } catch {}
+    
 
       console.error("Background removal error:", e?.message || e);
 
