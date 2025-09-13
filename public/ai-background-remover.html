@@ -320,6 +320,7 @@
     </script>
 
     <!-- JSON-LD: FAQ for background remover -->
+    <!-- JSON-LD: FAQ for background remover -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -327,39 +328,56 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "Is the AI background remover free?",
+            "name": "Is the AI background remover really free?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. The tool is 100% free to use and generates high‑resolution PNG outputs without watermarks."
+              "text": "Yes, our tool is 100% free to use. There are no hidden fees, no watermarks on downloads, and you don't need to create an account or provide a credit card."
             }
           },
           {
             "@type": "Question",
-            "name": "Which file formats are supported?",
+            "name": "Can I use the generated images for commercial purposes?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "You can upload JPG, PNG or WEBP images up to 10MB. Output is always a transparent PNG."
+              "text": "Absolutely. You can use the transparent PNG images for any personal or commercial project, including e-commerce product listings, advertisements, social media marketing, and more."
             }
           },
           {
             "@type": "Question",
-            "name": "Are uploaded photos stored?",
+            "name": "How well does the AI handle complex details like hair or fur?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Images are processed and automatically deleted within about one hour; we do not use them for training."
+              "text": "Our AI is specifically designed to handle fine details with high precision. It intelligently recognizes and isolates complex edges like hair, fur, and translucent objects to provide a clean, professional cutout."
             }
           },
           {
             "@type": "Question",
-            "name": "How fast is the background removal?",
+            "name": "What is the output file format and resolution?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Most images process in a few seconds depending on file size and server load."
+              "text": "The tool outputs a high-resolution PNG file, which is the best format for maintaining a transparent background. The output resolution will match that of your original uploaded image."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are my uploaded photos kept private?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, your privacy is a top priority. All images are processed securely and are automatically deleted from our servers within one hour. We never share your images or use them for AI training."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What type of photo provides the best background removal results?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "For the best results, use a clear, well-lit photo where the main subject is in focus. An image with good contrast between the subject and its background will yield the cleanest cutout, though our AI handles complex scenes effectively as well."
             }
           }
         ]
       }
     </script>
+
     <!-- JSON-LD: Breadcrumbs -->
     <script type="application/ld+json">
       {
@@ -1025,8 +1043,10 @@
           <div
             class="bg-slate-800/50 backdrop-blur-xl border border-purple-500/30 rounded-2xl overflow-hidden flex flex-col"
           >
-            <div class="grid grid-cols-2">
-              <div class="relative overflow-hidden h-56 md:h-64 lg:h-72">
+            <div class="flex gap-0 overflow-hidden">
+              <div
+                class="relative overflow-hidden h-56 md:h-64 lg:h-72 w-1/2 shrink-0"
+              >
                 <span
                   class="absolute top-2 left-2 bg-black/50 text-white text-xs font-bold py-1 px-2 rounded-full z-10"
                   >Before</span
@@ -1037,7 +1057,9 @@
                   class="w-full h-full object-contain"
                 />
               </div>
-              <div class="relative overflow-hidden h-56 md:h-64 lg:h-72">
+              <div
+                class="relative overflow-hidden h-56 md:h-64 lg:h-72 w-1/2 shrink-0"
+              >
                 <span
                   class="absolute top-2 right-2 bg-black/50 text-white text-xs font-bold py-1 px-2 rounded-full z-10"
                   >After</span
@@ -1148,85 +1170,193 @@
         class="mt-24 max-w-4xl mx-auto"
         aria-labelledby="faq-title"
       >
-        <h2 id="faq-title" class="text-3xl font-bold mb-8 text-center">
-          Frequently Asked Questions
-        </h2>
+        <header class="text-center mb-12">
+          <h2 id="faq-title" class="text-3xl lg:text-4xl font-bold mb-4">
+            <span class="gradient-text">Frequently Asked Questions</span>
+          </h2>
+          <p class="text-purple-200">
+            Have questions? We've got answers. Here are some of the most common
+            things people ask about our free background remover.
+          </p>
+        </header>
+
         <div class="space-y-4">
+          <!-- Question 1 -->
           <details
-            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
           >
             <summary
               class="flex cursor-pointer items-center justify-between list-none"
             >
               <span class="text-lg font-semibold"
-                >Is this tool really free?</span
+                >Is this AI background remover really free?</span
               >
               <i
                 class="fas fa-chevron-down transition-transform group-open:rotate-180"
               ></i>
             </summary>
             <div class="mt-3 text-purple-200">
-              Yes, our AI Background Remover is 100% free to use for any
-              purpose, including commercial projects.
+              Yes, 100%. Our tool is completely free to use with no hidden
+              costs, no watermarks, and no sign-up required. You get unlimited
+              high-resolution downloads for any project.
             </div>
           </details>
+
+          <!-- Question 2 -->
           <details
-            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
           >
             <summary
               class="flex cursor-pointer items-center justify-between list-none"
             >
               <span class="text-lg font-semibold"
-                >What file formats do you support?</span
+                >Can I use the images for commercial purposes?</span
               >
               <i
                 class="fas fa-chevron-down transition-transform group-open:rotate-180"
               ></i>
             </summary>
             <div class="mt-3 text-purple-200">
-              You can upload images in JPG, PNG, and WEBP formats. The output
-              will always be a high-resolution PNG file with a transparent
-              background.
+              Absolutely. The images you create are yours to use however you
+              wish, including for commercial purposes like product listings,
+              marketing campaigns, advertisements, book covers, and more.
             </div>
           </details>
+
+          <!-- Question 3 -->
           <details
-            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
           >
             <summary
               class="flex cursor-pointer items-center justify-between list-none"
             >
               <span class="text-lg font-semibold"
-                >Are my uploaded images stored?</span
+                >How does the AI handle complex details like hair and fur?</span
               >
               <i
                 class="fas fa-chevron-down transition-transform group-open:rotate-180"
               ></i>
             </summary>
             <div class="mt-3 text-purple-200">
-              Your privacy is important to us. Uploaded images are processed by
-              the AI and then automatically deleted from our servers within one
-              hour. We do not store or share your images.
+              Our tool is powered by advanced AI models from Google that are
+              specifically trained to recognize and isolate fine details. It
+              excels at handling challenging edges like hair, fur, and
+              semi-transparent objects to provide a clean, professional-grade
+              cutout.
             </div>
           </details>
+
+          <!-- Question 4 -->
           <details
-            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
           >
             <summary
               class="flex cursor-pointer items-center justify-between list-none"
             >
               <span class="text-lg font-semibold"
-                >What is the maximum image resolution and file size?</span
+                >What is the output resolution and format?</span
               >
               <i
                 class="fas fa-chevron-down transition-transform group-open:rotate-180"
               ></i>
             </summary>
             <div class="mt-3 text-purple-200">
-              You can upload images up to 10MB. The output resolution will match
-              the original image, ensuring high-quality results for your
-              projects.
+              The output resolution matches your original image, up to our
+              processing limits, ensuring high-quality results. The final
+              download is always a
+              <strong>PNG file</strong>, which is the standard format for
+              preserving transparent backgrounds.
             </div>
           </details>
+
+          <!-- Question 5 -->
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >Are my uploaded photos safe and private?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              Your privacy is our top priority. All uploaded images are
+              processed securely and are automatically deleted from our servers
+              within one hour. We do not use your images for AI training or
+              share them with any third parties.
+            </div>
+          </details>
+
+          <!-- Question 6 -->
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >What kind of photos get the best results?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              For optimal results, we recommend using images where the main
+              subject is clear and well-defined. Photos with good lighting and a
+              decent contrast between the subject and the background work best.
+              However, our AI is powerful enough to handle busy and complex
+              backgrounds too.
+            </div>
+          </details>
+
+          <!-- Question 7 -->
+          <details
+            class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5 transition-all duration-300 hover:border-purple-400"
+          >
+            <summary
+              class="flex cursor-pointer items-center justify-between list-none"
+            >
+              <span class="text-lg font-semibold"
+                >Is there an API available?</span
+              >
+              <i
+                class="fas fa-chevron-down transition-transform group-open:rotate-180"
+              ></i>
+            </summary>
+            <div class="mt-3 text-purple-200">
+              We are currently developing a developer API for automated
+              background removal. If you're interested in integrating our
+              technology into your app or workflow, please
+              <a
+                href="/contact"
+                class="underline text-purple-300 hover:text-white"
+                >contact our team</a
+              >
+              to join the waitlist.
+            </div>
+          </details>
+        </div>
+
+        <div
+          class="mt-12 text-center bg-slate-900/30 p-6 rounded-lg border border-slate-700"
+        >
+          <p class="text-lg text-white">
+            Can't find the answer you're looking for?
+          </p>
+          <p class="text-purple-300 mt-2">
+            Our support team is ready to help with any other questions you may
+            have.
+          </p>
+          <a
+            href="/contact"
+            class="mt-4 inline-block px-6 py-2 bg-purple-600 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
+            >Contact Us</a
+          >
         </div>
       </section>
     </main>
