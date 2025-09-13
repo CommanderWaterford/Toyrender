@@ -26,6 +26,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const archiver = require("archiver");
 
 // --- App init ---
 const app = express();
@@ -1942,7 +1943,64 @@ app.post(
   }
 );
 
-// Add this route to your existing Express app (around line 1400, after the /api/generate route)
+app.post("/api/generate-zip", ensureAuth, async (req, res) => {
+  const userId = req.session.userId;
+
+  try {
+    const { imagePaths } = req.body;
+
+    if (!imagePaths || !Array.isArray(imagePaths) || imagePaths.length === 0) {
+      return res.status(400).json({ error: "No images provided" });
+    }
+
+    // Set response headers for ZIP download
+    res.setHeader("Content-Type", "application/zip");
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename=dating-photos-${Date.now()}.zip`
+    );
+
+    // Create archive
+    const archive = archiver("zip", {
+      zlib: { level: 9 }, // Maximum compression
+    });
+
+    // Pipe archive to response
+    archive.pipe(res);
+
+    // Add each image to the ZIP
+    imagePaths.forEach((imagePath, index) => {
+      // Extract filename from URL path (e.g., "/results/gemini-output-123.png" -> "gemini-output-123.png")
+      const filename = path.basename(imagePath);
+      const fullPath = path.join(RESULTS_DIR, filename);
+
+      // Check if file exists before adding
+      if (fs.existsSync(fullPath)) {
+        // Add file to archive with a friendly name
+        const styles = [
+          "morning-glow",
+          "playful-charm",
+          "evening-elegance",
+          "carefree-summer",
+          "artistic-sensual",
+          "confident-intimate",
+        ];
+        const friendlyName = `dating-photo-${index + 1}-${
+          styles[index] || "style"
+        }.png`;
+        archive.file(fullPath, { name: friendlyName });
+      }
+    });
+
+    // Finalize the archive
+    await archive.finalize();
+  } catch (error) {
+    console.error("ZIP generation error:", error);
+    if (!res.headersSent) {
+      res.status(500).json({ error: "Failed to generate ZIP file" });
+    }
+  }
+});
 
 app.post(
   "/api/remove-background",
@@ -2107,7 +2165,7 @@ app.post(
           height: meta.height || null,
         },
         user_id: userId,
-        cost: 0
+        cost: 0,
       };
       logGen(logData);
 
@@ -2117,8 +2175,6 @@ app.post(
         watermarked: isFreeTrial,
       });
     } catch (e) {
-    
-
       console.error("Background removal error:", e?.message || e);
 
       // Log error

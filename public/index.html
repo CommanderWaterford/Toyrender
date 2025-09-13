@@ -2814,10 +2814,22 @@
         document
           .getElementById("styleSelectionSection")
           .classList.add("hidden");
+
+        // Remove pack results container if it exists
+        const packContainer = document.getElementById("packResultsContainer");
+        if (packContainer) {
+          packContainer.remove();
+        }
+
         fileInput.value = "";
         currentFile = null;
         originalPreview.src = "";
         resultPreview.src = "";
+
+        // Reset pack state
+        isPackGeneration = false;
+        packResults = [];
+        currentPackIndex = 0;
 
         // Reset style selection to figurine1
         selectedStyle = "figurine1";
@@ -2928,65 +2940,107 @@
         // Hide loading spinner
         loadingSpinner.classList.add("hidden");
 
-        // Hide the single download button since we're showing pack
-        document.getElementById("downloadBtn").classList.add("hidden");
+        // Hide the single result preview and download button
+        resultPreview.classList.add("hidden");
+        downloadBtn.classList.add("hidden");
 
-        // Create pack viewer UI
-        const resultContainer = document.getElementById("resultContainer");
-        resultContainer.innerHTML = `
-    <div class="pack-results-viewer">
+        // Create a new container for pack results OUTSIDE the resultContainer
+        // This prevents the download buttons from being overwritten
+        const packViewerHTML = `
+    <div id="packResultsContainer" class="mt-4">
       <div class="text-center mb-4">
-        <h3 class="text-xl font-bold mb-2">Your Dating Photo Pack</h3>
-        <div class="flex justify-center gap-2 mb-4">
-          ${packResults
-            .map(
-              (r, i) => `
-            <button class="pack-thumb ${
-              i === 0 ? "active" : ""
-            }" data-index="${i}">
-              <img src="${r.url}" alt="${
-                r.name
-              }" class="w-12 h-12 object-cover rounded">
-            </button>
-          `
-            )
-            .join("")}
-        </div>
+        <h3 class="text-xl font-bold mb-2 text-purple-300">Your Dating Photo Pack</h3>
+        <p class="text-sm text-purple-400 mb-3">6 professional dating photos generated</p>
       </div>
-      <img id="packMainImage" src="${packResults[0].url}" alt="${
+      
+      <!-- Main image display -->
+      <div class="relative rounded-xl overflow-hidden bg-black/30 mb-4">
+        <img id="packMainImage" src="${packResults[0].url}" alt="${
           packResults[0].name
-        }" class="w-full h-auto rounded-xl">
-      <p class="text-center mt-2 text-purple-300" id="packImageName">${
-        packResults[0].name
-      }</p>
-      <div class="flex gap-2 mt-4">
-        <button id="downloadCurrentBtn" class="flex-1 py-2 bg-green-600 rounded-lg hover:bg-green-700">
+        }" 
+             class="w-full h-auto max-h-[500px] object-contain">
+      </div>
+      
+      <!-- Image name -->
+      <p class="text-center text-purple-300 mb-4" id="packImageName">
+        <span class="font-semibold">${packResults[0].name}</span>
+      </p>
+      
+      <!-- Thumbnail selector -->
+      <div class="flex justify-center gap-2 mb-6 flex-wrap">
+        ${packResults
+          .map(
+            (r, i) => `
+          <button class="pack-thumb ${
+            i === 0 ? "active" : ""
+          } relative group" data-index="${i}">
+            <img src="${r.url}" alt="${r.name}" 
+                 class="w-16 h-16 object-cover rounded-lg transition-all">
+            <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+              <span class="text-xs text-white">${i + 1}</span>
+            </div>
+          </button>
+        `
+          )
+          .join("")}
+      </div>
+      
+      <!-- Download buttons -->
+      <div class="flex gap-3 max-w-md mx-auto">
+        <button id="downloadCurrentBtn" 
+                class="flex-1 py-3 bg-green-600 rounded-xl hover:bg-green-700 transition-all font-semibold">
           <i class="fas fa-download mr-2"></i>Download Current
         </button>
-        <button id="downloadAllBtn" class="flex-1 py-2 bg-purple-600 rounded-lg hover:bg-purple-700">
-          <i class="fas fa-download mr-2"></i>Download All (ZIP)
+        <button id="downloadAllBtn" 
+                class="flex-1 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl hover:from-purple-700 hover:to-pink-700 transition-all font-semibold">
+          <i class="fas fa-download mr-2"></i>Download All (6)
         </button>
       </div>
     </div>
   `;
 
+        // Insert the pack viewer AFTER the resultContainer, not inside it
+        const resultContainer = document.getElementById("resultContainer");
+
+        // Remove any existing pack container
+        const existingPack = document.getElementById("packResultsContainer");
+        if (existingPack) {
+          existingPack.remove();
+        }
+
+        // Insert the new pack viewer after resultContainer
+        resultContainer.insertAdjacentHTML("afterend", packViewerHTML);
+
         // Add thumbnail click handlers
-        resultContainer.querySelectorAll(".pack-thumb").forEach((btn) => {
+        document.querySelectorAll(".pack-thumb").forEach((btn) => {
           btn.addEventListener("click", function () {
             const index = parseInt(this.dataset.index);
             currentPackIndex = index;
 
             // Update active state
-            resultContainer
-              .querySelectorAll(".pack-thumb")
-              .forEach((b) => b.classList.remove("active"));
+            document.querySelectorAll(".pack-thumb").forEach((b) => {
+              b.classList.remove("active");
+              b.querySelector("img").classList.remove(
+                "ring-2",
+                "ring-purple-500"
+              );
+            });
             this.classList.add("active");
+            this.querySelector("img").classList.add(
+              "ring-2",
+              "ring-purple-500"
+            );
 
-            // Update main image
-            document.getElementById("packMainImage").src =
-              packResults[index].url;
-            document.getElementById("packImageName").textContent =
-              packResults[index].name;
+            // Update main image with fade effect
+            const mainImage = document.getElementById("packMainImage");
+            mainImage.style.opacity = "0.5";
+            setTimeout(() => {
+              mainImage.src = packResults[index].url;
+              mainImage.style.opacity = "1";
+              document.getElementById(
+                "packImageName"
+              ).innerHTML = `<span class="font-semibold">${packResults[index].name}</span>`;
+            }, 25);
           });
         });
 
@@ -2999,91 +3053,123 @@
             link.href = current.url;
             link.download = `dating-photo-${current.style}.png`;
             link.click();
+
+            // Visual feedback
+            const btn = document.getElementById("downloadCurrentBtn");
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>Downloaded!';
+            setTimeout(() => {
+              btn.innerHTML =
+                '<i class="fas fa-download mr-2"></i>Download Current';
+            }, 2000);
           });
 
-        // Download all ZIP handler
+        // Download all handler - fallback to individual downloads since ZIP endpoint might not exist
         document
           .getElementById("downloadAllBtn")
           .addEventListener("click", async () => {
-            try {
-              const btn = document.getElementById("downloadAllBtn");
-              btn.disabled = true;
-              btn.innerHTML =
-                '<i class="fas fa-spinner fa-spin mr-2"></i>Creating ZIP...';
+            const btn = document.getElementById("downloadAllBtn");
 
-              // Extract the relative paths from the URLs
-              const imagePaths = packResults.map((r) => r.url);
+            // First try ZIP if server supports it
+            if (window.location.hostname !== "localhost") {
+              // Only try ZIP on production
+              try {
+                btn.disabled = true;
+                btn.innerHTML =
+                  '<i class="fas fa-spinner fa-spin mr-2"></i>Creating ZIP...';
 
-              // Request ZIP from server
-              const response = await fetch("/api/generate-zip", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({ imagePaths }),
-              });
+                const imagePaths = packResults.map((r) => r.url);
+                const response = await fetch("/api/generate-zip", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  credentials: "include",
+                  body: JSON.stringify({ imagePaths }),
+                });
 
-              if (!response.ok) {
-                throw new Error("Failed to create ZIP");
+                if (response.ok) {
+                  const blob = await response.blob();
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement("a");
+                  link.href = url;
+                  link.download = `dating-photos-${Date.now()}.zip`;
+                  link.click();
+                  URL.revokeObjectURL(url);
+
+                  btn.innerHTML =
+                    '<i class="fas fa-check mr-2"></i>Downloaded!';
+                  setTimeout(() => {
+                    btn.disabled = false;
+                    btn.innerHTML =
+                      '<i class="fas fa-download mr-2"></i>Download All (6)';
+                  }, 2000);
+                  return;
+                }
+              } catch (error) {
+                console.log(
+                  "ZIP not available, falling back to individual downloads"
+                );
               }
+            }
 
-              // Download the ZIP
-              const blob = await response.blob();
-              const url = URL.createObjectURL(blob);
+            // Fallback: Download individually
+            btn.disabled = true;
+            btn.innerHTML =
+              '<i class="fas fa-spinner fa-spin mr-2"></i>Downloading...';
+
+            for (let i = 0; i < packResults.length; i++) {
+              await new Promise((resolve) => setTimeout(resolve, 500)); // Stagger downloads
+              const result = packResults[i];
               const link = document.createElement("a");
-              link.href = url;
-              link.download = `dating-photos-${Date.now()}.zip`;
+              link.href = result.url;
+              link.download = `dating-photo-${i + 1}-${result.style}.png`;
               link.click();
 
-              // Clean up
-              URL.revokeObjectURL(url);
+              // Update progress
+              btn.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i>Downloading ${
+                i + 1
+              }/6...`;
+            }
 
-              // Reset button
+            btn.innerHTML = '<i class="fas fa-check mr-2"></i>All Downloaded!';
+            setTimeout(() => {
               btn.disabled = false;
               btn.innerHTML =
-                '<i class="fas fa-download mr-2"></i>Download All (ZIP)';
-
-              toast("Dating photo pack downloaded successfully!");
-            } catch (error) {
-              console.error("Download failed:", error);
-
-              // Reset button
-              const btn = document.getElementById("downloadAllBtn");
-              if (btn) {
-                btn.disabled = false;
-                btn.innerHTML =
-                  '<i class="fas fa-download mr-2"></i>Download All (ZIP)';
-              }
-
-              toast("ZIP download failed. Downloading individually...");
-
-              // Fallback to individual downloads
-              packResults.forEach((result, i) => {
-                setTimeout(() => {
-                  const link = document.createElement("a");
-                  link.href = result.url;
-                  link.download = `dating-photo-${result.style}.png`;
-                  link.click();
-                }, i * 500);
-              });
-            }
+                '<i class="fas fa-download mr-2"></i>Download All (6)';
+            }, 2000);
           });
       }
 
-      // Optional: show a small dialog when clicking credits
-      $("#creditsBtn").addEventListener("click", () => {
-        if (!sessionUser) {
-          openAuth("login");
-          return;
+      // Also update the resetBtn handler to clean up pack results:
+      resetBtn.addEventListener("click", () => {
+        uploadArea.classList.remove("hidden");
+        previewSection.classList.add("hidden");
+        document
+          .getElementById("styleSelectionSection")
+          .classList.add("hidden");
+
+        // Remove pack results container if it exists
+        const packContainer = document.getElementById("packResultsContainer");
+        if (packContainer) {
+          packContainer.remove();
         }
-        const c = credits || {};
-        const free = Number(c.free_remaining || 0);
-        const paid = Number(c.paid_remaining || 0);
-        const total = totalCredits();
-        toast(
-          `Credits — Total: ${total}${
-            free || paid ? ` (free: ${free}, paid: ${paid})` : ""
-          }`
-        );
+
+        fileInput.value = "";
+        currentFile = null;
+        originalPreview.src = "";
+        resultPreview.src = "";
+
+        // Reset pack state
+        isPackGeneration = false;
+        packResults = [];
+        currentPackIndex = 0;
+
+        // Reset style selection to figurine1
+        selectedStyle = "figurine1";
+        document.querySelectorAll(".style-option").forEach((button) => {
+          button.classList.remove("active");
+          if (button.dataset.style === "figurine1") {
+            button.classList.add("active");
+          }
+        });
       });
 
       /* ----------------------- Init ----------------------- */
