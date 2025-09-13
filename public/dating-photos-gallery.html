@@ -8,6 +8,13 @@
     <!-- Canonical & SEO -->
     <link rel="canonical" href="https://toyrender.com/dating-photos-gallery/" />
     <link
+      rel="preload"
+      as="image"
+      href="/images/dating-photos/Simone.jpg"
+      fetchpriority="high"
+    />
+
+    <link
       rel="alternate"
       hreflang="en"
       href="https://toyrender.com/dating-photos-gallery/"
@@ -458,11 +465,15 @@
         ]
       }
     </script>
-    <script
-      src="https://analytics.ahrefs.com/analytics.js"
-      data-key="nbbMIaMmoBy8I696zAoHgw"
-      async
-    ></script>
+    <script>
+      requestIdleCallback?.(() => {
+        const s = document.createElement("script");
+        s.src = "https://analytics.ahrefs.com/analytics.js";
+        s.dataset.key = "nbbMIaMmoBy8I696zAoHgw";
+        s.async = true;
+        document.head.appendChild(s);
+      });
+    </script>
   </head>
 
   <body
@@ -492,7 +503,12 @@
           aria-label="Primary"
         >
           <a class="hover:text-white transition" href="/">Home</a>
-          <a class="hover:text-white transition" href="/gallery">Gallery</a>
+          <a class="hover:text-white transition" href="/blog">Blog</a>
+          <a class="hover:text-white transition" href="/gallery"
+            >AI Figurine Gallery</a
+          >
+          <a class="hover:text-white transition" href="/faq">FAQ</a>
+
           <a class="hover:text-white transition" href="#guide">Guide</a>
         </nav>
       </div>
@@ -517,7 +533,7 @@
         </nav>
         <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight">
           <span class="gradient-text">Dating & Tinder Photo Ideas</span> —
-          Original + 6 Styles
+          Original + 8 Styles
         </h1>
         <p class="mt-3 text-purple-200 max-w-3xl">
           Six real examples (3 women, 3 men). Click any image to open the
@@ -535,9 +551,8 @@
         <article class="space-y-4" aria-labelledby="sofia-title">
           <header class="flex items-center justify-between">
             <h2 id="sofia-title" class="text-xl font-bold">
-              <span class="gradient-text">Simone M.</span> · Women
+              <span class="gradient-text">Simone M.</span>
             </h2>
-            <p class="text-sm text-purple-300">Original + 8 AI styles</p>
           </header>
 
           <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
@@ -559,8 +574,9 @@
                   src="/images/dating-photos/Simone.jpg"
                   width="1200"
                   height="1600"
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
+                  fetchpriority="high"
                   alt="Simone M. original portrait by window light; neutral background, relaxed smile."
                   class="block w-full h-full object-cover"
                 />
@@ -677,9 +693,8 @@
         <article class="space-y-4" aria-labelledby="Stephany-title">
           <header class="flex items-center justify-between">
             <h2 id="Stephany-title" class="text-xl font-bold">
-              <span class="gradient-text">Stephany K.</span> · Women
+              <span class="gradient-text">Stephany K.</span>
             </h2>
-            <p class="text-sm text-purple-300">Original + 8 AI styles</p>
           </header>
           <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
             <figure
@@ -704,9 +719,6 @@
                   class="block w-full h-full object-cover"
                 />
               </div>
-              <figcaption class="px-1 py-3 text-sm text-purple-200">
-                Window-side portrait; neutral tones, clear eyes.
-              </figcaption>
             </figure>
 
             <div class="grid grid-cols-2 gap-3">
@@ -814,9 +826,8 @@
         <article class="space-y-4" aria-labelledby="Sabrina-title">
           <header class="flex items-center justify-between">
             <h2 id="Sabrina-title" class="text-xl font-bold">
-              <span class="gradient-text">Sabrina R.</span> · Women
+              <span class="gradient-text">Sabrina R.</span>
             </h2>
-            <p class="text-sm text-purple-300">Original + 8 AI styles</p>
           </header>
 
           <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
@@ -842,9 +853,6 @@
                   class="block w-full h-full object-cover"
                 />
               </div>
-              <figcaption class="px-1 py-3 text-sm text-purple-200">
-                Neutral exterior portrait; blurred background, sun light.
-              </figcaption>
             </figure>
 
             <div class="grid grid-cols-2 gap-3">
@@ -948,9 +956,8 @@
         <article class="space-y-4" aria-labelledby="Richard-title">
           <header class="flex items-center justify-between">
             <h2 id="Richard-title" class="text-xl font-bold">
-              <span class="gradient-text">Richard D.</span> · Men
+              <span class="gradient-text">Richard D.</span>
             </h2>
-            <p class="text-sm text-purple-300">Original + 8 AI styles</p>
           </header>
 
           <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
@@ -972,13 +979,10 @@
                   width="1200"
                   height="1600"
                   loading="lazy"
-                  alt="Richard D. original portrait; ironed shirt, tidy beard."
+                  alt="Richard D. original portrait"
                   class="block w-full h-full object-cover"
                 />
               </div>
-              <figcaption class="px-1 py-3 text-sm text-purple-200">
-                Smart-casual window-light headshot; light smile.
-              </figcaption>
             </figure>
 
             <div class="grid grid-cols-2 gap-3">
@@ -989,10 +993,10 @@
               >
                 <img
                   src="/images/dating-photos/Richard_01.jpg"
-                  alt="Richard D. golden hour park portrait."
+                  alt="Richard D. after Workout showing abs."
                   class="block w-full h-full object-cover"
                 />
-                <figcaption class="sr-only">Golden Hour Park</figcaption>
+                <figcaption class="sr-only">After Workout</figcaption>
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
@@ -1001,10 +1005,10 @@
               >
                 <img
                   src="/images/dating-photos/Richard_02.jpg"
-                  alt="Richard D. hobby with bicycle."
+                  alt="Richard D. reading book."
                   class="block w-full h-full object-cover"
                 />
-                <figcaption class="sr-only">Hobby Bicycle</figcaption>
+                <figcaption class="sr-only">Reading a Book</figcaption>
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
@@ -1013,10 +1017,12 @@
               >
                 <img
                   src="/images/dating-photos/Richard_03.jpg"
-                  alt="Richard D. cafe candid."
+                  alt="Richard D. enjoying sunset at the pool."
                   class="block w-full h-full object-cover"
                 />
-                <figcaption class="sr-only">Cafe Candid</figcaption>
+                <figcaption class="sr-only">
+                  Enjoying Sunset at the Pool
+                </figcaption>
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
@@ -1025,10 +1031,10 @@
               >
                 <img
                   src="/images/dating-photos/Richard_04.jpg"
-                  alt="Richard D. city evening bokeh."
+                  alt="Richard D. crafting Wood Art."
                   class="block w-full h-full object-cover"
                 />
-                <figcaption class="sr-only">City Evening Bokeh</figcaption>
+                <figcaption class="sr-only">Crafting Wood Art</figcaption>
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
@@ -1037,10 +1043,10 @@
               >
                 <img
                   src="/images/dating-photos/Richard_05.jpg"
-                  alt="Richard D. home cooking candid."
+                  alt="Richard D. in the shower."
                   class="block w-full h-full object-cover"
                 />
-                <figcaption class="sr-only">Home Cooking</figcaption>
+                <figcaption class="sr-only">Hot Shower</figcaption>
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
@@ -1049,10 +1055,10 @@
               >
                 <img
                   src="/images/dating-photos/Richard_06.jpg"
-                  alt="Richard D. black & white editorial."
+                  alt="Richard D. enjoying a Whiskey."
                   class="block w-full h-full object-cover"
                 />
-                <figcaption class="sr-only">B&W Editorial</figcaption>
+                <figcaption class="sr-only">Enjoying a Whiskey</figcaption>
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
@@ -1086,9 +1092,8 @@
         <article class="space-y-4" aria-labelledby="jonas-title">
           <header class="flex items-center justify-between">
             <h2 id="jonas-title" class="text-xl font-bold">
-              <span class="gradient-text">Jonas P.</span> · Men
+              <span class="gradient-text">Jonas P.</span>
             </h2>
-            <p class="text-sm text-purple-300">Original + 8 AI styles</p>
           </header>
 
           <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
@@ -1224,9 +1229,8 @@
         <article class="space-y-4" aria-labelledby="ethan-title">
           <header class="flex items-center justify-between">
             <h2 id="ethan-title" class="text-xl font-bold">
-              <span class="gradient-text">Ethan L.</span> · Men
+              <span class="gradient-text">Ethan L.</span>
             </h2>
-            <p class="text-sm text-purple-300">Original + 8 AI styles</p>
           </header>
 
           <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
@@ -1358,6 +1362,275 @@
           </div>
         </article>
       </section>
+      <!-- === SEO-Friendly Guide & FAQ (visible content) === -->
+      <section
+        id="guide"
+        aria-label="Dating photo guide"
+        class="mt-16 rounded-3xl border border-purple-500/30 bg-white/5 p-6 lg:p-10 space-y-6"
+      >
+        <header class="space-y-2">
+          <h2 class="text-2xl lg:text-3xl font-extrabold tracking-tight">
+            <span class="gradient-text">Dating & Tinder Photo Ideas:</span>
+            Guide, Tips & FAQs
+          </h2>
+          <p class="text-purple-200 max-w-3xl">
+            Real examples to help you choose better profile pictures for dating
+            apps. Each person here shows
+            <strong>1 original portrait + 8 style variations</strong> (window
+            light, golden hour, café candid, city night bokeh, beach sunset,
+            smart-casual, black-and-white editorial, and more). Use this guide
+            to decide what to shoot next—and what to avoid.
+          </p>
+        </header>
+
+        <!-- Quick checklist -->
+        <section aria-labelledby="checklist-title" class="space-y-3">
+          <h3 id="checklist-title" class="text-xl font-bold">
+            Quick checklist (works for most profiles)
+          </h3>
+          <ul class="list-disc pl-5 text-purple-100/90 space-y-2">
+            <li>
+              <strong>Lead with a clear face photo</strong> (eyes to camera,
+              natural light, no heavy filters).
+            </li>
+            <li>
+              Use <strong>2–4 supporting shots</strong>: one candid (café or
+              hobby), one <em>context</em> (outdoors/landmark), and one
+              <strong>smile</strong> shot.
+            </li>
+            <li>
+              Prefer <strong>window or golden-hour light</strong>; avoid harsh
+              overhead lighting and busy backgrounds.
+            </li>
+            <li>
+              <strong>One group photo max</strong> and no sunglasses in the main
+              photo.
+            </li>
+            <li>
+              <strong>Resolution matters</strong>: export at least 1200px on the
+              long side; keep faces crisp.
+            </li>
+            <li>
+              <strong>Be truthful</strong>: AI style variations should reflect
+              your real look & vibe.
+            </li>
+          </ul>
+        </section>
+
+        <!-- Style explainer -->
+        <section aria-labelledby="styles-title" class="space-y-3">
+          <h3 id="styles-title" class="text-xl font-bold">
+            What the styles in this gallery mean
+          </h3>
+          <dl class="grid grid-cols-1 md:grid-cols-2 gap-4 text-purple-100/90">
+            <div>
+              <dt class="font-semibold">Window light (Original)</dt>
+              <dd>
+                Soft, directional light from a window; simple background; eyes
+                sharp.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Golden hour</dt>
+              <dd>
+                Warm rim light near sunset; flattering skin tones; shallow depth
+                of field.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Café candid</dt>
+              <dd>
+                Seated, relaxed expression; props like coffee/book;
+                conversational vibe.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">City night bokeh</dt>
+              <dd>
+                Evening ambient light with blurred neon; keep eyes bright and
+                noise low.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Beach sunset</dt>
+              <dd>
+                Soft sky colors; hair movement; avoid squinting by facing away
+                from sun.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Smart-casual</dt>
+              <dd>
+                Clean, structured outfit near a window; approachable and
+                professional.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">B&W editorial</dt>
+              <dd>
+                Lower saturation distraction; emphasize shape, light, and
+                expression.
+              </dd>
+            </div>
+            <div>
+              <dt class="font-semibold">Hobby / context</dt>
+              <dd>
+                Show an authentic interest (bike, camera, cooking) without
+                clutter.
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <!-- Practical tips -->
+        <section aria-labelledby="tips-title" class="space-y-3">
+          <h3 id="tips-title" class="text-xl font-bold">
+            Practical shooting & export tips
+          </h3>
+          <ul class="list-disc pl-5 text-purple-100/90 space-y-2">
+            <li>
+              <strong>Framing:</strong> head-and-shoulders for the opener; add
+              one waist-up or full-body later.
+            </li>
+            <li>
+              <strong>Focus:</strong> tap focus on the closer eye; keep shutter
+              ≥ 1/125s to avoid motion blur.
+            </li>
+            <li>
+              <strong>Backgrounds:</strong> keep them simple; move subject 1–2m
+              from the background for blur.
+            </li>
+            <li>
+              <strong>Export:</strong> sRGB JPEG/WebP, quality ~75–85; long edge
+              1600–2048px for app compression.
+            </li>
+            <li>
+              <strong>Accessibility:</strong> write descriptive alt text
+              (lighting, setting, expression).
+            </li>
+          </ul>
+        </section>
+
+        <!-- FAQ -->
+        <section aria-labelledby="faq-title" class="space-y-4">
+          <h3 id="faq-title" class="text-xl font-bold">
+            FAQ: Dating & Tinder photos
+          </h3>
+
+          <div class="space-y-3">
+            <h4 class="font-semibold">
+              What’s the best first photo for Tinder or Hinge?
+            </h4>
+            <p class="text-purple-100/90">
+              A bright <em>window-light headshot</em> with eye contact and a
+              natural smile. Avoid sunglasses, heavy filters, and group shots in
+              the opener.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-semibold">How many photos should I use?</h4>
+            <p class="text-purple-100/90">
+              4–6 is plenty: one clear opener, 2–3 context/candid shots, and one
+              well-lit full-body or smart-casual portrait.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-semibold">
+              Are AI style variations okay for dating profiles?
+            </h4>
+            <p class="text-purple-100/90">
+              Yes—if they reflect your real appearance and vibe. Use them to
+              explore lighting/wardrobe ideas, not to misrepresent yourself.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-semibold">
+              What lighting gives the biggest improvement?
+            </h4>
+            <p class="text-purple-100/90">
+              <em>Window light</em> indoors and <em>golden hour</em> outdoors.
+              Both give soft contrast, catchlights, and flattering skin tones.
+            </p>
+          </div>
+
+          <div class="space-y-3">
+            <h4 class="font-semibold">Do I need a professional camera?</h4>
+            <p class="text-purple-100/90">
+              No. Modern phones are enough—just use clean light, steady hands,
+              and simple backgrounds. A friend beats a selfie.
+            </p>
+          </div>
+        </section>
+
+        <footer class="pt-4 text-sm text-purple-300/90">
+          Last updated: <time datetime="2025-09-11">September 11, 2025</time>.
+          See more in the
+          <a
+            href="/gallery"
+            class="underline decoration-purple-400 hover:text-white"
+            >AI Figurine Gallery</a
+          >
+          or
+          <a
+            href="/contact"
+            class="underline decoration-purple-400 hover:text-white"
+            >contact us</a
+          >.
+        </footer>
+      </section>
+
+      <!-- === Matching FAQPage structured data (must mirror visible Q&A) === -->
+      <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What’s the best first photo for Tinder or Hinge?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A bright window-light headshot with eye contact and a natural smile. Avoid sunglasses, heavy filters, and group shots in the opener."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How many photos should I use?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "4–6 is plenty: one clear opener, 2–3 context/candid shots, and one well-lit full-body or smart-casual portrait."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Are AI style variations okay for dating profiles?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes—if they reflect your real appearance and vibe. Use them to explore lighting/wardrobe ideas, not to misrepresent yourself."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What lighting gives the biggest improvement?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Window light indoors and golden hour outdoors. Both give soft contrast, catchlights, and flattering skin tones."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I need a professional camera?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Modern phones are enough—use clean light, steady hands, and simple backgrounds. A friend beats a selfie."
+              }
+            }
+          ]
+        }
+      </script>
     </main>
 
     <!-- Footer -->
