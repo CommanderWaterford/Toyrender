@@ -867,7 +867,7 @@
                 id="generateBtn"
                 class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <i class="fas fa-magic mr-2"></i><span>Generate Image</span>
+                <i class="fas fa-magic mr-2"></i><span>Generate Image(s)</span>
               </button>
               <button
                 id="downloadBtn"
@@ -2367,6 +2367,11 @@
             >Figurine Gallery</a
           >
           <a
+            href="/ai-background-remover"
+            class="hover:text-purple-300 transition-colors"
+            >AI Background Remover</a
+          >
+          <a
             href="/dating-photos-gallery"
             class="hover:text-purple-300 transition-colors"
             >Dating Photo Gallery</a
@@ -2923,44 +2928,47 @@
         // Hide loading spinner
         loadingSpinner.classList.add("hidden");
 
+        // Hide the single download button since we're showing pack
+        document.getElementById("downloadBtn").classList.add("hidden");
+
         // Create pack viewer UI
         const resultContainer = document.getElementById("resultContainer");
         resultContainer.innerHTML = `
-              <div class="pack-results-viewer">
-                <div class="text-center mb-4">
-                  <h3 class="text-xl font-bold mb-2">Your Dating Photo Pack</h3>
-                  <div class="flex justify-center gap-2 mb-4">
-                    ${packResults
-                      .map(
-                        (r, i) => `
-                      <button class="pack-thumb ${
-                        i === 0 ? "active" : ""
-                      }" data-index="${i}">
-                        <img src="${r.url}" alt="${
-                          r.name
-                        }" class="w-12 h-12 object-cover rounded">
-                      </button>
-                    `
-                      )
-                      .join("")}
-                  </div>
-                </div>
-                <img id="packMainImage" src="${packResults[0].url}" alt="${
+    <div class="pack-results-viewer">
+      <div class="text-center mb-4">
+        <h3 class="text-xl font-bold mb-2">Your Dating Photo Pack</h3>
+        <div class="flex justify-center gap-2 mb-4">
+          ${packResults
+            .map(
+              (r, i) => `
+            <button class="pack-thumb ${
+              i === 0 ? "active" : ""
+            }" data-index="${i}">
+              <img src="${r.url}" alt="${
+                r.name
+              }" class="w-12 h-12 object-cover rounded">
+            </button>
+          `
+            )
+            .join("")}
+        </div>
+      </div>
+      <img id="packMainImage" src="${packResults[0].url}" alt="${
           packResults[0].name
         }" class="w-full h-auto rounded-xl">
-                <p class="text-center mt-2 text-purple-300" id="packImageName">${
-                  packResults[0].name
-                }</p>
-                <div class="flex gap-2 mt-4">
-                  <button id="downloadCurrentBtn" class="flex-1 py-2 bg-green-600 rounded-lg hover:bg-green-700">
-                    <i class="fas fa-download mr-2"></i>Download Current
-                  </button>
-                  <button id="downloadAllBtn" class="flex-1 py-2 bg-purple-600 rounded-lg hover:bg-purple-700">
-                    <i class="fas fa-download mr-2"></i>Download All (ZIP)
-                  </button>
-                </div>
-              </div>
-            `;
+      <p class="text-center mt-2 text-purple-300" id="packImageName">${
+        packResults[0].name
+      }</p>
+      <div class="flex gap-2 mt-4">
+        <button id="downloadCurrentBtn" class="flex-1 py-2 bg-green-600 rounded-lg hover:bg-green-700">
+          <i class="fas fa-download mr-2"></i>Download Current
+        </button>
+        <button id="downloadAllBtn" class="flex-1 py-2 bg-purple-600 rounded-lg hover:bg-purple-700">
+          <i class="fas fa-download mr-2"></i>Download All (ZIP)
+        </button>
+      </div>
+    </div>
+  `;
 
         // Add thumbnail click handlers
         resultContainer.querySelectorAll(".pack-thumb").forEach((btn) => {
@@ -2985,7 +2993,7 @@
         // Download current handler
         document
           .getElementById("downloadCurrentBtn")
-          ?.addEventListener("click", () => {
+          .addEventListener("click", () => {
             const current = packResults[currentPackIndex];
             const link = document.createElement("a");
             link.href = current.url;
@@ -2993,21 +3001,71 @@
             link.click();
           });
 
-        // Download all handler (would need server-side ZIP generation)
+        // Download all ZIP handler
         document
           .getElementById("downloadAllBtn")
-          ?.addEventListener("click", async () => {
-            // This would require server-side implementation to create a ZIP
-            toast("Downloading all images... (Feature coming soon)");
-            // For now, download them one by one
-            packResults.forEach((result, i) => {
-              setTimeout(() => {
-                const link = document.createElement("a");
-                link.href = result.url;
-                link.download = `dating-photo-${result.style}.png`;
-                link.click();
-              }, i * 500); // Stagger downloads
-            });
+          .addEventListener("click", async () => {
+            try {
+              const btn = document.getElementById("downloadAllBtn");
+              btn.disabled = true;
+              btn.innerHTML =
+                '<i class="fas fa-spinner fa-spin mr-2"></i>Creating ZIP...';
+
+              // Extract the relative paths from the URLs
+              const imagePaths = packResults.map((r) => r.url);
+
+              // Request ZIP from server
+              const response = await fetch("/api/generate-zip", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ imagePaths }),
+              });
+
+              if (!response.ok) {
+                throw new Error("Failed to create ZIP");
+              }
+
+              // Download the ZIP
+              const blob = await response.blob();
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement("a");
+              link.href = url;
+              link.download = `dating-photos-${Date.now()}.zip`;
+              link.click();
+
+              // Clean up
+              URL.revokeObjectURL(url);
+
+              // Reset button
+              btn.disabled = false;
+              btn.innerHTML =
+                '<i class="fas fa-download mr-2"></i>Download All (ZIP)';
+
+              toast("Dating photo pack downloaded successfully!");
+            } catch (error) {
+              console.error("Download failed:", error);
+
+              // Reset button
+              const btn = document.getElementById("downloadAllBtn");
+              if (btn) {
+                btn.disabled = false;
+                btn.innerHTML =
+                  '<i class="fas fa-download mr-2"></i>Download All (ZIP)';
+              }
+
+              toast("ZIP download failed. Downloading individually...");
+
+              // Fallback to individual downloads
+              packResults.forEach((result, i) => {
+                setTimeout(() => {
+                  const link = document.createElement("a");
+                  link.href = result.url;
+                  link.download = `dating-photo-${result.style}.png`;
+                  link.click();
+                }, i * 500);
+              });
+            }
           });
       }
 

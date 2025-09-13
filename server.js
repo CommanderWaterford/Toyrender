@@ -1942,6 +1942,241 @@ app.post(
   }
 );
 
+// Add this route to your existing Express app (around line 1400, after the /api/generate route)
+
+app.post(
+  "/api/remove-background",
+  ensureAuth,
+  burstSlowdown,
+  perUserGenerateLimiter,
+  bodySizeGuard,
+  upload.single("photo"),
+  async (req, res) => {
+    const userId = req.session.userId;
+    let userEmail = "unknown";
+
+    try {
+      const user = await get("SELECT email FROM users WHERE id = ?", [userId]);
+      if (user) {
+        userEmail = user.email;
+      }
+    } catch (dbError) {
+      console.error("Error fetching user email for logging:", dbError);
+    }
+
+    const reqId =
+      (crypto.randomUUID && crypto.randomUUID()) ||
+      Date.now() + "-" + Math.random().toString(16).slice(2);
+    const t0 = Date.now();
+    let inputPath = null;
+
+    try {
+      if (!req.file) return res.status(400).json({ error: "No file uploaded" });
+      inputPath = req.file.path;
+
+      // Read and hash the file
+      const raw = fs.readFileSync(inputPath);
+      const imgHash16 = crypto
+        .createHash("sha256")
+        .update(raw)
+        .digest("hex")
+        .slice(0, 16);
+
+      // Consume one credit
+      const credit = await consumeCredits(userId, 1);
+      if (!credit.ok) {
+        fs.unlink(inputPath, () => {});
+        return res.status(402).json({
+          error: "Out of credits",
+          retryAfterSec: credit.retryAfterSec,
+          message: "Upgrade or wait until tomorrow.",
+        });
+      }
+
+      // Check if user is on free trial (for watermarking)
+      const userCredits = await get(
+        "SELECT paid_remaining FROM user_credits WHERE user_id = ?",
+        [userId]
+      );
+      const hasPayments = await get(
+        "SELECT id FROM payments WHERE user_id = ? LIMIT 1",
+        [userId]
+      );
+      const isFreeTrial =
+        !hasPayments && userCredits.paid_remaining <= STARTER_CREDITS;
+
+      // Log start
+      await run(
+        "INSERT INTO gen_events (user_id, req_id, status, img_hash16, input_bytes, ip, ua) VALUES (?,?,?,?,?,?,?)",
+        [
+          userId,
+          reqId,
+          "started",
+          imgHash16,
+          req.file.size,
+          req.ip,
+          (req.get("user-agent") || "").slice(0, 255),
+        ]
+      );
+
+      // Get image metadata
+      let meta = {};
+      try {
+        meta = await sharp(raw).metadata();
+      } catch {}
+
+      // Resize/compress if needed
+      let resizedBuf = raw;
+      try {
+        resizedBuf = await sharp(raw)
+          .resize({
+            width: 2048,
+            height: 2048,
+            fit: "inside",
+            withoutEnlargement: true,
+          })
+          .jpeg({ quality: 85 })
+          .toBuffer();
+      } catch (e) {
+        console.warn("Sharp resize failed; using original:", e.message);
+      }
+
+      // Background removal prompt for Gemini
+      const backgroundRemovalPrompt = `Remove the background from this image completely, making it transparent. Keep the main subject(s) intact and preserve all fine details like hair, fur, or fabric edges. Output a clean cutout with a transparent background suitable for professional use.`;
+
+      const parts = [
+        { text: backgroundRemovalPrompt },
+        {
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: resizedBuf.toString("base64"),
+          },
+        },
+      ];
+
+      // Call Gemini API with throttling and backoff
+      const response = await modelLimiter.schedule(() =>
+        withBackoff(() =>
+          ai.models.generateContent({
+            model: "gemini-2.5-flash-image-preview",
+            contents: [{ role: "user", parts }],
+          })
+        )
+      );
+
+      // Extract the generated image
+      const candidates = response?.candidates?.[0]?.content?.parts || [];
+      let outImagePath = null;
+
+      for (const part of candidates) {
+        if (part.inlineData?.data) {
+          const buffer = Buffer.from(part.inlineData.data, "base64");
+          const fname = `bg-removed-${Date.now()}.png`;
+          outImagePath = path.join(RESULTS_DIR, fname);
+
+          // Convert to PNG with transparency support
+          try {
+            await sharp(buffer)
+              .png({ compressionLevel: 6, adaptiveFiltering: false })
+              .toFile(outImagePath);
+          } catch (conversionError) {
+            // Fallback: save as-is
+            fs.writeFileSync(outImagePath, buffer);
+          }
+
+          // Apply watermark for free trial users
+          if (isFreeTrial && outImagePath) {
+            console.log(`Applying watermark for free trial user: ${userEmail}`);
+            try {
+              await applyWatermark(outImagePath);
+              console.log(`Watermark applied successfully to ${fname}`);
+            } catch (watermarkError) {
+              console.error(
+                `Failed to apply watermark to ${fname}:`,
+                watermarkError
+              );
+            }
+          }
+          break; // Only process the first image
+        }
+      }
+
+      if (!outImagePath) {
+        throw new Error("No image generated by AI model");
+      }
+
+      // Log success
+      await run("UPDATE gen_events SET status='success' WHERE req_id=?", [
+        reqId,
+      ]);
+
+      // Log to generation stream
+      const logData = {
+        event: "bg_removal_success",
+        reqId,
+        duration_ms: Date.now() - t0,
+        userEmail: userEmail,
+        output: {
+          image: path.basename(outImagePath),
+          watermarked: isFreeTrial,
+        },
+        file: {
+          name: req.file.originalname,
+          savedAs: req.file.filename,
+          mimetype: req.file.mimetype,
+          size: req.file.size,
+          format: meta.format || null,
+          width: meta.width || null,
+          height: meta.height || null,
+        },
+        user_id: userId,
+        is_free_trial: isFreeTrial,
+      };
+      logGen(logData);
+
+      return res.json({
+        ok: true,
+        imageUrl: "/results/" + path.basename(outImagePath),
+        watermarked: isFreeTrial,
+      });
+    } catch (e) {
+      // Refund credit on failure
+      try {
+        await run("UPDATE gen_events SET status='error' WHERE req_id=?", [
+          reqId,
+        ]);
+      } catch {}
+
+      try {
+        await refundCredit(userId, 1);
+      } catch {}
+
+      console.error("Background removal error:", e?.message || e);
+
+      // Log error
+      logGen({
+        event: "bg_removal_error",
+        reqId,
+        duration_ms: Date.now() - t0,
+        userEmail: userEmail,
+        error: { message: e?.message || "Unknown error" },
+        user_id: userId,
+      });
+
+      return res.status(e?.status || 500).json({
+        ok: false,
+        status: e?.status || 500,
+        error: e?.message || "Background removal failed",
+        reason: e?.reason || null,
+        details: e?.error?.details || null,
+      });
+    } finally {
+      // Clean up uploaded file (optional - your cleanup interval will handle this)
+      // if (inputPath) fs.unlink(inputPath, () => {});
+    }
+  }
+);
+
 // --- Hourly cleanup of old files ---
 const RETENTION_H = parseInt(process.env.UPLOAD_RETENTION_HOURS || "24", 10);
 function cleanupDir(dir) {
