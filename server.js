@@ -1753,14 +1753,6 @@ app.post(
         .digest("hex")
         .slice(0, 16);
 
-      // deny recent dup (do not spend credit)
-      if (await isRecentDuplicate(userId, imgHash16)) {
-        fs.unlink(inputPath, () => {});
-        return res
-          .status(429)
-          .json({ error: "Duplicate image detected. Try a different photo." });
-      }
-
       // consume one credit
       const credit = await consumeCredits(userId, 1);
       if (!credit.ok) {
