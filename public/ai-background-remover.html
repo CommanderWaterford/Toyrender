@@ -557,36 +557,69 @@
       </section>
 
       <!-- Upload & Process Section -->
-      <section class="max-w-4xl mx-auto" aria-labelledby="upload-title">
+      <!-- Upload & Process Section -->
+      <section class="max-w-6xl mx-auto" aria-labelledby="upload-title">
         <div
           class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/30 pulse-glow"
         >
-          <!-- Upload Area -->
+          <!-- Initial State: Uploader + Example (Hidden after upload) -->
           <div
-            id="uploadArea"
-            class="border-3 border-dashed border-purple-500/50 rounded-2xl p-12 text-center hover:border-purple-400 transition-all cursor-pointer bg-purple-900/20 hover:bg-purple-900/30"
+            id="uploadInitialState"
+            class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"
           >
-            <input type="file" id="fileInput" accept="image/*" class="hidden" />
-            <div class="float-animation inline-block mb-6">
-              <i class="fas fa-image text-6xl text-purple-400"></i>
-            </div>
-            <h3 id="upload-title" class="text-2xl font-bold mb-4">
-              Upload an Image to Get Started
-            </h3>
-            <p class="text-purple-300 mb-6">
-              Drag & drop your photo here or click to browse
-            </p>
-            <button
-              class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl"
+            <!-- Column 1: The Uploader -->
+            <div
+              id="uploadArea"
+              class="border-3 border-dashed border-purple-500/50 rounded-2xl p-8 text-center hover:border-purple-400 transition-all cursor-pointer bg-purple-900/20 hover:bg-purple-900/30 h-full flex flex-col justify-center"
             >
-              <i class="fas fa-upload mr-2"></i>Choose Photo
-            </button>
-            <p class="text-sm text-purple-400 mt-4">
-              Supports JPG, PNG, WEBP up to 10MB
-            </p>
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/*"
+                class="hidden"
+              />
+              <div class="float-animation inline-block mb-4">
+                <i class="fas fa-image text-5xl text-purple-400"></i>
+              </div>
+              <h3 id="upload-title" class="text-2xl font-bold mb-3">
+                Upload an Image
+              </h3>
+              <p class="text-purple-300 mb-6">
+                Drag & drop a file or click to browse p>
+                <button
+                  class="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl"
+                >
+                  <i class="fas fa-upload mr-2"></i>Choose Photo
+                </button>
+              </p>
+
+              <p class="text-sm text-purple-400 mt-4">
+                Supports JPG, PNG, WEBP up to 10MB
+              </p>
+            </div>
+
+            <!-- Column 2: The Simplified Example Photo Box -->
+            <div>
+              <h4
+                class="text-lg font-semibold mb-3 text-purple-300 text-center lg:text-left"
+              >
+                Example Output
+              </h4>
+              <!-- Checkerboard container to showcase transparency -->
+              <div
+                class="relative rounded-xl overflow-hidden checkerboard-bg p-4 border-2 border-slate-700 h-full flex items-center justify-center min-h-[300px] lg:min-h-0"
+              >
+                <!-- The single example "after" image (transparent PNG) -->
+                <img
+                  src="/images/Example8-no-bg.png"
+                  alt="Example of a person's photo with the background removed, showing a transparent background."
+                  class="max-w-full max-h-full object-contain"
+                />
+              </div>
+            </div>
           </div>
 
-          <!-- Preview & Result Section (Hidden by default) -->
+          <!-- Preview & Result Section (Hidden by default, shown after upload) -->
           <div id="previewSection" class="hidden">
             <div class="grid lg:grid-cols-2 gap-8 items-center">
               <div>
@@ -1120,6 +1153,7 @@
       const generateBtn = $("#generateBtn");
       const downloadBtn = $("#downloadBtn");
       const resetBtn = $("#resetBtn");
+      const uploadInitialState = $("#uploadInitialState");
 
       let currentFile = null;
 
@@ -1156,8 +1190,11 @@
         const reader = new FileReader();
         reader.onload = (e) => {
           originalPreview.src = e.target.result;
-          uploadArea.classList.add("hidden");
+
+          // NEW LOGIC: Hide the initial view and show the preview section
+          uploadInitialState.classList.add("hidden");
           previewSection.classList.remove("hidden");
+
           generateBtn.disabled = false;
           downloadBtn.classList.add("hidden");
           resultPreview.classList.add("hidden");
@@ -1228,8 +1265,10 @@
 
       // Reset button functionality
       resetBtn.addEventListener("click", () => {
-        uploadArea.classList.remove("hidden");
+        // NEW LOGIC: Hide the preview and show the initial view again
+        uploadInitialState.classList.remove("hidden");
         previewSection.classList.add("hidden");
+
         fileInput.value = ""; // Clear file input
         currentFile = null;
         originalPreview.src = "";
