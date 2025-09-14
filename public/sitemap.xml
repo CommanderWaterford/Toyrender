@@ -225,7 +225,20 @@
   <!-- Tool: AI Background Remover -->
   <url>
     <loc>https://toyrender.com/ai-background-remover.html</loc>
-    <lastmod>2025-09-12</lastmod>
+    <lastmod>2025-09-14</lastmod>
     <priority>0.68</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/ai-background-remover.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/ia-quitafondos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/ai-background-remover.html"/>
+  </url>
+
+  <!-- Herramienta: Removedor de Fondos con IA (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/ia-quitafondos.html</loc>
+    <lastmod>2025-09-14</lastmod>
+    <priority>0.68</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/ai-background-remover.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/ia-quitafondos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/ai-background-remover.html"/>
   </url>
 </urlset>
