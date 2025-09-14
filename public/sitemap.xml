@@ -193,6 +193,19 @@
     <loc>https://toyrender.com/dating-photos-gallery/</loc>
     <lastmod>2025-09-11</lastmod>
     <priority>0.64</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/dating-photos-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-citas-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/dating-photos-gallery/"/>
+  </url>
+
+  <!-- Ideas de Fotos para Citas (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/fotos-citas-galeria/</loc>
+    <lastmod>2025-09-14</lastmod>
+    <priority>0.64</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/dating-photos-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-citas-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/dating-photos-gallery/"/>
   </url>
 
   <!-- Blog Article: AI Couple Photos Guide -->
