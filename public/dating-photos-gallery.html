@@ -168,6 +168,51 @@
           opacity: 0;
         }
       }
+
+      /* === Fixed (always visible) profile nav === */
+      .sticky-nav {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(100% - 2rem, 1280px);
+        z-index: 999;
+        backdrop-filter: blur(16px);
+        background: linear-gradient(
+          90deg,
+          rgba(19, 16, 56, 0.9),
+          rgba(67, 56, 202, 0.9)
+        );
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 10px 32px -4px rgba(0, 0, 0, 0.6),
+          0 2px 6px -1px rgba(0, 0, 0, 0.4);
+        backdrop-filter: saturate(140%) blur(16px);
+      }
+      header.relative {
+        z-index: 100;
+      }
+      #profileNav.scrolled {
+        box-shadow: 0 8px 28px -6px rgba(0, 0, 0, 0.6);
+        background: linear-gradient(
+          90deg,
+          rgba(30, 27, 75, 0.92),
+          rgba(67, 56, 202, 0.88)
+        );
+      }
+      .profile-pill.active {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border-radius: 9999px;
+        padding: 4px 10px;
+      }
+      body {
+        padding-top: 120px;
+      }
+      @media (min-width: 1024px) {
+        body {
+          padding-top: 110px;
+        }
+      }
     </style>
 
     <!-- JSON-LD: WebSite + CollectionPage + BreadcrumbList (enhanced) -->
@@ -261,7 +306,7 @@
             "position": 1,
             "item": {
               "@type": "ImageObject",
-              "url": "https://toyrender.com/images/dating/sofia/original.jpg",
+              "url": "https://toyrender.com/images/dating/simone/original.jpg",
               "caption": "Simone M. original portrait by window light; neutral background, relaxed smile.",
               "width": 1200,
               "height": 1600
@@ -272,7 +317,7 @@
             "position": 2,
             "item": {
               "@type": "ImageObject",
-              "url": "https://toyrender.com/images/dating/sofia/style-golden-hour.jpg",
+              "url": "https://toyrender.com/images/dating/simone/style-golden-hour.jpg",
               "caption": "Simone M. golden hour outdoor portrait, warm rim light, shallow depth.",
               "width": 800,
               "height": 1000
@@ -283,7 +328,7 @@
             "position": 3,
             "item": {
               "@type": "ImageObject",
-              "url": "https://toyrender.com/images/dating/sofia/style-cafe-candid.jpg",
+              "url": "https://toyrender.com/images/dating/simone/style-cafe-candid.jpg",
               "caption": "Simone M. cafe candid with coffee; soft window light, eye contact.",
               "width": 800,
               "height": 1000
@@ -294,7 +339,7 @@
             "position": 4,
             "item": {
               "@type": "ImageObject",
-              "url": "https://toyrender.com/images/dating/sofia/style-city-bokeh.jpg",
+              "url": "https://toyrender.com/images/dating/simone/style-city-bokeh.jpg",
               "caption": "Simone M. evening city lights bokeh; crisp eyes, subtle smile.",
               "width": 800,
               "height": 1000
@@ -556,18 +601,61 @@
         <a href="/" class="flex items-center gap-2" aria-label="Toyrender Home">
           <span class="text-2xl font-bold gradient-text">Toyrender</span>
         </a>
+        <!-- Sticky Profile Navigation -->
         <nav
-          class="hidden md:flex items-center gap-6 text-purple-200"
-          aria-label="Primary"
+          class="sticky-nav py-4 px-4 lg:px-6 rounded-2xl shadow-lg"
+          id="profileNav"
+          role="navigation"
+          aria-label="Profile quick navigation"
         >
-          <a class="hover:text-white transition" href="/">Home</a>
-          <a class="hover:text-white transition" href="/blog">Blog</a>
-          <a class="hover:text-white transition" href="/gallery"
-            >AI Figurine Gallery</a
-          >
-          <a class="hover:text-white transition" href="/faq">FAQ</a>
-
-          <a class="hover:text-white transition" href="#guide">Guide</a>
+          <div class="max-w-7xl mx-auto">
+            <div class="flex items-center justify-between">
+              <span
+                class="text-sm font-medium text-purple-300 mr-4 hidden sm:inline"
+                >Jump to:</span
+              >
+              <div
+                class="profile-pills-container flex gap-2 overflow-x-auto w-full"
+              >
+                <a
+                  href="#simone-section"
+                  class="profile-pill text-sm text-purple-200 hover:text-white"
+                >
+                  👩 Simone M.
+                </a>
+                <a
+                  href="#stephany-section"
+                  class="profile-pill text-sm text-purple-200 hover:text-white"
+                >
+                  👩 Stephany K.
+                </a>
+                <a
+                  href="#sabrina-section"
+                  class="profile-pill text-sm text-purple-200 hover:text-white"
+                >
+                  👩 Sabrina R.
+                </a>
+                <a
+                  href="#richard-section"
+                  class="profile-pill text-sm text-purple-200 hover:text-white"
+                >
+                  👨 Richard D.
+                </a>
+                <a
+                  href="#jonas-section"
+                  class="profile-pill text-sm text-purple-200 hover:text-white"
+                >
+                  👨 Jonas P.
+                </a>
+                <a
+                  href="#ethan-section"
+                  class="profile-pill text-sm text-purple-200 hover:text-white"
+                >
+                  👨 Ethan L.
+                </a>
+              </div>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
@@ -606,9 +694,13 @@
         class="rounded-3xl border border-purple-500/30 backdrop-blur-xl p-5 lg:p-8 space-y-12"
       >
         <!-- Person: Simone (Women) -->
-        <article class="space-y-4" aria-labelledby="sofia-title">
+        <article
+          class="space-y-4"
+          aria-labelledby="simone-title"
+          id="simone-section"
+        >
           <header class="flex items-center justify-between">
-            <h2 id="sofia-title" class="text-xl font-bold">
+            <h2 id="simone-title" class="text-xl font-bold">
               <span class="gradient-text">Simone M.</span>
             </h2>
           </header>
@@ -617,7 +709,7 @@
             <!-- Original -->
             <figure
               class="relative bg-slate-800/50 border border-white/10 rounded-2xl p-3 cursor-pointer"
-              data-group="sofia"
+              data-group="simone"
               data-index="0"
             >
               <div
@@ -649,7 +741,7 @@
             <div class="grid grid-cols-2 gap-3">
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="1"
               >
                 <img
@@ -661,7 +753,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="2"
               >
                 <img
@@ -673,7 +765,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="3"
               >
                 <img
@@ -685,7 +777,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="4"
               >
                 <img
@@ -697,7 +789,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="5"
               >
                 <img
@@ -709,7 +801,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="6"
               >
                 <img
@@ -721,7 +813,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="7"
               >
                 <img
@@ -733,7 +825,7 @@
               </figure>
               <figure
                 class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
-                data-group="sofia"
+                data-group="simone"
                 data-index="8"
               >
                 <img
@@ -748,7 +840,11 @@
         </article>
 
         <!-- Person: Stephany (Women) -->
-        <article class="space-y-4" aria-labelledby="Stephany-title">
+        <article
+          class="space-y-4"
+          aria-labelledby="Stephany-title"
+          id="stephany-section"
+        >
           <header class="flex items-center justify-between">
             <h2 id="Stephany-title" class="text-xl font-bold">
               <span class="gradient-text">Stephany K.</span>
@@ -881,7 +977,11 @@
         </article>
 
         <!-- Person: Sabrina (Women) -->
-        <article class="space-y-4" aria-labelledby="Sabrina-title">
+        <article
+          class="space-y-4"
+          aria-labelledby="Sabrina-title"
+          id="sabrina-section"
+        >
           <header class="flex items-center justify-between">
             <h2 id="Sabrina-title" class="text-xl font-bold">
               <span class="gradient-text">Sabrina R.</span>
@@ -1011,7 +1111,11 @@
         </article>
 
         <!-- Person: Richard (Men) -->
-        <article class="space-y-4" aria-labelledby="Richard-title">
+        <article
+          class="space-y-4"
+          aria-labelledby="Richard-title"
+          id="richard-section"
+        >
           <header class="flex items-center justify-between">
             <h2 id="Richard-title" class="text-xl font-bold">
               <span class="gradient-text">Richard D.</span>
@@ -1147,7 +1251,11 @@
         </article>
 
         <!-- Person: Jonas (Men) -->
-        <article class="space-y-4" aria-labelledby="jonas-title">
+        <article
+          class="space-y-4"
+          aria-labelledby="jonas-title"
+          id="jonas-section"
+        >
           <header class="flex items-center justify-between">
             <h2 id="jonas-title" class="text-xl font-bold">
               <span class="gradient-text">Jonas P.</span>
@@ -1284,7 +1392,11 @@
         </article>
 
         <!-- Person: Ethan (Men) -->
-        <article class="space-y-4" aria-labelledby="ethan-title">
+        <article
+          class="space-y-4"
+          aria-labelledby="ethan-title"
+          id="ethan-section"
+        >
           <header class="flex items-center justify-between">
             <h2 id="ethan-title" class="text-xl font-bold">
               <span class="gradient-text">Ethan L.</span>
@@ -1751,6 +1863,50 @@
 
     <!-- Group-aware Lightbox JS -->
     <script>
+      // Sticky navigation scroll effect
+      window.addEventListener("scroll", function () {
+        const nav = document.getElementById("profileNav");
+        if (window.scrollY > 100) {
+          nav.classList.add("scrolled");
+        } else {
+          nav.classList.remove("scrolled");
+        }
+      });
+
+      // Highlight active profile in navigation
+      const observerOptions = {
+        root: null,
+        rootMargin: "-20% 0px -70% 0px",
+        threshold: 0,
+      };
+
+      const profileSections = document.querySelectorAll(
+        'article[id$="-section"]'
+      );
+      const profileLinks = document.querySelectorAll(".profile-pill");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Remove active class from all links
+            profileLinks.forEach((link) => link.classList.remove("active"));
+
+            // Add active class to corresponding link
+            const activeLink = document.querySelector(
+              `a[href="#${entry.target.id}"]`
+            );
+            if (activeLink) {
+              activeLink.classList.add("active");
+            }
+          }
+        });
+      }, observerOptions);
+
+      profileSections.forEach((section) => {
+        observer.observe(section);
+      });
+
+      // Existing lightbox code with mobile enhancements
       (function () {
         const lb = document.getElementById("lightbox");
         const lbImg = document.getElementById("lbImg");
@@ -1759,29 +1915,29 @@
         const btnNext = document.getElementById("lbNext");
         const btnClose = document.getElementById("lbClose");
 
-        // ADD MOBILE DETECTION HERE
+        // Mobile detection
         const isMobile =
           /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
             navigator.userAgent
           );
 
-        // ADD SWIPE HINT FUNCTION HERE
+        // Swipe hint function
         function showSwipeHint() {
           const hint = document.createElement("div");
           hint.className = "swipe-hint";
           hint.innerHTML = "← Swipe to navigate →";
           hint.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0,0,0,0.8);
-        color: white;
-        padding: 15px 30px;
-        border-radius: 25px;
-        z-index: 1000;
-        animation: fadeOut 3s forwards;
-      `;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 25px;
+            z-index: 1000;
+            animation: fadeOut 3s forwards;
+          `;
           lb.appendChild(hint);
           setTimeout(() => hint.remove(), 3000);
         }
@@ -1799,6 +1955,7 @@
             (parseInt(b.dataset.index, 10) || 0)
           );
         }
+
         function clamp(i) {
           if (!groupList.length) return 0;
           if (i < 0) return groupList.length - 1;
@@ -1821,7 +1978,8 @@
           lbCaption.textContent = captionEl
             ? captionEl.textContent.trim()
             : `Image ${idx + 1} of ${groupList.length}`;
-          // Dynamic caption positioning based on aspect ratio (mobile only)
+
+          // Dynamic caption positioning for mobile
           lbImg.onload = function () {
             if (isMobile) {
               const imgRatio = this.naturalHeight / this.naturalWidth;
