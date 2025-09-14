@@ -741,6 +741,29 @@ async function applyWatermark(imagePath) {
   process.exit(1);
 });
 
+// --- Helper to generate filenames with timestamp and random string ---
+function generateTimestampFilename(prefix = "output", extension = "png") {
+  const now = new Date();
+
+  // Format date as YYYYMMDD
+  const year = now.getUTCFullYear();
+  const month = String(now.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(now.getUTCDate()).padStart(2, "0");
+  const dateStr = `${year}${month}${day}`;
+
+  // Format time as HHMMSS
+  const hours = String(now.getUTCHours()).padStart(2, "0");
+  const minutes = String(now.getUTCMinutes()).padStart(2, "0");
+  const seconds = String(now.getUTCSeconds()).padStart(2, "0");
+  const timeStr = `${hours}${minutes}${seconds}`;
+
+  // Generate random hex string (8 characters)
+  const randomStr = crypto.randomBytes(4).toString("hex");
+
+  // Combine all parts
+  return `${prefix}-${dateStr}-${timeStr}-${randomStr}.${extension}`;
+}
+
 // --- Utils ---
 const FIGURINE_PROMPT1 = `Create a 1/7 scale commercialized figurine of the characters in the picture, in a realistic style, in a real environment. The figurine is placed on a computer desk. The figurine has a round transparent acrylic base, with no text on the base. The content on the computer screen is a 3D modeling process of this figurine. Next to the computer screen is a toy packaging box, designed in a style reminiscent of high-quality collectible figures, printed with original artwork. The packaging features two-dimensional flat illustrations.`;
 
@@ -1849,7 +1872,7 @@ app.post(
         if (part.text) outText += part.text + "\n";
         else if (part.inlineData?.data) {
           const buffer = Buffer.from(part.inlineData.data, "base64");
-          const fname = `gemini-output-${Date.now()}.png`;
+          const fname = generateTimestampFilename("toyrender", "png");
           outImagePath = path.join(RESULTS_DIR, fname);
           fs.writeFileSync(outImagePath, buffer);
 
@@ -2119,7 +2142,7 @@ app.post(
       for (const part of candidates) {
         if (part.inlineData?.data) {
           const buffer = Buffer.from(part.inlineData.data, "base64");
-          const fname = `bg-removed-${Date.now()}.png`;
+          const fname = generateTimestampFilename("bg-removed", "png");
           outImagePath = path.join(RESULTS_DIR, fname);
 
           // Convert to PNG with transparency support
