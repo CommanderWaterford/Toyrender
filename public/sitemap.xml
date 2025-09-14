@@ -241,4 +241,24 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/ia-quitafondos.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/ai-background-remover.html"/>
   </url>
+
+  <!-- Business Photos AI – Sabrina (EN) -->
+  <url>
+    <loc>https://toyrender.com/business-photos-sabrina/</loc>
+    <lastmod>2025-09-14</lastmod>
+    <priority>0.62</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/business-photos-sabrina/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-profesionales-sabrina/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/business-photos-sabrina/"/>
+  </url>
+
+  <!-- Business Photos AI – Jonas (EN) -->
+  <url>
+    <loc>https://toyrender.com/business-photos-jonas/</loc>
+    <lastmod>2025-09-14</lastmod>
+    <priority>0.62</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/business-photos-jonas/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-profesionales-jonas/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/business-photos-jonas/"/>
+  </url>
 </urlset>
