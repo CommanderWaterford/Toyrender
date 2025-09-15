@@ -242,7 +242,7 @@
             "about": {
               "@id": "https://toyrender.com/business-photos-jonas/#person"
             },
-            "numberOfItems": 10,
+            "numberOfItems": 19,
             "itemListElement": [
               {
                 "@type": "ListItem",
@@ -339,17 +339,6 @@
                   "@type": "ImageObject",
                   "url": "https://toyrender.com/images/business-photos/jonas/style-08-glass-wall.jpg",
                   "caption": "Glass wall reflection: airy office ambiance, crisp eyes.",
-                  "width": 1200,
-                  "height": 1600
-                }
-              },
-              {
-                "@type": "ListItem",
-                "position": 10,
-                "item": {
-                  "@type": "ImageObject",
-                  "url": "https://toyrender.com/images/business-photos/jonas/style-09-city-outdoor.jpg",
-                  "caption": "Outdoor city portrait: soft morning light, mild bokeh.",
                   "width": 1200,
                   "height": 1600
                 }
@@ -472,27 +461,23 @@
             </h2>
           </header>
 
-          <div class="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-5">
-            <!-- Original -->
+          <div class="space-y-5">
+            <!-- Original Photo - Full Width -->
             <figure
               class="relative bg-slate-800/50 border border-white/10 rounded-2xl p-3 cursor-pointer"
               data-group="jonas"
               data-index="0"
             >
               <div
-                class="absolute left-4 top-4 text-xs px-2 py-1 rounded-full bg-white/10 border border-white/20"
+                class="absolute left-4 top-4 text-xs px-2 py-1 rounded-full bg-white/10 border border-white/20 z-10"
               >
                 Original
               </div>
               <div
-                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-[420px]"
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center"
               >
                 <img
-                  src="/images/business-photos/jonas/original.jpg"
-                  srcset="
-                    /images/business-photos/jonas/original_800.jpg  800w,
-                    /images/business-photos/jonas/original.jpg     1200w
-                  "
+                  src="/images/businessphotos/Jonas.jpg"
                   sizes="(max-width: 1024px) 100vw, 720px"
                   width="1200"
                   height="1600"
@@ -500,142 +485,173 @@
                   decoding="async"
                   fetchpriority="high"
                   alt="Jonas original portrait with soft window light on a neutral background, professional attire."
-                  class="block w-full h-full object-cover"
+                  class="block w-full h-auto max-h-[600px] object-contain"
                 />
               </div>
-              <figcaption class="px-1 py-3 text-sm text-sky-200">
-                Original window-light portrait; neutral backdrop; crisp eyes;
-                light blazer. High quality source enables consistent AI
-                variations.
-              </figcaption>
             </figure>
 
-            <!-- 9 Styles -->
-            <div class="grid grid-cols-2 gap-3">
+            <!-- 9 Style Variations Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="1"
               >
-                <img
-                  src="/images/business-photos/jonas/style-01-corporate-headshot.jpg"
-                  alt="Corporate headshot: studio-clean background, subtle rim light."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Corporate Headshot</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-01.jpg"
+                    alt="Bright corporate lobby portrait with clean architectural background and confident posture."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 01
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="2"
               >
-                <img
-                  src="/images/business-photos/jonas/style-02-modern-office.jpg"
-                  alt="Modern office portrait with glass partitions and soft reflections."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Modern Office</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-02.jpg"
+                    alt="Neutral studio head and shoulders portrait with soft key light and smooth gradient background."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 02
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="3"
               >
-                <img
-                  src="/images/business-photos/jonas/style-03-boardroom.jpg"
-                  alt="Boardroom look seated at a conference table, confident posture and eye contact."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Boardroom</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-03.jpg"
+                    alt="Office depth of field portrait with soft blurred background and natural expression."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 03
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="4"
               >
-                <img
-                  src="/images/business-photos/jonas/style-04-startup-casual.jpg"
-                  alt="Startup casual portrait: blazer over tee, warm tone, laptop prop."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Startup Casual</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-04.jpg"
+                    alt="Arms-crossed branding pose with subtle vignette and professional attire."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 04
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="5"
               >
-                <img
-                  src="/images/business-photos/jonas/style-05-executive-portrait.jpg"
-                  alt="Executive portrait on a darker backdrop with decisive expression."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Executive Portrait</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-05.jpg"
+                    alt="Executive portrait variant with darker backdrop and focused lighting on face."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 05
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="6"
               >
-                <img
-                  src="/images/business-photos/jonas/style-06-linkedin-banner.jpg"
-                  alt="LinkedIn banner crop with wide composition and brand-friendly color."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">LinkedIn Banner</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-06.jpg"
+                    alt="Collaborative meeting scenario with warm practical lighting and engaged expression."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 06
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="7"
               >
-                <img
-                  src="/images/business-photos/jonas/style-07-speaker-onstage.jpg"
-                  alt="Conference speaker look with stage lights and audience blur."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Speaker Onstage</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-07.jpg"
+                    alt="Keynote stage lighting portrait with energetic color accents and poised stance."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 07
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="8"
               >
-                <img
-                  src="/images/business-photos/jonas/style-08-glass-wall.jpg"
-                  alt="Glass wall reflections with airy office ambiance and crisp eyes."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Glass Wall Reflections</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-08.jpg"
+                    alt="Casual modern workspace pose with laptop and natural daylight."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 08
+                </figcaption>
               </figure>
 
               <figure
-                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer h-36"
+                class="bg-slate-800/50 border border-white/10 rounded-xl overflow-hidden cursor-pointer group"
                 data-group="jonas"
                 data-index="9"
               >
-                <img
-                  src="/images/business-photos/jonas/style-09-city-outdoor.jpg"
-                  alt="Outdoor city portrait in soft morning light with mild background bokeh."
-                  class="block w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <figcaption class="sr-only">Outdoor City</figcaption>
+                <div class="aspect-[3/4] overflow-hidden">
+                  <img
+                    src="/images/businessphotos/Jonas-business-09.jpg"
+                    alt="Outdoor urban professional portrait with soft ambient city background."
+                    class="block w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption class="sr-only">
+                  Alternate Business Style 09
+                </figcaption>
               </figure>
             </div>
           </div>
