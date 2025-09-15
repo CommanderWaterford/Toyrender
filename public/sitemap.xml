@@ -57,13 +57,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/faq"/>
   </url>
 
-<!-- Gallery-->
-<url>
-    <loc>https://toyrender.com/gallery.html</loc>
-    <lastmod>2025-09-06T17:40:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery"/>
+<!-- AI Figurine Gallery (canonical updated) -->
+  <url>
+    <loc>https://toyrender.com/figurines-gallery/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <priority>0.63</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/figurines-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/figurines-gallery/"/>
   </url>
 <url>
     <loc>https://toyrender.com/galeria.html</loc>
