@@ -385,27 +385,6 @@
         scrollbar-width: none;
       }
 
-      /* Make native scrolling feel snappy & momentum-y */
-      .testimonial-track {
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-x: contain;
-        will-change: scroll-position;
-      }
-      .testimonial-track.dragging {
-        cursor: grabbing !important;
-      }
-
-      .testimonial-track.auto-scrolling {
-        scroll-snap-type: none;
-      }
-
-      .testimonials-section {
-        width: 100%;
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-
       .section-title {
         color: white;
         font-size: clamp(2rem, 5vw, 3.5rem);
@@ -413,44 +392,6 @@
         text-align: center;
         margin-bottom: 60px;
         line-height: 1.2;
-      }
-
-      .testimonials-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-        gap: 30px;
-        padding: 0 20px;
-      }
-
-      .testimonial-card {
-        background: rgba(30, 30, 45, 0.6);
-        backdrop-filter: blur(10px);
-        border: 2px solid;
-        border-image: linear-gradient(135deg, #ff6b6b, #ff8e53, #feca57) 1;
-        border-radius: 20px;
-        padding: 35px 30px;
-        position: relative;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .testimonial-card::before {
-        content: "";
-        position: absolute;
-        inset: -2px;
-        border-radius: 20px;
-        padding: 2px;
-        background: linear-gradient(135deg, #ff6b6b, #ff8e53, #feca57);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box,
-          linear-gradient(#fff 0 0);
-        mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0.7;
-      }
-
-      .testimonial-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 20px 40px rgba(255, 107, 107, 0.2);
       }
 
       .stars {
@@ -466,14 +407,6 @@
 
       .star.empty {
         color: #4a4a5e;
-      }
-
-      .testimonial-text {
-        color: #e0e0e0;
-        font-size: 17px;
-        line-height: 1.7;
-        margin-bottom: 30px;
-        min-height: 120px;
       }
 
       .customer-info {
@@ -518,27 +451,6 @@
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-      }
-
-      @media (max-width: 768px) {
-        .testimonials-grid {
-          grid-template-columns: 1fr;
-          padding: 0;
-        }
-
-        .testimonial-card {
-          padding: 25px 20px;
-        }
-
-        .section-title {
-          margin-bottom: 40px;
-        }
-      }
-
-      @media (min-width: 1200px) {
-        .testimonials-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
       }
 
       .google-auth-btn {
@@ -644,6 +556,284 @@
 
       .pack-progress-dot {
         transition: all 0.3s ease;
+      }
+
+      /* Gallery Grid Styles */
+      .gallery-section {
+        padding: 3rem 1.5rem;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+      }
+
+      .gallery-item {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        border-radius: 0.75rem;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: rgba(30, 30, 45, 0.6);
+        border: 2px solid rgba(147, 51, 234, 0.3);
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 30px rgba(147, 51, 234, 0.4);
+        border-color: rgba(147, 51, 234, 0.6);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .gallery-item-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        padding: 1rem;
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+      }
+
+      .gallery-item:hover .gallery-item-overlay {
+        transform: translateY(0);
+      }
+
+      .gallery-item-title {
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 600;
+      }
+
+      /* Lightbox Styles */
+      .lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+      }
+
+      .lightbox.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox-image {
+        max-width: 100%;
+        max-height: 85vh;
+        object-fit: contain;
+        border-radius: 0.5rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        animation: zoomIn 0.3s ease;
+      }
+
+      @keyframes zoomIn {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .lightbox-caption {
+        position: absolute;
+        bottom: -40px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        color: white;
+        font-size: 1rem;
+        padding: 0.5rem;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 0.5rem;
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 40px;
+        font-size: 2.5rem;
+        color: white;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+
+      .lightbox-close:hover {
+        background: rgba(147, 51, 234, 0.8);
+        transform: rotate(90deg);
+      }
+
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 3rem;
+        color: white;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+
+      .lightbox-nav:hover {
+        background: rgba(147, 51, 234, 0.8);
+      }
+
+      .lightbox-prev {
+        left: 20px;
+      }
+
+      .lightbox-next {
+        right: 20px;
+      }
+
+      .lightbox-counter {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        color: white;
+        background: rgba(0, 0, 0, 0.7);
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+      }
+
+      /* Thumbnail strip at bottom of lightbox */
+      .lightbox-thumbnails {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 0.5rem;
+        padding: 0.5rem;
+        background: rgba(0, 0, 0, 0.7);
+        border-radius: 0.5rem;
+        max-width: 80%;
+        overflow-x: auto;
+      }
+
+      .lightbox-thumbnail {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+      }
+
+      .lightbox-thumbnail:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .lightbox-thumbnail.active {
+        opacity: 1;
+        border-color: #9333ea;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .gallery-grid {
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 0.75rem;
+        }
+
+        .lightbox-nav {
+          font-size: 2rem;
+          padding: 0.5rem;
+        }
+
+        .lightbox-close {
+          top: 10px;
+          right: 10px;
+          width: 40px;
+          height: 40px;
+          font-size: 1.5rem;
+        }
+
+        .lightbox-thumbnails {
+          bottom: 10px;
+          max-width: 95%;
+        }
+
+        .lightbox-thumbnail {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      /* Loading spinner for images */
+      .gallery-item.loading::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 30px;
+        height: 30px;
+        border: 3px solid rgba(147, 51, 234, 0.3);
+        border-top-color: #9333ea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
       }
     </style>
     <script
@@ -1082,204 +1272,65 @@
       </div>
 
       <!-- Testimonials Examples-->
-      <section id="testimonials" class="py-12 relative">
-        <h2 class="text-2xl font-semibold mb-4 px-6">
+      <section id="testimonials" class="gallery-section">
+        <h2 class="text-2xl font-semibold mb-4 px-6" style="color: white">
           See What Others Created
         </h2>
 
-        <!-- arrows -->
-        <button
-          type="button"
-          class="hidden md:flex absolute left-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white"
-          data-track-left
-          aria-label="Scroll testimonials left"
-        >
-          ‹
-        </button>
-        <button
-          type="button"
-          class="hidden md:flex absolute right-2 top-1/2 -translate-y-1/2 z-20 h-10 w-10 items-center justify-center rounded-full bg-black/40 hover:bg-black/60 text-white"
-          data-track-right
-          aria-label="Scroll testimonials right"
-        >
-          ›
-        </button>
-
-        <!-- swipe/drag hint -->
-        <div
-          class="pointer-events-none absolute right-4 top-0 z-20 mt-2 px-3 py-1 rounded-full text-xs font-medium bg-black/60 text-white opacity-90 md:hidden"
-          data-swipe-hint
-        >
-          Swipe →
-        </div>
-        <div
-          class="pointer-events-none absolute right-4 top-0 z-20 mt-2 px-3 py-1 rounded-full text-xs font-medium bg-black/60 text-white opacity-90 hidden md:block"
-          data-drag-hint
-        >
-          Drag ↔︎
+        <div class="gallery-grid" id="galleryGrid">
+          <!-- Gallery items will be populated here -->
         </div>
 
-        <!-- gradient edges to suggest overflow -->
-        <div
-          class="pointer-events-none absolute inset-y-0 left-0 w-12 z-10 bg-gradient-to-r from-[rgba(0,0,0,0.25)] to-transparent"
-        ></div>
-        <div
-          class="pointer-events-none absolute inset-y-0 right-0 w-12 z-10 bg-gradient-to-l from-[rgba(0,0,0,0.25)] to-transparent"
-        ></div>
-
-        <div
-          class="testimonial-track relative flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 pb-3 touch-pan-x select-none cursor-grab active:cursor-grabbing no-scrollbar"
-          data-drag-scroll
-          role="region"
-          aria-label="Customer testimonials—drag or swipe to scroll"
-        >
-          <!-- Card 1 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example1.jpg"
-              alt="Customer figurine example 1"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Amazing quality! Turned my photo with my grandma into a figurine
-              that looks simply awesome. My family loves it!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Sarah M.</div>
-          </article>
-
-          <!-- Card 2 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example2.jpg"
-              alt="Customer figurine example 2"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Perfect for our anniversary! Good summer vibes memories was
-              exactly what I was looking for. Super fast generation too!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Mike T.</div>
-          </article>
-
-          <!-- Card 3 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example3.jpg"
-              alt="Customer figurine example 3"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Used this for my LinkedIn profile makeover. The business pro
-              figurine gives my profile a unique, memorable touch!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Jennifer L.</div>
-          </article>
-
-          <!-- Card 4 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example4.jpg"
-              alt="Customer figurine example 4"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Best gift ever for my birthday! My wife loved the figurine
-              design. It's now framed in our living room!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— David K.</div>
-          </article>
-
-          <!-- Card 5 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example5.jpg"
-              alt="Customer figurine example 5"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Created a set of Figurines of myself in shape for my girl friend.
-              She went immeditately to a 3D Publisher with the image! Great
-              quality output.”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Robert H.</div>
-          </article>
-
-          <!-- Card 6 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example6.jpg"
-              alt="Marriage figurine example image"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              "Our Marriage Photo figurines turned out incredible! Worth every
-              penny!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Emily R.</div>
-          </article>
-
-          <!-- Card 7 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example7.jpg"
-              alt="Flamenco Dancer figurine example"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Olé! Viva el Flamenco y los Figurines!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Maria L.</div>
-          </article>
-
-          <!-- Card 8 -->
-          <article
-            class="snap-start shrink-0 w-80 md:w-96 rounded-2xl p-4 shadow-md bg-white/5 border border-white/10 backdrop-blur"
-          >
-            <img
-              src="/images/Example8.jpg"
-              alt="Party Woman in Bikini figurine example"
-              class="w-full aspect-square object-cover rounded-xl"
-            />
-            <blockquote class="mt-3 text-sm opacity-90">
-              “Amazing photo of me in Bikini - used it in Tinder and Bumble!”
-            </blockquote>
-            <div class="mt-3 text-xs opacity-70">— Jenny A.</div>
-          </article>
-        </div>
-        <!-- Gallery CTA Button -->
+        <!-- Gallery CTA Buttons -->
         <div class="w-full flex justify-center mt-6 pb-2">
           <div class="flex flex-col sm:flex-row gap-4">
             <a
               href="/gallery"
-              class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-sm tracking-wide hover:from-purple-700 hover:to-pink-700 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-slate-900"
-              aria-label="View more figurine examples in the gallery"
+              class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full font-semibold text-sm tracking-wide hover:from-purple-700 hover:to-pink-700 transition-colors shadow-lg"
             >
               More Figurine Examples →
             </a>
             <a
               href="/dating-photos-gallery"
-              class="px-6 py-3 bg-gradient-to-r from-pink-600 to-red-600 rounded-full font-semibold text-sm tracking-wide hover:from-pink-700 hover:to-red-700 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-400 focus:ring-offset-slate-900"
-              aria-label="View dating photo style examples gallery"
+              class="px-6 py-3 bg-gradient-to-r from-pink-600 to-red-600 rounded-full font-semibold text-sm tracking-wide hover:from-pink-700 hover:to-red-700 transition-colors shadow-lg"
             >
               View Dating Photo Gallery →
             </a>
           </div>
         </div>
       </section>
+
+      <!-- Lightbox Modal -->
+      <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">
+          &times;
+        </button>
+        <button
+          class="lightbox-nav lightbox-prev"
+          onclick="navigateLightbox(-1)"
+        >
+          ‹
+        </button>
+        <button
+          class="lightbox-nav lightbox-next"
+          onclick="navigateLightbox(1)"
+        >
+          ›
+        </button>
+
+        <div class="lightbox-counter">
+          <span id="currentIndex">1</span> / <span id="totalImages">8</span>
+        </div>
+
+        <div class="lightbox-content">
+          <img id="lightboxImage" class="lightbox-image" src="" alt="" />
+          <div id="lightboxCaption" class="lightbox-caption"></div>
+        </div>
+
+        <div class="lightbox-thumbnails" id="lightboxThumbnails">
+          <!-- Thumbnails will be populated here -->
+        </div>
+      </div>
 
       <!-- Dating Photos CTA Section -->
       <section class="mt-20 text-center max-w-4xl mx-auto">
@@ -3299,180 +3350,157 @@
       refreshSession();
 
       /* ----------------- Testimonials drag code ----------------- */
-      (() => {
-        const friction = 0.92;
-        const wheelBoost = 0.9;
-
-        document.querySelectorAll("[data-drag-scroll]").forEach((el) => {
-          el.style.userSelect = "none";
-          el.style.touchAction = "pan-x";
-
-          let isDown = false,
-            startX = 0,
-            startLeft = 0;
-          let lastX = 0,
-            velocity = 0,
-            rafId = 0;
-
-          const stopMomentum = () => {
-            if (rafId) cancelAnimationFrame(rafId);
-            rafId = 0;
-          };
-          const momentum = () => {
-            stopMomentum();
-            const step = () => {
-              el.scrollLeft -= velocity;
-              velocity *= friction;
-              if (Math.abs(velocity) > 0.5) rafId = requestAnimationFrame(step);
-            };
-            rafId = requestAnimationFrame(step);
-          };
-
-          el.addEventListener("pointerdown", (e) => {
-            isDown = true;
-            el.setPointerCapture?.(e.pointerId);
-            startX = e.clientX;
-            startLeft = el.scrollLeft;
-            lastX = e.clientX;
-            velocity = 0;
-            stopMomentum();
-            el.classList.add("dragging");
-          });
-
-          el.addEventListener("pointermove", (e) => {
-            if (!isDown) return;
-            const dx = e.clientX - startX;
-            el.scrollLeft = startLeft - dx;
-            velocity = e.clientX - lastX;
-            lastX = e.clientX;
-          });
-
-          const endDrag = (e) => {
-            if (!isDown) return;
-            isDown = false;
-            el.releasePointerCapture?.(e.pointerId);
-            el.classList.remove("dragging");
-            momentum();
-          };
-          el.addEventListener("pointerup", endDrag);
-          el.addEventListener("pointercancel", endDrag);
-          el.addEventListener("pointerleave", () => {
-            if (isDown) endDrag({});
-          });
-
-          el.addEventListener(
-            "wheel",
-            (e) => {
-              if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                el.scrollLeft += e.deltaY * wheelBoost;
-                e.preventDefault();
-              }
+      const galleryData = [
+            {
+                src: '/images/Example1.jpg',
+                alt: 'Customer figurine example 1',
+                caption: '"Amazing quality! Turned my photo with my grandma into a figurine that looks simply awesome. My family loves it!" — Sarah M.'
             },
-            { passive: false }
-          );
+            {
+                src: '/images/Example2.jpg',
+                alt: 'Customer figurine example 2',
+                caption: '"Perfect for our anniversary! Good summer vibes memories was exactly what I was looking for. Super fast generation too!" — Mike T.'
+            },
+            {
+                src: '/images/Example3.jpg',
+                alt: 'Customer figurine example 3',
+                caption: '"Used this for my LinkedIn profile makeover. The business pro figurine gives my profile a unique, memorable touch!" — Jennifer L.'
+            },
+            {
+                src: '/images/Example4.jpg',
+                alt: 'Customer figurine example 4',
+                caption: '"Best gift ever for my birthday! My wife loved the figurine design. It\'s now framed in our living room!" — David K.'
+            },
+            {
+                src: '/images/Example5.jpg',
+                alt: 'Customer figurine example 5',
+                caption: '"Created a set of Figurines of myself in shape for my girl friend. She went immediately to a 3D Publisher with the image! Great quality output." — Robert H.'
+            },
+            {
+                src: '/images/Example6.jpg',
+                alt: 'Marriage figurine example image',
+                caption: '"Our Marriage Photo figurines turned out incredible! Worth every penny!" — Emily R.'
+            },
+            {
+                src: '/images/Example7.jpg',
+                alt: 'Flamenco Dancer figurine example',
+                caption: '"Olé! Viva el Flamenco y los Figurines!" — Maria L.'
+            },
+            {
+                src: '/images/Example8.jpg',
+                alt: 'Party Woman in Bikini figurine example',
+                caption: '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.'
+            },
+            {
+                src: '/images/Example9.jpg',
+                alt: 'Figurine example',
+                caption: '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.'
+            },
+           {
+                src: '/images/Example10.jpg',
+                alt: 'Figurine example',
+                caption: '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.'
+            }
 
-          el.tabIndex = 0;
-          el.addEventListener("keydown", (e) => {
-            if (e.key === "ArrowRight")
-              el.scrollBy({ left: el.clientWidth * 0.9, behavior: "smooth" });
-            if (e.key === "ArrowLeft")
-              el.scrollBy({ left: -el.clientWidth * 0.9, behavior: "smooth" });
-          });
-        });
-      })();
+        ];
 
-      // autoscroll
-      /* ----------------- Testimonials auto-scroll (seamless loop) ----------------- */
+        let currentImageIndex = 0;
 
-      // === AUTOPLAY testimonials (seamless + robust) ===
-      (() => {
-        const track = document.querySelector(
-          ".testimonial-track[data-drag-scroll]"
-        );
-        if (!track) return;
-
-        // Optional speed via data-auto-speed="0.6" (px per frame). Default ~0.5.
-        const speed = parseFloat(track.dataset.autoSpeed) || 0.5;
-
-        // Duplicate children once so we can loop seamlessly (idempotent).
-        if (!track.__duplicated) {
-          const kids = Array.from(track.children);
-          const frag = document.createDocumentFragment();
-          kids.forEach((k) => {
-            const clone = k.cloneNode(true);
-            clone.setAttribute("aria-hidden", "true");
-            frag.appendChild(clone);
-          });
-          track.appendChild(frag);
-          track.__duplicated = true;
+        // Initialize gallery
+        function initGallery() {
+            const galleryGrid = document.getElementById('galleryGrid');
+            
+            galleryData.forEach((item, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item loading';
+                galleryItem.onclick = () => openLightbox(index);
+                
+                const img = document.createElement('img');
+                img.src = item.src;
+                img.alt = item.alt;
+                img.loading = 'lazy';
+                img.onload = () => galleryItem.classList.remove('loading');
+                
+                const overlay = document.createElement('div');
+                overlay.className = 'gallery-item-overlay';
+                overlay.innerHTML = `<div class="gallery-item-title">Example ${index + 1}</div>`;
+                
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(overlay);
+                galleryGrid.appendChild(galleryItem);
+            });
+            
+            // Initialize lightbox thumbnails
+            const thumbnailsContainer = document.getElementById('lightboxThumbnails');
+            galleryData.forEach((item, index) => {
+                const thumb = document.createElement('img');
+                thumb.src = item.src;
+                thumb.alt = item.alt;
+                thumb.className = 'lightbox-thumbnail';
+                thumb.onclick = () => goToImage(index);
+                thumbnailsContainer.appendChild(thumb);
+            });
         }
 
-        let halfWidth = 0;
-        let playing = true; // force-start (ignore prefers-reduced-motion)
+        // Lightbox functions
+        function openLightbox(index) {
+            currentImageIndex = index;
+            updateLightbox();
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
 
-        const measure = () => {
-          // Wait for images to layout
-          halfWidth = track.scrollWidth / 2;
-          // Only autoplay if actual overflow exists
-          playing = halfWidth > track.clientWidth + 2;
-          track.classList.toggle("auto-scrolling", playing); // disables snap while auto
-        };
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
 
-        // Run measure after load and on resize/layout changes
-        const afterLoad = () => {
-          measure();
-          // A few re-measures while images settle
-          setTimeout(measure, 200);
-          setTimeout(measure, 600);
-          setTimeout(measure, 1200);
-        };
-        if (document.readyState === "complete") afterLoad();
-        else window.addEventListener("load", afterLoad);
+        function navigateLightbox(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = galleryData.length - 1;
+            if (currentImageIndex >= galleryData.length) currentImageIndex = 0;
+            updateLightbox();
+        }
 
-        // Keep measuring if container/cards change size
-        const ro = new ResizeObserver(measure);
-        ro.observe(track);
+        function goToImage(index) {
+            currentImageIndex = index;
+            updateLightbox();
+        }
 
-        // rAF loop
-        const step = () => {
-          if (playing) {
-            let next = track.scrollLeft + speed;
-            if (halfWidth > 0 && next >= halfWidth) next -= halfWidth; // seamless wrap
-            track.scrollLeft = next;
-          }
-          requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
+        function updateLightbox() {
+            const current = galleryData[currentImageIndex];
+            document.getElementById('lightboxImage').src = current.src;
+            document.getElementById('lightboxImage').alt = current.alt;
+            document.getElementById('lightboxCaption').textContent = current.caption;
+            document.getElementById('currentIndex').textContent = currentImageIndex + 1;
+            document.getElementById('totalImages').textContent = galleryData.length;
+            
+            // Update thumbnail highlights
+            const thumbs = document.querySelectorAll('.lightbox-thumbnail');
+            thumbs.forEach((thumb, index) => {
+                thumb.classList.toggle('active', index === currentImageIndex);
+            });
+        }
 
-        // Pause on user interaction; resume after
-        const pause = () => (playing = false);
-        const resume = () => {
-          measure(); // recompute in case user repositioned
-          playing = halfWidth > track.clientWidth + 2;
-        };
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+            }
+        });
 
-        ["mouseenter", "pointerdown", "focusin", "touchstart"].forEach((evt) =>
-          track.addEventListener(evt, pause, { passive: true })
-        );
-        [
-          "mouseleave",
-          "pointerup",
-          "focusout",
-          "touchend",
-          "touchcancel",
-        ].forEach((evt) =>
-          track.addEventListener(evt, resume, { passive: true })
-        );
+        // Click outside to close
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === e.currentTarget) closeLightbox();
+        });
 
-        // Arrow buttons should also pause
-        document
-          .querySelector("[data-track-left]")
-          ?.addEventListener("click", pause);
-        document
-          .querySelector("[data-track-right]")
-          ?.addEventListener("click", pause);
-      })();
-
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', initGallery);
+    
+        
+    
       // ---- Stripe init (must come before using `stripe`) ----
       if (!window.Stripe) {
         console.error("Stripe.js failed to load");
