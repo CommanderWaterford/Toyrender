@@ -3351,156 +3351,167 @@
 
       /* ----------------- Testimonials drag code ----------------- */
       const galleryData = [
-            {
-                src: '/images/Example1.jpg',
-                alt: 'Customer figurine example 1',
-                caption: '"Amazing quality! Turned my photo with my grandma into a figurine that looks simply awesome. My family loves it!" — Sarah M.'
-            },
-            {
-                src: '/images/Example2.jpg',
-                alt: 'Customer figurine example 2',
-                caption: '"Perfect for our anniversary! Good summer vibes memories was exactly what I was looking for. Super fast generation too!" — Mike T.'
-            },
-            {
-                src: '/images/Example3.jpg',
-                alt: 'Customer figurine example 3',
-                caption: '"Used this for my LinkedIn profile makeover. The business pro figurine gives my profile a unique, memorable touch!" — Jennifer L.'
-            },
-            {
-                src: '/images/Example4.jpg',
-                alt: 'Customer figurine example 4',
-                caption: '"Best gift ever for my birthday! My wife loved the figurine design. It\'s now framed in our living room!" — David K.'
-            },
-            {
-                src: '/images/Example5.jpg',
-                alt: 'Customer figurine example 5',
-                caption: '"Created a set of Figurines of myself in shape for my girl friend. She went immediately to a 3D Publisher with the image! Great quality output." — Robert H.'
-            },
-            {
-                src: '/images/Example6.jpg',
-                alt: 'Marriage figurine example image',
-                caption: '"Our Marriage Photo figurines turned out incredible! Worth every penny!" — Emily R.'
-            },
-            {
-                src: '/images/Example7.jpg',
-                alt: 'Flamenco Dancer figurine example',
-                caption: '"Olé! Viva el Flamenco y los Figurines!" — Maria L.'
-            },
-            {
-                src: '/images/Example8.jpg',
-                alt: 'Party Woman in Bikini figurine example',
-                caption: '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.'
-            },
-            {
-                src: '/images/Example9.jpg',
-                alt: 'Figurine example',
-                caption: '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.'
-            },
-           {
-                src: '/images/Example10.jpg',
-                alt: 'Figurine example',
-                caption: '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.'
-            }
+        {
+          src: "/images/Example1.jpg",
+          alt: "Customer figurine example 1",
+          caption:
+            '"Amazing quality! Turned my photo with my grandma into a figurine that looks simply awesome. My family loves it!" — Sarah M.',
+        },
+        {
+          src: "/images/Example2.jpg",
+          alt: "Young Woman creating a Figurine of herself",
+          caption:
+            '"Creating a figurine of myself! Crazy, isnt it?! Super fast generation!" — Mia R.',
+        },
+        {
+          src: "/images/Example3.jpg",
+          alt: "Customer figurine example 3",
+          caption:
+            '"Used this for my LinkedIn profile makeover. The business pro figurine gives my profile a unique, memorable touch!" — Jennifer L.',
+        },
+        {
+          src: "/images/Example4.jpg",
+          alt: "Customer figurine example 4",
+          caption:
+            '"Best gift ever for my birthday! My wife loved the figurine design. It\'s now framed in our living room!" — David K.',
+        },
+        {
+          src: "/images/Example5.jpg",
+          alt: "Customer figurine example 5",
+          caption:
+            '"Created a set of Figurines of myself in shape for my girl friend. She went immediately to a 3D Publisher with the image! Great quality output." — Robert H.',
+        },
+        {
+          src: "/images/Example6.jpg",
+          alt: "Marriage figurine example image",
+          caption:
+            '"Our Marriage Photo figurines turned out incredible! Worth every penny!" — Emily R.',
+        },
+        {
+          src: "/images/Example7.jpg",
+          alt: "Flamenco Dancer figurine example",
+          caption: '"Olé! Viva el Flamenco y los Figurines!" — Maria L.',
+        },
+        {
+          src: "/images/Example8.jpg",
+          alt: "Party Woman in Bikini figurine example",
+          caption:
+            '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.',
+        },
+        {
+          src: "/images/Example9.jpg",
+          alt: "Couple in summer clothes as AI Figurine",
+          caption:
+            '"Perfect for our anniversary! Good summer vibes memories was exactly what I was looking for. Super fast generation too!" — Mike T.',
+        },
+        {
+          src: "/images/Example10.jpg",
+          alt: "Woman in White Dress as Figurine in an Art Museum",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+      ];
 
-        ];
+      let currentImageIndex = 0;
 
-        let currentImageIndex = 0;
+      // Initialize gallery
+      function initGallery() {
+        const galleryGrid = document.getElementById("galleryGrid");
 
-        // Initialize gallery
-        function initGallery() {
-            const galleryGrid = document.getElementById('galleryGrid');
-            
-            galleryData.forEach((item, index) => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item loading';
-                galleryItem.onclick = () => openLightbox(index);
-                
-                const img = document.createElement('img');
-                img.src = item.src;
-                img.alt = item.alt;
-                img.loading = 'lazy';
-                img.onload = () => galleryItem.classList.remove('loading');
-                
-                const overlay = document.createElement('div');
-                overlay.className = 'gallery-item-overlay';
-                overlay.innerHTML = `<div class="gallery-item-title">Example ${index + 1}</div>`;
-                
-                galleryItem.appendChild(img);
-                galleryItem.appendChild(overlay);
-                galleryGrid.appendChild(galleryItem);
-            });
-            
-            // Initialize lightbox thumbnails
-            const thumbnailsContainer = document.getElementById('lightboxThumbnails');
-            galleryData.forEach((item, index) => {
-                const thumb = document.createElement('img');
-                thumb.src = item.src;
-                thumb.alt = item.alt;
-                thumb.className = 'lightbox-thumbnail';
-                thumb.onclick = () => goToImage(index);
-                thumbnailsContainer.appendChild(thumb);
-            });
-        }
+        galleryData.forEach((item, index) => {
+          const galleryItem = document.createElement("div");
+          galleryItem.className = "gallery-item loading";
+          galleryItem.onclick = () => openLightbox(index);
 
-        // Lightbox functions
-        function openLightbox(index) {
-            currentImageIndex = index;
-            updateLightbox();
-            document.getElementById('lightbox').classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
+          const img = document.createElement("img");
+          img.src = item.src;
+          img.alt = item.alt;
+          img.loading = "lazy";
+          img.onload = () => galleryItem.classList.remove("loading");
 
-        function closeLightbox() {
-            document.getElementById('lightbox').classList.remove('active');
-            document.body.style.overflow = '';
-        }
+          const overlay = document.createElement("div");
+          overlay.className = "gallery-item-overlay";
+          overlay.innerHTML = `<div class="gallery-item-title">Example ${
+            index + 1
+          }</div>`;
 
-        function navigateLightbox(direction) {
-            currentImageIndex += direction;
-            if (currentImageIndex < 0) currentImageIndex = galleryData.length - 1;
-            if (currentImageIndex >= galleryData.length) currentImageIndex = 0;
-            updateLightbox();
-        }
-
-        function goToImage(index) {
-            currentImageIndex = index;
-            updateLightbox();
-        }
-
-        function updateLightbox() {
-            const current = galleryData[currentImageIndex];
-            document.getElementById('lightboxImage').src = current.src;
-            document.getElementById('lightboxImage').alt = current.alt;
-            document.getElementById('lightboxCaption').textContent = current.caption;
-            document.getElementById('currentIndex').textContent = currentImageIndex + 1;
-            document.getElementById('totalImages').textContent = galleryData.length;
-            
-            // Update thumbnail highlights
-            const thumbs = document.querySelectorAll('.lightbox-thumbnail');
-            thumbs.forEach((thumb, index) => {
-                thumb.classList.toggle('active', index === currentImageIndex);
-            });
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (document.getElementById('lightbox').classList.contains('active')) {
-                if (e.key === 'Escape') closeLightbox();
-                if (e.key === 'ArrowLeft') navigateLightbox(-1);
-                if (e.key === 'ArrowRight') navigateLightbox(1);
-            }
+          galleryItem.appendChild(img);
+          galleryItem.appendChild(overlay);
+          galleryGrid.appendChild(galleryItem);
         });
 
-        // Click outside to close
-        document.getElementById('lightbox').addEventListener('click', (e) => {
-            if (e.target === e.currentTarget) closeLightbox();
+        // Initialize lightbox thumbnails
+        const thumbnailsContainer =
+          document.getElementById("lightboxThumbnails");
+        galleryData.forEach((item, index) => {
+          const thumb = document.createElement("img");
+          thumb.src = item.src;
+          thumb.alt = item.alt;
+          thumb.className = "lightbox-thumbnail";
+          thumb.onclick = () => goToImage(index);
+          thumbnailsContainer.appendChild(thumb);
         });
+      }
 
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', initGallery);
-    
-        
-    
+      // Lightbox functions
+      function openLightbox(index) {
+        currentImageIndex = index;
+        updateLightbox();
+        document.getElementById("lightbox").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        document.getElementById("lightbox").classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      function navigateLightbox(direction) {
+        currentImageIndex += direction;
+        if (currentImageIndex < 0) currentImageIndex = galleryData.length - 1;
+        if (currentImageIndex >= galleryData.length) currentImageIndex = 0;
+        updateLightbox();
+      }
+
+      function goToImage(index) {
+        currentImageIndex = index;
+        updateLightbox();
+      }
+
+      function updateLightbox() {
+        const current = galleryData[currentImageIndex];
+        document.getElementById("lightboxImage").src = current.src;
+        document.getElementById("lightboxImage").alt = current.alt;
+        document.getElementById("lightboxCaption").textContent =
+          current.caption;
+        document.getElementById("currentIndex").textContent =
+          currentImageIndex + 1;
+        document.getElementById("totalImages").textContent = galleryData.length;
+
+        // Update thumbnail highlights
+        const thumbs = document.querySelectorAll(".lightbox-thumbnail");
+        thumbs.forEach((thumb, index) => {
+          thumb.classList.toggle("active", index === currentImageIndex);
+        });
+      }
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (document.getElementById("lightbox").classList.contains("active")) {
+          if (e.key === "Escape") closeLightbox();
+          if (e.key === "ArrowLeft") navigateLightbox(-1);
+          if (e.key === "ArrowRight") navigateLightbox(1);
+        }
+      });
+
+      // Click outside to close
+      document.getElementById("lightbox").addEventListener("click", (e) => {
+        if (e.target === e.currentTarget) closeLightbox();
+      });
+
+      // Initialize on load
+      document.addEventListener("DOMContentLoaded", initGallery);
+
       // ---- Stripe init (must come before using `stripe`) ----
       if (!window.Stripe) {
         console.error("Stripe.js failed to load");
