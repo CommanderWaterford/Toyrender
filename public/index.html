@@ -2451,7 +2451,6 @@
           </div>
         </details>
 
-        <!-- Newly added extended FAQ items -->
         <details
           class="group bg-slate-800/50 border border-purple-500/30 rounded-xl p-5"
         >
@@ -2640,7 +2639,6 @@
 
       let selectedStyle = "figurine1";
 
-      // Variable to track if we're doing a pack generation
       let isPackGeneration = false;
       let packResults = [];
       let currentPackIndex = 0;
@@ -2770,8 +2768,6 @@
         const paid = Number(c.paid_remaining || 0);
         return free + paid;
       }
-
-      // (Removed duplicate updateAuthUI definition; primary version earlier includes Google account labeling)
 
       /* ----------------------- Auth modal logic ----------------------- */
       const authModal = $("#authModal");
@@ -3007,8 +3003,6 @@
         }
       }
 
-      // (Removed duplicate generation logic block)
-
       downloadBtn.addEventListener("click", () => {
         const link = document.createElement("a");
         link.href = resultPreview.src;
@@ -3153,10 +3147,6 @@
           progressDiv?.remove();
         }
       }
-
-      // COMPLETE REPLACEMENT - This goes in your showPackResults() function
-
-      // Replace your showPackResults() function with this version that matches heights:
 
       function showPackResults() {
         if (packResults.length === 0) return;
