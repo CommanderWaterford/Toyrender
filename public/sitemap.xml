@@ -137,6 +137,16 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/cosplay/"/>
   </url>
 
+  <!-- Glamour Shoots Gallery -->
+  <url>
+    <loc>https://toyrender.com/glamour-gallery/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <priority>0.60</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery/"/>
+  </url>
+
   <!-- Blog Article: Why Dating Photos Matter -->
   <url>
     <loc>https://toyrender.com/blog/why-dating-photos-matter-statistics/</loc>
