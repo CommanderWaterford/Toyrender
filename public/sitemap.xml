@@ -127,6 +127,16 @@
     <lastmod>2025-09-10</lastmod>
   </url>
 
+  <!-- Cosplay Example Gallery -->
+  <url>
+    <loc>https://toyrender.com/cosplay/</loc>
+    <lastmod>2025-09-15</lastmod>
+    <priority>0.63</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/cosplay/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/cosplay/"/>
+  </url>
+
   <!-- Blog Article: Why Dating Photos Matter -->
   <url>
     <loc>https://toyrender.com/blog/why-dating-photos-matter-statistics/</loc>
