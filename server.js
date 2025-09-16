@@ -27,6 +27,7 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 const archiver = require("archiver");
+const logen = require("./utils/logen");
 
 // --- App init ---
 const app = express();
@@ -393,21 +394,20 @@ passport.use(
           let user = await get("SELECT * FROM users WHERE email = ?", [email]);
 
           if (!user) {
-            // Create new user with Google auth (no password)
+            // 1) CREATE USER
             const r = await run(
               `INSERT INTO users (email, password_hash, verified_at, role) 
-             VALUES (?, ?, datetime('now'), 'user')`,
-              [email, "GOOGLE_AUTH"] // Special marker instead of password hash
+     VALUES (?, ?, datetime('now'), 'user')`,
+              [email, "GOOGLE_AUTH"]
             );
-
             const userId = r.lastID;
 
-            // Create initial credits for new user
-            await run(
-              `INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining) 
-             VALUES (?,?,?,?)`,
-              [userId, 0, nextUtcMidnightISO(), STARTER_CREDITS]
-            );
+            // 2) CREATE CREDITS (idempotent)
+            await ensureCreditsRow(userId, {
+              free: 0,
+              renewUtc: nextUtcMidnightISO(),
+              paid: STARTER_CREDITS,
+            });
 
             user = await get("SELECT * FROM users WHERE id = ?", [userId]);
           } else if (user.password_hash === "GOOGLE_AUTH") {
@@ -518,6 +518,40 @@ function logPayment(data) {
     console.log(`💳 Payment Event: ${logLine}`);
   } catch (err) {
     console.error("!!! FAILED TO WRITE TO PAYMENT LOG !!!", err);
+  }
+}
+
+function logUserRegistrationSuccess({ userId, email, ip, userAgent }) {
+  try {
+    const payload = { userId, email, ip, userAgent };
+    logen.logRegistrationSuccess(payload);
+    logen.logRegistration(payload);
+  } catch (err) {
+    console.error("Failed to log user registration", err);
+  }
+}
+
+function logUserRegistrationFailure({ email, ip, userAgent, reason, status }) {
+  try {
+    logen.logRegistrationFailure({ email, ip, userAgent, reason, status });
+  } catch (err) {
+    console.error("Failed to log user registration failure", err);
+  }
+}
+
+function logUserAuthSuccess({ userId, email, ip, userAgent }) {
+  try {
+    logen.logAuthSuccess({ userId, email, ip, userAgent });
+  } catch (err) {
+    console.error("Failed to log user auth success", err);
+  }
+}
+
+function logUserAuthFailure({ email, ip, userAgent, reason, status }) {
+  try {
+    logen.logAuthFailure({ email, ip, userAgent, reason, status });
+  } catch (err) {
+    console.error("Failed to log user auth failure", err);
   }
 }
 
@@ -1097,6 +1131,22 @@ async function isRecentDuplicate(userId, imgHash16) {
   return !!row;
 }
 
+// one place in your helpers section
+async function ensureCreditsRow(
+  userId,
+  { free = 0, renewUtc = nextUtcMidnightISO(), paid = 0 } = {}
+) {
+  // Create if missing (idempotent)
+  await run(
+    `
+    INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining)
+    VALUES (?,?,?,?)
+    ON CONFLICT(user_id) DO NOTHING
+  `,
+    [userId, free, renewUtc, paid]
+  );
+}
+
 // --- Rate limiting (global + per-user for /api/generate) ---
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
@@ -1404,6 +1454,15 @@ function checkPassword(pwRaw, email = "") {
   return { ok: true, pw };
 }
 
+async function userHasRealPayment(userId) {
+  // "Real money" = Stripe payment with amount > 0 (paid session) recorded by webhook/confirm
+  const row = await get(
+    "SELECT 1 FROM payments WHERE user_id=? AND amount > 0 AND source='stripe' LIMIT 1",
+    [userId]
+  );
+  return !!row;
+}
+
 async function grantCreditsAfterPayment({
   eventId,
   userId,
@@ -1435,9 +1494,9 @@ async function grantCreditsAfterPayment({
 
     // record payment
     await run(
-      `INSERT INTO payments (id, user_id, amount, currency, credits_added)
-       VALUES (?,?,?,?,?)`,
-      [eventId, userId, amount, currency, credits]
+      `INSERT INTO payments (id, user_id, amount, currency, credits_added, source)
+   VALUES (?,?,?,?,?,?)`,
+      [eventId, userId, amount, currency, credits, "stripe"]
     );
 
     return { ok: true };
@@ -1549,21 +1608,58 @@ app.post(
   authLimiter,
   authSlowdown,
   async (req, res) => {
+    const ip = req.ip;
+    const userAgent = (req.get("user-agent") || "").slice(0, 255);
+    let attemptedEmail = "";
     try {
       // Enforce JSON
       if (!/application\/json/i.test(req.headers["content-type"] || "")) {
+        logUserRegistrationFailure({
+          email: null,
+          ip,
+          userAgent,
+          reason: "invalid_content_type",
+          status: 415,
+        });
         return res.status(415).json({ error: "Use application/json" });
       }
 
       const email = normalizeEmailStrict(req.body?.email || "");
+      attemptedEmail = email;
       const pwCheck = checkPassword(
         String(req.body?.password || ""),
         email || ""
       );
-      if (!email) return res.status(400).json({ error: "Invalid email" });
-      if (isDisposable(email))
+      if (!email) {
+        logUserRegistrationFailure({
+          email: null,
+          ip,
+          userAgent,
+          reason: "invalid_email",
+          status: 400,
+        });
+        return res.status(400).json({ error: "Invalid email" });
+      }
+      if (isDisposable(email)) {
+        logUserRegistrationFailure({
+          email,
+          ip,
+          userAgent,
+          reason: "disposable_email",
+          status: 400,
+        });
         return res.status(400).json({ error: "Disposable email not allowed" });
-      if (!pwCheck.ok) return res.status(400).json({ error: pwCheck.err });
+      }
+      if (!pwCheck.ok) {
+        logUserRegistrationFailure({
+          email,
+          ip,
+          userAgent,
+          reason: pwCheck.err || "weak_password",
+          status: 400,
+        });
+        return res.status(400).json({ error: pwCheck.err });
+      }
 
       // Prevent user enumeration timing leaks by doing a small fake hash even if user exists
       const existing = await get("SELECT id FROM users WHERE email = ?", [
@@ -1573,10 +1669,19 @@ app.post(
         // Optional: respond 200 to avoid enumeration, but UX is worse.
         // Here we keep 409 and still burn ~bcrypt time for parity.
         await bcrypt.hash("dummyPasswordToNormalizeTiming", 12);
+        logUserRegistrationFailure({
+          email,
+          ip,
+          userAgent,
+          reason: "email_exists",
+          status: 409,
+        });
         return res.status(409).json({ error: "Email already registered" });
       }
 
       const hash = await bcrypt.hash(pwCheck.pw, 12);
+
+      let newUserId = null;
 
       // Transaction: create user + starter credits atomically
       await txn(async () => {
@@ -1585,6 +1690,7 @@ app.post(
           [email, hash]
         );
         const userId = r.lastID;
+        newUserId = userId;
 
         await run(
           "INSERT INTO user_credits (user_id, free_remaining, free_renew_utc, paid_remaining) VALUES (?,?,?,?)",
@@ -1606,10 +1712,26 @@ app.post(
         }
       });
 
+      if (newUserId) {
+        logUserRegistrationSuccess({
+          userId: newUserId,
+          email,
+          ip,
+          userAgent,
+        });
+      }
+
       res
         .status(201)
         .json({ ok: true, user: await userById(req.session.userId) });
     } catch (e) {
+      logUserRegistrationFailure({
+        email: attemptedEmail || null,
+        ip,
+        userAgent,
+        reason: e?.message || "register_failed",
+        status: 500,
+      });
       res.status(500).json({ error: e.message || "register failed" });
     }
   }
@@ -1620,17 +1742,36 @@ app.post(
   authLimiter,
   authSlowdown,
   async (req, res) => {
+    const ip = req.ip;
+    const userAgent = (req.get("user-agent") || "").slice(0, 255);
+    let attemptedEmail = "";
     try {
       if (!/application\/json/i.test(req.headers["content-type"] || "")) {
+        logUserAuthFailure({
+          email: null,
+          ip,
+          userAgent,
+          reason: "invalid_content_type",
+          status: 415,
+        });
         return res.status(415).json({ error: "Use application/json" });
       }
       const email = normalizeEmailStrict(req.body?.email || "");
+      attemptedEmail = email;
       const password = String(req.body?.password || "").replace(
         /[\u0000-\u001F\u007F-\u009F]/g,
         ""
       );
-      if (!email || !password)
+      if (!email || !password) {
+        logUserAuthFailure({
+          email: email || null,
+          ip,
+          userAgent,
+          reason: "missing_credentials",
+          status: 400,
+        });
         return res.status(400).json({ error: "email and password required" });
+      }
 
       const user = await get("SELECT * FROM users WHERE email = ?", [email]);
       // Compare with a dummy hash to normalize timing if user not found
@@ -1638,8 +1779,16 @@ app.post(
         user?.password_hash ||
         "$2b$12$C2wI3ipYv9a7dZlXf5sA3eVn0vU2gkTFQH/2K4kR0fF6qS9sC8F7y"; // random valid bcrypt
       const ok = await bcrypt.compare(password, hash);
-      if (!user || !ok)
+      if (!user || !ok) {
+        logUserAuthFailure({
+          email,
+          ip,
+          userAgent,
+          reason: "invalid_credentials",
+          status: 401,
+        });
         return res.status(401).json({ error: "Invalid credentials" });
+      }
 
       if (req.session && typeof req.session.regenerate === "function") {
         await new Promise((resolve, reject) =>
@@ -1655,8 +1804,22 @@ app.post(
         throw new Error("Session not initialized");
       }
 
+      logUserAuthSuccess({
+        userId: user.id,
+        email,
+        ip,
+        userAgent,
+      });
+
       res.json({ ok: true, user: await userById(req.session.userId) });
     } catch (e) {
+      logUserAuthFailure({
+        email: attemptedEmail || null,
+        ip,
+        userAgent,
+        reason: e?.message || "login_failed",
+        status: e?.status || 500,
+      });
       res.status(500).json({ error: e.message || "login failed" });
     }
   }
@@ -1797,14 +1960,10 @@ app.post(
       );
 
       // Check if user has made any payments
-      const hasPayments = await get(
-        "SELECT id FROM payments WHERE user_id = ? LIMIT 1",
-        [userId]
-      );
+      const hasRealPayment = await userHasRealPayment(userId);
 
       // User is on free trial if they have no payment history and only starter credits
-      const isFreeTrial =
-        !hasPayments && userCredits.paid_remaining <= STARTER_CREDITS;
+      const isFreeTrial = !hasRealPayment;
 
       // Log start
       await run(
