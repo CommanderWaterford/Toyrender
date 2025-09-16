@@ -950,7 +950,17 @@
             <span
               aria-hidden="true"
               class="w-5 h-3 rounded-sm border border-white/20"
-              style="background: linear-gradient(to bottom, #aa151b 0%, #aa151b 33%, #f1bf00 33%, #f1bf00 66%, #aa151b 66%, #aa151b 100%);"
+              style="
+                background: linear-gradient(
+                  to bottom,
+                  #aa151b 0%,
+                  #aa151b 33%,
+                  #f1bf00 33%,
+                  #f1bf00 66%,
+                  #aa151b 66%,
+                  #aa151b 100%
+                );
+              "
             ></span>
             <span class="text-sm font-semibold">ES</span>
           </a>
@@ -992,8 +1002,54 @@
           stunning 1:7 scale figurine designs or amazing AI Headshots in
           seconds. Perfect for collectors, gifts, or just for fun!
         </p>
+
+        <!-- PRIMARY CTA BUTTON - Above the fold -->
+        <div class="mb-8">
+          <button
+            id="heroCTABtn"
+            class="px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl pulse-glow inline-flex items-center"
+            aria-label="Start creating your AI figurine now"
+          >
+            <i class="fas fa-magic mr-3 text-3xl" aria-hidden="true"></i>
+            <span>Create Your AI Photo Now</span>
+            <i
+              class="fas fa-arrow-down ml-3 text-2xl animate-bounce"
+              aria-hidden="true"
+            ></i>
+          </button>
+        </div>
+
+        <!-- Secondary options for different use cases -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+          <button
+            id="figurineCTABtn"
+            class="px-6 py-3 bg-purple-800/50 backdrop-blur-sm rounded-full border-2 border-purple-500/50 hover:bg-purple-700/50 hover:border-purple-400 transition-all transform hover:scale-105"
+          >
+            <i class="fas fa-cube mr-2 text-purple-400" aria-hidden="true"></i>
+            <span>Make Figurine</span>
+          </button>
+          <button
+            id="datingCTABtn"
+            class="px-6 py-3 bg-pink-800/50 backdrop-blur-sm rounded-full border-2 border-pink-500/50 hover:bg-pink-700/50 hover:border-pink-400 transition-all transform hover:scale-105"
+          >
+            <i class="fas fa-heart mr-2 text-pink-400" aria-hidden="true"></i>
+            <span>Dating Photos</span>
+          </button>
+          <button
+            id="businessCTABtn"
+            class="px-6 py-3 bg-blue-800/50 backdrop-blur-sm rounded-full border-2 border-blue-500/50 hover:bg-blue-700/50 hover:border-blue-400 transition-all transform hover:scale-105"
+          >
+            <i
+              class="fas fa-briefcase mr-2 text-blue-400"
+              aria-hidden="true"
+            ></i>
+            <span>Business Photos</span>
+          </button>
+        </div>
+
+        <!-- Trust indicators -->
         <div
-          class="flex flex-wrap justify-center gap-4 mb-8"
+          class="flex flex-wrap justify-center gap-4 mb-4"
           role="list"
           aria-label="Key features"
         >
@@ -1022,6 +1078,12 @@
             ><span>High-Res Download</span>
           </div>
         </div>
+
+        <!-- Social proof element -->
+        <p class="text-sm text-purple-300">
+          <i class="fas fa-users mr-2 text-purple-400"></i>
+          Join 10,000+ users who've created amazing AI photos
+        </p>
       </section>
 
       <!-- Upload Section -->
@@ -3589,6 +3651,65 @@
             toast(e.message || "Failed to start checkout.");
           }
         });
+    </script>
+    <script>
+      // Add the CTA button functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        // Main CTA - scrolls to upload section
+        const heroCTA = document.getElementById("heroCTABtn");
+        if (heroCTA) {
+          heroCTA.addEventListener("click", function () {
+            // Smooth scroll to upload section
+            document.querySelector("#uploadArea").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+
+            // Optional: Track click event
+            if (typeof gtag !== "undefined") {
+              gtag("event", "click_hero_cta", {
+                event_category: "engagement",
+                event_label: "hero_main_cta",
+              });
+            }
+          });
+        }
+
+        // Secondary CTAs - scroll to upload and pre-select style
+        const figurineCTA = document.getElementById("figurineCTABtn");
+        const datingCTA = document.getElementById("datingCTABtn");
+        const businessCTA = document.getElementById("businessCTABtn");
+
+        if (figurineCTA) {
+          figurineCTA.addEventListener("click", function () {
+            selectedStyle = "figurine1";
+            document.querySelector("#uploadArea").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          });
+        }
+
+        if (datingCTA) {
+          datingCTA.addEventListener("click", function () {
+            selectedStyle = "dating1";
+            document.querySelector("#uploadArea").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          });
+        }
+
+        if (businessCTA) {
+          businessCTA.addEventListener("click", function () {
+            selectedStyle = "business1";
+            document.querySelector("#uploadArea").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          });
+        }
+      });
     </script>
   </body>
 </html>
