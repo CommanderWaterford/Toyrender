@@ -457,11 +457,58 @@
     </article>
 
     <!-- Global Footer -->
-    <footer
-      class="mt-24 border-t border-white/10 py-10 text-center text-sm text-purple-300"
-    >
-      <p>&copy; 2025 Toyrender. All rights reserved.</p>
+    <footer class="mt-24 border-t border-white/10 bg-black/30">
+      <div class="max-w-6xl mx-auto px-6 lg:px-12 py-10 grid gap-8 md:grid-cols-2">
+        <div>
+          <a href="/" class="flex items-center gap-2 text-white">
+            <i class="fa-solid fa-cube text-purple-400 text-2xl"></i>
+            <span class="font-bold text-xl">Toyrender</span>
+          </a>
+          <p class="mt-3 text-sm text-purple-200/70 max-w-md">
+            Turn a single portrait into magazine-ready glamour, collectible
+            figurines, dating photos, and more with Toyrender’s AI styling
+            engine.
+          </p>
+        </div>
+        <nav class="grid grid-cols-2 gap-4 text-sm text-purple-200/80">
+          <div class="space-y-2">
+            <a class="block hover:text-white" href="/">
+              Home
+            </a>
+            <a class="block hover:text-white" href="/blog">
+              Blog
+            </a>
+            <a class="block hover:text-white" href="/gallery">
+              Figurine Gallery
+            </a>
+            <a class="block hover:text-white" href="/glamour-gallery">
+              Glamour Gallery
+            </a>
+          </div>
+          <div class="space-y-2">
+            <a class="block hover:text-white" href="/dating-photos-gallery">
+              Dating Gallery
+            </a>
+            <a class="block hover:text-white" href="/dating-photos.html">
+              Dating Pack
+            </a>
+            <a class="block hover:text-white" href="/faq">
+              FAQ
+            </a>
+            <a class="block hover:text-white" href="/contact">
+              Contact
+            </a>
+          </div>
+        </nav>
+      </div>
+      <div class="border-t border-white/10 py-4 text-center text-xs text-purple-300/70">
+        © <span id="footerYear"></span> Toyrender. All rights reserved.
+      </div>
     </footer>
+
+    <script>
+      document.getElementById("footerYear").textContent = new Date().getFullYear();
+    </script>
 
     <!-- Structured Data -->
     <script type="application/ld+json">

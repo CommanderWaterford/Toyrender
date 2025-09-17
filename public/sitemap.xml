@@ -7,7 +7,7 @@
   <!-- Home (EN) -->
   <url>
     <loc>https://toyrender.com/</loc>
-    <lastmod>2025-09-15</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
@@ -16,7 +16,7 @@
   <!-- Home (ES) -->
   <url>
     <loc>https://toyrender.com/es/</loc>
-    <lastmod>2025-09-07</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
@@ -60,9 +60,9 @@
 <!-- AI Figurine Gallery (canonical updated) -->
   <url>
     <loc>https://toyrender.com/figurines-gallery/</loc>
-    <lastmod>2025-09-15</lastmod>
+    <lastmod>2025-09-17</lastmod>
     <priority>0.63</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/figurines-gallery/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/figurines-gallery/"/>
   </url>
@@ -106,7 +106,7 @@
   <!-- Gallery (ES .html explicit) -->
   <url>
     <loc>https://toyrender.com/es/galeria.html</loc>
-    <lastmod>2025-09-09</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery.html"/>
@@ -115,7 +115,7 @@
   <!-- Home (ES index.html explicit) -->
   <url>
     <loc>https://toyrender.com/es/index.html</loc>
-    <lastmod>2025-09-09</lastmod>
+    <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
@@ -132,17 +132,25 @@
     <loc>https://toyrender.com/cosplay/</loc>
     <lastmod>2025-09-15</lastmod>
     <priority>0.63</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/cosplay/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/cosplay/"/>
+  </url>
+
+  <!-- Cosplay Gallery Landing -->
+  <url>
+    <loc>https://toyrender.com/cosplay-gallery/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.60</priority>
+    <changefreq>weekly</changefreq>
   </url>
 
   <!-- Glamour Shoots Gallery -->
   <url>
     <loc>https://toyrender.com/glamour-gallery/</loc>
-    <lastmod>2025-09-15</lastmod>
+    <lastmod>2025-09-17</lastmod>
     <priority>0.60</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery/"/>
   </url>
@@ -177,7 +185,7 @@
   <!-- Blog Index -->
   <url>
     <loc>https://toyrender.com/blog/</loc>
-    <lastmod>2025-09-10</lastmod>
+    <lastmod>2025-09-17</lastmod>
     <priority>0.60</priority>
     <changefreq>daily</changefreq>
   </url>
@@ -185,7 +193,7 @@
   <!-- Blog Index (ES) -->
   <url>
     <loc>https://toyrender.com/es/blog.html</loc>
-    <lastmod>2025-09-10</lastmod>
+    <lastmod>2025-09-17</lastmod>
     <priority>0.55</priority>
     <changefreq>daily</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/"/>
@@ -223,7 +231,7 @@
   <!-- Dating & Tinder Photo Ideas Gallery -->
   <url>
     <loc>https://toyrender.com/dating-photos-gallery/</loc>
-    <lastmod>2025-09-11</lastmod>
+    <lastmod>2025-09-17</lastmod>
     <priority>0.64</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/dating-photos-gallery/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-citas-galeria/"/>
@@ -267,7 +275,7 @@
   <!-- Tool: AI Background Remover -->
   <url>
     <loc>https://toyrender.com/ai-background-remover.html</loc>
-    <lastmod>2025-09-14</lastmod>
+    <lastmod>2025-09-17</lastmod>
     <priority>0.68</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/ai-background-remover.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/ia-quitafondos.html"/>
@@ -308,7 +316,7 @@
     <loc>https://toyrender.com/how-to-order-a-figurine-of-me-online</loc>
     <lastmod>2025-09-18</lastmod>
     <priority>0.65</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/how-to-order-a-figurine-of-me-online"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/como-obtener-una-figurina-personalizada-de-mi-mismo.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/how-to-order-a-figurine-of-me-online"/>
@@ -318,7 +326,7 @@
     <loc>https://toyrender.com/es/como-obtener-una-figurina-personalizada-de-mi-mismo.html</loc>
     <lastmod>2025-09-18</lastmod>
     <priority>0.65</priority>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/how-to-order-a-figurine-of-me-online"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/como-obtener-una-figurina-personalizada-de-mi-mismo.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/how-to-order-a-figurine-of-me-online"/>

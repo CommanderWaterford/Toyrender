@@ -1114,39 +1114,54 @@
           </button>
         </div>
 
-        <!-- Trust indicators -->
         <div
-          class="flex flex-wrap justify-center gap-4 mb-4"
-          role="list"
-          aria-label="Key features"
+          class="max-w-5xl mx-auto grid gap-4 sm:gap-6 md:grid-cols-3 text-left mb-10"
+          aria-label="Getting started steps"
         >
           <div
-            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
-            role="listitem"
+            class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg shadow-xl"
           >
-            <i class="fas fa-bolt mr-2 text-yellow-400" aria-hidden="true"></i
-            ><span>Instant Generation</span>
+            <div
+              class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-600/80 text-white text-xl font-bold mb-4"
+            >
+              1
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Upload Your Photo</h3>
+            <p class="text-sm text-purple-200 leading-relaxed">
+              Add a clear selfie or portrait. We'll help you pick the best shot
+              so Toyrender can capture every detail.
+            </p>
           </div>
           <div
-            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
-            role="listitem"
+            class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg shadow-xl"
           >
-            <i class="fas fa-magic mr-2 text-purple-400" aria-hidden="true"></i
-            ><span>AI-Powered Design</span>
+            <div
+              class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-600/80 text-white text-xl font-bold mb-4"
+            >
+              2
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Select a Style</h3>
+            <p class="text-sm text-purple-200 leading-relaxed">
+              Choose from collectible figurines, dating edits, or business
+              headshots. Switch styles anytime before you generate.
+            </p>
           </div>
           <div
-            class="px-6 py-3 bg-purple-800/30 backdrop-blur-sm rounded-full border border-purple-500/50"
-            role="listitem"
+            class="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-lg shadow-xl"
           >
-            <i
-              class="fas fa-download mr-2 text-green-400"
-              aria-hidden="true"
-            ></i
-            ><span>High-Res Download</span>
+            <div
+              class="w-12 h-12 flex items-center justify-center rounded-full bg-purple-600/80 text-white text-xl font-bold mb-4"
+            >
+              3
+            </div>
+            <h3 class="text-lg font-semibold mb-2">Generate Your Image</h3>
+            <p class="text-sm text-purple-200 leading-relaxed">
+              Tap generate and watch Toyrender build your AI preview in seconds.
+              Download immediately and start sharing.
+            </p>
           </div>
         </div>
 
-        <!-- Social proof element -->
         <p class="text-sm text-purple-300">
           <i class="fas fa-users mr-2 text-purple-400"></i>
           Join 10,000+ users who've created amazing AI photos
@@ -3295,11 +3310,11 @@
         document
           .querySelectorAll(".style-option[data-style]")
           .forEach((button) => {
-          button.classList.remove("active");
-          if (button.dataset.style === "figurine1") {
-            button.classList.add("active");
-          }
-        });
+            button.classList.remove("active");
+            if (button.dataset.style === "figurine1") {
+              button.classList.add("active");
+            }
+          });
       });
 
       async function generateDatingPack() {
@@ -3574,11 +3589,11 @@
         document
           .querySelectorAll(".style-option[data-style]")
           .forEach((button) => {
-          button.classList.remove("active");
-          if (button.dataset.style === "figurine1") {
-            button.classList.add("active");
-          }
-        });
+            button.classList.remove("active");
+            if (button.dataset.style === "figurine1") {
+              button.classList.add("active");
+            }
+          });
       });
 
       /* ----------------------- Init ----------------------- */
