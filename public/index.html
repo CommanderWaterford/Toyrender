@@ -478,6 +478,7 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        gap: 0.75rem;
         padding: 1rem;
         background: rgba(71, 85, 105, 0.3);
         border: 2px solid rgba(147, 51, 234, 0.3);
@@ -515,6 +516,25 @@
         text-align: center;
       }
 
+      .style-option .style-thumb {
+        width: 100%;
+        max-width: 80px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        border: 2px solid rgba(147, 51, 234, 0.2);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+
+      .style-option:hover .style-thumb {
+        border-color: rgba(147, 51, 234, 0.6);
+      }
+
+      .style-option.active .style-thumb {
+        border-color: #f472b6;
+        transform: scale(1.02);
+      }
+
       @media (max-width: 768px) {
         .style-option {
           padding: 0.75rem;
@@ -527,6 +547,10 @@
 
         .style-option span {
           font-size: 0.75rem;
+        }
+
+        .style-option .style-thumb {
+          max-width: 64px;
         }
       }
 
@@ -1210,44 +1234,84 @@
               </h4>
               <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <button class="style-option active" data-style="figurine1">
-                  <i class="fas fa-coffee"></i>
-                  <span>Lifestyle Shot</span>
+                  <img
+                    src="/images/gallery1/GExample1.jpg"
+                    alt="Lifestyle shoot figurine"
+                    class="style-thumb"
+                  />
+                  <span>Lifestyle Shoot</span>
                 </button>
                 <button class="style-option" data-style="figurine2">
-                  <i class="fas fa-desktop"></i>
-                  <span>Desk Display</span>
+                  <img
+                    src="/images/gallery1/GExample2.jpg"
+                    alt="Desk studio figurine"
+                    class="style-thumb"
+                  />
+                  <span>Desk Studio</span>
                 </button>
                 <button class="style-option" data-style="figurine3">
-                  <i class="fas fa-flask"></i>
-                  <span>Workshop Setup</span>
+                  <img
+                    src="/images/gallery1/GExample3.jpg"
+                    alt="Livestream studio figurine"
+                    class="style-thumb"
+                  />
+                  <span>Livestream Studio</span>
                 </button>
                 <button class="style-option" data-style="figurine4">
-                  <i class="fas fa-building-columns"></i>
-                  <span>Museum Quality</span>
+                  <img
+                    src="/images/gallery1/GExample4.jpg"
+                    alt="Boutique window figurine"
+                    class="style-thumb"
+                  />
+                  <span>Boutique Window</span>
                 </button>
                 <button class="style-option" data-style="figurine5">
-                  <i class="fas fa-store"></i>
-                  <span>Retail Window</span>
+                  <img
+                    src="/images/gallery1/GExample5.jpg"
+                    alt="Editorial spread figurine"
+                    class="style-thumb"
+                  />
+                  <span>Editorial Spread</span>
                 </button>
                 <button class="style-option" data-style="figurine6">
-                  <i class="fas fa-th-large"></i>
+                  <img
+                    src="/images/gallery1/GExample6.jpg"
+                    alt="Display cabinet figurine"
+                    class="style-thumb"
+                  />
                   <span>Display Cabinet</span>
                 </button>
                 <button class="style-option" data-style="figurine7">
-                  <i class="fas fa-video"></i>
-                  <span>Unboxing Setup</span>
+                  <img
+                    src="/images/gallery1/GExample7.jpg"
+                    alt="Retro arcade figurine"
+                    class="style-thumb"
+                  />
+                  <span>Retro Arcade</span>
                 </button>
                 <button class="style-option" data-style="figurine8">
-                  <i class="fas fa-palette"></i>
+                  <img
+                    src="/images/gallery1/GExample8.jpg"
+                    alt="Color check figurine"
+                    class="style-thumb"
+                  />
                   <span>Color Check</span>
                 </button>
                 <button class="style-option" data-style="figurine9">
-                  <i class="fas fa-drafting-compass"></i>
-                  <span>Architect Desk</span>
+                  <img
+                    src="/images/gallery1/GExample9.jpg"
+                    alt="Auction preview figurine"
+                    class="style-thumb"
+                  />
+                  <span>Auction Preview</span>
                 </button>
                 <button class="style-option" data-style="figurine10">
-                  <i class="fas fa-broadcast-tower"></i>
-                  <span>Livestream Studio</span>
+                  <img
+                    src="/images/gallery1/GExample10.jpg"
+                    alt="Artist studio figurine"
+                    class="style-thumb"
+                  />
+                  <span>Artist Studio</span>
                 </button>
               </div>
             </div>
@@ -1319,15 +1383,27 @@
               </h4>
               <div class="grid grid-cols-3 gap-3">
                 <button class="style-option" data-style="business1">
-                  <i class="fas fa-user-tie"></i>
+                  <img
+                    src="/images/businessphotos/Jonas-business-03.jpg"
+                    alt="Corporate pro business headshot preview"
+                    class="style-thumb"
+                  />
                   <span>Corporate Pro</span>
                 </button>
                 <button class="style-option" data-style="business2">
-                  <i class="fas fa-chart-line"></i>
+                  <img
+                    src="/images/businessphotos/SabrinaBusiness-04.jpg"
+                    alt="Executive business headshot preview"
+                    class="style-thumb"
+                  />
                   <span>Executive</span>
                 </button>
                 <button class="style-option" data-style="business3">
-                  <i class="fas fa-handshake"></i>
+                  <img
+                    src="/images/businessphotos/Jonas-business-07.jpg"
+                    alt="Approachable business headshot preview"
+                    class="style-thumb"
+                  />
                   <span>Approachable</span>
                 </button>
               </div>
@@ -2784,6 +2860,10 @@
           "Create a 1/7-scale figurine of this person on a color-checker backdrop. Include swatch cards, gray card, and a spectrophotometer. Monitor shows node-based look-dev graph of the figurine materials. Packaging stands upright to the right.",
 
         figurine9: `Prompt: A dramatic, hyperrealistic photograph of a pristine 1/7-scale rare collectible figurine of this person (preserving fur color/markings), presented under focused, museum-style spot lighting in an exclusive auction house preview. The figurine stands on its round transparent acrylic base (no text) atop a dark, polished mahogany display table. Surrounding it are other blurred, high-value collectibles in glass cases, and a subtle velvet rope demarcation. A crisp, minimalist auction catalog, open to the figurine's entry (no legible text), lies nearby. In the deep, soft-focused background, discerning collectors in elegant attire are subtly visible. The lighting is sophisticated and theatrical, emphasizing exclusivity and the figurine's prestige.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cheap display, messy background, blurred figurine, harsh reflections."\nOptions: "A small, engraved brass lot number tag (digital/printable)", "Subtle, shimmering light reflecting off the figurine's surface."`,
+
+        figurine10:
+          "An evocative, artisanal photograph of a 1/7-scale collectible figurine of the person, meticulously arranged on a well-worn wooden workbench within a vibrant artist's studio. The figurine stands on its round transparent acrylic base (no text), positioned thoughtfully beside a miniature easel holding a blank, stretched canvas and a tiny palette with dabs of paint. Soft, natural light streams in from a large window, highlighting textures and casting gentle shadows across the scene. Surrounding the figurine are realistic miniature artist's tools: fine-tipped brushes, a small clay sculpting tool, and a few spilled charcoal sticks. In the soft-focused background, abstract canvases lean against the wall, and shelves overflow with art supplies, creating a sense of creative activity. The figurine's bespoke, artisanal packaging box, resembling a limited edition art print folio with expressive, brushstroke-inspired flat 2D artwork, lies partially open nearby, hinting at the creative journey. The overall composition is authentic, inspiring, and captures the spirit of artistic craftsmanship, with a shallow depth of field.",
+
 
         dating1: `Prompt: A professional, hyperrealistic photograph capturing the person (preserving hair color/style, eye color), lounging intimately on luxurious, slightly rumpled white silk sheets. Her body is artfully draped and partially covered by a soft, oversized white button-down shirt or silk robe, revealing a bare shoulder or leg. She gazes softly towards the camera with a tender, inviting, and slightly playful expression, as if just waking up. Soft, warm, diffused morning sunlight streams through a sheer window, creating a luminous, ethereal glow and gentle highlights on her skin. A single, long-stemmed red rose lies casually on the pillow nearby. The composition is clean, airy, and deeply intimate, evoking a feeling of romantic connection and sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty sheets, harsh or artificial lighting, aggressive or stressed expression, explicit nudity, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing underwear", "A personalized, handwritten 'love note' (blurred text) casually folded on the bedside table", "A steaming cup of gourmet coffee on a nearby minimalist nightstand."`,
 
