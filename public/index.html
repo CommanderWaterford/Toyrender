@@ -486,7 +486,8 @@
         color: #e9d5ff;
         transition: all 0.3s ease;
         cursor: pointer;
-        min-height: 80px;
+        min-height: 140px;
+        overflow: hidden;
       }
 
       .style-option:hover {
@@ -518,27 +519,33 @@
 
       .style-option .style-thumb {
         width: 100%;
-        max-width: 80px;
+        max-width: 96px;
         aspect-ratio: 1 / 1;
         object-fit: cover;
         border-radius: 0.75rem;
         border: 2px solid rgba(147, 51, 234, 0.2);
         transition: border-color 0.3s ease, transform 0.3s ease;
+        transform: scale(1);
       }
 
       .style-option:hover .style-thumb {
         border-color: rgba(147, 51, 234, 0.6);
+        transform: scale(2);
       }
 
       .style-option.active .style-thumb {
         border-color: #f472b6;
-        transform: scale(1.02);
+        transform: scale(1.05);
+      }
+
+      .style-option.active:hover .style-thumb {
+        transform: scale(2);
       }
 
       @media (max-width: 768px) {
         .style-option {
           padding: 0.75rem;
-          min-height: 70px;
+          min-height: 84px;
         }
 
         .style-option i {
@@ -550,7 +557,7 @@
         }
 
         .style-option .style-thumb {
-          max-width: 64px;
+          max-width: 76px;
         }
       }
 
@@ -2863,7 +2870,6 @@
 
         figurine10:
           "An evocative, artisanal photograph of a 1/7-scale collectible figurine of the person, meticulously arranged on a well-worn wooden workbench within a vibrant artist's studio. The figurine stands on its round transparent acrylic base (no text), positioned thoughtfully beside a miniature easel holding a blank, stretched canvas and a tiny palette with dabs of paint. Soft, natural light streams in from a large window, highlighting textures and casting gentle shadows across the scene. Surrounding the figurine are realistic miniature artist's tools: fine-tipped brushes, a small clay sculpting tool, and a few spilled charcoal sticks. In the soft-focused background, abstract canvases lean against the wall, and shelves overflow with art supplies, creating a sense of creative activity. The figurine's bespoke, artisanal packaging box, resembling a limited edition art print folio with expressive, brushstroke-inspired flat 2D artwork, lies partially open nearby, hinting at the creative journey. The overall composition is authentic, inspiring, and captures the spirit of artistic craftsmanship, with a shallow depth of field.",
-
 
         dating1: `Prompt: A professional, hyperrealistic photograph capturing the person (preserving hair color/style, eye color), lounging intimately on luxurious, slightly rumpled white silk sheets. Her body is artfully draped and partially covered by a soft, oversized white button-down shirt or silk robe, revealing a bare shoulder or leg. She gazes softly towards the camera with a tender, inviting, and slightly playful expression, as if just waking up. Soft, warm, diffused morning sunlight streams through a sheer window, creating a luminous, ethereal glow and gentle highlights on her skin. A single, long-stemmed red rose lies casually on the pillow nearby. The composition is clean, airy, and deeply intimate, evoking a feeling of romantic connection and sensuality, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty sheets, harsh or artificial lighting, aggressive or stressed expression, explicit nudity, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing underwear", "A personalized, handwritten 'love note' (blurred text) casually folded on the bedside table", "A steaming cup of gourmet coffee on a nearby minimalist nightstand."`,
 
