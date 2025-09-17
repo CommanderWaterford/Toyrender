@@ -254,6 +254,16 @@
       <priority>0.66</priority>
     </url>
 
+  <!-- Tool: Image to Text Generator -->
+  <url>
+    <loc>https://toyrender.com/imagetotext.html</loc>
+    <lastmod>2025-09-17</lastmod>
+    <priority>0.68</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/imagetotext.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/imagetotext.html"/>
+  </url>
+
   <!-- Tool: AI Background Remover -->
   <url>
     <loc>https://toyrender.com/ai-background-remover.html</loc>
