@@ -603,9 +603,9 @@ async function applyWatermark(imagePath) {
   // Adjust these values between 0 (fully transparent) and 1 (fully opaque)
 
   // CENTER WATERMARK OPACITY
-  const CENTER_TEXT_OPACITY = 0.3; // Main "TOYRENDER.COM" text opacity (0.4 = 40% visible)
-  const CENTER_SUBTITLE_OPACITY = 0.3; // "FREE TRIAL" text opacity
-  const CENTER_STROKE_OPACITY = 0.3; // Border around center text
+  const CENTER_TEXT_OPACITY = 0.1; // Main "TOYRENDER.COM" text opacity (0.4 = 40% visible)
+  const CENTER_SUBTITLE_OPACITY = 0.1; // "FREE TRIAL" text opacity
+  const CENTER_STROKE_OPACITY = 0.2; // Border around center text
   const CENTER_SHADOW_OPACITY = 0.5; // Drop shadow opacity
 
   // CORNER WATERMARK OPACITY
