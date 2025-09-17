@@ -480,8 +480,9 @@
       .style-option {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         justify-content: center;
+        gap: 0.75rem;
         padding: 1rem;
         background: rgba(71, 85, 105, 0.3);
         border: 2px solid rgba(147, 51, 234, 0.3);
@@ -489,7 +490,9 @@
         color: #e9d5ff;
         transition: all 0.3s ease;
         cursor: pointer;
-        min-height: 80px;
+        min-height: 140px;
+        overflow: hidden;
+        text-align: center;
       }
 
       .style-option:hover {
@@ -509,28 +512,83 @@
         box-shadow: 0 4px 15px rgba(147, 51, 234, 0.3);
       }
 
-      .style-option i {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-      }
-
       .style-option span {
         font-size: 0.875rem;
         text-align: center;
+        display: block;
+      }
+
+      .style-option .style-thumb {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        border: 2px solid rgba(147, 51, 234, 0.2);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+        transform: scale(1);
+        flex-shrink: 0;
+      }
+
+      .style-option:hover .style-thumb {
+        border-color: rgba(147, 51, 234, 0.6);
+        transform: scale(2);
+      }
+
+      .style-option.active .style-thumb {
+        border-color: #f472b6;
+        transform: scale(1.05);
+      }
+
+      .style-option.active:hover .style-thumb {
+        transform: scale(2);
+      }
+
+      .style-option.placeholder {
+        cursor: default;
+        opacity: 0.65;
+      }
+
+      .style-option.placeholder:hover {
+        background: rgba(71, 85, 105, 0.3);
+        border-color: rgba(147, 51, 234, 0.3);
+        transform: none;
+      }
+
+      .style-option.placeholder .style-thumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(30, 41, 59, 0.6);
+        color: #f1eafe;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-style: dashed;
+        border-color: rgba(147, 51, 234, 0.4);
+        transform: scale(1);
+      }
+
+      .style-option.placeholder:hover .style-thumb {
+        border-color: rgba(147, 51, 234, 0.4);
+        transform: scale(1);
+      }
+
+      .placeholder-thumb {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
       @media (max-width: 768px) {
         .style-option {
           padding: 0.75rem;
-          min-height: 70px;
-        }
-
-        .style-option i {
-          font-size: 1.25rem;
+          min-height: 84px;
         }
 
         .style-option span {
           font-size: 0.75rem;
+        }
+
+        .style-option .style-thumb {
+          width: 100%;
         }
       }
 
@@ -1226,47 +1284,95 @@
               <h4 class="text-lg font-semibold mb-3 text-purple-300">
                 <i class="fas fa-cube mr-2"></i>Estilos de Figura
               </h4>
-              <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <button class="style-option active" data-style="figurine1">
-                  <i class="fas fa-coffee"></i>
-                  <span>Toma de Estilo de Vida</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-01.webp"
+                    alt="Miniatura estilo sesión de vida"
+                    class="style-thumb"
+                  />
+                  <span>Sesión Estilo de Vida</span>
                 </button>
                 <button class="style-option" data-style="figurine2">
-                  <i class="fas fa-desktop"></i>
-                  <span>Exhibición de Escritorio</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-02.webp"
+                    alt="Miniatura estilo estudio de escritorio"
+                    class="style-thumb"
+                  />
+                  <span>Estudio de Escritorio</span>
                 </button>
                 <button class="style-option" data-style="figurine3">
-                  <i class="fas fa-flask"></i>
-                  <span>Configuración de Taller</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-03.webp"
+                    alt="Miniatura estilo estudio de livestream"
+                    class="style-thumb"
+                  />
+                  <span>Estudio de Livestream</span>
                 </button>
                 <button class="style-option" data-style="figurine4">
-                  <i class="fas fa-building-columns"></i>
-                  <span>Calidad de Museo</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-04.webp"
+                    alt="Miniatura estilo escaparate boutique"
+                    class="style-thumb"
+                  />
+                  <span>Escaparate Boutique</span>
                 </button>
                 <button class="style-option" data-style="figurine5">
-                  <i class="fas fa-store"></i>
-                  <span>Escaparate de Tienda</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-05.webp"
+                    alt="Miniatura estilo reportaje editorial"
+                    class="style-thumb"
+                  />
+                  <span>Reportaje Editorial</span>
                 </button>
                 <button class="style-option" data-style="figurine6">
-                  <i class="fas fa-th-large"></i>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-06.webp"
+                    alt="Miniatura estilo vitrina de exhibición"
+                    class="style-thumb"
+                  />
                   <span>Vitrina de Exhibición</span>
                 </button>
                 <button class="style-option" data-style="figurine7">
-                  <i class="fas fa-video"></i>
-                  <span>Configuración de Unboxing</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-07.webp"
+                    alt="Miniatura estilo arcade retro"
+                    class="style-thumb"
+                  />
+                  <span>Arcade Retro</span>
                 </button>
                 <button class="style-option" data-style="figurine8">
-                  <i class="fas fa-palette"></i>
-                  <span>Verificación de Color</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-08.webp"
+                    alt="Miniatura estilo control de color"
+                    class="style-thumb"
+                  />
+                  <span>Control de Color</span>
                 </button>
                 <button class="style-option" data-style="figurine9">
-                  <i class="fas fa-drafting-compass"></i>
-                  <span>Escritorio de Arquitecto</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-09.webp"
+                    alt="Miniatura estilo vista previa de subasta"
+                    class="style-thumb"
+                  />
+                  <span>Vista Previa de Subasta</span>
                 </button>
                 <button class="style-option" data-style="figurine10">
-                  <i class="fas fa-broadcast-tower"></i>
-                  <span>Estudio de Livestream</span>
+                  <img
+                    src="/images/figurinestyles/FigurinesStyle-10.webp"
+                    alt="Miniatura estilo estudio artístico"
+                    class="style-thumb"
+                  />
+                  <span>Estudio Artístico</span>
                 </button>
+                <div class="style-option placeholder">
+                  <div class="style-thumb placeholder-thumb">Estilo 11</div>
+                  <span>Próximamente</span>
+                </div>
+                <div class="style-option placeholder">
+                  <div class="style-thumb placeholder-thumb">Estilo 12</div>
+                  <span>Próximamente</span>
+                </div>
               </div>
             </div>
 
@@ -2832,25 +2938,27 @@
       // Initialize style selection
       function initStyleSelection() {
         // Handle style option clicks
-        document.querySelectorAll(".style-option").forEach((button) => {
-          button.addEventListener("click", function () {
-            // Remove active from all buttons
-            document
-              .querySelectorAll(".style-option")
-              .forEach((btn) => btn.classList.remove("active"));
-            // Add active to clicked button
-            this.classList.add("active");
-            // Update selected style
-            selectedStyle = this.dataset.style;
+        document
+          .querySelectorAll(".style-option[data-style]")
+          .forEach((button) => {
+            button.addEventListener("click", function () {
+              // Remove active from all buttons
+              document
+                .querySelectorAll(".style-option[data-style]")
+                .forEach((btn) => btn.classList.remove("active"));
+              // Add active to clicked button
+              this.classList.add("active");
+              // Update selected style
+              selectedStyle = this.dataset.style;
+            });
           });
-        });
 
         document
           .getElementById("dating9PackBtn")
           ?.addEventListener("click", function () {
             // Remove active from all buttons
             document
-              .querySelectorAll(".style-option")
+              .querySelectorAll(".style-option[data-style]")
               .forEach((btn) => btn.classList.remove("active"));
             // Add active to pack button
             this.classList.add("active");
@@ -3187,7 +3295,9 @@
 
         // Reset style selection to figurine1
         selectedStyle = "figurine1";
-        document.querySelectorAll(".style-option").forEach((button) => {
+        document
+          .querySelectorAll(".style-option[data-style]")
+          .forEach((button) => {
           button.classList.remove("active");
           if (button.dataset.style === "figurine1") {
             button.classList.add("active");
@@ -3466,7 +3576,9 @@
 
         // Reset style selection to default
         selectedStyle = "figurine1";
-        document.querySelectorAll(".style-option").forEach((button) => {
+        document
+          .querySelectorAll(".style-option[data-style]")
+          .forEach((button) => {
           button.classList.remove("active");
           if (button.dataset.style === "figurine1") {
             button.classList.add("active");

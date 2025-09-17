@@ -476,7 +476,7 @@
       .style-option {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         justify-content: center;
         gap: 0.75rem;
         padding: 1rem;
@@ -488,6 +488,7 @@
         cursor: pointer;
         min-height: 140px;
         overflow: hidden;
+        text-align: center;
       }
 
       .style-option:hover {
@@ -515,17 +516,18 @@
       .style-option span {
         font-size: 0.875rem;
         text-align: center;
+        display: block;
       }
 
       .style-option .style-thumb {
         width: 100%;
-        max-width: 96px;
         aspect-ratio: 1 / 1;
         object-fit: cover;
         border-radius: 0.75rem;
         border: 2px solid rgba(147, 51, 234, 0.2);
         transition: border-color 0.3s ease, transform 0.3s ease;
         transform: scale(1);
+        flex-shrink: 0;
       }
 
       .style-option:hover .style-thumb {
@@ -540,6 +542,40 @@
 
       .style-option.active:hover .style-thumb {
         transform: scale(2);
+      }
+
+      .style-option.placeholder {
+        cursor: default;
+        opacity: 0.65;
+      }
+
+      .style-option.placeholder:hover {
+        background: rgba(71, 85, 105, 0.3);
+        border-color: rgba(147, 51, 234, 0.3);
+        transform: none;
+      }
+
+      .style-option.placeholder .style-thumb {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(30, 41, 59, 0.6);
+        color: #f1eafe;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-style: dashed;
+        border-color: rgba(147, 51, 234, 0.4);
+        transform: scale(1);
+      }
+
+      .style-option.placeholder:hover .style-thumb {
+        border-color: rgba(147, 51, 234, 0.4);
+        transform: scale(1);
+      }
+
+      .placeholder-thumb {
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
       }
 
       @media (max-width: 768px) {
@@ -557,7 +593,7 @@
         }
 
         .style-option .style-thumb {
-          max-width: 76px;
+          width: 100%;
         }
       }
 
@@ -1239,7 +1275,7 @@
               <h4 class="text-lg font-semibold mb-3 text-purple-300">
                 <i class="fas fa-cube mr-2"></i>Figurine Styles
               </h4>
-              <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+              <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
                 <button class="style-option active" data-style="figurine1">
                   <img
                     src="/images/figurinestyles/FigurinesStyle-01.webp"
@@ -1320,6 +1356,14 @@
                   />
                   <span>Artist Studio</span>
                 </button>
+                <div class="style-option placeholder">
+                  <div class="style-thumb placeholder-thumb">Style 11</div>
+                  <span>Coming Soon</span>
+                </div>
+                <div class="style-option placeholder">
+                  <div class="style-thumb placeholder-thumb">Style 12</div>
+                  <span>Coming Soon</span>
+                </div>
               </div>
             </div>
 
@@ -2897,25 +2941,27 @@
       // Initialize style selection
       function initStyleSelection() {
         // Handle style option clicks
-        document.querySelectorAll(".style-option").forEach((button) => {
-          button.addEventListener("click", function () {
-            // Remove active from all buttons
-            document
-              .querySelectorAll(".style-option")
-              .forEach((btn) => btn.classList.remove("active"));
-            // Add active to clicked button
-            this.classList.add("active");
-            // Update selected style
-            selectedStyle = this.dataset.style;
+        document
+          .querySelectorAll(".style-option[data-style]")
+          .forEach((button) => {
+            button.addEventListener("click", function () {
+              // Remove active from all buttons
+              document
+                .querySelectorAll(".style-option[data-style]")
+                .forEach((btn) => btn.classList.remove("active"));
+              // Add active to clicked button
+              this.classList.add("active");
+              // Update selected style
+              selectedStyle = this.dataset.style;
+            });
           });
-        });
 
         document
           .getElementById("dating9PackBtn")
           ?.addEventListener("click", function () {
             // Remove active from all buttons
             document
-              .querySelectorAll(".style-option")
+              .querySelectorAll(".style-option[data-style]")
               .forEach((btn) => btn.classList.remove("active"));
             // Add active to pack button
             this.classList.add("active");
@@ -3246,7 +3292,9 @@
 
         // Reset style selection to figurine1
         selectedStyle = "figurine1";
-        document.querySelectorAll(".style-option").forEach((button) => {
+        document
+          .querySelectorAll(".style-option[data-style]")
+          .forEach((button) => {
           button.classList.remove("active");
           if (button.dataset.style === "figurine1") {
             button.classList.add("active");
@@ -3523,7 +3571,9 @@
 
         // Reset style selection to default
         selectedStyle = "figurine1";
-        document.querySelectorAll(".style-option").forEach((button) => {
+        document
+          .querySelectorAll(".style-option[data-style]")
+          .forEach((button) => {
           button.classList.remove("active");
           if (button.dataset.style === "figurine1") {
             button.classList.add("active");
