@@ -100,6 +100,12 @@ app.post(
         const amount = Number(session.amount_total || 500);
         const currency = String(session.currency || "usd").toLowerCase();
         const idempotencyKey = String(session.payment_intent || session.id);
+        const pack = session.metadata?.pack;
+        if (pack) {
+          // This is a Bananabatch payment (they use 'pack' field)
+          console.log("Ignoring Bananabatch webhook");
+          return res.json({ received: true, ignored: "not_for_toyrender" });
+        }
 
         // Get user email for logging
         let userEmail = "unknown";
