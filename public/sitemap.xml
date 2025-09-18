@@ -256,11 +256,22 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/ai-couple-photos-online/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/ai-couple-photos-online/"/>
   </url>
-    <url>
-      <loc>https://toyrender.com/blog/how-to-upscale-ai-photos/</loc>
-      <lastmod>2025-09-12</lastmod>
-      <priority>0.66</priority>
-    </url>
+  <url>
+    <loc>https://toyrender.com/blog/how-to-upscale-ai-photos/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.66</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/how-to-upscale-ai-photos/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/como-escalar-fotos-ia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/how-to-upscale-ai-photos/"/>
+  </url>
+  <url>
+    <loc>https://toyrender.com/es/como-escalar-fotos-ia/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.66</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/how-to-upscale-ai-photos/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/como-escalar-fotos-ia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/how-to-upscale-ai-photos/"/>
+  </url>
 
   <!-- Tool: Image to Text Generator -->
   <url>
