@@ -851,6 +851,38 @@
         border-color: #9333ea;
       }
 
+      .sticky-cta {
+        position: fixed;
+        top: 1.5rem;
+        right: 1.5rem;
+        z-index: 60;
+      }
+
+      .sticky-cta button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.85rem 1.75rem;
+        border-radius: 9999px;
+        font-weight: 700;
+        font-size: 1rem;
+        box-shadow: 0 15px 40px rgba(147, 51, 234, 0.35);
+      }
+
+      @media (max-width: 640px) {
+        .sticky-cta {
+          top: auto;
+          right: 1rem;
+          bottom: 1.5rem;
+          left: 1rem;
+        }
+
+        .sticky-cta button {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
       /* Responsive adjustments */
       @media (max-width: 768px) {
         .gallery-grid {
@@ -1053,6 +1085,17 @@
       </div>
     </nav>
 
+    <div class="sticky-cta" role="complementary" aria-label="Sticky free trial call to action">
+      <button
+        id="stickyCTABtn"
+        class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 text-white"
+        type="button"
+      >
+        <i class="fas fa-bolt"></i>
+        <span>Try it for free!</span>
+      </button>
+    </div>
+
     <!-- Main Content -->
     <main
       class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-12"
@@ -1200,6 +1243,8 @@
               Drag & drop your photo here or click to browse
             </p>
             <button
+              id="choosePhotoBtn"
+              type="button"
               class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-xl"
               aria-label="Choose photo to upload"
             >
@@ -2968,6 +3013,12 @@
               this.classList.add("active");
               // Update selected style
               selectedStyle = this.dataset.style;
+              if (typeof gtag === "function") {
+                gtag("event", "select_style", {
+                  event_category: "engagement",
+                  event_label: this.dataset.style,
+                });
+              }
             });
           });
 
@@ -2982,6 +3033,12 @@
             this.classList.add("active");
             selectedStyle = "dating-pack";
             isPackGeneration = true;
+            if (typeof gtag === "function") {
+              gtag("event", "select_style", {
+                event_category: "engagement",
+                event_label: "dating-pack",
+              });
+            }
           });
 
         // Handle continue button
@@ -3106,6 +3163,7 @@
       /* ----------------------- Upload & Generate ----------------------- */
       const uploadArea = $("#uploadArea");
       const fileInput = $("#fileInput");
+      const choosePhotoBtn = document.getElementById("choosePhotoBtn");
       const previewSection = $("#previewSection");
       const originalPreview = $("#originalPreview");
       const resultPreview = $("#resultPreview");
@@ -3115,6 +3173,19 @@
       const resetBtn = $("#resetBtn");
 
       let currentFile = null;
+
+      if (choosePhotoBtn) {
+        choosePhotoBtn.addEventListener("click", (event) => {
+          event.stopPropagation();
+          if (typeof gtag === "function") {
+            gtag("event", "choose_photo_click", {
+              event_category: "engagement",
+              event_label: "upload_choose_photo_button",
+            });
+          }
+          fileInput?.click();
+        });
+      }
 
       uploadArea.addEventListener("click", () => fileInput.click());
       uploadArea.addEventListener("dragover", (e) => {
@@ -3846,6 +3917,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         // Main CTA - scrolls to upload section
         const heroCTA = document.getElementById("heroCTABtn");
+        const stickyCTA = document.getElementById("stickyCTABtn");
         if (heroCTA) {
           heroCTA.addEventListener("click", function () {
             // Smooth scroll to upload section
@@ -3859,6 +3931,21 @@
               gtag("event", "click_hero_cta", {
                 event_category: "engagement",
                 event_label: "hero_main_cta",
+              });
+            }
+          });
+        }
+
+        if (stickyCTA) {
+          stickyCTA.addEventListener("click", function () {
+            document.querySelector("#uploadArea").scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+            if (typeof gtag === "function") {
+              gtag("event", "click_sticky_cta", {
+                event_category: "engagement",
+                event_label: "sticky_try_it_free",
               });
             }
           });
