@@ -332,6 +332,16 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/ai-background-remover.html"/>
   </url>
 
+  <!-- Business Headshot Gallery -->
+  <url>
+    <loc>https://toyrender.com/business-photos-gallery/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.62</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/business-photos-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/business-photos-gallery/"/>
+  </url>
+
   <!-- Business Photos AI – Sabrina (EN) -->
   <url>
     <loc>https://toyrender.com/business-photos-sabrina/</loc>
