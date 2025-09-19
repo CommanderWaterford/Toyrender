@@ -1090,7 +1090,11 @@
       </div>
     </nav>
 
-    <div class="sticky-cta" role="complementary" aria-label="Sticky free trial call to action">
+    <div
+      class="sticky-cta"
+      role="complementary"
+      aria-label="Sticky free trial call to action"
+    >
       <button
         id="stickyCTABtn"
         class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 text-white"
@@ -1118,11 +1122,81 @@
           seconds. Perfect for collectors, gifts, or just for fun!
         </p>
 
-        <!-- PRIMARY CTA BUTTON - Above the fold -->
-        <div class="mb-8">
+        <!-- PRIMARY CTA BUTTON - Above the fold with floating images -->
+        <div class="relative mb-8">
+          <!-- Floating Images Container -->
+          <div class="hidden lg:block">
+            <!-- Left Side - Original Photos -->
+            <div
+              class="absolute -left-60 top-1/2 transform -translate-y-1/2 space-y-6"
+            >
+              <div class="relative group animate-float-slow">
+                <img
+                  src="\images\businessphotos\Jonas.jpg"
+                  alt="Original photo - Professional headshot"
+                  class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:scale-110 hover:rotate-3"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute -bottom-2 -right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded-full shadow-lg font-medium"
+                >
+                  Original
+                </div>
+              </div>
+
+              <div class="relative group animate-float-delayed ml-8">
+                <img
+                  src="https://images.unsplash.com/photo-1494790108755-2616b612b3cc?w=200&h=280&fit=crop&crop=face"
+                  alt="Original photo - Casual portrait"
+                  class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:scale-110 hover:-rotate-2"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute -bottom-2 -right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded-full shadow-lg font-medium"
+                >
+                  Original
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Side - AI Generated Results -->
+            <div
+              class="absolute -right-60 top-1/2 transform -translate-y-1/2 space-y-6"
+            >
+              <div class="relative group animate-float-reverse">
+                <img
+                  src="\images\businessphotos\Jonas-business-09.jpg"
+                  alt="AI generated Business Shot"
+                  class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 transform hover:scale-110 hover:-rotate-3 border-2 border-purple-400/40"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded-full shadow-lg"
+                >
+                  ✨ AI Business Shot
+                </div>
+              </div>
+
+              <div class="relative group animate-float-delayed-reverse mr-8">
+                <img
+                  src="/images/Example10.jpg"
+                  alt="AI generated professional headshot"
+                  class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-pink-500/30 transition-all duration-500 transform hover:scale-110 hover:rotate-2 border-2 border-pink-400/40"
+                  loading="lazy"
+                />
+                <div
+                  class="absolute -top-2 -right-2 bg-pink-600 text-white text-xs px-2 py-1 rounded-full shadow-lg"
+                >
+                  ✨ AI Figurine
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
           <button
             id="heroCTABtn"
-            class="px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl pulse-glow inline-flex items-center"
+            class="relative z-10 px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl pulse-glow inline-flex items-center"
             aria-label="Start creating your AI figurine now"
           >
             <i class="fas fa-magic mr-3 text-3xl" aria-hidden="true"></i>
@@ -1132,7 +1206,148 @@
               aria-hidden="true"
             ></i>
           </button>
+
+          <!-- Mobile Version - Images below CTA -->
+          <div class="lg:hidden mt-8">
+            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+              <div class="space-y-3">
+                <div class="relative group">
+                  <img
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=200&fit=crop&crop=face"
+                    alt="Original photo"
+                    class="w-full h-24 object-cover rounded-lg shadow-lg"
+                    loading="lazy"
+                  />
+                  <div
+                    class="absolute -bottom-1 -right-1 bg-white text-gray-800 text-xs px-1 py-0.5 rounded-full text-[10px]"
+                  >
+                    Original
+                  </div>
+                </div>
+                <div class="relative group">
+                  <img
+                    src="https://images.unsplash.com/photo-1494790108755-2616b612b3cc?w=150&h=200&fit=crop&crop=face"
+                    alt="Original photo"
+                    class="w-full h-20 object-cover rounded-lg shadow-lg"
+                    loading="lazy"
+                  />
+                  <div
+                    class="absolute -bottom-1 -right-1 bg-white text-gray-800 text-xs px-1 py-0.5 rounded-full text-[10px]"
+                  >
+                    Original
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                <div class="relative group">
+                  <img
+                    src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=150&h=200&fit=crop"
+                    alt="AI figurine"
+                    class="w-full h-24 object-cover rounded-lg shadow-lg border border-purple-400/50"
+                    loading="lazy"
+                  />
+                  <div
+                    class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs px-1 py-0.5 rounded-full text-[10px]"
+                  >
+                    ✨ AI
+                  </div>
+                </div>
+                <div class="relative group">
+                  <img
+                    src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=150&h=200&fit=crop&crop=face"
+                    alt="AI headshot"
+                    class="w-full h-20 object-cover rounded-lg shadow-lg border border-pink-400/50"
+                    loading="lazy"
+                  />
+                  <div
+                    class="absolute -top-1 -right-1 bg-pink-600 text-white text-xs px-1 py-0.5 rounded-full text-[10px]"
+                  >
+                    ✨ AI
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+
+        <!-- Floating Animation Styles -->
+        <style>
+          @keyframes float-slow {
+            0%,
+            100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+              transform: translateY(-10px) rotate(1deg);
+            }
+          }
+
+          @keyframes float-delayed {
+            0%,
+            100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+              transform: translateY(-8px) rotate(-1deg);
+            }
+          }
+
+          @keyframes float-reverse {
+            0%,
+            100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+              transform: translateY(-12px) rotate(-1deg);
+            }
+          }
+
+          @keyframes float-delayed-reverse {
+            0%,
+            100% {
+              transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+              transform: translateY(-6px) rotate(1deg);
+            }
+          }
+
+          .animate-float-slow {
+            animation: float-slow 6s ease-in-out infinite;
+          }
+
+          .animate-float-delayed {
+            animation: float-delayed 7s ease-in-out infinite 1s;
+          }
+
+          .animate-float-reverse {
+            animation: float-reverse 5s ease-in-out infinite;
+          }
+
+          .animate-float-delayed-reverse {
+            animation: float-delayed-reverse 8s ease-in-out infinite 2s;
+          }
+
+          /* Ensure images don't interfere with smaller screens */
+          @media (max-width: 1400px) {
+            .absolute.-left-80 {
+              left: -18rem;
+            }
+            .absolute.-right-80 {
+              right: -18rem;
+            }
+          }
+
+          @media (max-width: 1200px) {
+            .absolute.-left-80 {
+              left: -12rem;
+            }
+            .absolute.-right-80 {
+              right: -12rem;
+            }
+          }
+        </style>
 
         <!-- Secondary options for different use cases -->
         <div class="flex flex-wrap justify-center gap-4 mb-8">
