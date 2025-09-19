@@ -104,6 +104,28 @@
       .lightbox-open {
         overflow: hidden;
       }
+      .timer-ring {
+        stroke-dasharray: 314;
+        stroke-dashoffset: 314;
+        animation: timer-ring-progress 15s linear forwards;
+      }
+      .timer-ring-bg {
+        stroke-dasharray: 314;
+        stroke-dashoffset: 0;
+      }
+      @keyframes timer-ring-progress {
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      .timer-finished {
+        box-shadow: 0 0 0 8px rgba(56, 189, 248, 0.2);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .timer-ring {
+          animation-duration: 1ms;
+        }
+      }
       @keyframes fadeOut {
         0%,
         70% {
@@ -414,12 +436,13 @@
           Professional Styles
         </h1>
         <p class="mt-3 text-sky-200 max-w-3xl">
-          From one original portrait to a full professional set. Click any image
-          to open the preview, then use
+          From one original portrait to a full professional set in only 15
+          seconds! Click any image to open the preview, then use
           <span class="font-semibold">← / →</span> or swipe to navigate. This
           page shows how <strong>Toyrender</strong> can generate a
           <em>cohesive multi‑style business photo kit</em> (headshot, banner,
-          speaker, office & casual) from a single good source photo.
+          speaker, office & casual) from a single good source photo within a
+          couple of seconds.
         </p>
 
         <div class="mt-5 flex flex-wrap gap-3">
@@ -438,6 +461,66 @@
             class="inline-flex items-center px-4 py-2 rounded-xl border border-sky-400/50 text-sky-100 hover:bg-white/10"
             >Dating gallery</a
           >
+        </div>
+        <div
+          class="mt-8 flex flex-col md:flex-row items-center md:items-start gap-6 rounded-3xl border border-sky-500/40 bg-white/5 p-6 shadow-lg shadow-sky-900/30"
+          role="status"
+          aria-live="polite"
+          data-generation-timer
+          data-duration="15"
+          data-running-text="Rendering 10 looks…"
+          data-complete-text="Voilá — 10 polished images ready to download."
+        >
+          <div
+            class="relative flex items-center justify-center w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 text-white"
+            data-timer-circle
+          >
+            <svg class="w-full h-full" viewBox="0 0 120 120" aria-hidden="true">
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                class="timer-ring-bg"
+                stroke-width="8"
+                stroke="#0f172a"
+                stroke-opacity="0.45"
+                fill="none"
+                transform="rotate(-90 60 60)"
+              ></circle>
+              <circle
+                cx="60"
+                cy="60"
+                r="50"
+                class="timer-ring"
+                stroke-width="8"
+                stroke="#38bdf8"
+                stroke-linecap="round"
+                fill="none"
+                transform="rotate(-90 60 60)"
+                data-timer-ring
+              ></circle>
+            </svg>
+            <div
+              class="absolute inset-0 flex flex-col items-center justify-center"
+            >
+              <span class="text-2xl font-bold" data-timer-value>0s</span>
+              <span class="text-xs uppercase tracking-wide text-sky-200"
+                >elapsed</span
+              >
+            </div>
+          </div>
+          <div
+            class="text-slate-100 space-y-2 max-w-xl text-center md:text-left"
+          >
+            <p class="text-lg font-semibold">
+              15 seconds to a ready-to-share set.
+            </p>
+            <p class="text-sky-200" data-timer-status>Rendering 10 looks…</p>
+            <p class="text-xs text-sky-300/80">
+              Animation resets on refresh; actual delivery depends on queue but
+              typically wraps in well under half a minute.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -900,6 +983,55 @@
         class="absolute left-0 right-0 bottom-2 sm:bottom-4 text-center text-sky-200 text-sm px-6"
       ></div>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        const timers = document.querySelectorAll("[data-generation-timer]");
+
+        timers.forEach((timer) => {
+          const valueEl = timer.querySelector("[data-timer-value]");
+          const statusEl = timer.querySelector("[data-timer-status]");
+          const circleEl = timer.querySelector("[data-timer-circle]");
+          const ringEl = timer.querySelector("[data-timer-ring]");
+          if (!valueEl || !statusEl || !circleEl || !ringEl) {
+            return;
+          }
+
+          const duration = Number(timer.dataset.duration) || 15;
+          const runningText = timer.dataset.runningText || "Rendering…";
+          const completeText =
+            timer.dataset.completeText || "Generation complete.";
+
+          ringEl.style.animationDuration = `${duration}s`;
+          statusEl.textContent = runningText;
+
+          if (reduceMotion) {
+            ringEl.style.animation = "none";
+            ringEl.style.strokeDashoffset = "0";
+            valueEl.textContent = `≤${duration}s`;
+            statusEl.textContent = completeText;
+            circleEl.classList.add("timer-finished");
+            return;
+          }
+
+          let elapsed = 0;
+          valueEl.textContent = "0s";
+
+          const tick = setInterval(() => {
+            elapsed += 1;
+            valueEl.textContent = `${elapsed}s`;
+            if (elapsed >= duration) {
+              clearInterval(tick);
+              statusEl.textContent = completeText;
+              circleEl.classList.add("timer-finished", "animate-pulse");
+            }
+          }, 1000);
+        });
+      });
+    </script>
 
     <!-- Lightbox JS (group-aware) -->
     <script>
