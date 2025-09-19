@@ -339,6 +339,18 @@
     <priority>0.62</priority>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/business-photos-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-profesionales-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/business-photos-gallery/"/>
+  </url>
+
+  <!-- Galería de Fotos Profesionales (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/fotos-profesionales-galeria/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.62</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/business-photos-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-profesionales-galeria/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/business-photos-gallery/"/>
   </url>
 
