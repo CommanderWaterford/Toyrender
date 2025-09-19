@@ -394,4 +394,24 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/how-to-order-a-figurine-of-me-online"/>
   </url>
 
+  <!-- Blog Article: Bulk Create Images with BananaBatch -->
+  <url>
+    <loc>https://toyrender.com/blog/bulk-create-images-with-bananabatch/</loc>
+    <lastmod>2025-09-19</lastmod>
+    <priority>0.67</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/crear-imagenes-masivas-con-bananabatch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"/>
+  </url>
+
+  <!-- Artículo Blog (ES): Crear Imágenes Masivas con BananaBatch -->
+  <url>
+    <loc>https://toyrender.com/es/crear-imagenes-masivas-con-bananabatch/</loc>
+    <lastmod>2025-09-19</lastmod>
+    <priority>0.67</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/crear-imagenes-masivas-con-bananabatch/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"/>
+  </url>
+
 </urlset>

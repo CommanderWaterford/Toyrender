@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      How to Bulk Create Images with Different Prompts Using Nano Banana |
+      BananaBatch
+    </title>
+
+    <!-- SEO -->
+    <meta
+      name="description"
+      content="Master bulk AI image creation with BananaBatch.com - the #1 bulk AI image creator. Generate dozens or hundreds of images in seconds with Nano Banana. Upload CSV files or manually add prompts for instant batch processing."
+    />
+    <meta name="robots" content="index, follow" />
+    <link
+      rel="canonical"
+      href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"
+    />
+    <link
+      rel="alternate"
+      hreflang="es"
+      href="https://toyrender.com/es/crear-imagenes-masivas-con-bananabatch/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"
+    />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:title"
+      content="Bulk Create Images with Different Prompts Using Nano Banana"
+    />
+    <meta
+      property="og:description"
+      content="Learn how to use BananaBatch.com, the #1 bulk AI image creator, to generate hundreds of images instantly with Nano Banana technology."
+    />
+    <meta
+      property="og:url"
+      content="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"
+    />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta
+      property="og:image"
+      content="https://toyrender.com/images/BananaBatchBulkGeneration.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="BananaBatch bulk AI image generation dashboard"
+    />
+    <meta property="article:section" content="AI Bulk Generation Tips" />
+    <meta property="article:published_time" content="2025-09-19T00:00:00Z" />
+    <meta property="article:modified_time" content="2025-09-19T00:00:00Z" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Bulk Create Images with Different Prompts Using Nano Banana"
+    />
+    <meta
+      name="twitter:description"
+      content="Master bulk AI image generation with BananaBatch - create hundreds of images in seconds."
+    />
+    <meta
+      name="twitter:image"
+      content="https://toyrender.com/images/BananaBatchBulkGeneration.jpg"
+    />
+
+    <!-- Theme -->
+    <meta name="theme-color" content="#f59e0b" />
+
+    <!-- Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+        }
+        50% {
+          box-shadow: 0 0 30px rgba(245, 158, 11, 0.7);
+        }
+      }
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .float {
+        animation: float 3s ease-in-out infinite;
+      }
+      .glow {
+        animation: glow 2s ease-in-out infinite;
+      }
+      .slide-in {
+        animation: slideInUp 0.6s ease-out;
+      }
+      .gradient-text {
+        background: linear-gradient(45deg, #f59e0b, #ef4444);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .glass {
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    </style>
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      async
+    ></script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-amber-900 via-orange-900 to-red-900 text-gray-100 font-sans leading-relaxed overflow-x-hidden"
+  >
+    <!-- Animated Background Elements -->
+    <div class="fixed inset-0 pointer-events-none">
+      <div
+        class="absolute top-20 left-10 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl float"
+      ></div>
+      <div
+        class="absolute top-1/3 right-10 w-96 h-96 bg-orange-500/10 rounded-full blur-3xl float"
+        style="animation-delay: -1s"
+      ></div>
+      <div
+        class="absolute bottom-20 left-1/3 w-80 h-80 bg-red-500/10 rounded-full blur-3xl float"
+        style="animation-delay: -2s"
+      ></div>
+    </div>
+
+    <!-- Header -->
+    <header class="relative z-10 border-b border-white/10 glass">
+      <div
+        class="max-w-7xl mx-auto flex items-center justify-between px-6 py-4"
+      >
+        <a href="/" class="text-3xl font-extrabold gradient-text"
+          >BananaBatch</a
+        >
+        <nav class="space-x-6 text-sm md:text-base">
+          <a
+            href="/blog"
+            class="hover:text-amber-300 transition-colors duration-300"
+            >Blog</a
+          >
+          <a
+            href="/gallery"
+            class="hover:text-amber-300 transition-colors duration-300"
+            >Gallery</a
+          >
+          <a
+            href="/faq"
+            class="hover:text-amber-300 transition-colors duration-300"
+            >FAQ</a
+          >
+          <a
+            href="/pricing"
+            class="bg-gradient-to-r from-amber-600 to-red-600 px-4 py-2 rounded-full hover:from-amber-500 hover:to-red-500 transition-all duration-300"
+            >Pricing</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 py-20 px-6">
+      <div class="max-w-4xl mx-auto text-center slide-in">
+        <div class="inline-block mb-4">
+          <span
+            class="bg-gradient-to-r from-amber-400 to-red-400 text-black px-4 py-2 rounded-full text-sm font-semibold"
+            >🍌 Complete Guide</span
+          >
+        </div>
+        <h1
+          class="text-5xl md:text-7xl font-bold mb-6 gradient-text leading-tight"
+        >
+          Bulk Create Images with
+          <span class="block">Nano Banana</span>
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+          Generate dozens or hundreds of AI images in seconds with
+          BananaBatch.com - the #1 bulk AI image creator powered by Google's
+          Nano Banana technology.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="https://bananabatch.com"
+            class="bg-gradient-to-r from-amber-600 to-red-600 px-8 py-4 rounded-full text-lg font-semibold hover:from-amber-500 hover:to-red-500 transition-all duration-300 glow inline-flex items-center justify-center"
+          >
+            Try BananaBatch Now →
+          </a>
+          <a
+            href="/gallery"
+            class="glass px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center"
+          >
+            View Examples
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="relative z-10 px-6 pb-12">
+      <article class="max-w-5xl mx-auto">
+        <!-- Introduction Card -->
+        <div class="glass rounded-3xl shadow-2xl p-8 md:p-12 mb-12 slide-in">
+          <div class="flex items-start gap-6 mb-8">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-amber-500 to-red-500 rounded-2xl flex items-center justify-center text-2xl"
+            >
+              🚀
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold mb-4">
+                Why BananaBatch is #1 for Bulk AI Image Creation
+              </h2>
+              <p class="text-lg text-gray-300 leading-relaxed">
+                Need to create dozens or hundreds of images with different
+                prompts?
+                <strong class="text-amber-300">BananaBatch.com</strong> is the
+                ultimate bulk AI image creator, powered by Google's cutting-edge
+                Nano Banana model. Whether you're manually adding prompts or
+                uploading a CSV file with hundreds of variations, BananaBatch
+                processes them all in seconds, not hours.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step Cards -->
+        <div class="space-y-8">
+          <!-- Step 1 -->
+          <div
+            class="glass rounded-3xl shadow-2xl p-8 md:p-12 slide-in hover:shadow-amber-500/20 transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center text-xl font-bold"
+              >
+                1
+              </div>
+              <h2 class="text-3xl font-bold">Access BananaBatch Dashboard</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <p class="mb-6 text-gray-300">
+                  Head to
+                  <strong class="text-amber-300">BananaBatch.com</strong>
+                  and create your account. The intuitive dashboard is designed
+                  for bulk operations, whether you're creating 10 or 1000
+                  images.
+                </p>
+
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-amber-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      ⚡
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-amber-300">
+                        Lightning Speed
+                      </h4>
+                      <p class="text-sm text-gray-300">
+                        Process hundreds of prompts simultaneously with Nano
+                        Banana's parallel processing power.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      📊
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-orange-300">
+                        Batch Management
+                      </h4>
+                      <p class="text-sm text-gray-300">
+                        Track progress, manage queues, and organize outputs with
+                        enterprise-grade tools.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-red-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      💾
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-red-300">Smart Storage</h4>
+                      <p class="text-sm text-gray-300">
+                        Automatic organization and bulk download options for all
+                        generated images.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-gradient-to-br from-amber-500/10 to-red-500/10 rounded-2xl p-6 border border-white/10"
+              >
+                <h4 class="font-semibold mb-4 text-amber-300">
+                  🍌 Why Nano Banana?
+                </h4>
+                <p class="text-gray-300">
+                  Google's Nano Banana model delivers superior quality and speed
+                  for bulk generation, with consistent results across thousands
+                  of prompts.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div
+            class="glass rounded-3xl shadow-2xl p-8 md:p-12 slide-in hover:shadow-orange-500/20 transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center text-xl font-bold"
+              >
+                2
+              </div>
+              <h2 class="text-3xl font-bold">Choose Your Input Method</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="space-y-6">
+                <div
+                  class="bg-gradient-to-br from-orange-500/20 to-amber-500/20 p-6 rounded-xl border border-orange-400/20"
+                >
+                  <div class="flex items-center gap-3 mb-4">
+                    <div
+                      class="w-8 h-8 bg-orange-500/30 rounded-lg flex items-center justify-center"
+                    >
+                      ✏️
+                    </div>
+                    <h3 class="font-bold text-orange-300">Manual Entry</h3>
+                  </div>
+                  <p class="text-sm text-gray-300 mb-4">
+                    Perfect for smaller batches or when you want full control
+                    over each prompt.
+                  </p>
+                  <ul class="text-xs text-gray-400 space-y-1">
+                    <li>• Add prompts one by one</li>
+                    <li>• Real-time preview</li>
+                    <li>• Custom parameters per prompt</li>
+                  </ul>
+                </div>
+
+                <div
+                  class="bg-gradient-to-br from-red-500/20 to-orange-500/20 p-6 rounded-xl border border-red-400/20"
+                >
+                  <div class="flex items-center gap-3 mb-4">
+                    <div
+                      class="w-8 h-8 bg-red-500/30 rounded-lg flex items-center justify-center"
+                    >
+                      📄
+                    </div>
+                    <h3 class="font-bold text-red-300">CSV Upload</h3>
+                  </div>
+                  <p class="text-sm text-gray-300 mb-4">
+                    Upload hundreds or thousands of prompts instantly from a
+                    spreadsheet.
+                  </p>
+                  <ul class="text-xs text-gray-400 space-y-1">
+                    <li>• Bulk upload from Excel/Sheets</li>
+                    <li>• Support for variables</li>
+                    <li>• Template downloads available</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                class="bg-gradient-to-br from-amber-500/10 to-orange-500/10 rounded-2xl p-6 border border-white/10"
+              >
+                <h4 class="font-semibold mb-4 text-amber-300">
+                  📝 CSV Format Example
+                </h4>
+                <div class="bg-black/30 p-4 rounded-lg text-xs font-mono">
+                  <div class="text-green-300">prompt,style,ratio</div>
+                  <div class="text-gray-300">
+                    cat wearing sunglasses,photorealistic,16:9
+                  </div>
+                  <div class="text-gray-300">dog in space suit,cartoon,1:1</div>
+                  <div class="text-gray-300">
+                    mountain landscape,oil painting,3:2
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div
+            class="glass rounded-3xl shadow-2xl p-8 md:p-12 slide-in hover:shadow-red-500/20 transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl flex items-center justify-center text-xl font-bold"
+              >
+                3
+              </div>
+              <h2 class="text-3xl font-bold">Configure Batch Settings</h2>
+            </div>
+
+            <p class="mb-6 text-gray-300">
+              BananaBatch offers powerful configuration options to optimize your
+              bulk generation. Set global parameters or customize each prompt
+              individually.
+            </p>
+
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6"
+            >
+              <div
+                class="bg-gradient-to-br from-red-500/20 to-pink-500/20 p-4 rounded-xl border border-red-400/20 hover:scale-105 transition-transform duration-200"
+              >
+                <div class="text-2xl mb-2">🎨</div>
+                <h4 class="font-semibold text-red-300">Style Consistency</h4>
+                <p class="text-xs text-gray-400">
+                  Apply same style across all prompts
+                </p>
+              </div>
+
+              <div
+                class="bg-gradient-to-br from-orange-500/20 to-red-500/20 p-4 rounded-xl border border-orange-400/20 hover:scale-105 transition-transform duration-200"
+              >
+                <div class="text-2xl mb-2">📐</div>
+                <h4 class="font-semibold text-orange-300">Aspect Ratios</h4>
+                <p class="text-xs text-gray-400">
+                  Mix different ratios in one batch
+                </p>
+              </div>
+
+              <div
+                class="bg-gradient-to-br from-amber-500/20 to-orange-500/20 p-4 rounded-xl border border-amber-400/20 hover:scale-105 transition-transform duration-200"
+              >
+                <div class="text-2xl mb-2">⚙️</div>
+                <h4 class="font-semibold text-amber-300">Quality Settings</h4>
+                <p class="text-xs text-gray-400">
+                  From draft to ultra-high resolution
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="bg-gradient-to-r from-red-500/10 to-orange-500/10 p-4 rounded-xl border border-red-400/20"
+            >
+              <p class="text-red-200">
+                💡 Pro Tip: Use variables in your prompts like {animal},
+                {color}, {style} and BananaBatch will automatically generate all
+                combinations!
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div
+            class="glass rounded-3xl shadow-2xl p-8 md:p-12 slide-in hover:shadow-green-500/20 transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-xl font-bold"
+              >
+                4
+              </div>
+              <h2 class="text-3xl font-bold">Launch Bulk Generation</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <p class="mb-6 text-gray-300">
+                  Hit the
+                  <strong class="text-green-300">Generate Batch</strong> button
+                  and watch as BananaBatch processes your prompts at incredible
+                  speed. Nano Banana's parallel processing means hundreds of
+                  images can be created simultaneously.
+                </p>
+
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      📊
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-green-300">
+                        Real-time Progress
+                      </h4>
+                      <p class="text-sm text-gray-300">
+                        Watch your batch progress with live updates and
+                        completion estimates.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-emerald-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      🔄
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-emerald-300">
+                        Queue Management
+                      </h4>
+                      <p class="text-sm text-gray-300">
+                        Add more batches while others process - no waiting
+                        required.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl p-6 border border-white/10"
+              >
+                <div class="text-center">
+                  <div
+                    class="w-16 h-16 bg-green-500/30 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl"
+                  >
+                    🚀
+                  </div>
+                  <h4 class="font-semibold mb-2">Blazing Fast</h4>
+                  <p class="text-sm text-gray-300">
+                    100 images in under 2 minutes with Nano Banana
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div
+            class="glass rounded-3xl shadow-2xl p-8 md:p-12 slide-in hover:shadow-purple-500/20 transition-all duration-300"
+          >
+            <div class="flex items-center gap-4 mb-6">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-500 rounded-xl flex items-center justify-center text-xl font-bold"
+              >
+                5
+              </div>
+              <h2 class="text-3xl font-bold">Download & Organize</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div>
+                <p class="mb-6 text-gray-300">
+                  Once generation completes, BananaBatch provides multiple
+                  download options. Get individual images, bulk ZIP files, or
+                  organized folders matching your prompt structure.
+                </p>
+
+                <div class="space-y-4">
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      📦
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-purple-300">
+                        Bulk Download
+                      </h4>
+                      <p class="text-sm text-gray-300">
+                        Download all images as organized ZIP files with custom
+                        naming.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3 p-4 glass rounded-xl">
+                    <div
+                      class="w-8 h-8 bg-violet-500/20 rounded-lg flex items-center justify-center"
+                    >
+                      🏷️
+                    </div>
+                    <div>
+                      <h4 class="font-semibold text-violet-300">
+                        Smart Naming
+                      </h4>
+                      <p class="text-sm text-gray-300">
+                        Auto-generated filenames based on prompts for easy
+                        organization.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pro Tips Section -->
+        <div class="glass rounded-3xl shadow-2xl p-8 md:p-12 mt-12 slide-in">
+          <div class="flex items-center gap-4 mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center text-xl"
+            >
+              💡
+            </div>
+            <h2 class="text-3xl font-bold">Pro Tips for Maximum Efficiency</h2>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div class="space-y-4">
+              <div
+                class="flex items-start gap-3 p-4 bg-yellow-500/10 rounded-xl border border-yellow-400/20"
+              >
+                <div
+                  class="w-6 h-6 bg-yellow-500/30 rounded-full flex items-center justify-center text-sm"
+                >
+                  1
+                </div>
+                <p class="text-sm text-gray-300">
+                  Use consistent prompt structures across your batch for better
+                  style coherence.
+                </p>
+              </div>
+
+              <div
+                class="flex items-start gap-3 p-4 bg-orange-500/10 rounded-xl border border-orange-400/20"
+              >
+                <div
+                  class="w-6 h-6 bg-orange-500/30 rounded-full flex items-center justify-center text-sm"
+                >
+                  2
+                </div>
+                <p class="text-sm text-gray-300">
+                  Leverage variables like {color}, {style}, {mood} for automatic
+                  combinations.
+                </p>
+              </div>
+            </div>
+
+            <div class="space-y-4">
+              <div
+                class="flex items-start gap-3 p-4 bg-red-500/10 rounded-xl border border-red-400/20"
+              >
+                <div
+                  class="w-6 h-6 bg-red-500/30 rounded-full flex items-center justify-center text-sm"
+                >
+                  3
+                </div>
+                <p class="text-sm text-gray-300">
+                  Test small batches first to refine your prompts before scaling
+                  up.
+                </p>
+              </div>
+
+              <div
+                class="flex items-start gap-3 p-4 bg-amber-500/10 rounded-xl border border-amber-400/20"
+              >
+                <div
+                  class="w-6 h-6 bg-amber-500/30 rounded-full flex items-center justify-center text-sm"
+                >
+                  4
+                </div>
+                <p class="text-sm text-gray-300">
+                  Use BananaBatch during off-peak hours for fastest processing
+                  speeds.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Use Cases Section -->
+        <div class="glass rounded-3xl shadow-2xl p-8 md:p-12 mt-12 slide-in">
+          <div class="flex items-center gap-4 mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center text-xl"
+            >
+              🎯
+            </div>
+            <h2 class="text-3xl font-bold">
+              Perfect Use Cases for Bulk Generation
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div
+              class="bg-gradient-to-br from-blue-500/20 to-cyan-500/20 p-6 rounded-xl border border-blue-400/20 hover:scale-105 transition-transform duration-200"
+            >
+              <div class="text-3xl mb-4">🛍️</div>
+              <h3 class="font-bold mb-2 text-blue-300">E-commerce</h3>
+              <p class="text-sm text-gray-300">
+                Generate product variations, lifestyle shots, and marketing
+                visuals at scale.
+              </p>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 p-6 rounded-xl border border-green-400/20 hover:scale-105 transition-transform duration-200"
+            >
+              <div class="text-3xl mb-4">📱</div>
+              <h3 class="font-bold mb-2 text-green-300">Social Media</h3>
+              <p class="text-sm text-gray-300">
+                Create weeks of content in minutes - posts, stories, and
+                campaign visuals.
+              </p>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-purple-500/20 to-violet-500/20 p-6 rounded-xl border border-purple-400/20 hover:scale-105 transition-transform duration-200"
+            >
+              <div class="text-3xl mb-4">🎮</div>
+              <h3 class="font-bold mb-2 text-purple-300">Game Development</h3>
+              <p class="text-sm text-gray-300">
+                Concept art, character variations, and environment assets in
+                bulk.
+              </p>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-red-500/20 to-pink-500/20 p-6 rounded-xl border border-red-400/20 hover:scale-105 transition-transform duration-200"
+            >
+              <div class="text-3xl mb-4">📚</div>
+              <h3 class="font-bold mb-2 text-red-300">Education</h3>
+              <p class="text-sm text-gray-300">
+                Educational illustrations, diagrams, and visual learning
+                materials.
+              </p>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-orange-500/20 to-red-500/20 p-6 rounded-xl border border-orange-400/20 hover:scale-105 transition-transform duration-200"
+            >
+              <div class="text-3xl mb-4">🎨</div>
+              <h3 class="font-bold mb-2 text-orange-300">Art Projects</h3>
+              <p class="text-sm text-gray-300">
+                Series, collections, and variations for artistic exploration.
+              </p>
+            </div>
+
+            <div
+              class="bg-gradient-to-br from-amber-500/20 to-yellow-500/20 p-6 rounded-xl border border-amber-400/20 hover:scale-105 transition-transform duration-200"
+            >
+              <div class="text-3xl mb-4">💼</div>
+              <h3 class="font-bold mb-2 text-amber-300">Marketing</h3>
+              <p class="text-sm text-gray-300">
+                A/B testing visuals, campaign variants, and brand consistency.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAQ Section -->
+        <div class="glass rounded-3xl shadow-2xl p-8 md:p-12 mt-12 slide-in">
+          <div class="flex items-center gap-4 mb-8">
+            <div
+              class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center text-xl"
+            >
+              ❓
+            </div>
+            <h2 class="text-3xl font-bold">Frequently Asked Questions</h2>
+          </div>
+
+          <div class="space-y-6">
+            <div class="border-l-4 border-amber-400 pl-6 py-4">
+              <h3 class="font-semibold text-lg mb-2 text-amber-300">
+                How many images can I generate at once?
+              </h3>
+              <p class="text-gray-300">
+                Users can batch up to 50 images. Pro users have unlimited batch
+                generation with priority processing.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-orange-400 pl-6 py-4">
+              <h3 class="font-semibold text-lg mb-2 text-orange-300">
+                What's the difference between manual and CSV upload?
+              </h3>
+              <p class="text-gray-300">
+                Manual entry is perfect for smaller batches with individual
+                customization. CSV upload handles hundreds or thousands of
+                prompts from spreadsheets instantly.
+              </p>
+            </div>
+
+            <div class="border-l-4 border-red-400 pl-6 py-4">
+              <h3 class="font-semibold text-lg mb-2 text-red-300">
+                How fast is Nano Banana for bulk generation?
+              </h3>
+              <p class="text-gray-300">
+                Nano Banana can process 100+ images in under 2 minutes with
+                parallel processing. Actual speed depends on complexity and
+                server load.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center mt-16 slide-in">
+          <div class="glass rounded-3xl shadow-2xl p-12">
+            <h2 class="text-4xl font-bold mb-6 gradient-text">
+              Ready to Scale Your Image Creation?
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+              Join thousands of creators using BananaBatch.com as their #1 bulk
+              AI image generator. Create dozens or hundreds of images in
+              seconds, not hours.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="https://bananabatch.com"
+                class="bg-gradient-to-r from-amber-600 to-red-600 px-10 py-4 rounded-full text-lg font-semibold hover:from-amber-500 hover:to-red-500 transition-all duration-300 glow inline-flex items-center justify-center"
+              >
+                Start Bulk Creating Now →
+              </a>
+              <a
+                href="/gallery"
+                class="glass px-10 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all duration-300 inline-flex items-center justify-center"
+              >
+                See Examples
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 border-t border-white/10 glass py-12 mt-20">
+      <div class="max-w-4xl mx-auto text-center">
+        <div class="mb-6">
+          <a
+            href="https://bananabatch.com"
+            class="text-3xl font-extrabold gradient-text"
+            >BananaBatch</a
+          >
+        </div>
+        <nav class="flex flex-wrap justify-center gap-6 mb-6 text-sm">
+          <a href="/blog" class="hover:text-amber-300 transition-colors"
+            >Blog</a
+          >
+          <a href="/gallery" class="hover:text-amber-300 transition-colors"
+            >Gallery</a
+          >
+          <a href="/faq" class="hover:text-amber-300 transition-colors">FAQ</a>
+          <a href="/pricing" class="hover:text-amber-300 transition-colors"
+            >Pricing</a
+          >
+          <a href="/privacy" class="hover:text-amber-300 transition-colors"
+            >Privacy</a
+          >
+          <a href="/terms" class="hover:text-amber-300 transition-colors"
+            >Terms</a
+          >
+        </nav>
+        <p class="text-sm text-gray-400">
+          © 2025 Toyrender. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://toyrender.com/#website",
+            "url": "https://toyrender.com/",
+            "name": "Toyrender",
+            "inLanguage": "en",
+            "potentialAction": {
+              "@type": "SearchAction",
+              "target": "https://toyrender.com/search?q={search_term_string}",
+              "query-input": "required name=search_term_string"
+            }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://toyrender.com/blog/bulk-create-images-with-bananabatch/#breadcrumb",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://toyrender.com/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://toyrender.com/blog/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Bulk Create Images with BananaBatch",
+                "item": "https://toyrender.com/blog/bulk-create-images-with-bananabatch/"
+              }
+            ]
+          },
+          {
+            "@type": "BlogPosting",
+            "@id": "https://toyrender.com/blog/bulk-create-images-with-bananabatch/#article",
+            "headline": "How to Bulk Create Images with Different Prompts Using Nano Banana",
+            "description": "Master bulk AI image creation with BananaBatch.com - the #1 bulk AI image creator. Generate dozens or hundreds of images in seconds with Nano Banana. Upload CSV files or manually add prompts for instant batch processing.",
+            "image": [
+              "https://toyrender.com/images/BananaBatchBulkGeneration.jpg"
+            ],
+            "datePublished": "2025-09-19T00:00:00Z",
+            "dateModified": "2025-09-19T00:00:00Z",
+            "author": { "@type": "Organization", "name": "Toyrender" },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Toyrender",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/logo-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://toyrender.com/blog/bulk-create-images-with-bananabatch/"
+            },
+            "isPartOf": { "@id": "https://toyrender.com/#website" },
+            "articleSection": "AI Bulk Generation Guide",
+            "wordCount": 1200,
+            "breadcrumb": {
+              "@id": "https://toyrender.com/blog/bulk-create-images-with-bananabatch/#breadcrumb"
+            }
+          },
+          {
+            "@type": "HowTo",
+            "name": "How to Bulk Create Images with Different Prompts",
+            "description": "Use BananaBatch.com to generate dozens or hundreds of AI images simultaneously with Nano Banana technology.",
+            "totalTime": "PT10M",
+            "supply": [
+              { "@type": "HowToSupply", "name": "List of prompts or CSV file" },
+              { "@type": "HowToSupply", "name": "BananaBatch account" }
+            ],
+            "tool": [
+              {
+                "@type": "HowToTool",
+                "name": "BananaBatch bulk AI image generator"
+              }
+            ],
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "Access BananaBatch Dashboard",
+                "text": "Sign up at BananaBatch.com and access the bulk generation dashboard designed for handling multiple prompts simultaneously."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Choose Input Method",
+                "text": "Either manually add prompts one by one or upload a CSV file containing hundreds of prompts for bulk processing."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Configure Batch Settings",
+                "text": "Set global parameters like style, aspect ratio, and quality settings that will apply to your entire batch."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Launch Bulk Generation",
+                "text": "Start the batch process and watch as Nano Banana generates dozens or hundreds of images in parallel processing."
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Download and Organize",
+                "text": "Download all generated images as organized ZIP files with smart naming based on your original prompts."
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How many images can I generate at once?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Free users can batch up to 50 images daily. Pro users have unlimited batch generation with priority processing."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What's the difference between manual and CSV upload?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Manual entry is perfect for smaller batches with individual customization. CSV upload handles hundreds or thousands of prompts from spreadsheets instantly."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How fast is Nano Banana for bulk generation?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nano Banana can process 100+ images in under 2 minutes with parallel processing. Actual speed depends on complexity and server load."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I use variables in my prompts?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes! Use variables like {color}, {style}, {animal} and BananaBatch will automatically generate all combinations, multiplying your creative output."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </body>
+</html>
