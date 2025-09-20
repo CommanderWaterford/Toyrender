@@ -485,6 +485,7 @@ function logGen(data) {
     }
 
     genLogStream.write(logLine + "\n");
+    console.log(`📝 GenLog: ${logLine}`);
   } catch (err) {
     console.error("!!! FAILED TO WRITE TO GENERATION LOG !!!", err);
   }
@@ -1938,6 +1939,25 @@ app.post(
       if (!req.file) return res.status(400).json({ error: "No file uploaded" });
       inputPath = req.file.path;
 
+      // Early "received" log (console + file)
+      console.log(
+        `📥 Upload received: ${req.file.originalname} -> ${req.file.filename} ` +
+          `(${req.file.mimetype}, ${req.file.size} bytes) for userId=${userId}`
+      );
+
+      logGen({
+        event: "upload_received",
+        reqId,
+        userEmail,
+        file: {
+          name: req.file.originalname,
+          savedAs: req.file.filename,
+          mimetype: req.file.mimetype,
+          size: req.file.size,
+        },
+        user_id: userId,
+      });
+
       // read + hash early
       const raw = fs.readFileSync(inputPath);
       const imgHash16 = crypto
@@ -1949,6 +1969,19 @@ app.post(
       // consume one credit
       const credit = await consumeCredits(userId, 1);
       if (!credit.ok) {
+        logGen({
+          event: "gen_rejected_no_credits",
+          reqId,
+          userEmail,
+          file: {
+            name: req.file.originalname,
+            savedAs: req.file.filename,
+            mimetype: req.file.mimetype,
+            size: req.file.size,
+          },
+          user_id: userId,
+        });
+
         fs.unlink(inputPath, () => {});
         return res.status(402).json({
           error: "Out of credits",
