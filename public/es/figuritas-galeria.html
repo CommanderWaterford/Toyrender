@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Galería de Figuritas IA – Ejemplos Personalizados y Calidad Toyrender
+    </title>
+
+    <!-- Canonical & SEO -->
+    <link rel="canonical" href="https://toyrender.com/es/figuritas-galeria/" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://toyrender.com/figurines-gallery/"
+    />
+    <link
+      rel="alternate"
+      hreflang="es"
+      href="https://toyrender.com/es/figuritas-galeria/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://toyrender.com/figurines-gallery/"
+    />
+    <meta
+      name="description"
+      content="Explora más de 20 figuritas generadas con IA: cosplay, fitness, parejas, héroes de fantasía y retratos profesionales. Inspírate y crea tu propia figurita en segundos."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Toyrender.com" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Galería de Figuritas IA – Ejemplos Personalizados"
+    />
+    <meta
+      property="og:description"
+      content="Ver más de 20 renders de figuritas hechas con Toyrender: anime, parejas, héroes y retratos para coleccionistas."
+    />
+    <meta
+      property="og:url"
+      content="https://toyrender.com/es/figuritas-galeria/"
+    />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta property="og:image" content="https://toyrender.com/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#9333ea" />
+
+    <!-- Tailwind & Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        animation: float 22s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .img-tile {
+        background-image: radial-gradient(
+          1200px 400px at 50% 10%,
+          rgba(148, 163, 184, 0.18),
+          rgba(0, 0, 0, 0)
+        );
+      }
+      /* Lightbox */
+      .lightbox-open {
+        overflow: hidden;
+      }
+    </style>
+
+    <!-- JSON-LD: Breadcrumbs + Collection of Images -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Inicio",
+                "item": "https://toyrender.com/es/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Galería de Figuritas",
+                "item": "https://toyrender.com/es/figuritas-galeria/"
+              }
+            ]
+          },
+          {
+            "@type": "CollectionPage",
+            "name": "Galería de Figuritas IA — Ejemplos Toyrender",
+            "url": "https://toyrender.com/es/figuritas-galeria/",
+            "isPartOf": { "@id": "https://toyrender.com/es/#website" },
+            "about": "Ejemplos de conceptos de figuritas con IA generados a partir de fotos usando Toyrender.",
+            "mainEntity": {
+              "@type": "ItemList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de cosplay",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample1.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 2,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de agente sigiloso",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample2.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 3,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de graduación con birrete y toga",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample3.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 4,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de mujer fitness Crossfit",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample4.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 5,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de mujer CEO",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample5.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 6,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de cosplay de mujer",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample6.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 7,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de héroe de fantasía",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample7.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 8,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita ciberpunk",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample8.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 9,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita steampunk",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample9.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 10,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de traje espacial de astronauta",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample10.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 11,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de piloto",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample11.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 12,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de piloto de Emirates",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample12.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 13,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de mujer con caballo",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample13.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 14,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de retrato formal",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample14.jpg"
+                  }
+                },
+                {
+                  "@type": "ListItem",
+                  "position": 15,
+                  "item": {
+                    "@type": "ImageObject",
+                    "name": "Ejemplo de figurita de pareja en la playa",
+                    "contentUrl": "https://toyrender.com/images/gallery1/GExample15.jpg"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    </script>
+
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      async
+    ></script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-purple-900 via-slate-900 to-indigo-900 min-h-screen text-white overflow-x-hidden"
+  >
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none">
+      <div class="blob w-96 h-96 bg-purple-600 -top-48 -left-48"></div>
+      <div
+        class="blob w-96 h-96 bg-indigo-600 top-1/2 -right-48"
+        style="animation-delay: 6s"
+      ></div>
+      <div
+        class="blob w-96 h-96 bg-pink-600 -bottom-48 left-1/3"
+        style="animation-delay: 12s"
+      ></div>
+    </div>
+
+    <!-- Header / Nav -->
+    <header class="relative z-10 px-6 py-4 lg:px-12">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <a href="/es/" class="flex items-center space-x-2">
+          <i
+            class="fas fa-cube text-3xl text-purple-400"
+            aria-hidden="true"
+          ></i>
+          <span class="text-2xl font-bold gradient-text">Toyrender</span>
+        </a>
+        <nav
+          class="hidden md:flex items-center gap-6 text-purple-200"
+          aria-label="Principal"
+        >
+          <a class="hover:text-white transition-colors" href="/es/">Inicio</a>
+          <a
+            class="hover:text-white transition-colors"
+            href="/es/galeria.html"
+            aria-current="page"
+            >Galería</a
+          >
+          <a class="hover:text-white transition-colors" href="#seo"
+            >Acerca de</a
+          >
+        </nav>
+      </div>
+    </header>
+
+    <main
+      class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-24"
+      role="main"
+    >
+      <!-- Page Title -->
+      <section class="pt-6 pb-8">
+        <nav
+          class="text-sm text-purple-300 mb-3"
+          aria-label="Ruta de navegación"
+        >
+          <ol class="flex items-center gap-2">
+            <li><a class="hover:text-purple-100" href="/es/">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li class="text-purple-100">Galería de figuritas</li>
+          </ol>
+        </nav>
+        <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight">
+          <span class="gradient-text">Galería de Figuritas</span> — Ejemplos con
+          IA
+        </h1>
+        <p class="mt-3 text-purple-200 max-w-3xl">
+          Un conjunto seleccionado de más de 20 renders de muestra. Haz clic en
+          cualquier imagen para abrir la vista previa completa, luego usa
+          <span class="font-semibold">← / →</span> o desliza para navegar.
+        </p>
+      </section>
+
+      <!-- Responsive Gallery Grid (15 images) -->
+      <section
+        aria-label="Renders de ejemplo"
+        class="img-tile rounded-3xl border border-purple-500/30 backdrop-blur-xl p-5 lg:p-8"
+      >
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          <!-- Each figure uses object-contain to avoid cropping and keeps intrinsic aspect via width/height -->
+
+          <!-- 01 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="1"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample1.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita de cosplay: pose de héroe de anime sobre base redonda de acrílico"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Figurita de cosplay — héroe de anime
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 02 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="2"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample2.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Concepto de figurita de agente sigiloso con iluminación dramática"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Agente sigiloso — iluminación dramática
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 03 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="3"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample3.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita de graduación con birrete y toga"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Graduación — birrete y toga
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 04 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="4"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample4.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Mujer de fitness Crossfit estilizada como una figurita"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Figurita de mujer fitness Crossfit
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 05 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="5"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample5.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de mujer CEO como figurita"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Poder de figurita de mujer CEO
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 06 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="6"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample6.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita de cosplay de mujer"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Cosplay de mujer. Profesional de día, aventurera de noche.
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 07 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="7"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample7.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Concepto de figurita de héroe de fantasía con espada"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Héroe de fantasía — pose con espada
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 08 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="8"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample8.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Figurita ciberpunk con luz de neón de contorno"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Ciberpunk — luz de neón
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 09 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="9"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample9.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Figurita steampunk con detalles de latón"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Steampunk — detalles de latón
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 10 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="10"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample10.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita de astronauta con reflejos en el visor"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Astronauta — reflejos en el visor
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 11 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="11"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample11.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita IA de retrato de piloto"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Ejemplo de figurita IA de retrato de piloto
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 12 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="12"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample12.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita de piloto de Emirates"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Figurita selfie de piloto de Emirates
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 13 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="13"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample13.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Figurita de mujer con su caballo"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Figurita de mujer y su caballo
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 14 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="14"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample14.jpg"
+                  width="960"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Ejemplo de figurita de mujer montando a caballo"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Amor por los caballos
+              </figcaption>
+            </figure>
+          </li>
+
+          <!-- 15 -->
+          <li>
+            <figure
+              class="bg-slate-800/50 border border-white/10 rounded-2xl p-3 hover:border-purple-400/50 transition-colors cursor-pointer"
+              data-lightbox="15"
+            >
+              <div
+                class="rounded-xl overflow-hidden bg-black/30 flex items-center justify-center h-72"
+              >
+                <img
+                  src="/images/gallery1/GExample15.jpg"
+                  width="1200"
+                  height="960"
+                  loading="lazy"
+                  decoding="async"
+                  alt="Pareja de figuritas con ambiente playero y tonos cálidos"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <figcaption class="px-1 py-3 text-sm text-purple-200">
+                Ambiente playero — Pareja de figuritas + tonos cálidos
+              </figcaption>
+            </figure>
+          </li>
+        </ul>
+      </section>
+
+      <!-- SEO copy -->
+      <section id="seo" class="max-w-4xl mx-auto mt-16">
+        <h2 class="text-3xl font-bold mb-4">
+          <span class="gradient-text">Acerca de esta Galería</span> — Qué crea
+          Toyrender
+        </h2>
+        <p class="text-purple-200">
+          Esta galería muestra lo que Toyrender hace mejor:
+          <strong
+            >convertir una foto de retrato clara en una imagen estilo
+            figurita</strong
+          >
+          con iluminación prémium, un aspecto de colección y la distintiva base
+          redonda de acrílico. Cada render es producido por nuestra IA en
+          segundos y se entrega como una imagen de alta resolución fácil de
+          guardar, imprimir o compartir.
+        </p>
+        <p class="text-purple-200 mt-3">
+          Verás una variedad de estéticas aquí — desde
+          <strong>cosplay</strong> (héroe de anime, ninja, mecha) y
+          <strong>géneros creativos</strong> (ciberpunk, steampunk, fantasía)
+          hasta <strong>momentos de la vida real</strong> (graduación,
+          aniversarios) y casos de uso prácticos como
+          <strong>avatares para negocios/LinkedIn</strong> o
+          <strong>arte para canales de gaming</strong>. Estos ejemplos están
+          destinados a inspirar ideas que puedes probar con tu propia foto.
+        </p>
+
+        <h3 class="text-2xl font-semibold mt-6 mb-2">
+          Las mejores fotos para subir
+        </h3>
+        <ul class="list-disc list-inside text-purple-200 space-y-1">
+          <li>
+            Buena iluminación uniforme (luz interior suave o de día). Evita
+            contraluces fuertes o sombras profundas.
+          </li>
+          <li>
+            Rostro claramente visible, mirando hacia la cámara; sin gafas de sol
+            ni filtros pesados.
+          </li>
+          <li>Un fondo simple ayuda a la IA a recortarte limpiamente.</li>
+          <li>
+            JPG/PNG de hasta 10&nbsp;MB. Los retratos de cabeza y hombros
+            funcionan especialmente bien.
+          </li>
+        </ul>
+
+        <h3 class="text-2xl font-semibold mt-6 mb-2">
+          Estilos populares en esta galería
+        </h3>
+        <ul class="grid md:grid-cols-2 gap-2 text-purple-200">
+          <li class="flex items-start gap-2">
+            <span class="mt-1">🎭</span>
+            <div>
+              <strong>Cosplay y fandom:</strong> héroe de anime, ninja, mecha,
+              samurái — poses audaces y luces cinematográficas.
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1">🎓</span>
+            <div>
+              <strong>Hitos importantes:</strong> birrete y toga de graduación,
+              parejas de aniversario con detalles florales y tonos cálidos.
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1">💼</span>
+            <div>
+              <strong>Profesional:</strong> retratos limpios y acordes a tu
+              marca para LinkedIn, biografías y páginas de ponentes.
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1">🎮</span>
+            <div>
+              <strong>Kits para creadores:</strong> arte para canales de
+              streamer/gamer, banners, imágenes de perfil con temas cohesivos.
+            </div>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="mt-1">🛠️</span>
+            <div>
+              <strong>Arte de referencia:</strong> imágenes de alta resolución
+              usadas como <em>referencias visuales</em> para artistas 3D o
+              servicios de impresión.
+            </div>
+          </li>
+        </ul>
+
+        <h3 class="text-2xl font-semibold mt-6 mb-2">
+          Del render a la vida real
+        </h3>
+        <p class="text-purple-200">
+          Toyrender proporciona <strong>imágenes</strong> de alta resolución (no
+          archivos STL). Muchos clientes imprimen su render favorito para
+          regalos, arte de pared o mercancía; otros lo comparten en redes
+          sociales o se lo entregan a un escultor como punto de partida para un
+          modelo físico. Si planeas una impresión 3D, lleva la imagen a un
+          profesional que pueda modelarla en CAD o ZBrush y prepararla para la
+          impresión.
+        </p>
+
+        <h3 class="text-2xl font-semibold mt-6 mb-2">
+          Licencia y privacidad (lectura rápida)
+        </h3>
+        <p class="text-purple-200">
+          Eres dueño de los resultados que generas. El
+          <strong>Paquete Pro</strong> incluye una licencia de uso comercial;
+          los resultados de la Prueba Gratuita son para uso personal y no
+          comercial. Por favor, evita subir o usar contenidos que infrinjan los
+          derechos de terceros (p. ej., logos, disfraces de marca). Procesamos
+          las fotos únicamente para crear tu render y las manejamos de acuerdo
+          con nuestra
+          <a href="/es/privacy.html" class="underline hover:text-purple-100"
+            >Política de Privacidad</a
+          >.
+        </p>
+
+        <p class="text-purple-200 mt-4">
+          ¿Listo para crear la tuya? Ve a la
+          <a href="/es/" class="underline hover:text-purple-100"
+            >página de inicio</a
+          >, sube una foto y genera tu <strong>figurita con IA</strong> en
+          segundos.
+        </p>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="relative z-10 mt-20 px-6 py-12 lg:px-12 border-t border-purple-800/30"
+      role="contentinfo"
+    >
+      <div class="max-w-7xl mx-auto text-center">
+        <div class="flex items-center justify-center space-x-2 mb-6">
+          <i
+            class="fas fa-cube text-2xl text-purple-400"
+            aria-hidden="true"
+          ></i>
+          <span class="text-xl font-bold gradient-text">Toyrender</span>
+        </div>
+        <p class="text-purple-300 mb-6">
+          © 2025 Toyrender.com. Todos los derechos reservados.
+        </p>
+        <nav
+          class="flex justify-center space-x-6 text-purple-400"
+          aria-label="Pie de página"
+        >
+          <a
+            href="/es/terms.html"
+            class="hover:text-purple-300 transition-colors"
+            >Términos</a
+          >
+          <a
+            href="/es/privacy.html"
+            class="hover:text-purple-300 transition-colors"
+            >Privacidad</a
+          >
+          <a href="/es/contact" class="hover:text-purple-300 transition-colors"
+            >Contacto</a
+          >
+          <a href="/es/faq.html" class="hover:text-purple-300 transition-colors"
+            >Preguntas Frecuentes</a
+          >
+        </nav>
+      </div>
+    </footer>
+
+    <!-- Lightbox (no dependency) -->
+    <div id="lightbox" class="hidden fixed inset-0 z-50 bg-black/90 p-4 sm:p-8">
+      <button
+        id="lbClose"
+        aria-label="Cerrar"
+        class="absolute top-4 right-4 md:top-6 md:right-6 text-white/80 hover:text-white text-2xl"
+      >
+        &times;
+      </button>
+      <button
+        id="lbPrev"
+        aria-label="Anterior"
+        class="absolute left-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl"
+      >
+        ❮
+      </button>
+      <button
+        id="lbNext"
+        aria-label="Siguiente"
+        class="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white text-3xl"
+      >
+        ❯
+      </button>
+      <figure class="h-full w-full flex items-center justify-center">
+        <img
+          id="lbImg"
+          src=""
+          alt="Vista previa de la galería"
+          class="max-h-full max-w-full object-contain"
+        />
+      </figure>
+      <div
+        id="lbCaption"
+        class="absolute left-0 right-0 bottom-2 sm:bottom-4 text-center text-purple-200 text-sm px-6"
+      ></div>
+    </div>
+
+    <script>
+      // Simple lightbox with keyboard + swipe
+      (function () {
+        const tiles = Array.from(document.querySelectorAll("[data-lightbox]"));
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lbImg");
+        const lbCaption = document.getElementById("lbCaption");
+        const btnPrev = document.getElementById("lbPrev");
+        const btnNext = document.getElementById("lbNext");
+        const btnClose = document.getElementById("lbClose");
+        let idx = 0;
+
+        function open(i) {
+          idx = i;
+          update();
+          lb.classList.remove("hidden");
+          document.body.classList.add("lightbox-open");
+        }
+        function close() {
+          lb.classList.add("hidden");
+          document.body.classList.remove("lightbox-open");
+        }
+        function clamp(i) {
+          if (i < 0) return tiles.length - 1;
+          if (i >= tiles.length) return 0;
+          return i;
+        }
+        function update() {
+          const fig = tiles[idx];
+          const img = fig.querySelector("img");
+          lbImg.src = img.currentSrc || img.src;
+          lbImg.alt = img.alt || "Imagen de la galería";
+          lbCaption.textContent =
+            fig.querySelector("figcaption")?.textContent || "";
+          // Preload neighbors
+          const next = new Image();
+          next.src =
+            tiles[clamp(idx + 1)].querySelector("img").currentSrc ||
+            tiles[clamp(idx + 1)].querySelector("img").src;
+          const prev = new Image();
+          prev.src =
+            tiles[clamp(idx - 1)].querySelector("img").currentSrc ||
+            tiles[clamp(idx - 1)].querySelector("img").src;
+        }
+
+        tiles.forEach((fig, i) => {
+          fig.addEventListener("click", () => open(i));
+          fig.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") open(i);
+          });
+          fig.setAttribute("tabindex", "0");
+          fig.setAttribute("role", "button");
+          fig.setAttribute("aria-label", "Abrir vista previa");
+        });
+
+        btnPrev.addEventListener("click", () => {
+          idx = clamp(idx - 1);
+          update();
+        });
+        btnNext.addEventListener("click", () => {
+          idx = clamp(idx + 1);
+          update();
+        });
+        btnClose.addEventListener("click", close);
+        lb.addEventListener("click", (e) => {
+          if (e.target === lb) close();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (lb.classList.contains("hidden")) return;
+          if (e.key === "Escape") close();
+          if (e.key === "ArrowLeft") {
+            idx = clamp(idx - 1);
+            update();
+          }
+          if (e.key === "ArrowRight") {
+            idx = clamp(idx + 1);
+            update();
+          }
+        });
+
+        // Basic touch swipe
+        let sx = 0,
+          sy = 0;
+        lb.addEventListener(
+          "touchstart",
+          (e) => {
+            const t = e.touches[0];
+            sx = t.clientX;
+            sy = t.clientY;
+          },
+          { passive: true }
+        );
+        lb.addEventListener(
+          "touchend",
+          (e) => {
+            const t = e.changedTouches[0];
+            const dx = t.clientX - sx;
+            const dy = t.clientY - sy;
+            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+              if (dx < 0) {
+                idx = clamp(idx + 1);
+                update();
+              } else {
+                idx = clamp(idx - 1);
+                update();
+              }
+            }
+          },
+          { passive: true }
+        );
+      })();
+    </script>
+  </body>
+</html>

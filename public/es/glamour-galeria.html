@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Galería de Glamour con IA – 10 looks desde una sola foto | Toyrender
+    </title>
+
+    <link
+      rel="canonical"
+      href="https://toyrender.com/es/glamour-galeria/"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://toyrender.com/glamour-gallery/"
+    />
+    <link
+      rel="alternate"
+      hreflang="es"
+      href="https://toyrender.com/es/glamour-galeria/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://toyrender.com/glamour-gallery/"
+    />
+    <meta
+      name="description"
+      content="Descubre cómo Toyrender transforma un solo retrato en 10 fotos glamour con calidad de revista. Explora variaciones de iluminación, estilismo y fondo que puedes conseguir a partir de una única subida."
+    />
+    <meta name="robots" content="index,follow" />
+    <meta name="author" content="Toyrender.com" />
+
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="Galería de Glamour con IA – 10 looks desde una sola foto"
+    />
+    <meta
+      property="og:description"
+      content="Revisa el escaparate glamour de Toyrender: un retrato base, diez resultados de alto impacto generados con IA."
+    />
+    <meta
+      property="og:url"
+      content="https://toyrender.com/es/glamour-galeria/"
+    />
+    <meta
+      property="og:image"
+      content="https://toyrender.com/images/Example6.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#ec4899" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      .gradient-text {
+        background: linear-gradient(135deg, #ec4899 0%, #6366f1 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.55;
+        animation: float 24s ease-in-out infinite;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-18px);
+        }
+      }
+      .img-tile {
+        background-image: radial-gradient(
+          960px 260px at 50% 15%,
+          rgba(236, 72, 153, 0.18),
+          rgba(15, 23, 42, 0)
+        );
+      }
+      .lightbox-open {
+        overflow: hidden;
+      }
+    </style>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Galería de Glamour con IA de Toyrender",
+        "url": "https://toyrender.com/es/glamour-galeria/",
+        "mainEntity": {
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example6.jpg",
+                "caption": "Retrato original utilizado para las variaciones de glamour."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example7.jpg",
+                "caption": "Variación glamour con luz de estudio rosa suave."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example8.jpg",
+                "caption": "Variación glamour con contraluz tipo golden hour."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example9.jpg",
+                "caption": "Variación glamour con estética editorial cinematográfica."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example10.jpg",
+                "caption": "Variación glamour con luces de escenario y niebla."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example11.jpg",
+                "caption": "Variación glamour con foco monocromático."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 7,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example12.jpg",
+                "caption": "Variación glamour con camerino de lujo."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 8,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example13.jpg",
+                "caption": "Variación glamour con estilo editorial cálido."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 9,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example14.jpg",
+                "caption": "Variación glamour con vestido de noche y lámpara colgante."
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 10,
+              "item": {
+                "@type": "ImageObject",
+                "url": "https://toyrender.com/images/Example15.jpg",
+                "caption": "Variación glamour con luces nocturnas de azotea."
+              }
+            }
+          ]
+        }
+      }
+    </script>
+  </head>
+  <body
+    class="bg-gradient-to-br from-rose-950 via-slate-950 to-indigo-950 min-h-screen text-white overflow-x-hidden"
+  >
+    <div class="fixed inset-0 pointer-events-none">
+      <div class="blob w-96 h-96 bg-rose-600 -top-40 -left-48"></div>
+      <div
+        class="blob w-96 h-96 bg-pink-500 top-1/2 -right-40"
+        style="animation-delay: 6s"
+      ></div>
+      <div
+        class="blob w-96 h-96 bg-indigo-600 -bottom-52 left-1/3"
+        style="animation-delay: 12s"
+      ></div>
+    </div>
+
+    <header class="relative z-10 px-6 py-4 lg:px-12">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        <a href="/es/" class="flex items-center gap-2">
+          <i class="fas fa-star text-3xl text-rose-300" aria-hidden="true"></i>
+          <span class="text-2xl font-bold gradient-text">Toyrender</span>
+        </a>
+        <nav
+          class="hidden md:flex items-center gap-6 text-rose-100"
+          aria-label="Principal"
+        >
+          <a class="hover:text-white transition" href="/es/">Inicio</a>
+          <a class="hover:text-white transition" href="/es/galeria.html"
+            >Hub de galerías</a
+          >
+          <a class="hover:text-white transition" href="#glamour-gallery"
+            >Galería</a
+          >
+          <a class="hover:text-white transition" href="#seo">Acerca de</a>
+        </nav>
+      </div>
+    </header>
+
+    <main
+      class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 pb-24"
+      role="main"
+    >
+      <section class="pt-6 pb-10 text-rose-100">
+        <nav class="text-sm text-rose-300 mb-4" aria-label="Ruta de navegación">
+          <ol class="flex items-center gap-2">
+            <li><a class="hover:text-rose-100" href="/es/">Inicio</a></li>
+            <li aria-hidden="true">/</li>
+            <li class="text-rose-100">Galería de Glamour</li>
+          </ol>
+        </nav>
+        <h1 class="text-4xl lg:text-6xl font-extrabold tracking-tight">
+          <span class="gradient-text">Sesiones Glamour con IA</span>
+          <span class="block text-rose-100/90 text-2xl lg:text-3xl mt-3"
+            >10 looks creados a partir de una sola foto original</span
+          >
+        </h1>
+        <p class="mt-4 max-w-3xl text-lg text-rose-200">
+          Partimos de un retrato de estudio (lo ves primero) y generamos diez
+          variaciones con calidad de revista usando Toyrender. Toca cualquier
+          imagen para abrir el lightbox y comparar iluminación, estilismo y
+          fondos en detalle.
+        </p>
+      </section>
+
+      <section
+        id="glamour-gallery"
+        aria-labelledby="glamour-heading"
+        class="img-tile rounded-3xl border border-rose-400/40 backdrop-blur-xl p-6 lg:p-10"
+      >
+        <header
+          class="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between mb-6"
+        >
+          <div>
+            <h2 id="glamour-heading" class="text-3xl font-semibold">
+              <span class="gradient-text">Original + 9 variaciones</span>
+            </h2>
+            <p class="text-rose-200 max-w-2xl mt-1">
+              La primera imagen es la foto subida. Las nueve restantes muestran
+              cómo Toyrender puede restilizar a la misma persona para campañas
+              beauty, portadas musicales o branding personal.
+            </p>
+          </div>
+          <a
+            href="/app"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-rose-500 to-indigo-500 hover:from-pink-500 hover:to-purple-600 text-sm font-medium shadow-lg shadow-rose-900/40"
+          >
+            <i class="fas fa-magic text-white/90"></i>
+            <span>Crea tu set</span>
+          </a>
+        </header>
+
+        <div class="space-y-5">
+          <figure
+            class="relative bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer"
+            data-lightbox="0"
+          >
+            <div
+              class="absolute left-4 top-4 text-xs px-2 py-1 rounded-full bg-white/10 border border-white/20"
+            >
+              Original
+            </div>
+            <div
+              class="rounded-xl overflow-hidden bg-black/40 flex items-center justify-center"
+            >
+              <img
+                src="/images/glamour/GlamourOriginal1.jpg"
+                alt="Retrato de estudio original utilizado para todas las variaciones glamour."
+                class="w-full h-auto max-h-[600px] object-contain"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
+              />
+            </div>
+            <figcaption class="px-1 py-3 text-sm text-rose-200">
+              Foto base con iluminación neutra de estudio.
+            </figcaption>
+          </figure>
+
+          <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="1"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-01.jpg"
+                    alt="Variación glamour con iluminación rosa suave de estudio."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Resplandor de estudio rosa: headshot profesional generado con
+                  IA, ideal para LinkedIn y CV.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="2"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-02.jpg"
+                    alt="Variación glamour con contraluz cálido al atardecer."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Golden hour: retrato cálido al aire libre, perfecto para
+                  branding en redes sociales.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="3"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-03.jpg"
+                    alt="Variación glamour con estética editorial y acentos neón."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Editorial cinematográfico: headshot audaz con acentos neón para
+                  portafolios creativos.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="4"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-04.jpg"
+                    alt="Variación glamour con luces teatrales y niebla."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Luces de escenario + niebla: retrato corporativo moderno con
+                  efecto de estudio.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="5"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-05.jpg"
+                    alt="Variación glamour en blanco y negro con foco dramático."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Spotlight monocromático: retrato clásico blanco y negro con
+                  elegancia atemporal.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="6"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-06.jpg"
+                    alt="Variación glamour con fondo de camerino de lujo."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Glow de camerino: retrato profesional con estilismo pulido,
+                  listo para perfiles ejecutivos.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="7"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-07.jpg"
+                    alt="Variación glamour con telón dorado y maquillaje dramático."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Glam dorado: estilismo teatral con énfasis en maquillaje y
+                  accesorios brillantes.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="8"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-08.jpg"
+                    alt="Variación glamour con iluminación editorial cálida."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Editorial cálido: look beauty con luz envolvente y color
+                  terracota.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="9"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-09.jpg"
+                    alt="Variación glamour con vestido de noche y lámpara colgante."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Gala nocturna: vestido escénico y candelabro para materiales de
+                  prensa y lanzamientos.
+                </figcaption>
+              </figure>
+            </li>
+            <li>
+              <figure
+                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                data-lightbox="10"
+              >
+                <div
+                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
+                >
+                  <img
+                    src="/images/glamour/GlamourExamples-10.jpg"
+                    alt="Variación glamour con skyline nocturno y luces de ciudad."
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+                <figcaption class="px-1 py-3 text-sm text-rose-200">
+                  Noches en azotea: vibras urbanas para banners, portadas y
+                  contenido social.
+                </figcaption>
+              </figure>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <div
+        id="lightbox"
+        class="fixed inset-0 hidden z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4"
+      >
+        <button
+          id="lbClose"
+          class="absolute top-6 right-6 text-white/80 hover:text-white text-3xl"
+          aria-label="Cerrar galería"
+        >
+          &times;
+        </button>
+        <button
+          id="lbPrev"
+          class="absolute left-4 md:left-10 text-white/80 hover:text-white text-4xl"
+          aria-label="Anterior"
+        >
+          ‹
+        </button>
+        <div class="max-w-3xl w-full space-y-3 text-center">
+          <img
+            id="lbImg"
+            src=""
+            alt="Vista previa glamour"
+            class="mx-auto max-h-[80vh] w-auto rounded-2xl shadow-2xl"
+          />
+          <p id="lbCaption" class="text-sm text-rose-100/80"></p>
+        </div>
+        <button
+          id="lbNext"
+          class="absolute right-4 md:right-10 text-white/80 hover:text-white text-4xl"
+          aria-label="Siguiente"
+        >
+          ›
+        </button>
+      </div>
+
+      <section
+        id="seo"
+        class="mt-16 grid gap-8 lg:grid-cols-[2fr,1fr] text-rose-100/80"
+        aria-labelledby="seo-heading"
+      >
+        <div
+          class="rounded-3xl border border-rose-400/30 bg-slate-950/60 backdrop-blur-xl p-6 lg:p-10"
+        >
+          <h2 id="seo-heading" class="text-3xl font-semibold text-white">
+            ¿Qué incluye el paquete Glamour de Toyrender?
+          </h2>
+          <p class="mt-4 text-rose-100/80">
+            El pack Glamour convierte una fotografía nítida en una colección de
+            retratos editoriales listos para prensa, portadas o redes. Puedes
+            combinar instrucciones sobre vestuario, maquillaje o iluminación y
+            Toyrender mezclará esos detalles con nuestra biblioteca de prompts
+            para entregarte diez looks cohesivos.
+          </p>
+          <div class="mt-6 grid gap-4 sm:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <h3 class="text-lg font-semibold text-white">
+                Looks para portafolio
+              </h3>
+              <p class="mt-2 text-sm text-rose-100/80">
+                Obtén retratos glamour listos para kits de prensa, dossiers de
+                artistas y anuncios de giras.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <h3 class="text-lg font-semibold text-white">Ajustes rápidos</h3>
+              <p class="mt-2 text-sm text-rose-100/80">
+                Cambia maquillaje, iluminación y fondos en segundos sin nuevas
+                sesiones de fotos.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <h3 class="text-lg font-semibold text-white">Listo para redes</h3>
+              <p class="mt-2 text-sm text-rose-100/80">
+                Exporta en PNG o JPG de alta resolución para Instagram, TikTok o
+                Spotify Canvas.
+              </p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-white/5 p-5">
+              <h3 class="text-lg font-semibold text-white">Licencia comercial</h3>
+              <p class="mt-2 text-sm text-rose-100/80">
+                Usa tus imágenes para campañas, portadas, anuncios o merch sin
+                cuotas adicionales.
+              </p>
+            </div>
+          </div>
+
+          <h3 class="mt-10 text-2xl font-semibold text-white">
+            Checklist de la foto ideal
+          </h3>
+          <ul class="mt-4 space-y-3 text-sm text-rose-100/80 list-disc list-inside">
+            <li>Retrato nítido, con iluminación uniforme y expresión natural.</li>
+            <li>Mantén el cabello visible; evita gorras o desenfoques fuertes.</li>
+            <li>Elige el Glamour Style Pack en Toyrender.</li>
+          </ul>
+          <p class="mt-4 text-rose-100/80">
+            ¿Listo para tu sesión? Abre la app de Toyrender, sube tu foto y
+            prueba los presets glamour para recibir decenas de resultados en
+            alta resolución: perfectos para portafolios, EPKs y anuncios.
+          </p>
+        </div>
+        <aside class="space-y-8">
+          <div
+            class="rounded-3xl border border-rose-400/30 bg-slate-950/70 p-6"
+          >
+            <h3 class="text-lg font-semibold text-white">Consejos rápidos</h3>
+            <p class="mt-2 text-sm text-rose-100/80">
+              Mezcla 2 estilos de iluminación + 2 contextos + 2 palabras clave de
+              estilismo para descubrir la estética que mejor funciona para tu
+              marca.
+            </p>
+          </div>
+          <div
+            class="rounded-3xl border border-rose-400/30 bg-slate-950/70 p-6"
+          >
+            <h3 class="text-lg font-semibold text-white">
+              Explora más galerías
+            </h3>
+            <ul class="mt-3 space-y-2 text-sm text-rose-100/80">
+              <li>
+                <a class="hover:text-white" href="/es/figuritas-galeria.html"
+                  >Galería de figuritas →</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-white" href="/es/fotos-profesionales-galeria.html"
+                  >Headshots profesionales →</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-white" href="/es/fotos-citas-galeria.html"
+                  >Fotos para citas →</a
+                >
+              </li>
+              <li>
+                <a class="hover:text-white" href="/cosplay-gallery"
+                  >Galería de cosplay (EN) →</a
+                >
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+    </main>
+
+    <section
+      id="glamour-faq"
+      class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 mt-8 pb-12"
+      aria-labelledby="glamour-faq-title"
+    >
+      <header class="max-w-3xl">
+        <h2
+          id="glamour-faq-title"
+          class="text-3xl lg:text-4xl font-bold gradient-text"
+        >
+          Preguntas frecuentes del pack Glamour
+        </h2>
+        <p class="mt-3 text-rose-100/80">
+          Respuestas rápidas sobre la foto de origen, prompts de estilo, tiempos
+          de entrega y licencias cuando adquieres el Glamour Pack de Toyrender.
+        </p>
+      </header>
+
+      <dl class="mt-8 space-y-6">
+        <div class="bg-slate-900/60 border border-white/10 rounded-2xl p-6">
+          <dt class="text-lg font-semibold text-white">
+            ¿Qué tipo de foto debo subir para el Glamour Pack?
+          </dt>
+          <dd class="mt-2 text-rose-100/80">
+            Sube un retrato nítido con el rostro completo visible, expresión
+            natural e iluminación homogénea. Evita gafas oscuras o desenfoques
+            intensos para que la IA capture cabello, maquillaje y rasgos en todas
+            las variaciones.
+          </dd>
+        </div>
+
+        <div class="bg-slate-900/60 border border-white/10 rounded-2xl p-6">
+          <dt class="text-lg font-semibold text-white">
+            ¿Puedo personalizar vestuario, maquillaje o iluminación?
+          </dt>
+          <dd class="mt-2 text-rose-100/80">
+            Sí. Cada orden acepta notas como “vestido plateado con lentejuelas”,
+            “soft glam makeup” o “spotlight de escenario”. Mezclamos esas
+            indicaciones con nuestra biblioteca Glamour para que recibas diez
+            looks coherentes y de alto impacto.
+          </dd>
+        </div>
+
+        <div class="bg-slate-900/60 border border-white/10 rounded-2xl p-6">
+          <dt class="text-lg font-semibold text-white">
+            ¿Cuánto tardan en entregarse las imágenes glamour?
+          </dt>
+          <dd class="mt-2 text-rose-100/80">
+            La mayoría de los pedidos terminan en pocos minutos. En cuanto
+            finaliza el render, recibes un enlace al set completo dentro de
+            Toyrender con descargas inmediatas en PNG o JPG de alta resolución.
+          </dd>
+        </div>
+
+        <div class="bg-slate-900/60 border border-white/10 rounded-2xl p-6">
+          <dt class="text-lg font-semibold text-white">
+            ¿Soy dueño de los retratos glamour que generan para mí?
+          </dt>
+          <dd class="mt-2 text-rose-100/80">
+            Sí. Cada compra de Toyrender incluye licencia comercial libre de
+            regalías. Puedes usar las imágenes en redes sociales, press kits,
+            portadas o campañas sin pagar extra.
+          </dd>
+        </div>
+      </dl>
+    </section>
+
+    <footer class="relative z-10 border-t border-white/10 bg-black/30">
+      <div
+        class="max-w-6xl mx-auto px-6 lg:px-12 py-10 grid gap-8 md:grid-cols-2"
+      >
+        <div>
+          <a href="/es/" class="flex items-center gap-2 text-white">
+            <i
+              class="fas fa-star text-2xl text-rose-300"
+              aria-hidden="true"
+            ></i>
+            <span class="text-xl font-bold">Toyrender</span>
+          </a>
+          <p class="mt-3 text-sm text-rose-100/70 max-w-md">
+            Crea sesiones glamour dignas de revista, figuritas coleccionables,
+            retratos para citas y más, impulsado por el motor de estilismo IA de
+            Toyrender.
+          </p>
+        </div>
+        <nav class="grid grid-cols-2 gap-4 text-sm text-rose-100/80">
+          <div class="space-y-2">
+            <a class="block hover:text-white" href="/es/"> Inicio </a>
+            <a class="block hover:text-white" href="/es/galeria.html">
+              Hub de galerías
+            </a>
+            <a class="block hover:text-white" href="/es/glamour-galeria.html">
+              Galería de glamour
+            </a>
+            <a class="block hover:text-white" href="/cosplay-gallery">
+              Galería de cosplay (EN)
+            </a>
+          </div>
+          <div class="space-y-2">
+            <a class="block hover:text-white" href="/es/fotos-citas-galeria.html">
+              Fotos para citas
+            </a>
+            <a class="block hover:text-white" href="/dating-photos"
+              >Dating Pack (EN)</a
+            >
+            <a class="block hover:text-white" href="/es/faq.html"> FAQ </a>
+            <a class="block hover:text-white" href="/es/contacto.html">
+              Contacto
+            </a>
+          </div>
+        </nav>
+      </div>
+      <div
+        class="border-t border-white/10 py-4 text-center text-xs text-rose-100/60"
+      >
+        © <span id="footerYear"></span> Toyrender. Todos los derechos reservados.
+      </div>
+    </footer>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Qué tipo de foto debo subir para el Glamour Pack?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sube un retrato nítido donde se vea tu rostro completo, con el cabello descubierto y luz uniforme. Evita gafas oscuras o desenfoques fuertes para que la IA de Toyrender reproduzca tus rasgos con precisión en cada variación glamour."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Puedo personalizar vestuario, maquillaje o iluminación en los resultados?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Cada pedido admite prompts de estilo como 'vestido plateado con lentejuelas', 'soft glam makeup' o 'luces de escenario neón'. Nuestro pack Glamour combina esas notas con plantillas curadas para entregarte diez looks de alto nivel editorial."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué tan rápido se entrega el Glamour Pack de Toyrender?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "La mayoría de los pedidos Glamour se completan en cuestión de minutos. Al terminar el render, recibes un enlace con descargas inmediatas en PNG o JPG de alta resolución."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Soy dueño de los retratos glamour generados?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sí. Cada compra de Toyrender incluye licencia comercial sin regalías, para que publiques las imágenes en redes, press kits, portadas o campañas sin tarifas adicionales."
+            }
+          }
+        ]
+      }
+    </script>
+
+    <script>
+      document.getElementById("footerYear").textContent =
+        new Date().getFullYear();
+
+      (function () {
+        const tiles = Array.from(document.querySelectorAll("[data-lightbox]"));
+        const lb = document.getElementById("lightbox");
+        const lbImg = document.getElementById("lbImg");
+        const lbCaption = document.getElementById("lbCaption");
+        const btnPrev = document.getElementById("lbPrev");
+        const btnNext = document.getElementById("lbNext");
+        const btnClose = document.getElementById("lbClose");
+        let idx = 0;
+
+        function clamp(i) {
+          if (i < 0) return tiles.length - 1;
+          if (i >= tiles.length) return 0;
+          return i;
+        }
+        function update() {
+          const fig = tiles[idx];
+          const img = fig.querySelector("img");
+          lbImg.src = img.currentSrc || img.src;
+          lbImg.alt = img.alt || "Vista previa glamour";
+          lbCaption.textContent =
+            fig.querySelector("figcaption")?.textContent || "";
+        }
+        function open(i) {
+          idx = i;
+          update();
+          lb.classList.remove("hidden");
+          document.body.classList.add("lightbox-open");
+        }
+        function close() {
+          lb.classList.add("hidden");
+          document.body.classList.remove("lightbox-open");
+        }
+
+        tiles.forEach((fig, i) => {
+          fig.addEventListener("click", () => open(i));
+          fig.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") open(i);
+          });
+          fig.setAttribute("tabindex", "0");
+          fig.setAttribute("role", "button");
+          fig.setAttribute("aria-label", "Abrir vista previa glamour");
+        });
+
+        btnPrev.addEventListener("click", () => {
+          idx = clamp(idx - 1);
+          update();
+        });
+        btnNext.addEventListener("click", () => {
+          idx = clamp(idx + 1);
+          update();
+        });
+        btnClose.addEventListener("click", close);
+        lb.addEventListener("click", (e) => {
+          if (e.target === lb) close();
+        });
+        document.addEventListener("keydown", (e) => {
+          if (lb.classList.contains("hidden")) return;
+          if (e.key === "Escape") close();
+          if (e.key === "ArrowLeft") {
+            idx = clamp(idx - 1);
+            update();
+          }
+          if (e.key === "ArrowRight") {
+            idx = clamp(idx + 1);
+            update();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

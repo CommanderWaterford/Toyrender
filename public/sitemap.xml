@@ -64,14 +64,37 @@
     <priority>0.63</priority>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/figurines-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/figuritas-galeria/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/figurines-gallery/"/>
   </url>
-<url>
-    <loc>https://toyrender.com/galeria.html</loc>
-    <lastmod>2025-09-06T17:50:00+00:00</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery"/>
+
+  <!-- Galleries Hub -->
+  <url>
+    <loc>https://toyrender.com/galleries</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.65</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/galleries"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/galleries"/>
+  </url>
+
+  <url>
+    <loc>https://toyrender.com/es/galeria.html</loc>
+    <lastmod>2025-09-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/galleries"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/galleries"/>
+  </url>
+
+  <url>
+    <loc>https://toyrender.com/es/figuritas-galeria/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.60</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/figurines-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/figuritas-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/figurines-gallery/"/>
   </url>
 
   <url>
@@ -101,15 +124,6 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/contact"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/contacto.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/contact"/>
-  </url>
-
-  <!-- Gallery (ES .html explicit) -->
-  <url>
-    <loc>https://toyrender.com/es/galeria.html</loc>
-    <lastmod>2025-09-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/gallery.html"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/galeria.html"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/gallery.html"/>
   </url>
 
   <!-- Home (ES index.html explicit) -->
@@ -152,6 +166,17 @@
     <priority>0.60</priority>
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/glamour-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery/"/>
+  </url>
+
+  <url>
+    <loc>https://toyrender.com/es/glamour-galeria/</loc>
+    <lastmod>2025-09-18</lastmod>
+    <priority>0.58</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/glamour-galeria/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery/"/>
   </url>
 
