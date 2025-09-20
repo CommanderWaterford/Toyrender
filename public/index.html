@@ -122,6 +122,13 @@
               },
               {
                 "@type": "Offer",
+                "name": "Starter Pack",
+                "price": "3.99",
+                "priceCurrency": "USD",
+                "description": "25 Credits to create photos with fast processing and HD downloads"
+              },
+              {
+                "@type": "Offer",
                 "name": "Pro Pack",
                 "price": "4.99",
                 "priceCurrency": "USD",
@@ -151,7 +158,7 @@
               "lowPrice": "0",
               "highPrice": "4.99",
               "priceCurrency": "USD",
-              "offerCount": "2"
+              "offerCount": "3"
             }
           },
           {
@@ -1876,7 +1883,7 @@
           Simple Pricing
         </h2>
         <div
-          class="max-w-2xl mx-auto grid md:grid-cols-2 gap-8"
+          class="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           role="list"
           aria-label="Pricing plans"
         >
@@ -1914,10 +1921,45 @@
               </li>
             </ul>
             <button
+              id="freeTrialBtn"
               class="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all mt-auto"
               aria-label="Start with free trial"
             >
               Get Started
+            </button>
+          </article>
+          <article
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/30 flex flex-col"
+            role="listitem"
+          >
+            <h3 class="text-2xl font-bold mb-4">Starter Pack</h3>
+            <p class="text-4xl font-bold mb-4">$3.99</p>
+            <ul
+              class="space-y-3 mb-8 text-left flex-grow"
+              role="list"
+              aria-label="Starter pack features"
+            >
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span>25 Credits to create photos</span>
+              </li>
+              <li role="listitem">
+                <i
+                  class="fas fa-check text-green-400 mr-2"
+                  aria-hidden="true"
+                ></i
+                ><span>Fast generation priority</span>
+              </li>
+            </ul>
+            <button
+              id="buyStarterPackBtn"
+              class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-105 mt-auto"
+              aria-label="Purchase starter pack credits"
+            >
+              Buy Starter Pack
             </button>
           </article>
           <article
@@ -4106,39 +4148,62 @@
 
       // STRIPE INTEGRATION
 
-      document
-        .getElementById("buyCreditsBtn")
-        .addEventListener("click", async () => {
-          try {
-            if (!sessionUser) {
-              openAuth("login");
-              return;
-            }
-            const data = await fetchJSON("/api/payments/checkout", {
-              method: "POST",
-            });
+      const trackPricingClick = (tier) => {
+        if (typeof gtag === "function") {
+          gtag("event", "pricing_cta_click", { tier });
+        }
+      };
 
-            // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
-            if (data?.url) {
-              window.location.assign(data.url);
-              return;
-            }
-            // Fallback to Stripe.js
-            if (data?.id) {
-              const { error } = await stripe.redirectToCheckout({
-                sessionId: data.id,
-              });
-              if (error)
-                throw new Error(error.message || "Checkout could not start.");
-              return;
-            }
-
-            throw new Error("No checkout URL or session id from server.");
-          } catch (e) {
-            console.error("Checkout failed:", e);
-            toast(e.message || "Failed to start checkout.");
+      const startCheckout = async (tier) => {
+        trackPricingClick(tier);
+        try {
+          if (!sessionUser) {
+            openAuth("login");
+            return;
           }
-        });
+          const data = await fetchJSON("/api/payments/checkout", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ package: tier }),
+          });
+
+          if (data?.url) {
+            window.location.assign(data.url);
+            return;
+          }
+          if (data?.id) {
+            const { error } = await stripe.redirectToCheckout({
+              sessionId: data.id,
+            });
+            if (error)
+              throw new Error(error.message || "Checkout could not start.");
+            return;
+          }
+
+          throw new Error("No checkout URL or session id from server.");
+        } catch (e) {
+          console.error("Checkout failed:", e);
+          toast(e.message || "Failed to start checkout.");
+        }
+      };
+
+      const checkoutButtons = {
+        buyStarterPackBtn: "starter_pack_25_credits",
+        buyCreditsBtn: "pro_pack_50_credits",
+      };
+
+      Object.entries(checkoutButtons).forEach(([id, tier]) => {
+        const btn = document.getElementById(id);
+        if (!btn) return;
+        btn.addEventListener("click", () => startCheckout(tier));
+      });
+
+      const freeTrialBtn = document.getElementById("freeTrialBtn");
+      if (freeTrialBtn) {
+        freeTrialBtn.addEventListener("click", () =>
+          trackPricingClick("free_trial")
+        );
+      }
     </script>
     <script>
       // Add the CTA button functionality

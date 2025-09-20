@@ -1513,12 +1513,30 @@ async function grantCreditsAfterPayment({
 app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
   const userId = req.session.userId;
   let userEmail = "unknown";
+  const requestedPackage = req.body?.package;
+
+  const PACKAGES = {
+    starter_pack_25_credits: {
+      envKey: "STRIPE_PRICE_STARTER_PACK",
+      credits: 25,
+    },
+    pro_pack_50_credits: {
+      envKey: "STRIPE_PRICE_PRO_PACK",
+      credits: 50,
+    },
+  };
+
+  const defaultPackage = "pro_pack_50_credits";
+  const packageKey = PACKAGES[requestedPackage] ? requestedPackage : defaultPackage;
+  const packageConfig = PACKAGES[packageKey];
+
+  const priceEnvValue = process.env[packageConfig.envKey];
 
   try {
     if (!process.env.STRIPE_SECRET_KEY)
       throw new Error("Missing STRIPE_SECRET_KEY");
-    if (!process.env.STRIPE_PRICE_PRO_PACK)
-      throw new Error("Missing STRIPE_PRICE_PRO_PACK");
+    if (!priceEnvValue)
+      throw new Error(`Missing ${packageConfig.envKey}`);
 
     const user = await userById(userId);
     userEmail = user.email;
@@ -1528,18 +1546,18 @@ app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
       event: "checkout_attempted",
       userId,
       userEmail,
-      metadata: { package: "pro_pack_10_credits" },
+      metadata: { package: packageKey },
     });
 
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      line_items: [{ price: process.env.STRIPE_PRICE_PRO_PACK, quantity: 1 }],
+      line_items: [{ price: priceEnvValue, quantity: 1 }],
       customer_email: user.email,
       client_reference_id: String(userId),
       metadata: {
         userId: String(userId),
-        credits: "10",
-        package: "pro_pack_10_credits",
+        credits: String(packageConfig.credits),
+        package: packageKey,
       },
       allow_promotion_codes: true,
       billing_address_collection: "auto",
@@ -1555,6 +1573,7 @@ app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
       userId,
       userEmail,
       status: "pending",
+      metadata: { package: packageKey },
     });
 
     res.json({ id: session.id, url: session.url });
