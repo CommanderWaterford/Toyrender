@@ -2044,8 +2044,12 @@ app.post(
       // Check if user has made any payments
       const hasRealPayment = await userHasRealPayment(userId);
 
-      // User is on free trial if they have no payment history and only starter credits
-      const isFreeTrial = !hasRealPayment;
+      // Also check if user has more credits than starter amount (indicates purchase)
+      const currentCredits = userCredits ? (userCredits.paid_remaining || 0) : 0;
+      const hasCreditsFromPurchase = currentCredits > STARTER_CREDITS;
+
+      // User is on free trial if they have no payment history AND no purchased credits
+      const isFreeTrial = !hasRealPayment && !hasCreditsFromPurchase;
 
       // Log start
       await run(
@@ -2313,8 +2317,11 @@ app.post(
         "SELECT id FROM payments WHERE user_id = ? LIMIT 1",
         [userId]
       );
+      // Check both payment history and credit count to determine free trial status
+      const currentCredits = userCredits ? (userCredits.paid_remaining || 0) : 0;
+      const hasCreditsFromPurchase = currentCredits > STARTER_CREDITS;
       const isFreeTrial =
-        !hasPayments && userCredits.paid_remaining <= STARTER_CREDITS;
+        !hasPayments && !hasCreditsFromPurchase;
 
       // Log start
       await run(
