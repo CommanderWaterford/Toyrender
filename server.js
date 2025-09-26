@@ -1602,9 +1602,29 @@ app.get("/checkout/success", ensureAuth, (req, res) => {
     <body style="font-family:system-ui; color:#e5e7eb; background:#0f172a; text-align:center; padding:40px">
       <h1>🔄 Finalizing your credits…</h1>
       <p>Please wait a moment.</p>
+
+      <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-78RSLH46CX"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-78RSLH46CX');
+      </script>
+
       <script>
         (async () => {
           try {
+            // Track payment success conversion event
+            if (typeof gtag === "function") {
+              gtag("event", "payment_success", {
+                event_category: "ecommerce",
+                event_label: "checkout_completed",
+                session_id: ${JSON.stringify(sid)},
+                send_to: "G-78RSLH46CX"
+              });
+            }
+
             const r = await fetch('/api/payments/confirm', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
@@ -1613,7 +1633,11 @@ app.get("/checkout/success", ensureAuth, (req, res) => {
             });
             // ignore response – the next page will fetch fresh credits
           } catch (e) {}
-          location.href = '/';
+
+          // Small delay to ensure GA4 event is sent before redirect
+          setTimeout(() => {
+            location.href = '/';
+          }, 500);
         })();
       </script>
     </body>

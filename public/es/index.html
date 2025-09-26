@@ -3311,12 +3311,15 @@
             // Track which style was used (check if gtag exists)
             if (typeof gtag !== "undefined") {
               gtag("event", "generate_success", {
+                event_category: "ai_generation",
+                event_label: selectedStyle,
                 style: selectedStyle,
                 category: selectedStyle.startsWith("figurine")
                   ? "figurine"
                   : selectedStyle.startsWith("dating")
                   ? "dating"
                   : "business",
+                send_to: "G-78RSLH46CX"
               });
             }
           }
@@ -3888,6 +3891,16 @@
             const data = await fetchJSON("/api/payments/checkout", {
               method: "POST",
             });
+
+            // Track checkout start conversion event
+            if (typeof gtag === "function") {
+              gtag("event", "checkout_start", {
+                event_category: "ecommerce",
+                event_label: "basic",
+                tier: "basic",
+                send_to: "G-78RSLH46CX"
+              });
+            }
 
             // Prefer the hosted URL (bypasses any Stripe.js issues/ad-blockers)
             if (data?.url) {
