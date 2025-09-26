@@ -3863,16 +3863,43 @@
         const fullQualityContainer = document.getElementById('resultsFullQualityPreview')?.parentElement;
         const lockOverlay = fullQualityContainer?.querySelector('.absolute.inset-0');
 
+        // Find testimonial and payment badge
+        const testimonial = document.querySelector('.mt-4.bg-gradient-to-r.from-yellow-500\\/20');
+        const securePaymentBadge = document.querySelector('.mt-2.flex.items-center.justify-center.text-xs.text-gray-400');
+
+        // Find the button container
+        const buttonContainer = document.querySelector('#resultsSection .grid.grid-cols-1.md\\:grid-cols-3');
+
         if (userCredits > 0) {
-          // User has credits - unlock everything
-          console.log('User has credits - unlocking UI');
+          // User has credits - simplify UI
+          console.log('User has credits - simplifying UI');
 
           // Hide the lock overlay on full quality image
           if (lockOverlay) {
             lockOverlay.style.display = 'none';
           }
 
-          // Update main upgrade button
+          // Hide testimonial - not needed for credited users
+          if (testimonial) {
+            testimonial.style.display = 'none';
+          }
+
+          // Hide secure payment badge - not needed for credited users
+          if (securePaymentBadge) {
+            securePaymentBadge.style.display = 'none';
+          }
+
+          // Hide the first download button - we only need one
+          if (downloadBtn) {
+            downloadBtn.style.display = 'none';
+          }
+
+          // Change grid to 2 columns for credited users
+          if (buttonContainer) {
+            buttonContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto';
+          }
+
+          // Update main button to be Download Full Quality
           if (upgradeBtn) {
             upgradeBtn.innerHTML = '👉 Download Full Quality';
             upgradeBtn.className = 'w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg';
@@ -3881,20 +3908,35 @@
           // Update generate another button
           if (generateAnotherBtn) {
             generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Generate More Styles';
-          }
-
-          // Update download button
-          if (downloadBtn) {
-            downloadBtn.innerHTML = '👉 Download Full Quality';
-            downloadBtn.className = 'px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold transition-all text-center';
+            generateAnotherBtn.className = 'px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center';
           }
         } else {
-          // User has no credits - show upgrade prompts
+          // User has no credits - show full upgrade UI
           console.log('User has no credits - showing upgrade prompts');
 
           // Show the lock overlay on full quality image
           if (lockOverlay) {
             lockOverlay.style.display = 'flex';
+          }
+
+          // Show testimonial for free users
+          if (testimonial) {
+            testimonial.style.display = 'block';
+          }
+
+          // Show secure payment badge for free users
+          if (securePaymentBadge) {
+            securePaymentBadge.style.display = 'flex';
+          }
+
+          // Show download preview button for free users
+          if (downloadBtn) {
+            downloadBtn.style.display = 'block';
+          }
+
+          // Use 3 columns for free users
+          if (buttonContainer) {
+            buttonContainer.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto';
           }
 
           // Update main upgrade button
@@ -3906,6 +3948,7 @@
           // Update generate another button
           if (generateAnotherBtn) {
             generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles';
+            generateAnotherBtn.className = 'px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center';
           }
 
           // Update download button
