@@ -3847,8 +3847,16 @@
           stickyCTA.style.display = 'none';
         }
 
+        // Delay button customization to ensure session is loaded
+        setTimeout(() => {
+          updateResultsPageButtons();
+        }, 100);
+      }
+
+      function updateResultsPageButtons() {
         // Customize buttons based on user credits
         const userCredits = totalCredits();
+        console.log('updateResultsPageButtons - User credits:', userCredits, 'Credits object:', credits);
         const upgradeBtn = document.getElementById('upgradePackageBtn');
         const generateAnotherBtn = document.getElementById('generateAnotherBtn');
 
@@ -3866,6 +3874,8 @@
           // User has no credits - show upgrade prompts
           if (upgradeBtn) {
             upgradeBtn.innerHTML = '👉 Unlock Full Quality – $3.99';
+            upgradeBtn.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-indigo-600', 'hover:from-purple-700', 'hover:to-indigo-700');
+            upgradeBtn.classList.add('bg-gradient-to-r', 'from-green-500', 'to-emerald-500', 'hover:from-green-600', 'hover:to-emerald-600');
           }
           if (generateAnotherBtn) {
             generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles';
@@ -4135,6 +4145,10 @@
           };
         }
         updateAuthUI();
+        // Update results page buttons if they exist
+        if (document.getElementById('upgradePackageBtn')) {
+          updateResultsPageButtons();
+        }
       }
 
       function totalCredits() {
