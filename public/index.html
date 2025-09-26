@@ -3847,10 +3847,8 @@
           stickyCTA.style.display = 'none';
         }
 
-        // Delay button customization to ensure session is loaded
-        setTimeout(() => {
-          updateResultsPageButtons();
-        }, 100);
+        // Update buttons immediately since session is already refreshed
+        updateResultsPageButtons();
       }
 
       function updateResultsPageButtons() {
@@ -4390,7 +4388,10 @@
 
           // Success
           if (data.imageUrl) {
-            // Show new results page instead of old preview
+            // Refresh session first to get updated credits
+            await refreshSession();
+
+            // Show new results page with updated credit info
             const originalSrc = document.getElementById('originalPreview').src;
             showResultsPage(originalSrc, data.imageUrl);
 
@@ -4409,7 +4410,6 @@
               });
             }
           }
-          await refreshSession();
         } catch (err) {
           console.error(err);
           toast(err.message || "Generation failed");
