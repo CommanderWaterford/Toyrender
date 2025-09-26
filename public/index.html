@@ -1147,6 +1147,21 @@
           transform: translate(-50%, -50%) rotate(360deg);
         }
       }
+
+      /* Mobile styles for credits button */
+      @media (max-width: 768px) {
+        #creditsBtn {
+          padding: 0.375rem 0.75rem !important;
+          font-size: 0.875rem !important;
+        }
+        #creditsBtn i {
+          font-size: 0.875rem !important;
+          margin-right: 0.375rem !important;
+        }
+        #creditsLabel {
+          display: none !important;
+        }
+      }
     </style>
     <script
       src="https://analytics.ahrefs.com/analytics.js"
@@ -2019,6 +2034,16 @@
                   <span>Coming Soon</span>
                 </div>
               </div>
+              <!-- Continue Button After Figurine Styles -->
+              <div class="flex justify-center mt-6 mb-6">
+                <button
+                  id="continueToPreviewFigurine"
+                  class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+                  onclick="document.getElementById('continueToPreview').click()"
+                >
+                  <i class="fas fa-arrow-right mr-2"></i>Continue to Preview
+                </button>
+              </div>
             </div>
 
             <!-- Dating Photo Styles -->
@@ -2028,27 +2053,87 @@
               </h4>
               <div class="grid grid-cols-3 gap-3">
                 <button class="style-option" data-style="dating1">
-                  <i class="fas fa-bed"></i>
+                  <img
+                    src="/images/dating-photos/DatingStyle1.jpg"
+                    alt="Morning Glow"
+                    class="style-thumb"
+                  />
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/dating-photos/DatingStyle1.jpg', 'dating1', 'Morning Glow')"
+                  >
+                    <i class="fas fa-search-plus"></i>
+                  </div>
                   <span>Morning Glow</span>
                 </button>
                 <button class="style-option" data-style="dating2">
-                  <i class="fas fa-smile-wink"></i>
+                  <img
+                    src="/images/dating-photos/DatingStyle2.jpg"
+                    alt="Playful Charm"
+                    class="style-thumb"
+                  />
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/dating-photos/DatingStyle2.jpg', 'dating2', 'Playful Charm')"
+                  >
+                    <i class="fas fa-search-plus"></i>
+                  </div>
                   <span>Playful Charm</span>
                 </button>
                 <button class="style-option" data-style="dating3">
-                  <i class="fas fa-gem"></i>
+                  <img
+                    src="/images/dating-photos/DatingStyle3.jpg"
+                    alt="Evening Elegance"
+                    class="style-thumb"
+                  />
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/dating-photos/DatingStyle3.jpg', 'dating3', 'Evening Elegance')"
+                  >
+                    <i class="fas fa-search-plus"></i>
+                  </div>
                   <span>Evening Elegance</span>
                 </button>
                 <button class="style-option" data-style="dating4">
-                  <i class="fas fa-sun"></i>
+                  <img
+                    src="/images/dating-photos/DatingStyle4.jpg"
+                    alt="Carefree Summer"
+                    class="style-thumb"
+                  />
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/dating-photos/DatingStyle4.jpg', 'dating4', 'Carefree Summer')"
+                  >
+                    <i class="fas fa-search-plus"></i>
+                  </div>
                   <span>Carefree Summer</span>
                 </button>
                 <button class="style-option" data-style="dating5">
-                  <i class="fas fa-spa"></i>
+                  <img
+                    src="/images/dating-photos/DatingStyle5.jpg"
+                    alt="Artistic Sensual"
+                    class="style-thumb"
+                  />
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/dating-photos/DatingStyle5.jpg', 'dating5', 'Artistic Sensual')"
+                  >
+                    <i class="fas fa-search-plus"></i>
+                  </div>
                   <span>Artistic Sensual</span>
                 </button>
                 <button class="style-option" data-style="dating6">
-                  <i class="fas fa-moon"></i>
+                  <img
+                    src="/images/dating-photos/DatingStyle6.jpg"
+                    alt="Confident Intimate"
+                    class="style-thumb"
+                  />
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/dating-photos/DatingStyle6.jpg', 'dating6', 'Confident Intimate')"
+                  >
+                    <i class="fas fa-search-plus"></i>
+                  </div>
                   <span>Confident Intimate</span>
                 </button>
               </div>
