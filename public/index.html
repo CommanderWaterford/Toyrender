@@ -493,8 +493,9 @@
         color: #e9d5ff;
         transition: all 0.3s ease;
         cursor: pointer;
+        position: relative;
         min-height: 140px;
-        overflow: hidden;
+        overflow: visible;
         text-align: center;
       }
 
@@ -587,25 +588,35 @@
 
       /* Zoom icon overlay */
       .style-zoom-overlay {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        background: rgba(0, 0, 0, 0.7);
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        z-index: 10;
-        color: white;
+        position: absolute !important;
+        top: 8px !important;
+        right: 8px !important;
+        background: rgba(0, 0, 0, 0.9) !important;
+        border-radius: 50% !important;
+        width: 32px !important;
+        height: 32px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        z-index: 100 !important;
+        color: white !important;
+        border: 2px solid rgba(255, 255, 255, 0.8) !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
       }
 
       .style-zoom-overlay:hover {
         background: rgba(147, 51, 234, 0.8);
         transform: scale(1.1);
+        border-color: rgba(255, 255, 255, 0.8);
+      }
+
+      .style-zoom-overlay i {
+        font-size: 14px !important;
+        color: white !important;
       }
 
       .style-zoom-overlay.selected {
@@ -722,6 +733,76 @@
 
         .style-option .style-thumb {
           width: 100%;
+        }
+
+        /* Mobile header and text sizes */
+        h1 {
+          font-size: 2rem !important; /* Even smaller */
+        }
+
+        .text-2xl {
+          font-size: 1.125rem !important; /* Smaller than default text-2xl */
+        }
+
+        .text-lg {
+          font-size: 1rem !important; /* Smaller subheaders */
+        }
+
+        .text-base,
+        p {
+          font-size: 0.875rem !important; /* Smaller body text */
+        }
+
+        .text-purple-300 {
+          font-size: 0.8rem !important; /* Even smaller for description text */
+        }
+
+        /* Mobile zoom overlay positioning - ensure visibility on mobile */
+        .style-zoom-overlay {
+          top: 6px !important;
+          right: 6px !important;
+          width: 28px !important;
+          height: 28px !important;
+          font-size: 12px !important;
+        }
+
+        /* Fix style option sizing for mobile to prevent image cropping */
+        .style-option {
+          min-height: 160px !important;
+          gap: 0.25rem;
+          padding: 0.25rem !important;
+        }
+
+        /* Use 2 columns on mobile for better image visibility */
+        .grid.grid-cols-2.md\\:grid-cols-4 {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 0.75rem !important;
+        }
+
+        /* Adjust style thumb for mobile - ensure full image visibility */
+        .style-option .style-thumb {
+          width: 100%;
+          height: 120px;
+          object-fit: cover;
+          border-radius: 0.75rem;
+        }
+
+        /* Smaller text on mobile */
+        .style-option span {
+          font-size: 0.65rem !important;
+          line-height: 1.2;
+        }
+
+        /* Hero section example images - prevent excessive height on mobile */
+        .lg\\:hidden .grid.grid-cols-2 img {
+          height: 120px !important;
+          object-fit: cover;
+        }
+
+        /* Adjust grid spacing for hero examples */
+        .lg\\:hidden .grid.grid-cols-2 {
+          gap: 1rem !important;
+          max-width: 20rem !important;
         }
       }
 
@@ -1225,7 +1306,7 @@
     >
       <button
         id="stickyCTABtn"
-        class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 text-white"
+        class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 text-white shadow-lg"
         type="button"
       >
         <i class="fas fa-bolt"></i>
@@ -1346,7 +1427,7 @@
                   <img
                     src="\images\businessphotos\Jonas.jpg"
                     alt="Original photo"
-                    class="w-full h-24 object-cover rounded-lg shadow-lg"
+                    class="w-full h-32 object-contain rounded-lg shadow-lg"
                     loading="lazy"
                   />
                   <div
@@ -1359,7 +1440,7 @@
                   <img
                     src="/images/Elyra.jpg"
                     alt="Original photo"
-                    class="w-full h-20 object-cover rounded-lg shadow-lg"
+                    class="w-full h-32 object-contain rounded-lg shadow-lg"
                     loading="lazy"
                   />
                   <div
@@ -1375,7 +1456,7 @@
                   <img
                     src="\images\businessphotos\Jonas-business-09.jpg"
                     alt="AI Business Shot"
-                    class="w-full h-24 object-cover rounded-lg shadow-lg border border-purple-400/50"
+                    class="w-full h-32 object-contain rounded-lg shadow-lg border border-purple-400/50"
                     loading="lazy"
                   />
                   <div
@@ -1386,7 +1467,7 @@
                 </div>
                 <div class="relative group">
                   <img src="/images/Example10.jpg"" alt="AI Figurine"
-                  class="w-full h-20 object-cover rounded-lg shadow-lg border
+                  class="w-full h-32 object-contain rounded-lg shadow-lg border
                   border-pink-400/50" loading="lazy" />
                   <div
                     class="absolute -top-1 -right-1 bg-pink-600 text-white text-xs px-1 py-0.5 rounded-full text-[10px]"
@@ -1690,7 +1771,10 @@
                     alt="Lifestyle shoot figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-01.webp', 'figurine1', 'Lifestyle Shoot')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-01.webp', 'figurine1', 'Lifestyle Shoot')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Lifestyle Shoot</span>
@@ -1701,7 +1785,10 @@
                     alt="Desk studio figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-02.webp', 'figurine2', 'Desk Studio')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-02.webp', 'figurine2', 'Desk Studio')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Desk Studio</span>
@@ -1712,7 +1799,10 @@
                     alt="Livestream studio figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-03.webp', 'figurine3', 'Livestream Studio')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-03.webp', 'figurine3', 'Livestream Studio')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Livestream Studio</span>
@@ -1723,7 +1813,10 @@
                     alt="Boutique window figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-04.webp', 'figurine4', 'Boutique Window')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-04.webp', 'figurine4', 'Boutique Window')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Boutique Window</span>
@@ -1734,7 +1827,10 @@
                     alt="Editorial spread figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-05.webp', 'figurine5', 'Editorial Spread')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-05.webp', 'figurine5', 'Editorial Spread')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Editorial Spread</span>
@@ -1745,7 +1841,10 @@
                     alt="Display cabinet figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-06.webp', 'figurine6', 'Display Cabinet')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-06.webp', 'figurine6', 'Display Cabinet')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Display Cabinet</span>
@@ -1756,7 +1855,10 @@
                     alt="Retro arcade figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-07.webp', 'figurine7', 'Retro Arcade')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-07.webp', 'figurine7', 'Retro Arcade')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Retro Arcade</span>
@@ -1767,7 +1869,10 @@
                     alt="Color check figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-08.webp', 'figurine8', 'Color Check')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-08.webp', 'figurine8', 'Color Check')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Color Check</span>
@@ -1778,7 +1883,10 @@
                     alt="Auction preview figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-09.webp', 'figurine9', 'Auction Preview')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-09.webp', 'figurine9', 'Auction Preview')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Auction Preview</span>
@@ -1789,7 +1897,10 @@
                     alt="Artist studio figurine"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-10.webp', 'figurine10', 'Artist Studio')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/figurinestyles/FigurinesStyle-10.webp', 'figurine10', 'Artist Studio')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Artist Studio</span>
@@ -1877,7 +1988,10 @@
                     alt="Corporate pro business headshot preview"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/businessphotos/Jonas-business-03.jpg', 'business1', 'Corporate Pro')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/businessphotos/Jonas-business-03.jpg', 'business1', 'Corporate Pro')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Corporate Pro</span>
@@ -1888,7 +2002,10 @@
                     alt="Executive business headshot preview"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/businessphotos/SabrinaBusiness-04.jpg', 'business2', 'Executive')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/businessphotos/SabrinaBusiness-04.jpg', 'business2', 'Executive')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Executive</span>
@@ -1899,7 +2016,10 @@
                     alt="Approachable business headshot preview"
                     class="style-thumb"
                   />
-                  <div class="style-zoom-overlay" onclick="openStyleZoomPopup(event, '/images/businessphotos/Jonas-business-07.jpg', 'business3', 'Approachable')">
+                  <div
+                    class="style-zoom-overlay"
+                    onclick="openStyleZoomPopup(event, '/images/businessphotos/Jonas-business-07.jpg', 'business3', 'Approachable')"
+                  >
                     <i class="fas fa-search-plus"></i>
                   </div>
                   <span>Approachable</span>
@@ -3444,57 +3564,71 @@
       function openStyleZoomPopup(event, imageSrc, styleId, styleName) {
         event.stopPropagation(); // Prevent triggering the button's click event
 
-        const popup = document.getElementById('styleZoomPopup');
-        const image = document.getElementById('styleZoomImage');
-        const selectButton = document.querySelector('.style-zoom-popup-select');
+        const popup = document.getElementById("styleZoomPopup");
+        const image = document.getElementById("styleZoomImage");
+        const selectButton = document.querySelector(".style-zoom-popup-select");
 
         image.src = imageSrc;
         image.alt = styleName;
-        selectButton.innerHTML = '<i class="fas fa-check mr-2"></i>Select ' + styleName;
+        selectButton.innerHTML =
+          '<i class="fas fa-check mr-2"></i>Select ' + styleName;
 
         currentPopupStyle = styleId;
-        popup.classList.add('active');
+        popup.classList.add("active");
 
         // Prevent body scroll when popup is open
-        document.body.style.overflow = 'hidden';
+        document.body.style.overflow = "hidden";
       }
 
       function closeStyleZoomPopup() {
-        const popup = document.getElementById('styleZoomPopup');
-        popup.classList.remove('active');
+        const popup = document.getElementById("styleZoomPopup");
+        popup.classList.remove("active");
 
         // Restore body scroll
-        document.body.style.overflow = '';
+        document.body.style.overflow = "";
         currentPopupStyle = null;
       }
 
       function selectStyleFromPopup() {
         if (currentPopupStyle) {
           // Remove active from all buttons
-          document.querySelectorAll('.style-option[data-style]')
-            .forEach(btn => btn.classList.remove('active'));
+          document
+            .querySelectorAll(".style-option[data-style]")
+            .forEach((btn) => btn.classList.remove("active"));
 
           // Add active to selected button
-          const selectedButton = document.querySelector(`[data-style="${currentPopupStyle}"]`);
+          const selectedButton = document.querySelector(
+            `[data-style="${currentPopupStyle}"]`
+          );
           if (selectedButton) {
-            selectedButton.classList.add('active');
+            selectedButton.classList.add("active");
           }
 
           // Update selected style
           selectedStyle = currentPopupStyle;
 
-          // Update zoom overlay icon to show selected state
-          const allOverlays = document.querySelectorAll('.style-zoom-overlay');
-          allOverlays.forEach(overlay => {
-            overlay.classList.remove('selected');
-            overlay.innerHTML = '<i class="fas fa-search-plus"></i>';
+          // Update zoom overlay icons to show selected state
+          const allZoomOverlays = document.querySelectorAll(
+            ".style-zoom-overlay"
+          );
+          allZoomOverlays.forEach((overlay) => {
+            overlay.classList.remove("selected");
+            const icon = overlay.querySelector("i");
+            if (icon) {
+              icon.className = "fas fa-search-plus";
+            }
           });
 
-          // Mark current overlay as selected
-          const currentOverlay = selectedButton?.querySelector('.style-zoom-overlay');
-          if (currentOverlay) {
-            currentOverlay.classList.add('selected');
-            currentOverlay.innerHTML = '<i class="fas fa-check"></i>';
+          // Mark current zoom overlay as selected
+          const currentZoomOverlay = selectedButton?.querySelector(
+            ".style-zoom-overlay"
+          );
+          if (currentZoomOverlay) {
+            currentZoomOverlay.classList.add("selected");
+            const icon = currentZoomOverlay.querySelector("i");
+            if (icon) {
+              icon.className = "fas fa-check";
+            }
           }
 
           // Close popup
@@ -3503,10 +3637,10 @@
       }
 
       // Close popup when clicking outside the content
-      document.addEventListener('DOMContentLoaded', function() {
-        const popup = document.getElementById('styleZoomPopup');
+      document.addEventListener("DOMContentLoaded", function () {
+        const popup = document.getElementById("styleZoomPopup");
         if (popup) {
-          popup.addEventListener('click', function(event) {
+          popup.addEventListener("click", function (event) {
             if (event.target === popup) {
               closeStyleZoomPopup();
             }
@@ -3514,8 +3648,8 @@
         }
 
         // Close popup with ESC key
-        document.addEventListener('keydown', function(event) {
-          if (event.key === 'Escape') {
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") {
             closeStyleZoomPopup();
           }
         });
@@ -3529,7 +3663,7 @@
           .forEach((button) => {
             button.addEventListener("click", function (event) {
               // Check if click came from zoom overlay - if so, don't handle selection here
-              if (event.target.closest('.style-zoom-overlay')) {
+              if (event.target.closest(".style-zoom-overlay")) {
                 return;
               }
 
@@ -3543,17 +3677,27 @@
               selectedStyle = this.dataset.style;
 
               // Update zoom overlay icons
-              const allOverlays = document.querySelectorAll('.style-zoom-overlay');
-              allOverlays.forEach(overlay => {
-                overlay.classList.remove('selected');
-                overlay.innerHTML = '<i class="fas fa-search-plus"></i>';
+              const allZoomOverlays = document.querySelectorAll(
+                ".style-zoom-overlay"
+              );
+              allZoomOverlays.forEach((overlay) => {
+                overlay.classList.remove("selected");
+                const icon = overlay.querySelector("i");
+                if (icon) {
+                  icon.className = "fas fa-search-plus";
+                }
               });
 
-              // Mark current overlay as selected
-              const currentOverlay = this.querySelector('.style-zoom-overlay');
-              if (currentOverlay) {
-                currentOverlay.classList.add('selected');
-                currentOverlay.innerHTML = '<i class="fas fa-check"></i>';
+              // Mark current zoom overlay as selected
+              const currentZoomOverlay = this.querySelector(
+                ".style-zoom-overlay"
+              );
+              if (currentZoomOverlay) {
+                currentZoomOverlay.classList.add("selected");
+                const icon = currentZoomOverlay.querySelector("i");
+                if (icon) {
+                  icon.className = "fas fa-check";
+                }
               }
               if (typeof gtag === "function") {
                 gtag("event", "select_style", {
@@ -3595,18 +3739,30 @@
         }
 
         // Initialize zoom overlay icons - set the default selected style (figurine1) to show check icon
-        const allOverlays = document.querySelectorAll('.style-zoom-overlay');
-        allOverlays.forEach(overlay => {
-          overlay.classList.remove('selected');
-          overlay.innerHTML = '<i class="fas fa-search-plus"></i>';
+        const allZoomOverlays = document.querySelectorAll(
+          ".style-zoom-overlay"
+        );
+        allZoomOverlays.forEach((overlay) => {
+          overlay.classList.remove("selected");
+          const icon = overlay.querySelector("i");
+          if (icon) {
+            icon.className = "fas fa-search-plus";
+          }
         });
 
-        // Mark figurine1 overlay as selected since it's the default active style
-        const defaultButton = document.querySelector('[data-style="figurine1"]');
-        const defaultOverlay = defaultButton?.querySelector('.style-zoom-overlay');
-        if (defaultOverlay) {
-          defaultOverlay.classList.add('selected');
-          defaultOverlay.innerHTML = '<i class="fas fa-check"></i>';
+        // Mark figurine1 zoom overlay as selected since it's the default active style
+        const defaultButton = document.querySelector(
+          '[data-style="figurine1"]'
+        );
+        const defaultZoomOverlay = defaultButton?.querySelector(
+          ".style-zoom-overlay"
+        );
+        if (defaultZoomOverlay) {
+          defaultZoomOverlay.classList.add("selected");
+          const icon = defaultZoomOverlay.querySelector("i");
+          if (icon) {
+            icon.className = "fas fa-check";
+          }
         }
       }
 
@@ -3879,7 +4035,7 @@
                   : selectedStyle.startsWith("dating")
                   ? "dating"
                   : "business",
-                send_to: "G-78RSLH46CX"
+                send_to: "G-78RSLH46CX",
               });
             }
           }
@@ -4463,7 +4619,7 @@
               event_category: "ecommerce",
               event_label: tier,
               tier: tier,
-              send_to: "G-78RSLH46CX"
+              send_to: "G-78RSLH46CX",
             });
           }
 
@@ -4587,12 +4743,14 @@
         <button class="style-zoom-popup-close" onclick="closeStyleZoomPopup()">
           <i class="fas fa-times"></i>
         </button>
-        <img id="styleZoomImage" src="" alt="Style preview">
-        <button class="style-zoom-popup-select" onclick="selectStyleFromPopup()">
+        <img id="styleZoomImage" src="" alt="Style preview" />
+        <button
+          class="style-zoom-popup-select"
+          onclick="selectStyleFromPopup()"
+        >
           <i class="fas fa-check mr-2"></i>Select This Style
         </button>
       </div>
     </div>
-
   </body>
 </html>
