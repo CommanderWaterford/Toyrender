@@ -3857,26 +3857,61 @@
         console.log('updateResultsPageButtons - User credits:', userCredits, 'Credits object:', credits);
         const upgradeBtn = document.getElementById('upgradePackageBtn');
         const generateAnotherBtn = document.getElementById('generateAnotherBtn');
+        const downloadBtn = document.getElementById('downloadPreviewBtn');
+
+        // Find the lock overlay on the full quality image
+        const fullQualityContainer = document.getElementById('resultsFullQualityPreview')?.parentElement;
+        const lockOverlay = fullQualityContainer?.querySelector('.absolute.inset-0');
 
         if (userCredits > 0) {
-          // User has credits - change button text and behavior
+          // User has credits - unlock everything
+          console.log('User has credits - unlocking UI');
+
+          // Hide the lock overlay on full quality image
+          if (lockOverlay) {
+            lockOverlay.style.display = 'none';
+          }
+
+          // Update main upgrade button
           if (upgradeBtn) {
             upgradeBtn.innerHTML = '👉 Download Full Quality';
-            upgradeBtn.classList.remove('bg-gradient-to-r', 'from-green-500', 'to-emerald-500', 'hover:from-green-600', 'hover:to-emerald-600');
-            upgradeBtn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-indigo-600', 'hover:from-purple-700', 'hover:to-indigo-700');
+            upgradeBtn.className = 'w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg';
           }
+
+          // Update generate another button
           if (generateAnotherBtn) {
             generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Generate More Styles';
           }
+
+          // Update download button
+          if (downloadBtn) {
+            downloadBtn.innerHTML = '👉 Download Full Quality';
+            downloadBtn.className = 'px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold transition-all text-center';
+          }
         } else {
           // User has no credits - show upgrade prompts
+          console.log('User has no credits - showing upgrade prompts');
+
+          // Show the lock overlay on full quality image
+          if (lockOverlay) {
+            lockOverlay.style.display = 'flex';
+          }
+
+          // Update main upgrade button
           if (upgradeBtn) {
             upgradeBtn.innerHTML = '👉 Unlock Full Quality – $3.99';
-            upgradeBtn.classList.remove('bg-gradient-to-r', 'from-purple-600', 'to-indigo-600', 'hover:from-purple-700', 'hover:to-indigo-700');
-            upgradeBtn.classList.add('bg-gradient-to-r', 'from-green-500', 'to-emerald-500', 'hover:from-green-600', 'hover:to-emerald-600');
+            upgradeBtn.className = 'w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg';
           }
+
+          // Update generate another button
           if (generateAnotherBtn) {
             generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles';
+          }
+
+          // Update download button
+          if (downloadBtn) {
+            downloadBtn.innerHTML = '👉 Free sample – low-res, watermarked';
+            downloadBtn.className = 'px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded-xl font-semibold transition-all text-center';
           }
         }
       }
@@ -3884,23 +3919,32 @@
       function setupResultsPageHandlers() {
         // Download Preview button
         document.getElementById('downloadPreviewBtn')?.addEventListener('click', function() {
+          const userCredits = totalCredits();
           const link = document.createElement('a');
-          link.href = document.getElementById('resultsBlurredPreview').src;
-          link.download = 'toyrender-preview.png';
+
+          if (userCredits > 0) {
+            // User has credits - download full quality
+            link.href = document.getElementById('resultsFullQualityPreview').src;
+            link.download = 'toyrender-full-quality.png';
+          } else {
+            // No credits - download preview
+            link.href = document.getElementById('resultsBlurredPreview').src;
+            link.download = 'toyrender-preview.png';
+          }
+
           link.click();
 
           // After download, prompt for upgrade only if user has no credits
-          setTimeout(() => {
-            const userCredits = totalCredits();
-            if (userCredits === 0) {
+          if (userCredits === 0) {
+            setTimeout(() => {
               if (confirm('Want the full HD quality without watermark? Upgrade now for just $3.99!')) {
                 startCheckout('starter_pack_25_credits');
               }
-            }
-          }, 1000);
+            }, 1000);
+          }
 
           if (typeof gtag === "function") {
-            gtag("event", "download_preview", {
+            gtag("event", userCredits > 0 ? "download_full_quality" : "download_preview", {
               event_category: "engagement",
             });
           }
