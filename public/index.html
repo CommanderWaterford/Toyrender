@@ -1752,6 +1752,100 @@
         </div>
       </section>
 
+      <!-- Results Section -->
+      <section id="resultsSection" class="hidden max-w-6xl mx-auto mt-8">
+        <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30">
+          <h2 class="text-3xl font-bold mb-8 text-center gradient-text">Your Generated Image</h2>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <!-- Original Photo -->
+            <div class="text-center">
+              <h3 class="text-lg font-semibold mb-4 text-purple-300">Original Photo</h3>
+              <div class="relative rounded-xl overflow-hidden bg-black/30 aspect-square">
+                <img
+                  id="resultsOriginalPreview"
+                  src=""
+                  alt="Your original photo"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+
+            <!-- Blurred Preview -->
+            <div class="text-center">
+              <h3 class="text-lg font-semibold mb-4 text-purple-300">Preview</h3>
+              <div class="relative rounded-xl overflow-hidden bg-black/30 aspect-square">
+                <img
+                  id="resultsBlurredPreview"
+                  src=""
+                  alt="Blurred preview of your generated image"
+                  class="w-full h-full object-cover blur-sm"
+                />
+                <div class="absolute inset-0 flex items-center justify-center bg-black/50">
+                  <div class="text-center p-4">
+                    <i class="fas fa-eye-slash text-3xl text-white mb-2"></i>
+                    <p class="text-white font-semibold">Preview Quality</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Full Quality with Package Upgrade -->
+            <div class="text-center">
+              <h3 class="text-lg font-semibold mb-4 text-green-400">Full Quality</h3>
+              <div class="relative rounded-xl overflow-hidden bg-black/30 aspect-square">
+                <img
+                  id="resultsFullQualityPreview"
+                  src=""
+                  alt="Full quality preview"
+                  class="w-full h-full object-cover"
+                />
+                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                  <div class="text-center p-6">
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full mb-3">
+                      <i class="fas fa-crown mr-2"></i>Standard Package
+                    </div>
+                    <p class="text-white font-semibold text-lg mb-2">Unlock Full Quality</p>
+                    <p class="text-gray-300 text-sm">High-resolution, watermark-free</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap justify-center gap-4">
+            <button
+              id="downloadPreviewBtn"
+              class="px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded-xl font-semibold transition-all"
+            >
+              <i class="fas fa-download mr-2"></i>Download Preview
+            </button>
+
+            <button
+              id="upgradePackageBtn"
+              class="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg"
+            >
+              <i class="fas fa-crown mr-2"></i>Get Standard Package
+            </button>
+
+            <button
+              id="generateAnotherBtn"
+              class="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all"
+            >
+              <i class="fas fa-magic mr-2"></i>Generate Another
+            </button>
+
+            <button
+              id="startOverBtn"
+              class="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition-all"
+            >
+              <i class="fas fa-redo mr-2"></i>Start Over
+            </button>
+          </div>
+        </div>
+      </section>
+
       <div id="styleSelectionSection" class="hidden max-w-4xl mx-auto mt-8">
         <div
           class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30"
@@ -3721,6 +3815,106 @@
         }
       }
 
+      // Results page functionality
+      function showResultsPage(originalImageSrc, generatedImageSrc) {
+        // Hide all other sections
+        document.getElementById('heroSection')?.classList.add('hidden');
+        document.getElementById('styleSelectionSection')?.classList.add('hidden');
+        document.getElementById('previewSection')?.classList.add('hidden');
+
+        // Show results section
+        const resultsSection = document.getElementById('resultsSection');
+        resultsSection.classList.remove('hidden');
+
+        // Set images
+        document.getElementById('resultsOriginalPreview').src = originalImageSrc;
+        document.getElementById('resultsBlurredPreview').src = generatedImageSrc;
+        document.getElementById('resultsFullQualityPreview').src = generatedImageSrc;
+
+        // Scroll to results
+        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        // Update sticky CTA to hide it
+        const stickyCTA = document.getElementById('stickyCTABtn');
+        if (stickyCTA) {
+          stickyCTA.style.display = 'none';
+        }
+      }
+
+      function setupResultsPageHandlers() {
+        // Download Preview button
+        document.getElementById('downloadPreviewBtn')?.addEventListener('click', function() {
+          const link = document.createElement('a');
+          link.href = document.getElementById('resultsBlurredPreview').src;
+          link.download = 'toyrender-preview.png';
+          link.click();
+
+          if (typeof gtag === "function") {
+            gtag("event", "download_preview", {
+              event_category: "engagement",
+            });
+          }
+        });
+
+        // Upgrade Package button
+        document.getElementById('upgradePackageBtn')?.addEventListener('click', function() {
+          // Here you would integrate with your payment system
+          alert('Package upgrade functionality would be implemented here');
+
+          if (typeof gtag === "function") {
+            gtag("event", "click_upgrade_package", {
+              event_category: "conversion",
+            });
+          }
+        });
+
+        // Generate Another button
+        document.getElementById('generateAnotherBtn')?.addEventListener('click', function() {
+          // Hide results and show style selection
+          document.getElementById('resultsSection').classList.add('hidden');
+          document.getElementById('styleSelectionSection').classList.remove('hidden');
+
+          // Show sticky CTA again as Generate Image
+          const stickyCTA = document.getElementById('stickyCTABtn');
+          if (stickyCTA) {
+            stickyCTA.style.display = '';
+            showContinueButton(); // This will make it "Generate Image"
+          }
+
+          if (typeof gtag === "function") {
+            gtag("event", "generate_another_image", {
+              event_category: "engagement",
+            });
+          }
+        });
+
+        // Start Over button
+        document.getElementById('startOverBtn')?.addEventListener('click', function() {
+          // Reset everything
+          document.getElementById('resultsSection').classList.add('hidden');
+          document.getElementById('heroSection')?.classList.remove('hidden');
+          document.querySelector('#uploadArea')?.classList.remove('hidden');
+
+          // Reset file and previews
+          currentFile = null;
+          document.getElementById('originalPreview').src = '';
+          document.getElementById('resultPreview').src = '';
+
+          // Restore original CTA
+          const stickyCTA = document.getElementById('stickyCTABtn');
+          if (stickyCTA) {
+            stickyCTA.style.display = '';
+            hideContinueButton();
+          }
+
+          if (typeof gtag === "function") {
+            gtag("event", "start_over", {
+              event_category: "engagement",
+            });
+          }
+        });
+      }
+
       // Initialize style selection
       function initStyleSelection() {
         // Handle style option clicks
@@ -4118,9 +4312,10 @@
 
           // Success
           if (data.imageUrl) {
-            resultPreview.src = data.imageUrl;
-            resultPreview.classList.remove("hidden");
-            downloadBtn.classList.remove("hidden");
+            // Show new results page instead of old preview
+            const originalSrc = document.getElementById('originalPreview').src;
+            showResultsPage(originalSrc, data.imageUrl);
+
             // Track which style was used (check if gtag exists)
             if (typeof gtag !== "undefined") {
               gtag("event", "generate_success", {
@@ -4498,6 +4693,7 @@
       // Initialize on DOM load
       document.addEventListener("DOMContentLoaded", function () {
         initStyleSelection();
+        setupResultsPageHandlers();
       });
       refreshSession();
 
