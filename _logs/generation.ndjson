@@ -124,19 +124,3 @@
 [2025-09-25T15:12:58.887Z] EVENT: GEN_SUCCESS | REQ: aac3ba1e-ba1b-4ea2-84c9-f2b6647dd41a | USER: yummy.bian@gmail.com | DURATION: 7973ms | FILE: "ä¸ºä»ä¹æçæåæ²¡å«äººçå¥½çåï¼_7_è½¯è¥¿è¥¿_æ¥èªå°çº¢ä¹¦ç½é¡µç.jpg" (299.93 KB) | OUTPUT: toyrender-20250925-151258-6e8724a4.png
 [2025-09-25T15:13:40.413Z] EVENT: UPLOAD_RECEIVED | REQ: 509f113f-b8d3-4a76-a5ed-0a11f6f70ea3 | USER: yummy.bian@gmail.com | FILE: "ä¸ºä»ä¹æçæåæ²¡å«äººçå¥½çåï¼_5_è½¯è¥¿è¥¿_æ¥èªå°çº¢ä¹¦ç½é¡µç.jpg" (241.91 KB)
 [2025-09-25T15:13:52.599Z] EVENT: GEN_SUCCESS | REQ: 509f113f-b8d3-4a76-a5ed-0a11f6f70ea3 | USER: yummy.bian@gmail.com | DURATION: 12186ms | FILE: "ä¸ºä»ä¹æçæåæ²¡å«äººçå¥½çåï¼_5_è½¯è¥¿è¥¿_æ¥èªå°çº¢ä¹¦ç½é¡µç.jpg" (241.91 KB) | OUTPUT: toyrender-20250925-151352-bbc785cc.png
-[2025-09-26T11:29:37.623Z] EVENT: UPLOAD_RECEIVED | REQ: c15fb4a4-f4eb-4d15-902f-7d20477a438f | USER: guwr@proton.me | FILE: "image (2).jpg" (20.11 KB)
-[2025-09-26T11:29:47.862Z] EVENT: GEN_SUCCESS | REQ: c15fb4a4-f4eb-4d15-902f-7d20477a438f | USER: guwr@proton.me | DURATION: 10240ms | FILE: "image (2).jpg" (20.11 KB) | OUTPUT: toyrender-20250926-112947-34e40284.png
-[2025-09-26T11:34:32.926Z] EVENT: UPLOAD_RECEIVED | REQ: 76c08176-4ef9-4900-b3da-7d28f819b938 | USER: guwr@proton.me | FILE: "image (2).jpg" (20.11 KB)
-[2025-09-26T11:34:41.339Z] EVENT: GEN_SUCCESS | REQ: 76c08176-4ef9-4900-b3da-7d28f819b938 | USER: guwr@proton.me | DURATION: 8413ms | FILE: "image (2).jpg" (20.11 KB) | OUTPUT: toyrender-20250926-113441-d15432b3.png
-[2025-09-26T11:38:28.497Z] EVENT: UPLOAD_RECEIVED | REQ: 8cdbd8ac-9d57-435f-b410-b88dbe68669f | USER: guwr@proton.me | FILE: "image (2).jpg" (20.11 KB)
-[2025-09-26T11:38:36.550Z] EVENT: GEN_SUCCESS | REQ: 8cdbd8ac-9d57-435f-b410-b88dbe68669f | USER: guwr@proton.me | DURATION: 8054ms | FILE: "image (2).jpg" (20.11 KB) | OUTPUT: toyrender-20250926-113836-25c69506.png
-[2025-09-26T11:39:21.338Z] EVENT: UPLOAD_RECEIVED | REQ: 2fe40e15-d32a-4f4b-9765-5e0644e90a9d | USER: hafige7947@rograc.com | FILE: "00305-3151500625.png" (1399.07 KB)
-[2025-09-26T11:39:30.049Z] EVENT: GEN_SUCCESS | REQ: 2fe40e15-d32a-4f4b-9765-5e0644e90a9d | USER: hafige7947@rograc.com | DURATION: 8711ms | FILE: "00305-3151500625.png" (1399.07 KB) | OUTPUT: toyrender-20250926-113929-dca1e795.png
-[2025-09-26T11:41:22.585Z] EVENT: UPLOAD_RECEIVED | REQ: 8ca5e241-96ff-4046-83e0-2908e082b00b | USER: guwr@proton.me | FILE: "image (2).jpg" (20.11 KB)
-[2025-09-26T11:41:32.442Z] EVENT: GEN_SUCCESS | REQ: 8ca5e241-96ff-4046-83e0-2908e082b00b | USER: guwr@proton.me | DURATION: 9858ms | FILE: "image (2).jpg" (20.11 KB) | OUTPUT: toyrender-20250926-114132-5b650289.png
-[2025-09-26T11:45:35.206Z] EVENT: UPLOAD_RECEIVED | REQ: 048ca3d9-928f-4979-875e-29b7e1443c76 | USER: guwr@proton.me | FILE: "Tejeda.jpg" (103.42 KB)
-[2025-09-26T11:45:43.871Z] EVENT: GEN_SUCCESS | REQ: 048ca3d9-928f-4979-875e-29b7e1443c76 | USER: guwr@proton.me | DURATION: 8666ms | FILE: "Tejeda.jpg" (103.42 KB) | OUTPUT: toyrender-20250926-114543-62d4810d.png
-[2025-09-26T11:51:22.392Z] EVENT: UPLOAD_RECEIVED | REQ: c5366cd3-0fd4-45af-b99e-fbc775ce1ac0 | USER: guwr@proton.me | FILE: "Tejeda.jpg" (103.42 KB)
-[2025-09-26T11:51:32.822Z] EVENT: GEN_SUCCESS | REQ: c5366cd3-0fd4-45af-b99e-fbc775ce1ac0 | USER: guwr@proton.me | DURATION: 10431ms | FILE: "Tejeda.jpg" (103.42 KB) | OUTPUT: toyrender-20250926-115132-e522ea9b.png
-[2025-09-26T12:07:16.088Z] EVENT: UPLOAD_RECEIVED | REQ: edd18c18-47ed-430d-b09f-6f626a3267fe | USER: guwr@proton.me | FILE: "Face.jpeg" (247.55 KB)
-[2025-09-26T12:07:24.228Z] EVENT: GEN_SUCCESS | REQ: edd18c18-47ed-430d-b09f-6f626a3267fe | USER: guwr@proton.me | DURATION: 8140ms | FILE: "Face.jpeg" (247.55 KB) | OUTPUT: toyrender-20250926-120724-bf12a45a.png
