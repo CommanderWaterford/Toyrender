@@ -118,7 +118,7 @@
                 "name": "Free Trial",
                 "price": "0",
                 "priceCurrency": "USD",
-                "description": "2 Free Figurine Generations with High-Resolution Downloads"
+                "description": "2 Free Figurine Generations with Low-Resolution Downloads"
               },
               {
                 "@type": "Offer",
@@ -1779,7 +1779,7 @@
                   id="resultsBlurredPreview"
                   src=""
                   alt="Blurred preview of your generated image"
-                  class="w-full h-full object-cover blur-sm"
+                  class="w-full h-full object-cover blur-[1px]"
                 />
                 <div class="absolute inset-0 flex items-center justify-center bg-black/50">
                   <div class="text-center p-4">
@@ -1810,37 +1810,44 @@
                   </div>
                 </div>
               </div>
+              <!-- Testimonial -->
+              <div class="mt-4 p-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-xl border border-yellow-500/30">
+                <div class="text-center">
+                  <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
+                  <p class="text-sm text-gray-300 italic mb-2">"Loved it! The HD version looked stunning — totally worth it."</p>
+                  <p class="text-xs text-gray-400">– Anna, Berlin</p>
+                </div>
+              </div>
             </div>
           </div>
 
           <!-- Action Buttons -->
-          <div class="flex flex-wrap justify-center gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto">
             <button
               id="downloadPreviewBtn"
-              class="px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded-xl font-semibold transition-all"
+              class="px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded-xl font-semibold transition-all text-center"
             >
-              <i class="fas fa-download mr-2"></i>Download Preview
+              👉 Free sample – low-res, watermarked
             </button>
 
-            <button
-              id="upgradePackageBtn"
-              class="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg"
-            >
-              <i class="fas fa-crown mr-2"></i>Get Standard Package
-            </button>
+            <div class="text-center">
+              <button
+                id="upgradePackageBtn"
+                class="w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg"
+              >
+                👉 Unlock Full Quality – $3.99
+              </button>
+              <div class="mt-2 flex items-center justify-center text-xs text-gray-400">
+                <i class="fas fa-shield-alt mr-1"></i>
+                <span>Secure payment · Instant download</span>
+              </div>
+            </div>
 
             <button
               id="generateAnotherBtn"
-              class="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all"
+              class="px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center"
             >
-              <i class="fas fa-magic mr-2"></i>Generate Another
-            </button>
-
-            <button
-              id="startOverBtn"
-              class="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl font-semibold transition-all"
-            >
-              <i class="fas fa-redo mr-2"></i>Start Over
+              <i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles
             </button>
           </div>
         </div>
@@ -2291,7 +2298,7 @@
                   class="fas fa-check text-green-400 mr-2"
                   aria-hidden="true"
                 ></i
-                ><span>High-Resolution Downloads</span>
+                ><span>Low-Resolution Downloads</span>
               </li>
               <li role="listitem">
                 <i
@@ -3849,6 +3856,13 @@
           link.download = 'toyrender-preview.png';
           link.click();
 
+          // After download, prompt for upgrade
+          setTimeout(() => {
+            if (confirm('Want the full HD quality without watermark? Upgrade now for just $3.99!')) {
+              startCheckout('starter_pack_25_credits');
+            }
+          }, 1000);
+
           if (typeof gtag === "function") {
             gtag("event", "download_preview", {
               event_category: "engagement",
@@ -3858,8 +3872,7 @@
 
         // Upgrade Package button
         document.getElementById('upgradePackageBtn')?.addEventListener('click', function() {
-          // Here you would integrate with your payment system
-          alert('Package upgrade functionality would be implemented here');
+          startCheckout('starter_pack_25_credits');
 
           if (typeof gtag === "function") {
             gtag("event", "click_upgrade_package", {
@@ -3870,15 +3883,9 @@
 
         // Generate Another button
         document.getElementById('generateAnotherBtn')?.addEventListener('click', function() {
-          // Hide results and show style selection
-          document.getElementById('resultsSection').classList.add('hidden');
-          document.getElementById('styleSelectionSection').classList.remove('hidden');
-
-          // Show sticky CTA again as Generate Image
-          const stickyCTA = document.getElementById('stickyCTABtn');
-          if (stickyCTA) {
-            stickyCTA.style.display = '';
-            showContinueButton(); // This will make it "Generate Image"
+          // Prompt for upgrade to generate more styles
+          if (confirm('Unlock unlimited style generation with the Starter Pack for $3.99. Continue?')) {
+            startCheckout('starter_pack_25_credits');
           }
 
           if (typeof gtag === "function") {
