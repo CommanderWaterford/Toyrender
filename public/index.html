@@ -3846,6 +3846,31 @@
         if (stickyCTA) {
           stickyCTA.style.display = 'none';
         }
+
+        // Customize buttons based on user credits
+        const userCredits = totalCredits();
+        const upgradeBtn = document.getElementById('upgradePackageBtn');
+        const generateAnotherBtn = document.getElementById('generateAnotherBtn');
+
+        if (userCredits > 0) {
+          // User has credits - change button text and behavior
+          if (upgradeBtn) {
+            upgradeBtn.innerHTML = '👉 Download Full Quality';
+            upgradeBtn.classList.remove('bg-gradient-to-r', 'from-green-500', 'to-emerald-500', 'hover:from-green-600', 'hover:to-emerald-600');
+            upgradeBtn.classList.add('bg-gradient-to-r', 'from-purple-600', 'to-indigo-600', 'hover:from-purple-700', 'hover:to-indigo-700');
+          }
+          if (generateAnotherBtn) {
+            generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Generate More Styles';
+          }
+        } else {
+          // User has no credits - show upgrade prompts
+          if (upgradeBtn) {
+            upgradeBtn.innerHTML = '👉 Unlock Full Quality – $3.99';
+          }
+          if (generateAnotherBtn) {
+            generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles';
+          }
+        }
       }
 
       function setupResultsPageHandlers() {
@@ -3856,10 +3881,13 @@
           link.download = 'toyrender-preview.png';
           link.click();
 
-          // After download, prompt for upgrade
+          // After download, prompt for upgrade only if user has no credits
           setTimeout(() => {
-            if (confirm('Want the full HD quality without watermark? Upgrade now for just $3.99!')) {
-              startCheckout('starter_pack_25_credits');
+            const userCredits = totalCredits();
+            if (userCredits === 0) {
+              if (confirm('Want the full HD quality without watermark? Upgrade now for just $3.99!')) {
+                startCheckout('starter_pack_25_credits');
+              }
             }
           }, 1000);
 
@@ -3872,6 +3900,21 @@
 
         // Upgrade Package button
         document.getElementById('upgradePackageBtn')?.addEventListener('click', function() {
+          const userCredits = totalCredits();
+          if (userCredits > 0) {
+            // User has credits - download full quality image
+            const link = document.createElement('a');
+            link.href = document.getElementById('resultsFullQualityPreview').src;
+            link.download = 'toyrender-full-quality.png';
+            link.click();
+
+            if (typeof gtag === "function") {
+              gtag("event", "download_full_quality", {
+                event_category: "engagement",
+              });
+            }
+            return;
+          }
           startCheckout('starter_pack_25_credits');
 
           if (typeof gtag === "function") {
@@ -3883,9 +3926,23 @@
 
         // Generate Another button
         document.getElementById('generateAnotherBtn')?.addEventListener('click', function() {
-          // Prompt for upgrade to generate more styles
-          if (confirm('Unlock unlimited style generation with the Starter Pack for $3.99. Continue?')) {
-            startCheckout('starter_pack_25_credits');
+          const userCredits = totalCredits();
+          if (userCredits > 0) {
+            // User has credits, go back to style selection
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('styleSelectionSection').classList.remove('hidden');
+
+            // Show sticky CTA again as Generate Image
+            const stickyCTA = document.getElementById('stickyCTABtn');
+            if (stickyCTA) {
+              stickyCTA.style.display = '';
+              showContinueButton(); // This will make it "Generate Image"
+            }
+          } else {
+            // User has no credits, prompt for upgrade
+            if (confirm('Unlock unlimited style generation with the Starter Pack for $3.99. Continue?')) {
+              startCheckout('starter_pack_25_credits');
+            }
           }
 
           if (typeof gtag === "function") {
