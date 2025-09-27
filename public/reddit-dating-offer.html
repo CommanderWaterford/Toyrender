@@ -725,7 +725,7 @@
           >Dating Photo Gallery</a
         >
         <a class="hover:text-white" href="/faq">FAQ</a>
-        <a class="hover:text-white" href="#pricing">Just $4.99</a>
+        <a class="hover:text-white font-bold" href="#pricing">Just $4.99</a>
       </nav>
       <a
         href="#upload"
@@ -752,7 +752,7 @@
           <p class="mt-4 text-purple-200 text-base md:text-lg" itemprop="description">
             Look, dating app photos are everything. Bad photos = no matches.
             Period. Upload <strong>one decent selfie</strong> and get
-            <strong>10 professional-looking photos</strong> that actually get attention.
+            <strong>dozens of professional-looking photos</strong> that actually get attention.
             No awkward photographer sessions, no expensive shoots – just
             <strong>$4.99 and you're done</strong>.
           </p>
@@ -760,13 +760,13 @@
             <a
               id="cta"
               href="#upload"
-              class="w-full sm:w-auto px-6 py-4 rounded-xl bg-purple-600 hover:bg-purple-700 font-semibold text-center"
+              class="w-full sm:w-auto px-8 py-5 rounded-xl bg-purple-600 hover:bg-purple-700 font-semibold text-center"
               aria-label="Start creating enhanced photos from your portrait"
               >Try It Now – $4.99</a
             >
             <a
               href="#carousel-examples"
-              class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-center"
+              class="w-full sm:w-auto px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-center"
               aria-label="View example photo transformations"
               >See Examples First</a
             >
@@ -821,11 +821,11 @@
     <section class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12" id="carousel-examples">
       <h2 class="text-2xl sm:text-3xl font-bold mb-6 text-center">More Proof This Actually Works</h2>
       <p class="text-purple-200 mb-8 text-center max-w-2xl mx-auto">
-        Real transformations from actual users. Left = original photo, right = scroll through AI-generated styles.
+        Real transformations from actual users. Left = original photo, right = Our AI.
       </p>
 
       <!-- Carousel Container -->
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      <div class="grid md:grid-cols-2 gap-6 sm:gap-8">
 
         <!-- Example 1: Stephany -->
         <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
@@ -914,6 +914,36 @@
           <div class="p-4">
             <h3 class="font-semibold mb-1">Max's Transformation</h3>
             <p class="text-sm text-purple-200">Basic headshot → 6 different professional styles</p>
+          </div>
+        </div>
+
+        <!-- Example 4: Ethan -->
+        <div class="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+          <div class="grid grid-cols-2 gap-0">
+            <!-- Original -->
+            <div class="relative">
+              <img src="/images/dating-photos/Ethan.jpg" alt="Original - Ethan" class="w-full h-48 sm:h-64 object-cover">
+              <div class="absolute top-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-xs font-semibold">ORIGINAL</div>
+            </div>
+            <!-- Scrolling Results -->
+            <div class="relative overflow-hidden">
+              <div class="carousel-track flex transition-transform duration-300" data-carousel="ethan">
+                <img src="/images/dating-photos/Ethan_01.jpg" alt="Ethan Style 1" class="w-full h-48 sm:h-64 object-cover flex-shrink-0">
+                <img src="/images/dating-photos/Ethan_02.jpg" alt="Ethan Style 2" class="w-full h-48 sm:h-64 object-cover flex-shrink-0">
+                <img src="/images/dating-photos/Ethan_03.jpg" alt="Ethan Style 3" class="w-full h-48 sm:h-64 object-cover flex-shrink-0">
+                <img src="/images/dating-photos/Ethan_04.jpg" alt="Ethan Style 4" class="w-full h-48 sm:h-64 object-cover flex-shrink-0">
+                <img src="/images/dating-photos/Ethan_05.jpg" alt="Ethan Style 5" class="w-full h-48 sm:h-64 object-cover flex-shrink-0">
+                <img src="/images/dating-photos/Ethan_06.jpg" alt="Ethan Style 6" class="w-full h-48 sm:h-64 object-cover flex-shrink-0">
+              </div>
+              <div class="absolute top-2 right-2 bg-purple-600/90 text-white px-2 py-1 rounded text-xs font-semibold">AI</div>
+              <div class="absolute bottom-2 right-2 bg-black/70 text-white px-2 py-1 rounded text-xs">
+                <span class="carousel-counter" data-carousel="ethan">1/6</span>
+              </div>
+            </div>
+          </div>
+          <div class="p-4">
+            <h3 class="font-semibold mb-1">Ethan's Transformation</h3>
+            <p class="text-sm text-purple-200">Casual photo → 6 different professional styles</p>
           </div>
         </div>
       </div>

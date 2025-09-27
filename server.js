@@ -610,14 +610,19 @@ async function applyWatermark(imagePath) {
   // Adjust these values between 0 (fully transparent) and 1 (fully opaque)
 
   // CENTER WATERMARK OPACITY
-  const CENTER_TEXT_OPACITY = 0.1; // Main "TOYRENDER.COM" text opacity (0.4 = 40% visible)
-  const CENTER_SUBTITLE_OPACITY = 0.1; // "FREE TRIAL" text opacity
-  const CENTER_STROKE_OPACITY = 0.2; // Border around center text
-  const CENTER_SHADOW_OPACITY = 0.5; // Drop shadow opacity
+  const CENTER_TEXT_OPACITY = 0.15; // Main "TOYRENDER.COM" text opacity
+  const CENTER_SUBTITLE_OPACITY = 0.15; // "FREE TRIAL" text opacity
+  const CENTER_STROKE_OPACITY = 0.25; // Border around center text
+  const CENTER_SHADOW_OPACITY = 0.6; // Drop shadow opacity
 
   // CORNER WATERMARK OPACITY
-  const CORNER_BACKGROUND_OPACITY = 0.7; // Black background box opacity
-  const CORNER_SUBTITLE_OPACITY = 0.8; // "Buy credits..." text opacity
+  const CORNER_BACKGROUND_OPACITY = 0.8; // Black background box opacity
+  const CORNER_SUBTITLE_OPACITY = 0.9; // "Buy credits..." text opacity
+
+  // === BLUR AND QUALITY CONTROLS ===
+  const BLUR_RADIUS = 4; // Light blur radius (increased to be more noticeable)
+  const MAX_RESOLUTION = 1024; // Max width/height for free trial images
+  const JPEG_QUALITY = 55; // Reduced quality for free trial (vs original PNG)
 
   try {
     // Create bottom-right watermark SVG
@@ -670,9 +675,21 @@ async function applyWatermark(imagePath) {
     // Get image metadata to determine if we need to resize the center watermark
     const metadata = await sharp(imageBuffer).metadata();
 
-    // Scale center watermark based on image size
+    // Apply blur and resolution reduction to the base image
+    const processedImageBuffer = await sharp(imageBuffer)
+      .resize({
+        width: MAX_RESOLUTION,
+        height: MAX_RESOLUTION,
+        fit: "inside",
+        withoutEnlargement: true,
+      })
+      .blur(BLUR_RADIUS)
+      .jpeg({ quality: JPEG_QUALITY })
+      .toBuffer();
+
+    // Scale center watermark based on processed image size (now max 1024px)
     let centerWatermarkBuffer = centerWatermarkSVG;
-    if (metadata.width && metadata.width < 800) {
+    if (MAX_RESOLUTION < 800) {
       // Create a smaller version for smaller images (with same opacity settings)
       centerWatermarkBuffer = Buffer.from(`
         <svg width="250" height="80" xmlns="http://www.w3.org/2000/svg">
@@ -699,8 +716,8 @@ async function applyWatermark(imagePath) {
       `);
     }
 
-    // Apply both watermarks using sharp
-    const watermarkedBuffer = await sharp(imageBuffer)
+    // Apply both watermarks using sharp on the processed (blurred & reduced) image
+    const watermarkedBuffer = await sharp(processedImageBuffer)
       .composite([
         {
           input: centerWatermarkBuffer,
@@ -719,7 +736,9 @@ async function applyWatermark(imagePath) {
     await fs.promises.writeFile(imagePath, watermarkedBuffer);
 
     console.log(
-      `Dual watermarks applied successfully to ${path.basename(imagePath)}`
+      `Watermarks applied with blur (${BLUR_RADIUS}px) and reduced resolution (${MAX_RESOLUTION}px) to ${path.basename(
+        imagePath
+      )}`
     );
     return true;
   } catch (error) {
@@ -1527,7 +1546,9 @@ app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
   };
 
   const defaultPackage = "pro_pack_50_credits";
-  const packageKey = PACKAGES[requestedPackage] ? requestedPackage : defaultPackage;
+  const packageKey = PACKAGES[requestedPackage]
+    ? requestedPackage
+    : defaultPackage;
   const packageConfig = PACKAGES[packageKey];
 
   const priceEnvValue = process.env[packageConfig.envKey];
@@ -1535,8 +1556,7 @@ app.post("/api/payments/checkout", ensureAuth, async (req, res) => {
   try {
     if (!process.env.STRIPE_SECRET_KEY)
       throw new Error("Missing STRIPE_SECRET_KEY");
-    if (!priceEnvValue)
-      throw new Error(`Missing ${packageConfig.envKey}`);
+    if (!priceEnvValue) throw new Error(`Missing ${packageConfig.envKey}`);
 
     const user = await userById(userId);
     userEmail = user.email;
@@ -2045,7 +2065,7 @@ app.post(
       const hasRealPayment = await userHasRealPayment(userId);
 
       // Developer account exception - never watermark
-      const isDeveloper = userEmail === 'guwr@proton.me';
+      const isDeveloper = userEmail === "guwr@proton.me";
 
       // User is on free trial if they have no payment history
       // Developer account is never considered free trial
@@ -2319,7 +2339,7 @@ app.post(
       );
 
       // Developer account exception - never watermark
-      const isDeveloper = userEmail === 'guwr@proton.me';
+      const isDeveloper = userEmail === "guwr@proton.me";
 
       // User is on free trial if they have no payment history
       // Developer account is never considered free trial

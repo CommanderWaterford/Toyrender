@@ -14,3 +14,6 @@
 [2025-09-26T11:10:24.547Z] EVENT: CHECKOUT_SESSION_CREATED | SESSION: cs_live_b1LDn6J8Faoc3pMoJ8xwaj1ePyCEtymo6XiSKKEKFlcb9AQgG3CHnpVrvo | USER_ID: 1 | EMAIL: guwr@proton.me | STATUS: pending | META: {"package":"starter_pack_25_credits"}
 [2025-09-26T11:10:34.332Z] EVENT: CHECKOUT_ATTEMPTED | USER_ID: 1 | EMAIL: guwr@proton.me | META: {"package":"pro_pack_50_credits"}
 [2025-09-26T11:10:34.674Z] EVENT: CHECKOUT_SESSION_CREATED | SESSION: cs_live_b1isGdcxCxFatH15hUOaAkp9RGgwdBbWwM4gyqklPUYIMBGlpY9Krw6LbP | USER_ID: 1 | EMAIL: guwr@proton.me | STATUS: pending | META: {"package":"pro_pack_50_credits"}
+[2025-09-27T16:15:31.004Z] EVENT: CHECKOUT_ATTEMPTED | USER_ID: 84 | EMAIL: rafiksaidina@gmail.com | META: {"package":"starter_pack_25_credits"}
+[2025-09-27T16:15:31.527Z] EVENT: CHECKOUT_SESSION_CREATED | SESSION: cs_live_b1mgiaXeYBldOdygBm2OXScRZfdCpr0y35eazGfyqXA2VVH0AqVYmJYrp9 | USER_ID: 84 | EMAIL: rafiksaidina@gmail.com | STATUS: pending | META: {"package":"starter_pack_25_credits"}
+[2025-09-27T16:24:00.632Z] EVENT: WEBHOOK_CHECKOUT.SESSION.COMPLETED | META: {"eventId":"evt_1SC0uiF01O2UKyKA4THpe30I"}
