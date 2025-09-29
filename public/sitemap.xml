@@ -10,6 +10,7 @@
     <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
   </url>
 
@@ -19,6 +20,17 @@
     <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
+  </url>
+
+  <!-- Home (PT-BR) -->
+  <url>
+    <loc>https://toyrender.com/pt/</loc>
+    <lastmod>2025-09-29</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
   </url>
 
@@ -142,6 +154,7 @@
     <lastmod>2025-09-18</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/"/>
   </url>
 
@@ -299,6 +312,7 @@
     <priority>0.64</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/dating-photos-gallery/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-citas-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/galeria-fotos-namoro/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/dating-photos-gallery/"/>
   </url>
 
@@ -309,6 +323,18 @@
     <priority>0.64</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/dating-photos-gallery/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-citas-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/galeria-fotos-namoro/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/dating-photos-gallery/"/>
+  </url>
+
+  <!-- Ideias de Fotos para Namoro (PT-BR) -->
+  <url>
+    <loc>https://toyrender.com/pt/galeria-fotos-namoro/</loc>
+    <lastmod>2025-09-29</lastmod>
+    <priority>0.64</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/dating-photos-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotos-citas-galeria/"/>
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://toyrender.com/pt/galeria-fotos-namoro/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/dating-photos-gallery/"/>
   </url>
 
