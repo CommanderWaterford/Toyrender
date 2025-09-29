@@ -71,6 +71,332 @@
       .lightbox-open {
         overflow: hidden;
       }
+
+      /* Enhanced Gallery Hover Effects */
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+      }
+
+      .gallery-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.3), rgba(99, 102, 241, 0.3));
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .gallery-item:hover::before {
+        opacity: 1;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 25px 50px rgba(236, 72, 153, 0.4), 0 10px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .gallery-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 15;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 1.5rem;
+      }
+
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      .overlay-content {
+        transform: translateY(20px);
+        transition: all 0.3s ease 0.1s;
+      }
+
+      .gallery-item:hover .overlay-content {
+        transform: translateY(0);
+      }
+
+      .quality-indicator {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: rgba(255, 255, 255, 0.9);
+        color: #1f2937;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 20;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease 0.2s;
+      }
+
+      .gallery-item:hover .quality-indicator {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Premium Lightbox */
+      .premium-lightbox {
+        backdrop-filter: blur(20px);
+        background: rgba(0, 0, 0, 0.95);
+      }
+
+      .lightbox-content {
+        position: relative;
+        max-width: 90vw;
+        max-height: 90vh;
+        margin: auto;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .lightbox-image {
+        transition: all 0.3s ease;
+      }
+
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        z-index: 100;
+      }
+
+      .lightbox-nav:hover {
+        background: rgba(236, 72, 153, 0.8);
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .lightbox-prev {
+        left: 20px;
+      }
+
+      .lightbox-next {
+        right: 20px;
+      }
+
+      /* Parallax & Dynamic Elements */
+      .parallax-element {
+        transform: translateZ(0);
+        will-change: transform;
+      }
+
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .fade-in-up.animate {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Real-time Activity */
+      .activity-indicator {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(236, 72, 153, 0.9);
+        backdrop-filter: blur(10px);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        z-index: 1000;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+      }
+
+      .activity-indicator.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Before/After Slider */
+      .before-after-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+
+      .before-after-slider {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 4px;
+        height: 100%;
+        background: #ec4899;
+        cursor: ew-resize;
+        z-index: 10;
+        transform: translateX(-50%);
+      }
+
+      .before-after-slider::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        background: #ec4899;
+        border: 3px solid white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .before-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .after-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 100%);
+        transition: clip-path 0.3s ease;
+      }
+
+      /* Mobile Optimizations */
+      @media (max-width: 768px) {
+        .gallery-item:hover {
+          transform: translateY(-4px) scale(1.01);
+        }
+
+        .gallery-overlay {
+          opacity: 1;
+          background: linear-gradient(to bottom, transparent 60%, rgba(0, 0, 0, 0.9) 100%);
+        }
+
+        .overlay-content {
+          transform: translateY(0);
+        }
+
+        .quality-indicator {
+          opacity: 1;
+          transform: translateY(0);
+          font-size: 0.7rem;
+          padding: 2px 6px;
+        }
+
+        .lightbox-content {
+          max-width: 95vw;
+          max-height: 85vh;
+        }
+
+        .lightbox-nav {
+          padding: 8px;
+          font-size: 0.875rem;
+        }
+
+        .before-after-container {
+          height: 250px;
+        }
+
+        .activity-indicator {
+          right: 10px;
+          top: 10px;
+          padding: 6px 12px;
+          font-size: 0.8rem;
+        }
+      }
+
+      /* Touch devices */
+      @media (hover: none) and (pointer: coarse) {
+        .gallery-item {
+          transform: none;
+        }
+
+        .gallery-overlay {
+          opacity: 1;
+        }
+
+        .overlay-content {
+          transform: translateY(0);
+        }
+
+        .quality-indicator {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Transformation Option Buttons */
+      .transformation-option {
+        position: relative;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 0;
+      }
+
+      .transformation-option:hover img {
+        border-color: rgba(236, 72, 153, 0.5);
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(236, 72, 153, 0.3);
+      }
+
+      .transformation-option.active img {
+        border-color: #ec4899;
+        box-shadow: 0 8px 16px rgba(236, 72, 153, 0.5);
+      }
+
+      .transformation-option.active span {
+        color: #ec4899;
+        font-weight: 600;
+      }
+
+      .transformation-option:hover span {
+        color: #f472b6;
+      }
+
+      /* Mobile adjustments for transformation options */
+      @media (max-width: 768px) {
+        .transformation-option img {
+          width: 48px;
+          height: 60px;
+        }
+
+        .transformation-option span {
+          font-size: 0.6rem;
+        }
+
+        .grid-cols-5 {
+          grid-template-columns: repeat(5, 1fr);
+          gap: 8px;
+        }
+      }
     </style>
 
     <script type="application/ld+json">
@@ -255,13 +581,53 @@
           </a>
         </div>
 
-        <!-- Value Proposition -->
-        <div class="mt-6 text-center">
-          <p class="text-rose-300 text-sm">
-            💖
-            <span class="font-semibold">Join 2K+ models & influencers</span> who
-            boosted their image
-          </p>
+        <!-- Enhanced Value Proposition with Urgency -->
+        <div class="mt-8 bg-gradient-to-r from-rose-600/30 to-pink-600/30 backdrop-blur-xl rounded-2xl border border-rose-500/50 p-6 relative overflow-hidden">
+          <!-- Urgency Banner -->
+          <div class="absolute top-0 left-0 right-0 bg-gradient-to-r from-red-600 to-orange-600 text-white text-center py-2 text-sm font-bold">
+            🔥 LIMITED TIME: 25% off all glamour packages - Next 24 hours only
+          </div>
+
+          <div class="text-center mt-8">
+            <p class="text-white text-lg font-semibold mb-4">
+              💖 Join <span class="text-yellow-400 font-bold">5,000+</span> successful influencers & models
+            </p>
+
+            <!-- Success Metrics -->
+            <div class="grid grid-cols-3 gap-4 mb-6 max-w-md mx-auto">
+              <div class="text-center">
+                <div class="text-2xl font-bold text-green-400">300%</div>
+                <div class="text-xs text-rose-300">More Engagement</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-blue-400">4.9★</div>
+                <div class="text-xs text-rose-300">Average Rating</div>
+              </div>
+              <div class="text-center">
+                <div class="text-2xl font-bold text-yellow-400">2 min</div>
+                <div class="text-xs text-rose-300">Delivery Time</div>
+              </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="/app"
+                class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              >
+                🚀 Start Your Glamour Transformation
+              </a>
+              <a
+                href="/gallery"
+                class="inline-flex items-center px-6 py-3 border-2 border-rose-400 text-rose-200 hover:text-white hover:border-rose-300 font-semibold rounded-xl transition-all duration-300"
+              >
+                📸 View More Examples
+              </a>
+            </div>
+
+            <p class="text-rose-300 text-sm mt-4">
+              ✅ <strong>Money-back guarantee</strong> • 🔒 <strong>Secure payment</strong> • ⚡ <strong>Instant results</strong>
+            </p>
+          </div>
         </div>
       </section>
 
@@ -322,12 +688,10 @@
           <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             <li>
               <figure
-                class="bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
+                class="gallery-item bg-slate-900/60 border border-white/10 rounded-2xl p-3 cursor-pointer group"
                 data-lightbox="1"
               >
-                <div
-                  class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5]"
-                >
+                <div class="rounded-xl overflow-hidden bg-black/40 aspect-[4/5] relative">
                   <img
                     src="/images/glamour/GlamourExamples-01.jpg"
                     alt="Glamour variation with soft pink studio lighting."
@@ -335,6 +699,19 @@
                     loading="lazy"
                     decoding="async"
                   />
+                  <div class="quality-indicator">
+                    ⭐ LinkedIn Pro
+                  </div>
+                  <div class="gallery-overlay">
+                    <div class="overlay-content">
+                      <h3 class="text-white font-semibold text-sm mb-1">Professional Headshot</h3>
+                      <p class="text-rose-200 text-xs">Perfect for LinkedIn, CV, and business profiles</p>
+                      <div class="flex gap-1 mt-2">
+                        <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded">LinkedIn</span>
+                        <span class="text-xs bg-purple-500 text-white px-2 py-1 rounded">Business</span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <figcaption class="px-1 py-3 text-sm text-rose-200">
                   Soft pink studio glow – AI-generated professional headshot
@@ -752,6 +1129,101 @@
       </section>
     </main>
 
+    <!-- Premium Lightbox -->
+    <div id="lightbox" class="premium-lightbox fixed inset-0 z-50 flex items-center justify-center hidden">
+      <div class="lightbox-content relative">
+        <img id="lbImg" class="lightbox-image max-w-full max-h-full" src="" alt="">
+        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+          <p id="lbCaption" class="text-white text-sm"></p>
+          <div class="flex justify-between items-center mt-3">
+            <div class="flex gap-2">
+              <span class="text-xs bg-rose-500 text-white px-2 py-1 rounded-full">4K Quality</span>
+              <span class="text-xs bg-blue-500 text-white px-2 py-1 rounded-full">AI Generated</span>
+            </div>
+            <button class="text-white hover:text-rose-300 text-sm">
+              <i class="fas fa-download mr-1"></i>Download
+            </button>
+          </div>
+        </div>
+        <button id="lbPrev" class="lightbox-nav lightbox-prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="lbNext" class="lightbox-nav lightbox-next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+        <button id="lbClose" class="absolute top-4 right-4 text-white hover:text-rose-300 text-2xl">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Real-time Activity Indicator -->
+    <div id="activityIndicator" class="activity-indicator">
+      <i class="fas fa-circle text-green-400 mr-2 animate-pulse"></i>
+      <span id="activityText">3 photos created in the last hour</span>
+    </div>
+
+    <!-- Before/After Comparison Section -->
+    <section class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 mt-16">
+      <div class="bg-white/5 backdrop-blur-xl rounded-2xl border border-rose-500/30 p-8">
+        <h2 class="text-3xl font-bold text-center mb-8">
+          <span class="gradient-text">See the AI Transformation</span>
+        </h2>
+
+        <!-- Main Before/After Container -->
+        <div class="before-after-container h-96 mx-auto max-w-md mb-6">
+          <img class="before-image" src="/images/glamour/GlamourOriginal1.jpg" alt="Before: Original photo">
+          <img class="after-image" id="currentAfterImage" src="/images/glamour/GlamourExamples-01.jpg" alt="After: AI glamour transformation">
+          <div class="before-after-slider" id="beforeAfterSlider"></div>
+
+          <!-- Style Label -->
+          <div class="absolute top-4 left-4 bg-black/70 backdrop-blur text-white px-3 py-1 rounded-full text-sm font-medium">
+            <span id="currentStyleLabel">Professional Studio</span>
+          </div>
+        </div>
+
+        <!-- Transformation Options -->
+        <div class="flex justify-center mb-6">
+          <div class="grid grid-cols-5 gap-3 p-3 bg-black/20 backdrop-blur rounded-2xl border border-white/10">
+            <button class="transformation-option active" data-index="0" data-image="/images/glamour/GlamourExamples-01.jpg" data-label="Professional Studio">
+              <img src="/images/glamour/GlamourExamples-01.jpg" alt="Professional Studio" class="w-16 h-20 object-cover rounded-lg border-2 border-transparent transition-all duration-300">
+              <span class="block text-xs text-center mt-1 text-rose-300">Studio</span>
+            </button>
+
+            <button class="transformation-option" data-index="1" data-image="/images/glamour/GlamourExamples-02.jpg" data-label="Golden Hour Glow">
+              <img src="/images/glamour/GlamourExamples-02.jpg" alt="Golden Hour" class="w-16 h-20 object-cover rounded-lg border-2 border-transparent transition-all duration-300">
+              <span class="block text-xs text-center mt-1 text-rose-300">Golden</span>
+            </button>
+
+            <button class="transformation-option" data-index="2" data-image="/images/glamour/GlamourExamples-03.jpg" data-label="Editorial Fashion">
+              <img src="/images/glamour/GlamourExamples-03.jpg" alt="Editorial" class="w-16 h-20 object-cover rounded-lg border-2 border-transparent transition-all duration-300">
+              <span class="block text-xs text-center mt-1 text-rose-300">Editorial</span>
+            </button>
+
+            <button class="transformation-option" data-index="3" data-image="/images/glamour/GlamourExamples-04.jpg" data-label="Dramatic Lighting">
+              <img src="/images/glamour/GlamourExamples-04.jpg" alt="Dramatic" class="w-16 h-20 object-cover rounded-lg border-2 border-transparent transition-all duration-300">
+              <span class="block text-xs text-center mt-1 text-rose-300">Drama</span>
+            </button>
+
+            <button class="transformation-option" data-index="4" data-image="/images/glamour/GlamourExamples-05.jpg" data-label="Classic Monochrome">
+              <img src="/images/glamour/GlamourExamples-05.jpg" alt="Monochrome" class="w-16 h-20 object-cover rounded-lg border-2 border-transparent transition-all duration-300">
+              <span class="block text-xs text-center mt-1 text-rose-300">B&W</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <p class="text-rose-200 mb-4">
+            <span class="inline-block mr-2">Drag the slider to compare</span> •
+            <span class="inline-block ml-2">Click thumbnails to change style</span>
+          </p>
+          <a href="/app" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-700 hover:to-pink-700 text-white font-bold rounded-xl transition-all duration-300 transform hover:scale-105">
+            <i class="fas fa-magic mr-2"></i>Transform Your Photo Now
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section
       id="glamour-faq"
       class="relative z-10 max-w-6xl mx-auto px-6 lg:px-12 mt-8 pb-12"
@@ -1037,8 +1509,200 @@
         });
       })();
 
-      // Floating CTA Bar for Glamour Gallery
+      // Enhanced Glamour Gallery Functionality
       (function () {
+        // Real-time Activity Simulation
+        const activityIndicator = document.getElementById('activityIndicator');
+        const activityMessages = [
+          '3 photos created in the last hour',
+          '2 users viewing this gallery now',
+          '15 glamour transformations today',
+          '1 user just upgraded to premium',
+          '8 photos downloaded this hour'
+        ];
+
+        let messageIndex = 0;
+        function showActivity() {
+          if (activityIndicator) {
+            activityIndicator.classList.add('show');
+            setTimeout(() => {
+              activityIndicator.classList.remove('show');
+            }, 4000);
+          }
+        }
+
+        function cycleActivityMessages() {
+          const textElement = document.getElementById('activityText');
+          if (textElement) {
+            textElement.textContent = activityMessages[messageIndex];
+            messageIndex = (messageIndex + 1) % activityMessages.length;
+          }
+        }
+
+        // Show activity indicator after 3 seconds, then cycle every 15 seconds
+        setTimeout(() => {
+          showActivity();
+          setInterval(() => {
+            cycleActivityMessages();
+            showActivity();
+          }, 15000);
+        }, 3000);
+
+        // Enhanced Before/After Slider with Multiple Images
+        const beforeAfterSlider = document.getElementById('beforeAfterSlider');
+        const afterImage = document.getElementById('currentAfterImage');
+        const styleLabel = document.getElementById('currentStyleLabel');
+        const transformationOptions = document.querySelectorAll('.transformation-option');
+
+        if (beforeAfterSlider && afterImage) {
+          let isDragging = false;
+
+          function updateSlider(x) {
+            const container = beforeAfterSlider.parentElement;
+            const rect = container.getBoundingClientRect();
+            const percentage = Math.max(0, Math.min(100, ((x - rect.left) / rect.width) * 100));
+
+            beforeAfterSlider.style.left = percentage + '%';
+            afterImage.style.clipPath = `polygon(${percentage}% 0%, 100% 0%, 100% 100%, ${percentage}% 100%)`;
+          }
+
+          // Transformation option functionality
+          transformationOptions.forEach((option, index) => {
+            option.addEventListener('click', () => {
+              // Remove active class from all options
+              transformationOptions.forEach(opt => opt.classList.remove('active'));
+
+              // Add active class to clicked option
+              option.classList.add('active');
+
+              // Update the after image
+              const newImage = option.dataset.image;
+              const newLabel = option.dataset.label;
+
+              if (afterImage && newImage) {
+                afterImage.src = newImage;
+                afterImage.alt = `After: ${newLabel}`;
+              }
+
+              if (styleLabel && newLabel) {
+                styleLabel.textContent = newLabel;
+              }
+
+              // Add a subtle animation
+              afterImage.style.opacity = '0.7';
+              setTimeout(() => {
+                afterImage.style.opacity = '1';
+              }, 200);
+            });
+
+            // Add hover effect for preview
+            option.addEventListener('mouseenter', () => {
+              if (!option.classList.contains('active')) {
+                option.querySelector('img').style.transform = 'scale(1.05)';
+              }
+            });
+
+            option.addEventListener('mouseleave', () => {
+              if (!option.classList.contains('active')) {
+                option.querySelector('img').style.transform = 'scale(1)';
+              }
+            });
+          });
+
+          // Slider drag functionality
+          beforeAfterSlider.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            e.preventDefault();
+          });
+
+          document.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+              updateSlider(e.clientX);
+            }
+          });
+
+          document.addEventListener('mouseup', () => {
+            isDragging = false;
+          });
+
+          // Touch support
+          beforeAfterSlider.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            e.preventDefault();
+          });
+
+          document.addEventListener('touchmove', (e) => {
+            if (isDragging) {
+              updateSlider(e.touches[0].clientX);
+            }
+          });
+
+          document.addEventListener('touchend', () => {
+            isDragging = false;
+          });
+        }
+
+        // Parallax Effect
+        function handleParallax() {
+          const scrolled = window.pageYOffset;
+          const parallaxElements = document.querySelectorAll('.parallax-element');
+
+          parallaxElements.forEach((element, index) => {
+            const speed = 0.5 + (index * 0.1);
+            const yPos = -(scrolled * speed);
+            element.style.transform = `translateY(${yPos}px)`;
+          });
+        }
+
+        // Fade in animations
+        function handleFadeInAnimations() {
+          const fadeElements = document.querySelectorAll('.fade-in-up');
+          const windowHeight = window.innerHeight;
+
+          fadeElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
+            if (elementTop < windowHeight - 100) {
+              element.classList.add('animate');
+            }
+          });
+        }
+
+        // Optimized scroll handler
+        let ticking = false;
+        function optimizedScrollHandler() {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              handleParallax();
+              handleFadeInAnimations();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }
+
+        window.addEventListener('scroll', optimizedScrollHandler);
+
+        // Lazy loading for gallery images
+        if ('IntersectionObserver' in window) {
+          const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                  img.src = img.dataset.src;
+                  img.classList.remove('lazy');
+                  observer.unobserve(img);
+                }
+              }
+            });
+          });
+
+          document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+          });
+        }
+
+        // Enhanced Floating CTA
         const floatingCTA = document.createElement("div");
         floatingCTA.id = "floating-cta-glamour";
         floatingCTA.className =
@@ -1047,8 +1711,8 @@
           <div class="max-w-md mx-auto bg-gradient-to-r from-rose-600 to-pink-600 rounded-2xl p-4 shadow-2xl border border-white/20">
             <div class="flex items-center justify-between">
               <div>
-                <p class="text-white font-semibold text-sm">Ready to be camera-ready?</p>
-                <p class="text-rose-100 text-xs">Join 5K+ successful influencers</p>
+                <p class="text-white font-semibold text-sm">Ready for your glamour transformation?</p>
+                <p class="text-rose-100 text-xs">🔥 25% off - Limited time only!</p>
               </div>
               <a href="/app" class="bg-white text-rose-600 px-4 py-2 rounded-lg font-bold text-sm hover:bg-rose-50 transition-colors">
                 Start Now
@@ -1060,8 +1724,7 @@
         document.body.appendChild(floatingCTA);
 
         let ctaShown = false;
-        let ctaDismissed =
-          localStorage.getItem("floatingCtaGlamourDismissed") === "true";
+        let ctaDismissed = localStorage.getItem("floatingCtaGlamourDismissed") === "true";
 
         function showFloatingCTA() {
           if (!ctaDismissed && !ctaShown) {
@@ -1072,30 +1735,28 @@
         }
 
         function hideFloatingCTA() {
-          floatingCTA.style.transform = "translateY(full)";
+          floatingCTA.style.transform = "translateY(100%)";
           floatingCTA.style.opacity = "0";
           ctaShown = false;
         }
 
-        // Show after scrolling 50% of page
+        // Show after scrolling 30% of page
         window.addEventListener("scroll", function () {
-          const scrollPercent =
-            (window.scrollY /
-              (document.documentElement.scrollHeight - window.innerHeight)) *
-            100;
-          if (scrollPercent > 50) {
+          const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+          if (scrollPercent > 30) {
             showFloatingCTA();
           }
         });
 
         // Dismiss functionality
-        document
-          .getElementById("close-floating-cta-glamour")
-          .addEventListener("click", function () {
-            hideFloatingCTA();
-            localStorage.setItem("floatingCtaGlamourDismissed", "true");
-            ctaDismissed = true;
-          });
+        document.getElementById("close-floating-cta-glamour").addEventListener("click", function () {
+          hideFloatingCTA();
+          localStorage.setItem("floatingCtaGlamourDismissed", "true");
+          ctaDismissed = true;
+        });
+
+        // Initial animations
+        handleFadeInAnimations();
       })();
     </script>
 
