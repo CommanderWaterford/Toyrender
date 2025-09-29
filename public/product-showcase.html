@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>No Model? No Problem - AI Product Photography | Toyrender</title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Transform your product photos with AI-generated models. Upload your product and get professional lifestyle photos in seconds. No photoshoot, no models needed."
+    />
+    <meta
+      name="keywords"
+      content="AI product photography, product modeling, AI models, e-commerce photos, product lifestyle photos"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="No Model? No Problem - AI Product Photography" />
+    <meta
+      property="og:description"
+      content="Bring your products to life with AI-generated lifestyle photos in seconds"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://toyrender.com/product-showcase.html" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .product-card {
+        position: relative;
+        border-radius: 24px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .badge {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: 600;
+        backdrop-filter: blur(10px);
+      }
+
+      .arrow-icon {
+        color: #9333ea;
+        font-size: 48px;
+        opacity: 0.8;
+      }
+
+      /* Responsive grid */
+      @media (max-width: 768px) {
+        .showcase-grid {
+          grid-template-columns: 1fr;
+        }
+        .arrow-icon {
+          transform: rotate(90deg);
+          font-size: 36px;
+        }
+      }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white min-h-screen">
+    <!-- Navigation -->
+    <nav class="container mx-auto px-6 py-6">
+      <div class="flex items-center justify-between">
+        <a href="/" class="text-2xl font-bold gradient-text">Toyrender</a>
+        <div class="hidden md:flex items-center gap-8">
+          <a href="/" class="hover:text-purple-400 transition">Home</a>
+          <a href="/gallery.html" class="hover:text-purple-400 transition">Gallery</a>
+          <a href="/pricing.html" class="hover:text-purple-400 transition">Pricing</a>
+          <a href="/contact.html" class="hover:text-purple-400 transition">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="container mx-auto px-6 py-16 text-center fade-in-up">
+      <h1 class="text-5xl md:text-7xl font-bold mb-6">
+        <span class="text-white">No Model?</span><br />
+        <span class="gradient-text">No Problem</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
+        Bring your products to life in seconds
+      </p>
+    </section>
+
+    <!-- Showcase Section - Apparel Example -->
+    <section class="container mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-8 items-center mb-20">
+        <!-- Original Product -->
+        <div class="product-card bg-white/10 backdrop-blur-lg p-6 float-animation" style="animation-delay: 0s;">
+          <img
+            src="/images/showcase/T-Shirt-Original.webp"
+            alt="Original T-Shirt Product"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <div class="badge">Original</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="hidden md:block arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- AI Generated 1 -->
+        <div class="product-card bg-white/10 backdrop-blur-lg p-6 pulse-glow float-animation" style="animation-delay: 1s;">
+          <img
+            src="/images/showcase/T-Shirt-Final1.webp"
+            alt="AI Generated Model Wearing T-Shirt"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <div class="badge">AI Generated</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="hidden md:block arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- AI Generated 2 -->
+        <div class="product-card bg-white/10 backdrop-blur-lg p-6 pulse-glow float-animation" style="animation-delay: 2s;">
+          <img
+            src="/images/showcase/T-Shirt-Final2.webp"
+            alt="AI Generated Model Wearing T-Shirt in Different Setting"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <div class="badge">AI Generated</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Showcase Section - Product Example -->
+    <section class="container mx-auto px-6 py-12">
+      <div class="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-8 items-center mb-20">
+        <!-- Original Product -->
+        <div class="product-card bg-white/10 backdrop-blur-lg p-6 float-animation" style="animation-delay: 0.5s;">
+          <img
+            src="/images/showcase/Coffee-Original.webp"
+            alt="Original Coffee Mug Product"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <div class="badge">Original</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="hidden md:block arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- AI Generated 1 -->
+        <div class="product-card bg-white/10 backdrop-blur-lg p-6 pulse-glow float-animation" style="animation-delay: 1.5s;">
+          <img
+            src="/images/showcase/Coffee-Final1.webp"
+            alt="AI Generated Person Using Coffee Mug"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <div class="badge">AI Generated</div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="hidden md:block arrow-icon">
+          <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- AI Generated 2 -->
+        <div class="product-card bg-white/10 backdrop-blur-lg p-6 pulse-glow float-animation" style="animation-delay: 2.5s;">
+          <img
+            src="/images/showcase/Coffee-Final2.webp"
+            alt="AI Generated Person Using Coffee Mug in Different Setting"
+            class="w-full h-full object-cover rounded-2xl"
+          />
+          <div class="badge">AI Generated</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="container mx-auto px-6 py-20">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">How It Works</h2>
+      <div class="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
+        <div class="text-center">
+          <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-upload text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">1. Upload Your Product</h3>
+          <p class="text-gray-300">
+            Simply upload a photo of your product - apparel, accessories, home goods, or any item
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-magic text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">2. AI Magic</h3>
+          <p class="text-gray-300">
+            Our AI generates professional lifestyle photos with models wearing or using your product
+          </p>
+        </div>
+
+        <div class="text-center">
+          <div class="w-20 h-20 bg-purple-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-download text-3xl"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">3. Download & Use</h3>
+          <p class="text-gray-300">
+            Get high-quality images ready for your e-commerce store, social media, or marketing
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="container mx-auto px-6 py-20 bg-white/5 backdrop-blur-lg rounded-3xl my-12">
+      <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Why Choose AI Product Photography?</h2>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+        <div class="text-center">
+          <div class="text-5xl mb-4">⚡</div>
+          <h3 class="text-xl font-bold mb-2">Instant Results</h3>
+          <p class="text-gray-300">Get professional photos in seconds, not weeks</p>
+        </div>
+
+        <div class="text-center">
+          <div class="text-5xl mb-4">💰</div>
+          <h3 class="text-xl font-bold mb-2">Cost Effective</h3>
+          <p class="text-gray-300">No expensive photoshoots or model fees</p>
+        </div>
+
+        <div class="text-center">
+          <div class="text-5xl mb-4">🎨</div>
+          <h3 class="text-xl font-bold mb-2">Unlimited Variations</h3>
+          <p class="text-gray-300">Generate multiple styles and settings</p>
+        </div>
+
+        <div class="text-center">
+          <div class="text-5xl mb-4">📈</div>
+          <h3 class="text-xl font-bold mb-2">Boost Sales</h3>
+          <p class="text-gray-300">Lifestyle photos increase conversion rates</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="container mx-auto px-6 py-20 text-center">
+      <h2 class="text-4xl md:text-5xl font-bold mb-8">Ready to Transform Your Products?</h2>
+      <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+        Join thousands of businesses using AI to create stunning product photography
+      </p>
+      <div class="flex flex-col sm:flex-row gap-6 justify-center">
+        <a
+          href="/"
+          class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-10 py-5 rounded-full text-lg font-semibold hover:shadow-2xl hover:scale-105 transition transform inline-block"
+        >
+          Get Started Free <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+        <a
+          href="/gallery.html"
+          class="bg-white/10 backdrop-blur-lg text-white px-10 py-5 rounded-full text-lg font-semibold hover:bg-white/20 transition inline-block"
+        >
+          View Examples
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="container mx-auto px-6 py-12 border-t border-white/10">
+      <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <h3 class="text-xl font-bold mb-4 gradient-text">Toyrender</h3>
+          <p class="text-gray-400">AI-powered product photography</p>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Product</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="/pricing.html" class="hover:text-purple-400 transition">Pricing</a></li>
+            <li><a href="/gallery.html" class="hover:text-purple-400 transition">Gallery</a></li>
+            <li><a href="/faq.html" class="hover:text-purple-400 transition">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Company</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><a href="/contact.html" class="hover:text-purple-400 transition">Contact</a></li>
+            <li><a href="/privacy.html" class="hover:text-purple-400 transition">Privacy</a></li>
+            <li><a href="/terms.html" class="hover:text-purple-400 transition">Terms</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-semibold mb-4">Connect</h4>
+          <div class="flex gap-4">
+            <a href="#" class="text-2xl hover:text-purple-400 transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-2xl hover:text-purple-400 transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-2xl hover:text-purple-400 transition"><i class="fab fa-facebook"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-gray-400 pt-8 border-t border-white/10">
+        <p>&copy; 2025 Toyrender. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
