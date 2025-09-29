@@ -93,6 +93,127 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
+      /* Enhanced Card Design */
+      .blog-card {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(147, 51, 234, 0.3), 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .blog-card:hover .card-image {
+        transform: scale(1.05);
+        filter: brightness(1.1) contrast(1.05);
+      }
+
+      .card-image {
+        transition: all 0.4s ease;
+        object-fit: cover;
+      }
+
+      .reading-time {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        color: rgb(196 181 253);
+        opacity: 0.8;
+      }
+
+      .featured-badge {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        background: linear-gradient(135deg, #f59e0b, #f97316);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 10;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+      }
+
+      /* Social Sharing */
+      .social-share {
+        display: flex;
+        gap: 8px;
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(147, 51, 234, 0.2);
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s ease;
+      }
+
+      .blog-card:hover .social-share {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .social-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        color: white;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-size: 0.875rem;
+      }
+
+      .social-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .social-btn.twitter { background: #1da1f2; }
+      .social-btn.facebook { background: #4267b2; }
+      .social-btn.linkedin { background: #0077b5; }
+      .social-btn.copy { background: #6b7280; }
+
+      /* Mobile Optimizations */
+      @media (max-width: 640px) {
+        .blog-card:hover {
+          transform: translateY(-4px);
+        }
+
+        .social-share {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        .featured-badge {
+          top: 8px;
+          right: 8px;
+          padding: 3px 6px;
+          font-size: 0.7rem;
+        }
+
+        .reading-time {
+          display: none;
+        }
+      }
+
+      /* Touch-friendly interactions */
+      @media (hover: none) and (pointer: coarse) {
+        .blog-card:hover .social-share {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     </style>
 
     <!-- JSON-LD Enhanced: WebSite, WebPage (CollectionPage), Blog, BreadcrumbList, ItemList -->
@@ -279,18 +400,48 @@
         </p>
       </section>
 
+      <!-- Strategic CTA Banner -->
+      <section class="bg-gradient-to-r from-purple-600/20 to-pink-600/20 backdrop-blur-xl rounded-2xl border border-purple-500/30 p-8 mb-12 text-center">
+        <div class="max-w-2xl mx-auto">
+          <h2 class="text-2xl font-bold gradient-text mb-4">
+            Ready to Transform Your Photos?
+          </h2>
+          <p class="text-purple-200 mb-6">
+            Turn your selfies into professional-looking photos with AI. Join 50,000+ users who've upgraded their profiles.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/dating-photos-gallery"
+              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            >
+              🚀 Create AI Photos Now
+            </a>
+            <a
+              href="/gallery"
+              class="inline-flex items-center px-6 py-3 border-2 border-purple-400 text-purple-200 hover:text-white hover:border-purple-300 font-semibold rounded-xl transition-all duration-300"
+            >
+              📸 View Examples
+            </a>
+          </div>
+          <p class="text-purple-300 text-sm mt-4">
+            ✨ <span class="font-semibold">95% of users</span> see more matches in 7 days
+          </p>
+        </div>
+      </section>
+
       <!-- Posts grid -->
       <section aria-label="Blog posts">
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <!-- Post newest -->
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <!-- Post newest - Featured -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col relative"
           >
+            <div class="featured-badge">🔥 Featured</div>
             <a href="/blog/turn-your-selfie-into-a-figurine/" class="block">
               <img
                 src="/images/GalleryFigurinesCollage.jpg"
                 alt="Collage of Toyrender figurine-style portraits"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -303,6 +454,10 @@
                 <time datetime="2025-09-18" class="opacity-80"
                   >Sep 18, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  3 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -323,17 +478,31 @@
                   >Read article</a
                 >
               </div>
+              <div class="social-share">
+                <a href="https://twitter.com/intent/tweet?text=Turn%20Your%20Selfie%20Into%20a%20Figurine%20Image%20with%20AI&url=https://toyrender.com/blog/turn-your-selfie-into-a-figurine/" class="social-btn twitter" target="_blank" aria-label="Share on Twitter">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://toyrender.com/blog/turn-your-selfie-into-a-figurine/" class="social-btn facebook" target="_blank" aria-label="Share on Facebook">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://toyrender.com/blog/turn-your-selfie-into-a-figurine/&title=Turn%20Your%20Selfie%20Into%20a%20Figurine%20Image%20with%20AI" class="social-btn linkedin" target="_blank" aria-label="Share on LinkedIn">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+                <button onclick="navigator.clipboard.writeText('https://toyrender.com/blog/turn-your-selfie-into-a-figurine/')" class="social-btn copy" aria-label="Copy link">
+                  <i class="fas fa-copy"></i>
+                </button>
+              </div>
             </div>
           </article>
           <!-- Post 2 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a href="/blog/ai-couple-photos-online/" class="block">
               <img
                 src="/images/blog/CoupleGuideHero.jpg"
                 alt="AI couple photo example generated from two portraits"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -346,6 +515,10 @@
                 <time datetime="2025-09-12" class="opacity-80"
                   >Sep 12, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  5 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -370,13 +543,13 @@
           </article>
           <!-- Post 3 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a href="/blog/how-to-upscale-ai-photos/" class="block">
               <img
                 src="/images/blog/Upscale4KHero.jpg"
                 alt="Before and after AI photo upscaling comparison"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -389,6 +562,10 @@
                 <time datetime="2025-09-12" class="opacity-80"
                   >Sep 12, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  4 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -413,13 +590,13 @@
           </article>
           <!-- Post 1 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a href="/perfect-source-photo-ai-enhancement.html" class="block">
               <img
                 src="/images/blog/PerfectSourcePhoto.jpg"
                 alt="Perfect source photo example with good lighting"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -432,6 +609,10 @@
                 <time datetime="2025-09-01" class="opacity-80"
                   >Sep 1, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  6 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -465,7 +646,7 @@
 
           <!-- Post 2 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a href="/dating-photos.html" class="block">
               <img
@@ -484,6 +665,10 @@
                 <time datetime="2025-09-05" class="opacity-80"
                   >Sep 5, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  4 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a href="/dating-photos.html" class="hover:underline">
@@ -514,13 +699,13 @@
 
           <!-- Post 3 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a href="/why-dating-photos-matter-statistics.html" class="block">
               <img
                 src="/images/blog/WhyDatingPhotosMatters.jpg"
                 alt="Statistics charts illustrating dating photo performance"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -533,6 +718,10 @@
                 <time datetime="2025-09-08" class="opacity-80"
                   >Sep 8, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  5 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -565,7 +754,7 @@
           </article>
           <!-- Post 4 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a
               href="/blog/at-home-dating-photos-10-minute-setup/"
@@ -574,7 +763,7 @@
               <img
                 src="/images/dating-photos/merged-image.jpg"
                 alt="At-home dating photos using window light and a phone tripod"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -587,6 +776,10 @@
                 <time datetime="2025-09-11" class="opacity-80"
                   >Sep 11, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  3 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -612,13 +805,13 @@
           </article>
           <!-- Post 5 -->
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
+            class="blog-card bg-slate-800/50 backdrop-blur-xl rounded-2xl border border-purple-500/30 overflow-hidden flex flex-col"
           >
             <a href="/blog/top-5-tinder-photo-tips-2025/" class="block">
               <img
                 src="/images/Top5TipsPhotosStandOut.jpg"
                 alt="Collage illustrating top Tinder photo improvement tips"
-                class="w-full h-44 object-cover"
+                class="card-image w-full h-44"
                 loading="lazy"
               />
             </a>
@@ -631,6 +824,10 @@
                 <time datetime="2025-09-11" class="opacity-80"
                   >Sep 11, 2025</time
                 >
+                <span class="reading-time">
+                  <i class="fas fa-clock" style="font-size: 0.7rem;"></i>
+                  4 min read
+                </span>
               </div>
               <h2 class="text-xl font-semibold mt-2">
                 <a
@@ -661,6 +858,42 @@
               </div>
             </div>
           </article>
+        </div>
+
+        <!-- Trust & Success Metrics -->
+        <div class="mt-16 bg-gradient-to-r from-slate-800/60 to-purple-800/40 backdrop-blur-xl rounded-2xl border border-purple-500/30 p-8">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold gradient-text mb-4">
+              Join Thousands Who've Transformed Their Photos
+            </h3>
+            <p class="text-purple-200">
+              Our blog readers are getting real results with AI-enhanced photos
+            </p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6 mb-8">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-2">50,000+</div>
+              <div class="text-purple-300">Photos Enhanced</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-2">95%</div>
+              <div class="text-purple-300">More Matches Reported</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-white mb-2">4.8/5</div>
+              <div class="text-purple-300">Average Rating</div>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a
+              href="/dating-photos-gallery"
+              class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
+            >
+              🚀 Start Your Photo Transformation
+            </a>
+          </div>
         </div>
 
         <!-- Optional pagination placeholder -->
