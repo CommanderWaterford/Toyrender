@@ -620,6 +620,14 @@
         background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+      /* Hide scrollbar for mobile gallery */
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
       /* Lightbox */
       .lb-open {
         overflow: hidden;
@@ -741,64 +749,9 @@
       itemscope
       itemtype="https://schema.org/Product"
     >
-      <div class="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-center">
-        <header>
-          <h1
-            class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight"
-            itemprop="name"
-          >
-            Transform Your Dating Photos Into 5x More Matches
-          </h1>
-          <p class="mt-4 text-purple-200 text-base md:text-lg" itemprop="description">
-            Skip the $500 photographer and get <strong>professional-quality dating photos in under a minute</strong>.
-            Upload one selfie and get <strong>10 magazine-worthy styles</strong> that actually get attention and matches.
-            Used by <strong>5,000+ singles</strong> to upgrade their dating game –
-            <strong>97% report getting more matches within 24 hours</strong>.
-          </p>
-          <!-- Success Stats -->
-          <div class="mt-6 grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div class="text-2xl font-bold text-purple-300">5x</div>
-              <div class="text-xs text-purple-400">More Matches</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold text-purple-300">&lt;1min</div>
-              <div class="text-xs text-purple-400">Processing Time</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold text-purple-300">97%</div>
-              <div class="text-xs text-purple-400">Success Rate</div>
-            </div>
-          </div>
-
-          <div class="mt-6 flex flex-col sm:flex-row gap-3">
-            <a
-              id="cta"
-              href="#upload"
-              class="w-full sm:w-auto px-8 py-5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold text-center relative shadow-lg"
-              aria-label="Start creating enhanced photos from your portrait"
-            >
-              <span class="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">AS SEEN ON REDDIT</span>
-              Get More Matches Today – $4.99
-            </a>
-            <a
-              href="#carousel-examples"
-              class="w-full sm:w-auto px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-center"
-              aria-label="View example photo transformations"
-              >See Proof First</a
-            >
-          </div>
-          <div class="mt-4 text-center sm:text-left">
-            <p class="text-sm font-semibold text-green-300">
-              ✅ 100% Money-Back Guarantee • ✅ Results in Under 1 Minute • ✅ No Subscription Required
-            </p>
-            <p class="text-xs text-purple-300 mt-2">
-              Join 5,000+ satisfied users. <strong>Limited time:</strong> Usually $19.99, now just $4.99
-            </p>
-          </div>
-        </header>
-        <!-- Interactive Before/After Slider -->
-        <div class="ba-wrap rounded-2xl overflow-hidden border border-white/10 shadow-xl relative">
+      <div class="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-center">
+        <!-- Interactive Before/After Slider (Now First on Mobile) -->
+        <div class="ba-wrap rounded-2xl overflow-hidden border border-white/10 shadow-xl relative lg:order-2 w-full">
           <!-- Before Image -->
           <img
             src="/images/dating-photos/Sabrina_08.jpg"
@@ -834,6 +787,125 @@
           </div>
           <div class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-purple-600/90 text-white px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-semibold">
             AFTER: AI
+          </div>
+          <!-- Mobile hint -->
+          <div class="lg:hidden absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-xs animate-pulse">
+            👆 Drag to compare
+          </div>
+        </div>
+
+        <header class="lg:order-1">
+          <h1
+            class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight"
+            itemprop="name"
+          >
+            Transform Your Dating Photos Into 5x More Matches
+          </h1>
+          <p class="mt-4 text-purple-200 text-base md:text-lg" itemprop="description">
+            One selfie → <strong>10 professional photos in under 60 seconds</strong>.
+            Used by <strong>5,000+ singles</strong> – <strong>97% get more matches within 24 hours</strong>.
+          </p>
+          <!-- Success Stats -->
+          <div class="mt-6 grid grid-cols-3 gap-4 text-center">
+            <div>
+              <div class="text-2xl font-bold text-purple-300">5x</div>
+              <div class="text-xs text-purple-400">More Matches</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-300">&lt;1min</div>
+              <div class="text-xs text-purple-400">Processing Time</div>
+            </div>
+            <div>
+              <div class="text-2xl font-bold text-purple-300">97%</div>
+              <div class="text-xs text-purple-400">Success Rate</div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a
+              id="cta"
+              href="#upload"
+              class="w-full sm:w-auto px-8 py-5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold text-center relative shadow-lg"
+              aria-label="Start creating enhanced photos from your portrait"
+            >
+              <span class="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse">AS SEEN ON REDDIT</span>
+              Get More Matches Today – $4.99
+            </a>
+            <a
+              href="#carousel-examples"
+              class="w-full sm:w-auto px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-center"
+              aria-label="View example photo transformations"
+              >See Proof First</a
+            >
+          </div>
+          <div class="mt-4 text-center sm:text-left space-y-2">
+            <p class="text-sm font-semibold text-green-300">
+              ✅ Money-Back Guarantee • ✅ Under 1 Min • ✅ No Subscription
+            </p>
+            <p class="text-xs text-purple-300">
+              <strong>Limited time:</strong> Usually $19.99, now just $4.99
+            </p>
+          </div>
+        </header>
+      </div>
+
+      <!-- Quick Visual Proof Gallery (Mobile-First) -->
+      <div class="mt-8 lg:hidden">
+        <p class="text-center text-sm text-purple-300 mb-3 font-semibold">
+          👉 Swipe to see more transformations
+        </p>
+        <div class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar">
+          <!-- Example 1 -->
+          <div class="flex-shrink-0 w-[280px] snap-center">
+            <div class="grid grid-cols-2 gap-2 bg-white/5 rounded-xl p-2 border border-white/10">
+              <div class="relative">
+                <img src="/images/dating-photos/Stephany-before.jpg" alt="Before" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 left-1 bg-black/70 text-white px-2 py-0.5 rounded text-xs">Before</span>
+              </div>
+              <div class="relative">
+                <img src="/images/dating-photos/Stephany-Dating-Photo1.jpg" alt="After" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 right-1 bg-purple-600/90 text-white px-2 py-0.5 rounded text-xs">After</span>
+              </div>
+            </div>
+          </div>
+          <!-- Example 2 -->
+          <div class="flex-shrink-0 w-[280px] snap-center">
+            <div class="grid grid-cols-2 gap-2 bg-white/5 rounded-xl p-2 border border-white/10">
+              <div class="relative">
+                <img src="/images/dating-photos/Sarah-Before.jpg" alt="Before" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 left-1 bg-black/70 text-white px-2 py-0.5 rounded text-xs">Before</span>
+              </div>
+              <div class="relative">
+                <img src="/images/dating-photos/Sarah-Dating-Photo1.jpg" alt="After" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 right-1 bg-purple-600/90 text-white px-2 py-0.5 rounded text-xs">After</span>
+              </div>
+            </div>
+          </div>
+          <!-- Example 3 -->
+          <div class="flex-shrink-0 w-[280px] snap-center">
+            <div class="grid grid-cols-2 gap-2 bg-white/5 rounded-xl p-2 border border-white/10">
+              <div class="relative">
+                <img src="/images/dating-photos/Emily-before.jpg" alt="Before" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 left-1 bg-black/70 text-white px-2 py-0.5 rounded text-xs">Before</span>
+              </div>
+              <div class="relative">
+                <img src="/images/dating-photos/Emily-Dating-Photo1.jpg" alt="After" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 right-1 bg-purple-600/90 text-white px-2 py-0.5 rounded text-xs">After</span>
+              </div>
+            </div>
+          </div>
+          <!-- Example 4 -->
+          <div class="flex-shrink-0 w-[280px] snap-center">
+            <div class="grid grid-cols-2 gap-2 bg-white/5 rounded-xl p-2 border border-white/10">
+              <div class="relative">
+                <img src="/images/dating-photos/Max-Before.jpg" alt="Before" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 left-1 bg-black/70 text-white px-2 py-0.5 rounded text-xs">Before</span>
+              </div>
+              <div class="relative">
+                <img src="/images/dating-photos/Max-Dating-Photo1.jpg" alt="After" class="rounded-lg w-full h-auto" width="140" height="175" loading="lazy" />
+                <span class="absolute top-1 right-1 bg-purple-600/90 text-white px-2 py-0.5 rounded text-xs">After</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
