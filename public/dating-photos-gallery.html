@@ -212,7 +212,31 @@
       }
       body {
         padding-top: 120px;
+        padding-bottom: 80px;
       }
+
+      /* Sticky CTA Bar */
+      .sticky-cta-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 998;
+        background: linear-gradient(135deg, rgba(147, 51, 234, 0.98), rgba(236, 72, 153, 0.98));
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        animation: slideUp 0.3s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(100%);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+
       @media (min-width: 1024px) {
         body {
           padding-top: 110px;
@@ -1004,11 +1028,29 @@
           </a>
         </div>
 
-        <!-- Value Proposition -->
-        <div class="mt-6 text-center">
+        <!-- Pricing & Value Proposition -->
+        <div class="mt-6 text-center space-y-3">
+          <p class="text-white text-lg font-semibold">
+            Most people spend $300+ on photoshoots — <span class="text-yellow-300">get yours in minutes for $4.99</span>
+          </p>
           <p class="text-purple-300 text-sm">
             ✨ <span class="font-semibold">95% of users</span> see increased matches within 7 days
           </p>
+        </div>
+
+        <!-- Privacy Guarantee Badge -->
+        <div class="mt-6 flex justify-center">
+          <div class="inline-flex items-center gap-3 px-6 py-3 bg-green-900/30 border border-green-500/30 rounded-xl">
+            <div class="flex-shrink-0 w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
+              <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+              </svg>
+            </div>
+            <div class="text-left">
+              <p class="text-green-300 font-semibold text-sm">🔒 Safe & Private</p>
+              <p class="text-green-200/70 text-xs">We never share or sell your photos. Used only for your render.</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1307,6 +1349,22 @@
           </div>
         </article>
 
+        <!-- Mini CTA Block 1 -->
+        <div class="my-12 p-8 bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-2 border-pink-500/50 rounded-3xl text-center">
+          <p class="text-2xl font-bold text-white mb-4">
+            🔥 Ready to get photos like Stephany?
+          </p>
+          <a
+            href="/"
+            class="inline-flex items-center px-10 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
+          >
+            → Claim 25% Off Now
+          </a>
+          <p class="mt-4 text-purple-200 text-sm">
+            Limited time offer • Instant delivery • Cancel anytime
+          </p>
+        </div>
+
         <!-- Person: Sabrina (Women) -->
         <article
           class="space-y-4"
@@ -1592,6 +1650,22 @@
             </div>
           </div>
         </article>
+
+        <!-- Mini CTA Block 2 -->
+        <div class="my-12 p-8 bg-gradient-to-r from-blue-900/40 to-purple-900/40 border-2 border-blue-500/50 rounded-3xl text-center">
+          <p class="text-2xl font-bold text-white mb-4">
+            💪 Want professional results like Richard?
+          </p>
+          <a
+            href="/"
+            class="inline-flex items-center px-10 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
+          >
+            → Get Started for $4.99
+          </a>
+          <p class="mt-4 text-purple-200 text-sm">
+            10 AI photo styles • High resolution • Commercial license included
+          </p>
+        </div>
 
         <!-- Person: Jonas (Men) -->
         <article
@@ -1887,7 +1961,7 @@
           <h2 class="text-xl lg:text-2xl font-bold text-white mb-3">
             Used Successfully On All Major Dating Platforms
           </h2>
-          <p class="text-purple-200">Join millions finding matches with AI-enhanced photos</p>
+          <p class="text-purple-200">Join thousands finding matches with AI-enhanced photos</p>
         </header>
 
         <!-- Platform Logos Grid -->
@@ -1948,7 +2022,7 @@
             <div class="text-purple-300 text-sm">More Matches</div>
           </div>
           <div class="bg-white/5 rounded-xl p-4 border border-white/10">
-            <div class="text-2xl font-bold text-white">25K+</div>
+            <div class="text-2xl font-bold text-white">5,000+</div>
             <div class="text-purple-300 text-sm">Success Stories</div>
           </div>
           <div class="bg-white/5 rounded-xl p-4 border border-white/10">
@@ -2817,7 +2891,26 @@
       })();
     </script>
 
-    <!-- Floating CTA Bar HTML -->
-    <div id="floating-cta-container"></div>
+    <!-- Sticky CTA Bar -->
+    <div class="sticky-cta-bar">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div class="text-center sm:text-left">
+            <p class="text-white font-bold text-lg">
+              🚀 Create Your AI Dating Photos – <span class="text-yellow-300">25% Off Today Only</span>
+            </p>
+            <p class="text-purple-100 text-sm">
+              Most popular: 10 styles for just $4.99 • 95% see more matches within 7 days
+            </p>
+          </div>
+          <a
+            href="/"
+            class="flex-shrink-0 px-8 py-3 bg-white hover:bg-gray-100 text-purple-900 font-bold text-lg rounded-xl transition-all duration-300 transform hover:scale-105 shadow-xl"
+          >
+            Get Started Now →
+          </a>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
