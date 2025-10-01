@@ -105,7 +105,207 @@
         background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
         border: 2px solid #a855f7;
       }
+
+      .faq-item {
+        background: rgba(30, 27, 75, 0.6);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(168, 85, 247, 0.2);
+        transition: all 0.3s ease;
+      }
+
+      .faq-item:hover {
+        border-color: rgba(168, 85, 247, 0.4);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+
+      .faq-answer.active {
+        max-height: 500px;
+      }
+
+      .gallery-image {
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .gallery-image:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(147, 51, 234, 0.6);
+      }
+
+      .gallery-image::after {
+        content: '👁️ Click to Learn More';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        color: white;
+        padding: 20px 10px 10px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .gallery-image:hover::after {
+        opacity: 1;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 9999;
+        overflow-y: auto;
+        padding: 20px;
+      }
+
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+        border: 2px solid rgba(168, 85, 247, 0.5);
+        border-radius: 24px;
+        max-width: 900px;
+        width: 100%;
+        position: relative;
+        animation: modalSlideIn 0.3s ease;
+      }
+
+      @keyframes modalSlideIn {
+        from {
+          opacity: 0;
+          transform: translateY(-50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(168, 85, 247, 0.3);
+        border: none;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        z-index: 10;
+      }
+
+      .modal-close:hover {
+        background: rgba(168, 85, 247, 0.6);
+        transform: rotate(90deg);
+      }
+
+      @media (max-width: 768px) {
+        .modal-content {
+          margin: 20px 0;
+        }
+
+        .gallery-image::after {
+          opacity: 1;
+          font-size: 0.75rem;
+          padding: 15px 5px 8px;
+        }
+      }
     </style>
+
+    <!-- JSON-LD FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I determine my face shape?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "To determine your face shape, pull your hair back and look in a mirror. Measure the widest parts of your forehead, cheekbones, and jawline, and note the length of your face. Oval faces have balanced proportions with a slightly wider forehead. Round faces have equal width and length with soft curves. Square faces have a strong jawline and broad forehead. Heart faces have a wider forehead and narrow chin. Diamond faces have wide cheekbones with a narrow forehead and chin."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What glasses suit round faces best?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Round faces look best with angular frames that add definition. Rectangle and square frames create contrast and make the face appear longer and more angular. Geometric frames with sharp lines are ideal. Avoid round or oval frames that emphasize the face's natural roundness."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can oval faces wear any style of glasses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, oval faces are the most versatile and can wear almost any style of glasses. Aviator, Wayfarer, Cat-eye, Round, Square, and Rectangle frames all work well. The key is to choose frames that are as wide as (or slightly wider than) the broadest part of your face to maintain balance."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the worst glasses for square faces?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Square faces should avoid heavy, boxy, or angular frames that emphasize the face's natural angularity. Instead, opt for round, oval, or cat-eye frames that soften the strong jawline and angular features. Frames with curves help create balance and contrast."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where should I buy glasses online after determining my face shape?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Popular online retailers include Warby Parker, Zenni Optical, and EyeBuyDirect. For luxury options, try Ray-Ban or Oakley's official sites. Always use virtual try-on tools like Toyrender to see how different styles look on your face before purchasing. Many retailers offer home try-on programs where you can test 5-7 frames at home before buying."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do glasses for heart-shaped faces differ from other shapes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Heart-shaped faces have a wider forehead and narrow chin, so they need frames that balance these proportions. Aviator frames (wider at the bottom), round frames, and rimless styles work best. Avoid heavy top bars or decorative embellishments on the top of frames, as these draw attention to the already-wide forehead. Light-colored frames also help minimize emphasis on the upper face."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are cat-eye glasses only for women?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "While cat-eye glasses are traditionally associated with women's fashion, modern unisex and masculine cat-eye styles exist. The key is the degree of upward sweep - subtle cat-eye frames work for anyone, while dramatic vintage styles tend to be more feminine. Square and diamond face shapes benefit most from cat-eye frames regardless of gender."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I need different glasses for prescription vs sunglasses based on face shape?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, the same face shape principles apply to both prescription glasses and sunglasses. However, sunglasses can be slightly larger and bolder since they're a fashion statement. The key recommendations for your face shape remain the same whether you're choosing prescription eyewear or sunglasses."
+          }
+        }
+      ]
+    }
+    </script>
   </head>
 
   <body class="text-white">
@@ -171,210 +371,84 @@
       </div>
     </section>
 
-    <!-- Face Shape Guide Grid -->
+    <!-- Face Shape Gallery Grid -->
     <section class="pb-20 px-6">
       <div class="container mx-auto max-w-6xl">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <h2 class="text-3xl font-bold mb-8 text-center text-purple-200">
+          <i class="fas fa-hand-pointer mr-2"></i>Click any face shape to learn more
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6 mb-8">
 
-          <!-- Round Face Shape -->
-          <article class="face-shape-card rounded-2xl p-8 flex flex-col">
-            <div class="mb-6">
-              <img src="/images/faceshape-example-01.webp" alt="Round face shape with recommended glasses" class="rounded-xl shadow-2xl w-full aspect-square object-cover" loading="eager" />
+          <!-- Oval Face -->
+          <div class="gallery-image rounded-xl overflow-hidden border-2 border-purple-500/30" onclick="openModal('oval')" data-shape="oval">
+            <img src="/images/faceshape-example-01.webp" alt="Oval face shape with recommended glasses" class="w-full aspect-square object-cover" loading="eager" />
+            <div class="text-center py-3 bg-slate-900/80">
+              <h3 class="text-lg font-bold text-purple-200">🥚 Oval</h3>
             </div>
-            <div class="flex-1">
-              <h2 class="text-3xl font-bold mb-3 text-purple-200">
-                <span class="text-4xl mr-2">🔴</span>Round Face
-              </h2>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
-                <ul class="text-sm text-purple-200 space-y-1 mb-4">
-                  <li>• Equal width and length</li>
-                  <li>• Soft curves and full cheeks</li>
-                  <li>• Rounded chin</li>
-                </ul>
-              </div>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
-                <ul class="text-sm text-purple-200 space-y-1">
-                  <li>• <strong>Rectangle frames:</strong> Add definition</li>
-                  <li>• <strong>Square frames:</strong> Create angles</li>
-                  <li>• <strong>Geometric frames:</strong> Sharp contrast</li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
-                <p class="text-sm text-purple-200">Round or oval frames that emphasize roundness</p>
-              </div>
-            </div>
-          </article>
+          </div>
 
-          <!-- Oval Face Shape -->
-          <article class="face-shape-card rounded-2xl p-8 flex flex-col">
-            <div class="mb-6">
-              <img src="/images/faceshape-example-02.webp" alt="Oval face shape with recommended glasses" class="rounded-xl shadow-2xl w-full aspect-square object-cover" loading="eager" />
+          <!-- Square Face -->
+          <div class="gallery-image rounded-xl overflow-hidden border-2 border-purple-500/30" onclick="openModal('square')" data-shape="square">
+            <img src="/images/faceshape-example-02.webp" alt="Square face shape with recommended glasses" class="w-full aspect-square object-cover" loading="eager" />
+            <div class="text-center py-3 bg-slate-900/80">
+              <h3 class="text-lg font-bold text-purple-200">⬜ Square</h3>
             </div>
-            <div class="flex-1">
-              <h2 class="text-3xl font-bold mb-3 text-purple-200">
-                <span class="text-4xl mr-2">🥚</span>Oval Face
-              </h2>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
-                <ul class="text-sm text-purple-200 space-y-1 mb-4">
-                  <li>• Balanced proportions</li>
-                  <li>• Forehead slightly wider than chin</li>
-                  <li>• Gentle curves</li>
-                </ul>
-              </div>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
-                <ul class="text-sm text-purple-200 space-y-1">
-                  <li>• <strong>Almost anything!</strong> Most versatile</li>
-                  <li>• <strong>Aviator:</strong> Classic choice</li>
-                  <li>• <strong>Wayfarer:</strong> Timeless style</li>
-                  <li>• <strong>Cat-eye:</strong> Playful sophistication</li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-yellow-400 mb-2">💡 Pro Tip:</h3>
-                <p class="text-sm text-purple-200">Choose frames as wide as (or slightly wider than) the broadest part of your face</p>
-              </div>
-            </div>
-          </article>
+          </div>
 
-          <!-- Square Face Shape -->
-          <article class="face-shape-card rounded-2xl p-8 flex flex-col">
-            <div class="mb-6">
-              <img src="/images/faceshape-example-03.webp" alt="Square face shape with recommended glasses" class="rounded-xl shadow-2xl w-full aspect-square object-cover" loading="eager" />
+          <!-- Heart Face -->
+          <div class="gallery-image rounded-xl overflow-hidden border-2 border-purple-500/30" onclick="openModal('heart')" data-shape="heart">
+            <img src="/images/faceshape-example-03.webp" alt="Heart face shape with recommended glasses" class="w-full aspect-square object-cover" loading="eager" />
+            <div class="text-center py-3 bg-slate-900/80">
+              <h3 class="text-lg font-bold text-purple-200">💜 Heart</h3>
             </div>
-            <div class="flex-1">
-              <h2 class="text-3xl font-bold mb-3 text-purple-200">
-                <span class="text-4xl mr-2">⬜</span>Square Face
-              </h2>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
-                <ul class="text-sm text-purple-200 space-y-1 mb-4">
-                  <li>• Strong jawline</li>
-                  <li>• Broad forehead</li>
-                  <li>• Angular features</li>
-                </ul>
-              </div>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
-                <ul class="text-sm text-purple-200 space-y-1">
-                  <li>• <strong>Round frames:</strong> Soften angles</li>
-                  <li>• <strong>Oval frames:</strong> Classic contrast</li>
-                  <li>• <strong>Cat-eye frames:</strong> Draw eyes up</li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
-                <p class="text-sm text-purple-200">Heavy, boxy frames that emphasize angularity</p>
-              </div>
-            </div>
-          </article>
+          </div>
 
-          <!-- Heart Face Shape -->
-          <article class="face-shape-card rounded-2xl p-8 flex flex-col">
-            <div class="mb-6">
-              <img src="/images/faceshape-example-04.webp" alt="Heart face shape with recommended glasses" class="rounded-xl shadow-2xl w-full aspect-square object-cover" loading="lazy" />
+          <!-- Round Face -->
+          <div class="gallery-image rounded-xl overflow-hidden border-2 border-purple-500/30" onclick="openModal('round')" data-shape="round">
+            <img src="/images/faceshape-example-04.webp" alt="Round face shape with recommended glasses" class="w-full aspect-square object-cover" loading="lazy" />
+            <div class="text-center py-3 bg-slate-900/80">
+              <h3 class="text-lg font-bold text-purple-200">🔴 Round</h3>
             </div>
-            <div class="flex-1">
-              <h2 class="text-3xl font-bold mb-3 text-purple-200">
-                <span class="text-4xl mr-2">💜</span>Heart Face
-              </h2>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
-                <ul class="text-sm text-purple-200 space-y-1 mb-4">
-                  <li>• Wider forehead</li>
-                  <li>• High cheekbones</li>
-                  <li>• Narrow, pointed chin</li>
-                </ul>
-              </div>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
-                <ul class="text-sm text-purple-200 space-y-1">
-                  <li>• <strong>Aviator:</strong> Wider at bottom</li>
-                  <li>• <strong>Round frames:</strong> Soften chin</li>
-                  <li>• <strong>Rimless:</strong> Minimize heaviness</li>
-                  <li>• <strong>Light colors:</strong> Less attention to forehead</li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
-                <p class="text-sm text-purple-200">Heavy top bars or decorative embellishments on top</p>
-              </div>
+          </div>
+
+          <!-- Diamond Face -->
+          <div class="gallery-image rounded-xl overflow-hidden border-2 border-purple-500/30" onclick="openModal('diamond')" data-shape="diamond">
+            <img src="/images/faceshape-example-05.webp" alt="Diamond face shape with recommended glasses" class="w-full aspect-square object-cover" loading="lazy" />
+            <div class="text-center py-3 bg-slate-900/80">
+              <h3 class="text-lg font-bold text-purple-200">💎 Diamond</h3>
             </div>
-          </article>
+          </div>
 
-          <!-- Diamond Face Shape -->
-          <article class="face-shape-card rounded-2xl p-8 flex flex-col">
-            <div class="mb-6">
-              <img src="/images/faceshape-example-05.webp" alt="Diamond face shape with recommended glasses" class="rounded-xl shadow-2xl w-full aspect-square object-cover" loading="lazy" />
+        </div>
+
+        <!-- Quick Reference Section -->
+        <div class="glass-card rounded-2xl p-8 max-w-4xl mx-auto">
+          <div class="text-center mb-6">
+            <div class="text-5xl mb-3">🔍</div>
+            <h2 class="text-2xl font-bold text-purple-200 mb-3">Quick Reference Guide</h2>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4 text-sm">
+            <div class="bg-slate-900/50 rounded-lg p-4">
+              <p class="font-bold text-purple-300">🥚 Oval → Almost Anything!</p>
             </div>
-            <div class="flex-1">
-              <h2 class="text-3xl font-bold mb-3 text-purple-200">
-                <span class="text-4xl mr-2">💎</span>Diamond Face
-              </h2>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
-                <ul class="text-sm text-purple-200 space-y-1 mb-4">
-                  <li>• Narrow forehead and chin</li>
-                  <li>• Wide cheekbones</li>
-                  <li>• Angular features</li>
-                </ul>
-              </div>
-              <div class="mb-4">
-                <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
-                <ul class="text-sm text-purple-200 space-y-1">
-                  <li>• <strong>Cat-eye:</strong> Accentuate cheekbones</li>
-                  <li>• <strong>Oval frames:</strong> Soften angles</li>
-                  <li>• <strong>Rimless:</strong> Show bone structure</li>
-                  <li>• <strong>Detailed frames:</strong> Draw to brow line</li>
-                </ul>
-              </div>
-              <div>
-                <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
-                <p class="text-sm text-purple-200">Narrow frames that make cheekbones appear wider</p>
-              </div>
+            <div class="bg-slate-900/50 rounded-lg p-4">
+              <p class="font-bold text-purple-300">⬜ Square → Round/Oval</p>
             </div>
-          </article>
-
-          <!-- Quick Reference Card -->
-          <article class="face-shape-card rounded-2xl p-8 flex flex-col bg-gradient-to-br from-purple-900/40 to-pink-900/40 border-2 border-purple-400/50">
-            <div class="flex-1 flex flex-col justify-center">
-              <div class="text-center mb-6">
-                <div class="text-6xl mb-4">🔍</div>
-                <h2 class="text-3xl font-bold text-purple-200 mb-3">
-                  Quick Reference
-                </h2>
-              </div>
-
-              <div class="space-y-3 text-sm">
-                <div class="bg-slate-900/50 rounded-lg p-3">
-                  <p class="font-bold text-purple-300">🔴 Round → Rectangle/Square</p>
-                </div>
-                <div class="bg-slate-900/50 rounded-lg p-3">
-                  <p class="font-bold text-purple-300">🥚 Oval → Almost Anything!</p>
-                </div>
-                <div class="bg-slate-900/50 rounded-lg p-3">
-                  <p class="font-bold text-purple-300">⬜ Square → Round/Oval</p>
-                </div>
-                <div class="bg-slate-900/50 rounded-lg p-3">
-                  <p class="font-bold text-purple-300">💜 Heart → Aviator/Round</p>
-                </div>
-                <div class="bg-slate-900/50 rounded-lg p-3">
-                  <p class="font-bold text-purple-300">💎 Diamond → Cat-eye/Oval</p>
-                </div>
-              </div>
-
-              <div class="mt-8 text-center">
-                <a href="/blog/what-glasses-fit-my-face/" class="inline-block text-purple-300 hover:text-white underline text-sm">
-                  <i class="fas fa-book-open mr-1"></i>Read Full Guide
-                </a>
-              </div>
+            <div class="bg-slate-900/50 rounded-lg p-4">
+              <p class="font-bold text-purple-300">💜 Heart → Aviator/Round</p>
             </div>
-          </article>
-
+            <div class="bg-slate-900/50 rounded-lg p-4">
+              <p class="font-bold text-purple-300">🔴 Round → Rectangle/Square</p>
+            </div>
+            <div class="bg-slate-900/50 rounded-lg p-4">
+              <p class="font-bold text-purple-300">💎 Diamond → Cat-eye/Oval</p>
+            </div>
+            <div class="bg-slate-900/50 rounded-lg p-4 flex items-center justify-center">
+              <a href="/blog/what-glasses-fit-my-face/" class="text-purple-300 hover:text-white underline">
+                <i class="fas fa-book-open mr-1"></i>Read Full Guide
+              </a>
+            </div>
+          </div>
         </div>
 
         <!-- Bottom CTA Section -->
@@ -447,13 +521,397 @@
             </a>
           </div>
         </div>
+
+        <!-- FAQ Section -->
+        <div class="mt-20">
+          <h2 class="text-4xl font-bold mb-12 text-center gradient-text">Frequently Asked Questions</h2>
+          <div class="max-w-4xl mx-auto space-y-4">
+
+            <!-- FAQ 1 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">How do I determine my face shape?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  To determine your face shape, pull your hair back and look in a mirror. Measure the widest parts of your forehead, cheekbones, and jawline, and note the length of your face. <strong>Oval faces</strong> have balanced proportions with a slightly wider forehead. <strong>Round faces</strong> have equal width and length with soft curves. <strong>Square faces</strong> have a strong jawline and broad forehead. <strong>Heart faces</strong> have a wider forehead and narrow chin. <strong>Diamond faces</strong> have wide cheekbones with a narrow forehead and chin.
+                </p>
+                <a href="https://www.allaboutvision.com/eyeglasses/glasses-for-your-face/" target="_blank" rel="noopener" class="inline-block mt-3 text-sm text-purple-400 hover:text-purple-300">
+                  <i class="fas fa-external-link-alt mr-1"></i>Learn more about face shapes at All About Vision
+                </a>
+              </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">What glasses suit round faces best?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  Round faces look best with <strong>angular frames</strong> that add definition. Rectangle and square frames create contrast and make the face appear longer and more angular. Geometric frames with sharp lines are ideal. Avoid round or oval frames that emphasize the face's natural roundness.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 3 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">Can oval faces wear any style of glasses?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  Yes! Oval faces are the most versatile and can wear almost any style of glasses. Aviator, Wayfarer, Cat-eye, Round, Square, and Rectangle frames all work well. The key is to choose frames that are as wide as (or slightly wider than) the broadest part of your face to maintain balance.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 4 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">What are the worst glasses for square faces?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  Square faces should avoid heavy, boxy, or angular frames that emphasize the face's natural angularity. Instead, opt for round, oval, or cat-eye frames that soften the strong jawline and angular features. Frames with curves help create balance and contrast.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 5 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">Where should I buy glasses online after determining my face shape?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed mb-3">
+                  Popular online retailers include <a href="https://www.warbyparker.com" target="_blank" rel="noopener" class="text-purple-400 hover:text-purple-300 underline">Warby Parker</a>, <a href="https://www.zennioptical.com" target="_blank" rel="noopener" class="text-purple-400 hover:text-purple-300 underline">Zenni Optical</a>, and <a href="https://www.eyebuydirect.com" target="_blank" rel="noopener" class="text-purple-400 hover:text-purple-300 underline">EyeBuyDirect</a>. For luxury options, try <a href="https://www.ray-ban.com" target="_blank" rel="noopener" class="text-purple-400 hover:text-purple-300 underline">Ray-Ban</a> or Oakley's official sites.
+                </p>
+                <p class="text-purple-300 leading-relaxed">
+                  Always use virtual try-on tools like <a href="/glasses-tryon.html" class="text-purple-400 hover:text-purple-300 underline font-semibold">Toyrender</a> to see how different styles look on your face before purchasing. Many retailers offer home try-on programs where you can test 5-7 frames at home before buying.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 6 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">How do glasses for heart-shaped faces differ from other shapes?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  Heart-shaped faces have a wider forehead and narrow chin, so they need frames that balance these proportions. Aviator frames (wider at the bottom), round frames, and rimless styles work best. Avoid heavy top bars or decorative embellishments on the top of frames, as these draw attention to the already-wide forehead. Light-colored frames also help minimize emphasis on the upper face.
+                </p>
+              </div>
+            </div>
+
+            <!-- FAQ 7 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">Are cat-eye glasses only for women?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  While cat-eye glasses are traditionally associated with women's fashion, modern unisex and masculine cat-eye styles exist. The key is the degree of upward sweep - subtle cat-eye frames work for anyone, while dramatic vintage styles tend to be more feminine. Square and diamond face shapes benefit most from cat-eye frames regardless of gender.
+                </p>
+                <a href="https://www.visionexpress.com/eye-health/choosing-glasses-for-your-face-shape" target="_blank" rel="noopener" class="inline-block mt-3 text-sm text-purple-400 hover:text-purple-300">
+                  <i class="fas fa-external-link-alt mr-1"></i>More glasses style tips at Vision Express
+                </a>
+              </div>
+            </div>
+
+            <!-- FAQ 8 -->
+            <div class="faq-item rounded-xl p-6">
+              <button class="faq-question w-full text-left flex items-start justify-between gap-4" onclick="toggleFaq(this)">
+                <div>
+                  <h3 class="text-xl font-bold text-purple-200 mb-2">Do I need different glasses for prescription vs sunglasses based on face shape?</h3>
+                </div>
+                <i class="fas fa-chevron-down text-purple-400 mt-1 transition-transform"></i>
+              </button>
+              <div class="faq-answer mt-4">
+                <p class="text-purple-300 leading-relaxed">
+                  No, the same face shape principles apply to both prescription glasses and sunglasses. However, sunglasses can be slightly larger and bolder since they're a fashion statement. The key recommendations for your face shape remain the same whether you're choosing prescription eyewear or sunglasses.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
       </div>
     </section>
+
+    <!-- Modal Popups -->
+    <div id="modalOval" class="modal" onclick="closeModal(event, 'oval')">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(event, 'oval')">&times;</button>
+        <div class="grid md:grid-cols-2 gap-6 p-6 md:p-8">
+          <div>
+            <img src="/images/faceshape-example-01.webp" alt="Oval face" class="rounded-xl w-full shadow-2xl" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-200">
+              <span class="text-5xl mr-2">🥚</span>Oval Face
+            </h2>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
+              <ul class="text-purple-200 space-y-1 mb-4">
+                <li>• Balanced proportions</li>
+                <li>• Forehead slightly wider than chin</li>
+                <li>• Gentle curves</li>
+              </ul>
+            </div>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
+              <ul class="text-purple-200 space-y-1">
+                <li>• <strong>Almost anything!</strong> Most versatile</li>
+                <li>• <strong>Aviator:</strong> Classic choice</li>
+                <li>• <strong>Wayfarer:</strong> Timeless style</li>
+                <li>• <strong>Cat-eye:</strong> Playful sophistication</li>
+              </ul>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-yellow-400 mb-2">💡 Pro Tip:</h3>
+              <p class="text-purple-200">Choose frames as wide as (or slightly wider than) the broadest part of your face</p>
+            </div>
+            <a href="/glasses-tryon.html" class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transition">
+              Try On Glasses - $4.99
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalSquare" class="modal" onclick="closeModal(event, 'square')">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(event, 'square')">&times;</button>
+        <div class="grid md:grid-cols-2 gap-6 p-6 md:p-8">
+          <div>
+            <img src="/images/faceshape-example-02.webp" alt="Square face" class="rounded-xl w-full shadow-2xl" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-200">
+              <span class="text-5xl mr-2">⬜</span>Square Face
+            </h2>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
+              <ul class="text-purple-200 space-y-1 mb-4">
+                <li>• Strong jawline</li>
+                <li>• Broad forehead</li>
+                <li>• Angular features</li>
+              </ul>
+            </div>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
+              <ul class="text-purple-200 space-y-1">
+                <li>• <strong>Round frames:</strong> Soften angles</li>
+                <li>• <strong>Oval frames:</strong> Classic contrast</li>
+                <li>• <strong>Cat-eye frames:</strong> Draw eyes up</li>
+              </ul>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
+              <p class="text-purple-200">Heavy, boxy frames that emphasize angularity</p>
+            </div>
+            <a href="/glasses-tryon.html" class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transition">
+              Try On Glasses - $4.99
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalHeart" class="modal" onclick="closeModal(event, 'heart')">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(event, 'heart')">&times;</button>
+        <div class="grid md:grid-cols-2 gap-6 p-6 md:p-8">
+          <div>
+            <img src="/images/faceshape-example-03.webp" alt="Heart face" class="rounded-xl w-full shadow-2xl" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-200">
+              <span class="text-5xl mr-2">💜</span>Heart Face
+            </h2>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
+              <ul class="text-purple-200 space-y-1 mb-4">
+                <li>• Wider forehead</li>
+                <li>• High cheekbones</li>
+                <li>• Narrow, pointed chin</li>
+              </ul>
+            </div>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
+              <ul class="text-purple-200 space-y-1">
+                <li>• <strong>Aviator:</strong> Wider at bottom</li>
+                <li>• <strong>Round frames:</strong> Soften chin</li>
+                <li>• <strong>Rimless:</strong> Minimize heaviness</li>
+                <li>• <strong>Light colors:</strong> Less attention to forehead</li>
+              </ul>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
+              <p class="text-purple-200">Heavy top bars or decorative embellishments on top</p>
+            </div>
+            <a href="/glasses-tryon.html" class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transition">
+              Try On Glasses - $4.99
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalRound" class="modal" onclick="closeModal(event, 'round')">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(event, 'round')">&times;</button>
+        <div class="grid md:grid-cols-2 gap-6 p-6 md:p-8">
+          <div>
+            <img src="/images/faceshape-example-04.webp" alt="Round face" class="rounded-xl w-full shadow-2xl" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-200">
+              <span class="text-5xl mr-2">🔴</span>Round Face
+            </h2>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
+              <ul class="text-purple-200 space-y-1 mb-4">
+                <li>• Equal width and length</li>
+                <li>• Soft curves and full cheeks</li>
+                <li>• Rounded chin</li>
+              </ul>
+            </div>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
+              <ul class="text-purple-200 space-y-1">
+                <li>• <strong>Rectangle frames:</strong> Add definition</li>
+                <li>• <strong>Square frames:</strong> Create angles</li>
+                <li>• <strong>Geometric frames:</strong> Sharp contrast</li>
+              </ul>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
+              <p class="text-purple-200">Round or oval frames that emphasize roundness</p>
+            </div>
+            <a href="/glasses-tryon.html" class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transition">
+              Try On Glasses - $4.99
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalDiamond" class="modal" onclick="closeModal(event, 'diamond')">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal(event, 'diamond')">&times;</button>
+        <div class="grid md:grid-cols-2 gap-6 p-6 md:p-8">
+          <div>
+            <img src="/images/faceshape-example-05.webp" alt="Diamond face" class="rounded-xl w-full shadow-2xl" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-purple-200">
+              <span class="text-5xl mr-2">💎</span>Diamond Face
+            </h2>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-purple-300 mb-2">Characteristics:</h3>
+              <ul class="text-purple-200 space-y-1 mb-4">
+                <li>• Narrow forehead and chin</li>
+                <li>• Wide cheekbones</li>
+                <li>• Angular features</li>
+              </ul>
+            </div>
+            <div class="mb-4">
+              <h3 class="text-lg font-semibold text-green-400 mb-2">✓ Best Frames:</h3>
+              <ul class="text-purple-200 space-y-1">
+                <li>• <strong>Cat-eye:</strong> Accentuate cheekbones</li>
+                <li>• <strong>Oval frames:</strong> Soften angles</li>
+                <li>• <strong>Rimless:</strong> Show bone structure</li>
+                <li>• <strong>Detailed frames:</strong> Draw to brow line</li>
+              </ul>
+            </div>
+            <div class="mb-6">
+              <h3 class="text-lg font-semibold text-red-400 mb-2">✗ Avoid:</h3>
+              <p class="text-purple-200">Narrow frames that make cheekbones appear wider</p>
+            </div>
+            <a href="/glasses-tryon.html" class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-xl font-bold text-center hover:from-purple-700 hover:to-pink-700 transition">
+              Try On Glasses - $4.99
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      function openModal(shape) {
+        const modalId = 'modal' + shape.charAt(0).toUpperCase() + shape.slice(1);
+        document.getElementById(modalId).classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal(event, shape) {
+        const modalId = 'modal' + shape.charAt(0).toUpperCase() + shape.slice(1);
+        document.getElementById(modalId).classList.remove('active');
+        document.body.style.overflow = 'auto';
+      }
+
+      function toggleFaq(button) {
+        const faqItem = button.closest('.faq-item');
+        const answer = faqItem.querySelector('.faq-answer');
+        const icon = button.querySelector('i');
+
+        // Close all other FAQs
+        document.querySelectorAll('.faq-answer').forEach(otherAnswer => {
+          if (otherAnswer !== answer) {
+            otherAnswer.classList.remove('active');
+            otherAnswer.closest('.faq-item').querySelector('i').style.transform = 'rotate(0deg)';
+          }
+        });
+
+        // Toggle current FAQ
+        answer.classList.toggle('active');
+        if (answer.classList.contains('active')) {
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          icon.style.transform = 'rotate(0deg)';
+        }
+      }
+
+      // Close modal with ESC key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          document.querySelectorAll('.modal').forEach(modal => {
+            modal.classList.remove('active');
+          });
+          document.body.style.overflow = 'auto';
+        }
+      });
+    </script>
 
     <!-- Footer -->
     <footer class="border-t border-purple-500/30 py-12 px-6">
       <div class="container mx-auto max-w-6xl">
-        <div class="grid md:grid-cols-4 gap-8 mb-8">
+        <div class="grid md:grid-cols-5 gap-8 mb-8">
           <div>
             <h4 class="font-bold text-lg mb-4 gradient-text">Toyrender</h4>
             <p class="text-sm text-purple-300">
@@ -476,6 +934,13 @@
               <li><a href="/glasses-face-shape-guide.html" class="hover:text-white transition">Face Shape Guide</a></li>
               <li><a href="/faq.html" class="hover:text-white transition">FAQ</a></li>
               <li><a href="/pricing.html" class="hover:text-white transition">Pricing</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-bold mb-4">More Tools</h4>
+            <ul class="space-y-2 text-sm text-purple-300">
+              <li><a href="https://bananabatch.com" target="_blank" rel="noopener" class="hover:text-white transition">BananaBatch</a></li>
+              <li><a href="https://thismodelnotexist.com" target="_blank" rel="noopener" class="hover:text-white transition">ThisModelNotExist</a></li>
             </ul>
           </div>
           <div>
