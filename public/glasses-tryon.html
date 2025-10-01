@@ -85,6 +85,36 @@
         animation: pulse-glow 2s ease-in-out infinite;
       }
 
+      @keyframes urgency-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 40px rgba(220, 38, 38, 0.9);
+        }
+      }
+
+      .urgency-pulse {
+        animation: urgency-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes cta-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 15px 60px rgba(34, 197, 94, 0.6);
+        }
+      }
+
+      .cta-button {
+        animation: cta-pulse 2s ease-in-out infinite;
+      }
+
       .gradient-text {
         background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 100%);
         -webkit-background-clip: text;
@@ -96,6 +126,7 @@
         backdrop-filter: blur(16px);
         background: rgba(30, 27, 75, 0.6);
         border: 1px solid rgba(168, 85, 247, 0.3);
+        padding: 2.5rem;
       }
 
       .result-image-container {
@@ -103,12 +134,31 @@
         overflow: hidden;
         border-radius: 1rem;
         aspect-ratio: 1;
+        transition: transform 0.3s ease;
+      }
+
+      .result-image-container:hover {
+        transform: scale(1.05);
+        cursor: zoom-in;
       }
 
       .result-image-container img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+      }
+
+      @keyframes arrow-bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+      }
+
+      .arrow-bounce {
+        animation: arrow-bounce 2s ease-in-out infinite;
       }
     </style>
   </head>
@@ -134,9 +184,12 @@
       <!-- Hero Section -->
       <section class="max-w-6xl mx-auto text-center mb-16">
         <div class="inline-block mb-6">
-          <span class="px-4 py-2 bg-red-600/30 border border-red-500/50 rounded-full text-sm font-semibold animate-pulse">
-            <i class="fas fa-fire mr-2"></i>Limited Time: 50% Off Launch Price
-          </span>
+          <div class="px-6 py-4 bg-red-600 border-2 border-red-400 rounded-full text-base font-bold shadow-2xl urgency-pulse">
+            <i class="fas fa-fire mr-2 text-yellow-300"></i>
+            <span class="text-white">LIMITED TIME: 25% OFF</span>
+            <span class="mx-2">•</span>
+            <span class="text-yellow-300" id="countdown">Ends in 23:45:12</span>
+          </div>
         </div>
 
         <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6">
@@ -177,25 +230,70 @@
             <div class="flex items-start">
               <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
               <div class="text-left">
-                <div class="font-semibold text-white">Just $4.99</div>
-                <div class="text-purple-300 line-through">Regular: $9.99</div>
+                <div class="font-bold text-white text-xl">Just $4.99</div>
+                <div class="text-purple-300 line-through text-sm">Regular: $6.65</div>
+                <div class="text-yellow-300 text-xs font-bold">SAVE 25%</div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="mb-8">
-          <p class="text-yellow-300 font-semibold mb-2">
-            <i class="fas fa-star mr-1"></i>
-            <i class="fas fa-star mr-1"></i>
-            <i class="fas fa-star mr-1"></i>
-            <i class="fas fa-star mr-1"></i>
-            <i class="fas fa-star mr-1"></i>
-            4.9/5 from 2,847 happy customers
-          </p>
-          <p class="text-purple-300 text-sm italic">
-            "I wish I had this before buying my last pair. Would've saved me $250 on frames I never wear!" - Sarah M.
-          </p>
+        <!-- Enhanced Trust Signals -->
+        <div class="mb-12 glass-card rounded-2xl p-8 max-w-2xl mx-auto">
+          <div class="flex flex-col items-center mb-6">
+            <div class="text-5xl mb-3">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-yellow-300 font-bold text-2xl mb-2">
+              4.9/5 Rating
+            </p>
+            <p class="text-white font-semibold text-xl">
+              <span id="customerCount" class="text-green-400">2,847</span> Happy Customers
+            </p>
+          </div>
+
+          <div class="border-t border-purple-500/30 pt-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-user text-white text-xl"></i>
+              </div>
+              <div class="text-left">
+                <p class="text-white text-lg italic mb-2">
+                  "I wish I had this before buying my last pair. Would've saved me $250 on frames I never wear!"
+                </p>
+                <p class="text-purple-400 font-semibold">- Sarah M.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-purple-500/30">
+            <div class="flex items-center justify-center gap-6 text-sm">
+              <div class="flex items-center">
+                <i class="fas fa-shield-alt text-green-400 mr-2 text-xl"></i>
+                <span class="text-white font-semibold">Secure Payment</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-undo text-green-400 mr-2 text-xl"></i>
+                <span class="text-white font-semibold">30-Day Guarantee</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-lock text-green-400 mr-2 text-xl"></i>
+                <span class="text-white font-semibold">Private & Safe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Activity Counter -->
+          <div class="mt-6 bg-green-900/20 border border-green-500/50 rounded-lg p-4">
+            <p class="text-green-400 font-semibold text-center">
+              <i class="fas fa-circle text-green-400 mr-2 animate-pulse"></i>
+              <span id="liveCounter">47</span> people are viewing this page right now
+            </p>
+          </div>
         </div>
 
         <!-- Glass Styles Preview -->
@@ -306,86 +404,98 @@
           </p>
         </div>
 
-        <div class="glass-card rounded-3xl p-6 lg:p-10">
-          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <!-- Original Photo -->
-            <div class="lg:col-span-1 sm:col-span-2">
-              <div class="glass-card rounded-xl p-4 h-full flex flex-col">
-                <div class="result-image-container mb-4">
-                  <img src="/images/man1-glass-original.webp" alt="Original selfie example" class="rounded-lg" />
-                  <div class="absolute top-2 left-2 bg-slate-900/90 px-3 py-1 rounded-full text-xs font-bold">
-                    📸 ORIGINAL
-                  </div>
-                </div>
-                <p class="text-center text-sm text-purple-300 font-semibold">Your Original Selfie</p>
-              </div>
-            </div>
-
-            <!-- 6 Glass Styles Results -->
-            <div class="lg:col-span-3 sm:col-span-2">
-              <div class="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <!-- Aviator Style -->
-                <div class="glass-card rounded-xl p-3">
-                  <div class="result-image-container mb-3">
-                    <img src="/images/man1-glass-style-01.webp" alt="Example with aviator glasses" class="rounded-lg" />
-                    <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 rounded-full text-xs font-semibold">
-                      👓 Aviator
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Wayfarer Style -->
-                <div class="glass-card rounded-xl p-3">
-                  <div class="result-image-container mb-3">
-                    <img src="/images/man1-glass-style-02.webp" alt="Example with wayfarer glasses" class="rounded-lg" />
-                    <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 rounded-full text-xs font-semibold">
-                      👓 Wayfarer
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Round Style -->
-                <div class="glass-card rounded-xl p-3">
-                  <div class="result-image-container mb-3">
-                    <img src="/images/man1-glass-style-03.webp" alt="Example with round glasses" class="rounded-lg" />
-                    <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 rounded-full text-xs font-semibold">
-                      🤓 Round
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Cat-Eye Style -->
-                <div class="glass-card rounded-xl p-3">
-                  <div class="result-image-container mb-3">
-                    <img src="/images/man1-glass-style-04.webp" alt="Example with cat-eye glasses" class="rounded-lg" />
-                    <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 rounded-full text-xs font-semibold">
-                      👓 Cat-Eye
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Square Style -->
-                <div class="glass-card rounded-xl p-3">
-                  <div class="result-image-container mb-3">
-                    <img src="/images/man1-glass-style-05.webp" alt="Example with square glasses" class="rounded-lg" />
-                    <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 rounded-full text-xs font-semibold">
-                      👓 Square
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Rectangle Style -->
-                <div class="glass-card rounded-xl p-3">
-                  <div class="result-image-container mb-3">
-                    <img src="/images/man1-glass-style-06.webp" alt="Example with rectangle glasses" class="rounded-lg" />
-                    <div class="absolute bottom-2 left-2 bg-black/80 px-2 py-1 rounded-full text-xs font-semibold">
-                      👓 Rectangle
-                    </div>
-                  </div>
+        <div class="glass-card rounded-3xl p-8 lg:p-12">
+          <!-- Original Photo - Full Width -->
+          <div class="mb-10">
+            <h3 class="text-2xl font-bold mb-4 text-center text-white">Original Photo</h3>
+            <div class="max-w-md mx-auto">
+              <div class="result-image-container mb-4" style="aspect-ratio: auto; max-height: 500px;">
+                <img src="/images/man1-glass-original.webp" alt="Original selfie example" class="rounded-2xl shadow-2xl" />
+                <div class="absolute top-4 left-4 bg-slate-900/90 px-4 py-2 rounded-full text-sm font-bold">
+                  📸 YOUR ORIGINAL PHOTO
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Arrow pointing down -->
+          <div class="text-center mb-10 arrow-bounce">
+            <i class="fas fa-arrow-down text-5xl text-purple-400"></i>
+            <p class="text-white text-xl font-bold mt-4">Transformed Into 6 Different Styles</p>
+          </div>
+
+          <!-- 6 Glass Styles Results - Larger Grid -->
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-center text-white">Your 6 Virtual Try-On Results</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- Aviator Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-01.webp" alt="Example with aviator glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Aviator
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Classic & Bold</p>
+              </div>
+
+              <!-- Wayfarer Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-02.webp" alt="Example with wayfarer glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Wayfarer
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Timeless Cool</p>
+              </div>
+
+              <!-- Round Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-03.webp" alt="Example with round glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    🤓 Round
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Trendy & Smart</p>
+              </div>
+
+              <!-- Cat-Eye Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-04.webp" alt="Example with cat-eye glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Cat-Eye
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Elegant & Chic</p>
+              </div>
+
+              <!-- Square Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-05.webp" alt="Example with square glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Square
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Modern Edge</p>
+              </div>
+
+              <!-- Rectangle Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-06.webp" alt="Example with rectangle glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Rectangle
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Professional</p>
+              </div>
+            </div>
+          </div>
+        </div>
 
           <div class="mt-8 text-center">
             <div class="bg-yellow-500/20 border border-yellow-500/50 rounded-xl p-4 mb-4 inline-block">
@@ -395,8 +505,8 @@
               </p>
             </div>
             <div>
-              <a href="#uploadArea" class="inline-block px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl text-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105 shadow-2xl">
-                <i class="fas fa-arrow-down mr-2"></i>Get My 6 Styles Now (50% Off)
+              <a href="#uploadArea" class="cta-button inline-block px-12 py-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl text-2xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl">
+                <i class="fas fa-arrow-down mr-2"></i>Get My 6 Styles Now (25% Off - $4.99)
               </a>
               <p class="text-sm text-purple-400 mt-3">
                 <i class="fas fa-shield-alt mr-1"></i>
@@ -407,9 +517,16 @@
         </div>
       </section>
 
+      <!-- Start Here Arrow -->
+      <div class="text-center mb-8 arrow-bounce">
+        <div class="inline-block bg-yellow-500 text-black px-8 py-4 rounded-full text-2xl font-black shadow-2xl">
+          👇 START HERE - UPLOAD YOUR PHOTO BELOW 👇
+        </div>
+      </div>
+
       <!-- Upload Section -->
-      <section class="max-w-4xl mx-auto mb-16">
-        <div class="glass-card rounded-3xl p-8 lg:p-12 pulse-glow">
+      <section class="max-w-4xl mx-auto mb-16" id="uploadAreaSection">
+        <div class="glass-card rounded-3xl p-8 lg:p-12 pulse-glow" style="border: 3px solid #eab308; box-shadow: 0 0 60px rgba(234, 179, 8, 0.5);">
           <div
             id="uploadArea"
             class="border-3 border-dashed border-purple-500/50 rounded-2xl p-12 text-center hover:border-purple-400 transition-all cursor-pointer bg-purple-900/20 hover:bg-purple-900/30"
@@ -435,9 +552,9 @@
             <button
               id="choosePhotoBtn"
               type="button"
-              class="px-12 py-5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl text-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105 shadow-2xl"
+              class="cta-button px-14 py-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl text-2xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl"
             >
-              <i class="fas fa-upload mr-2"></i><span>Upload & Get My 6 Styles ($4.99)</span>
+              <i class="fas fa-upload mr-3"></i><span>Upload & Get My 6 Styles - $4.99 (25% OFF)</span>
             </button>
             <p class="text-sm text-purple-400 mt-4">
               <i class="fas fa-lock mr-1"></i>100% Private & Secure • JPG/PNG up to 10MB
@@ -660,16 +777,16 @@
       <!-- FAQ Section -->
       <section class="max-w-4xl mx-auto mt-20">
         <h2 class="text-3xl font-bold text-center mb-12 gradient-text">Frequently Asked Questions</h2>
-        <div class="space-y-4">
+        <div class="space-y-4" id="faqContainer">
           <details class="glass-card rounded-xl p-6 cursor-pointer">
-            <summary class="font-semibold text-lg">What glass styles are included?</summary>
+            <summary class="font-semibold text-lg"><i class="fas fa-glasses text-purple-400 mr-3"></i>What glass styles are included?</summary>
             <p class="mt-3 text-purple-300">
               You'll receive 6 different styles: Aviator, Wayfarer, Round, Cat-Eye, Square, and Rectangle frames. Each style is carefully rendered to look natural on your face, so you can compare which frame shape suits your face best.
             </p>
           </details>
 
           <details class="glass-card rounded-xl p-6 cursor-pointer">
-            <summary class="font-semibold text-lg">How accurate are the virtual try-on results?</summary>
+            <summary class="font-semibold text-lg"><i class="fas fa-check-circle text-purple-400 mr-3"></i>How accurate are the virtual try-on results?</summary>
             <p class="mt-3 text-purple-300">
               Our AI technology creates photorealistic images showing exactly how each frame style will look on your face. While exact frame dimensions may vary by brand, you'll get a highly accurate visualization of which style suits your facial structure, skin tone, and overall appearance.
             </p>
@@ -964,6 +1081,129 @@
       const tryAnotherBtn = document.getElementById('tryAnotherBtn');
 
       let uploadedFile = null;
+
+      // Countdown Timer (24 hours from now)
+      function startCountdown() {
+        const countdownElement = document.getElementById('countdown');
+        if (!countdownElement) return;
+
+        // Set end time to 24 hours from first visit or use stored time
+        let endTime = localStorage.getItem('dealEndTime');
+        if (!endTime) {
+          endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+          localStorage.setItem('dealEndTime', endTime);
+        }
+
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = endTime - now;
+
+          if (distance < 0) {
+            // Reset to 24 hours
+            endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            localStorage.setItem('dealEndTime', endTime);
+          }
+
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          countdownElement.textContent = `Ends in ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      // Live Activity Counter
+      function animateLiveCounter() {
+        const liveCounter = document.getElementById('liveCounter');
+        if (!liveCounter) return;
+
+        function getRandomViews() {
+          return Math.floor(Math.random() * 30) + 35; // 35-65 viewers
+        }
+
+        function updateViews() {
+          const currentViews = parseInt(liveCounter.textContent);
+          const change = Math.floor(Math.random() * 7) - 3; // -3 to +3
+          let newViews = currentViews + change;
+
+          // Keep between 35 and 65
+          if (newViews < 35) newViews = 35;
+          if (newViews > 65) newViews = 65;
+
+          liveCounter.textContent = newViews;
+        }
+
+        setInterval(updateViews, 5000); // Update every 5 seconds
+      }
+
+      // Exit Intent Popup
+      let exitIntentShown = false;
+      function showExitIntentPopup() {
+        if (exitIntentShown) return;
+        exitIntentShown = true;
+
+        const popup = document.createElement('div');
+        popup.id = 'exitPopup';
+        popup.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          display: flex;
+          align-items: center;
+          justify-center;
+          z-index: 9999;
+          animation: fadeIn 0.3s ease;
+        `;
+
+        popup.innerHTML = `
+          <div style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); padding: 3rem; border-radius: 2rem; max-width: 600px; text-align: center; position: relative; border: 2px solid #a855f7;">
+            <button id="closePopup" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: white; font-size: 2rem; cursor: pointer;">&times;</button>
+            <div style="font-size: 4rem; margin-bottom: 1rem;">⚠️</div>
+            <h2 style="color: #fbbf24; font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">WAIT! Don't Leave Yet...</h2>
+            <p style="color: white; font-size: 1.25rem; margin-bottom: 1.5rem;">You're about to miss out on seeing yourself in 6 different glasses styles!</p>
+            <p style="color: #c084fc; font-size: 1.1rem; margin-bottom: 2rem;">Still not sure? Here's an <strong style="color: #fbbf24;">EXTRA 10% OFF</strong> – making it just <strong style="color: #22c55e; font-size: 1.5rem;">$4.49</strong> today!</p>
+            <a href="#uploadArea" id="specialOfferBtn" style="display: inline-block; background: linear-gradient(to right, #22c55e, #10b981); color: white; padding: 1.25rem 2.5rem; border-radius: 1rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4); margin-bottom: 1rem;">
+              Get My 6 Styles for $4.49 - 35% OFF
+            </a>
+            <p style="color: #9ca3af; font-size: 0.875rem;">This offer expires when you leave this page</p>
+          </div>
+        `;
+
+        document.body.appendChild(popup);
+
+        document.getElementById('closePopup').addEventListener('click', () => {
+          popup.remove();
+        });
+
+        document.getElementById('specialOfferBtn').addEventListener('click', () => {
+          popup.remove();
+        });
+
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) {
+            popup.remove();
+          }
+        });
+      }
+
+      // Detect exit intent
+      document.addEventListener('mouseleave', (e) => {
+        if (e.clientY <= 0) {
+          showExitIntentPopup();
+        }
+      });
+
+      // Initialize timers on load
+      document.addEventListener('DOMContentLoaded', () => {
+        startCountdown();
+        animateLiveCounter();
+      });
 
       // Upload handlers
       choosePhotoBtn.addEventListener('click', () => fileInput.click());
