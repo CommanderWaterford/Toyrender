@@ -5065,12 +5065,18 @@
       ];
 
       let currentImageIndex = 0;
+      let displayData = [];
 
       // Initialize gallery
       function initGallery() {
         const galleryGrid = document.getElementById("galleryGrid");
 
-        galleryData.forEach((item, index) => {
+        // Show 14 items on mobile (< 640px), 15 on desktop
+        const isMobile = window.innerWidth < 640;
+        const itemsToShow = isMobile ? 14 : 15;
+        displayData = galleryData.slice(0, itemsToShow);
+
+        displayData.forEach((item, index) => {
           const galleryItem = document.createElement("div");
           galleryItem.className = "gallery-item loading";
           galleryItem.onclick = () => openLightbox(index);
@@ -5095,7 +5101,7 @@
         // Initialize lightbox thumbnails
         const thumbnailsContainer =
           document.getElementById("lightboxThumbnails");
-        galleryData.forEach((item, index) => {
+        displayData.forEach((item, index) => {
           const thumb = document.createElement("img");
           thumb.src = item.src;
           thumb.alt = item.alt;
@@ -5120,8 +5126,8 @@
 
       function navigateLightbox(direction) {
         currentImageIndex += direction;
-        if (currentImageIndex < 0) currentImageIndex = galleryData.length - 1;
-        if (currentImageIndex >= galleryData.length) currentImageIndex = 0;
+        if (currentImageIndex < 0) currentImageIndex = displayData.length - 1;
+        if (currentImageIndex >= displayData.length) currentImageIndex = 0;
         updateLightbox();
       }
 
@@ -5131,14 +5137,14 @@
       }
 
       function updateLightbox() {
-        const current = galleryData[currentImageIndex];
+        const current = displayData[currentImageIndex];
         document.getElementById("lightboxImage").src = current.src;
         document.getElementById("lightboxImage").alt = current.alt;
         document.getElementById("lightboxCaption").textContent =
           current.caption;
         document.getElementById("currentIndex").textContent =
           currentImageIndex + 1;
-        document.getElementById("totalImages").textContent = galleryData.length;
+        document.getElementById("totalImages").textContent = displayData.length;
 
         // Update thumbnail highlights
         const thumbs = document.querySelectorAll(".lightbox-thumbnail");
