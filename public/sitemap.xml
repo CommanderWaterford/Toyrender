@@ -506,6 +506,16 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glasses-tryon"/>
   </url>
 
+  <!-- Glasses Face Shape Guide -->
+  <url>
+    <loc>https://toyrender.com/glasses-face-shape-guide.html</loc>
+    <lastmod>2025-10-01</lastmod>
+    <priority>0.72</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glasses-face-shape-guide"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glasses-face-shape-guide"/>
+  </url>
+
   <!-- Product Showcase -->
   <url>
     <loc>https://toyrender.com/product-showcase.html</loc>
