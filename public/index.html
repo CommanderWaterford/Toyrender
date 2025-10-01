@@ -1077,38 +1077,6 @@
         border-color: #9333ea;
       }
 
-      .sticky-cta {
-        position: fixed;
-        top: 1.5rem;
-        right: 1.5rem;
-        z-index: 60;
-      }
-
-      .sticky-cta button {
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 0.85rem 1.75rem;
-        border-radius: 9999px;
-        font-weight: 700;
-        font-size: 1rem;
-        box-shadow: 0 15px 40px rgba(147, 51, 234, 0.35);
-      }
-
-      @media (max-width: 640px) {
-        .sticky-cta {
-          top: auto;
-          right: 1rem;
-          bottom: 1.5rem;
-          left: 1rem;
-        }
-
-        .sticky-cta button {
-          width: 100%;
-          justify-content: center;
-        }
-      }
-
       /* Responsive adjustments */
       @media (max-width: 768px) {
         .gallery-grid {
@@ -1176,70 +1144,6 @@
         }
       }
 
-      /* Sticky CTA Buttons */
-      .sticky-cta {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        background: rgba(88, 28, 135, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 12px 16px;
-        border-radius: 16px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        animation: slideUp 0.3s ease-out;
-      }
-
-      .sticky-cta .inline-flex {
-        gap: 8px;
-      }
-
-      .sticky-cta button,
-      .sticky-cta a {
-        padding: 12px 20px !important;
-        font-size: 1rem !important;
-      }
-
-      .sticky-cta i {
-        font-size: 1.25rem !important;
-      }
-
-      @keyframes slideUp {
-        from {
-          transform: translateX(-50%) translateY(100px);
-          opacity: 0;
-        }
-        to {
-          transform: translateX(-50%) translateY(0);
-          opacity: 1;
-        }
-      }
-
-      .hidden-sticky {
-        display: none;
-      }
-
-      @media (max-width: 640px) {
-        .sticky-cta {
-          bottom: 10px;
-          padding: 8px 12px;
-          border-radius: 12px;
-        }
-
-        .sticky-cta .inline-flex {
-          flex-direction: column;
-          gap: 6px;
-        }
-
-        .sticky-cta button,
-        .sticky-cta a {
-          padding: 10px 16px !important;
-          font-size: 0.875rem !important;
-          width: 100%;
-          justify-content: center;
-        }
-      }
     </style>
     <script src="/config.js"></script>
   </head>
@@ -1276,21 +1180,21 @@
         </div>
 
         <!-- Right: Credits + Mini Nav + Auth -->
-        <div class="flex items-center gap-3 ml-4">
+        <div class="flex items-center gap-1 sm:gap-3 ml-2 sm:ml-4">
           <!-- Credits -->
           <button
             id="creditsBtn"
-            class="px-4 py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all"
+            class="px-2 sm:px-4 py-1 sm:py-2 bg-purple-600/30 backdrop-blur-sm rounded-lg border border-purple-500/50 hover:bg-purple-600/50 transition-all text-xs sm:text-base"
             aria-label="View available credits"
           >
-            <i class="fas fa-coins mr-2" aria-hidden="true"></i>
+            <i class="fas fa-coins mr-1" aria-hidden="true"></i>
             <span id="creditsCount">0</span>
-            <span id="creditsLabel">Credits</span>
+            <span id="creditsLabel" class="hidden sm:inline">Credits</span>
           </button>
 
           <!-- Tiny Nav (shows from sm and up) -->
           <nav
-            class="hidden sm:flex items-center gap-2 text-sm text-purple-200/90"
+            class="hidden lg:flex items-center gap-2 text-sm text-purple-200/90"
             aria-label="Quick links"
           >
             <a
@@ -1334,7 +1238,7 @@
 
           <a
             href="/es/index.html"
-            class="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all"
+            class="flex items-center gap-1 sm:gap-2 px-1 sm:px-3 py-1 sm:py-2 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all"
             aria-label="Switch to Spanish version"
           >
             <span
@@ -1352,12 +1256,12 @@
                 );
               "
             ></span>
-            <span class="text-sm font-semibold">ES</span>
+            <span class="hidden sm:inline text-xs sm:text-sm font-semibold">ES</span>
           </a>
 
           <a
             href="/pt/index.html"
-            class="flex items-center gap-2 px-3 py-2 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all"
+            class="flex items-center gap-1 sm:gap-2 px-1 sm:px-3 py-1 sm:py-2 bg-white/5 rounded-lg border border-white/10 hover:bg-white/10 transition-all"
             aria-label="Switch to Portuguese version"
           >
             <span
@@ -1373,44 +1277,29 @@
                 );
               "
             ></span>
-            <span class="text-sm font-semibold">PT</span>
+            <span class="hidden sm:inline text-xs sm:text-sm font-semibold">PT</span>
           </a>
 
           <!-- Auth -->
           <button
             id="signInBtn"
-            class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105"
+            class="px-2 sm:px-4 py-1 sm:py-2 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 text-xs sm:text-base"
             aria-label="Sign in to your account"
           >
-            <i class="fas fa-user-circle mr-2" aria-hidden="true"></i>
-            <span id="authBtnText">Sign In</span>
+            <i class="fas fa-user-circle sm:mr-2" aria-hidden="true"></i>
+            <span id="authBtnText" class="hidden sm:inline">Sign In</span>
           </button>
 
           <button
             id="logoutBtn"
-            class="hidden px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all"
+            class="hidden px-2 sm:px-4 py-1 sm:py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all text-xs sm:text-base"
             aria-label="Sign out"
           >
-            <i class="fas fa-right-from-bracket mr-2"></i><span>Logout</span>
+            <i class="fas fa-right-from-bracket sm:mr-2"></i><span class="hidden sm:inline">Logout</span>
           </button>
         </div>
       </div>
     </nav>
-
-    <div
-      class="sticky-cta hidden-sticky"
-      role="complementary"
-      aria-label="Sticky free trial call to action"
-    >
-      <button
-        id="stickyCTABtn"
-        class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 transition-all transform hover:scale-105 text-white shadow-lg"
-        type="button"
-      >
-        <i class="fas fa-bolt"></i>
-        <span>Try it for free!</span>
-      </button>
-    </div>
 
     <!-- Main Content -->
     <main
@@ -1705,27 +1594,27 @@
         </style>
 
         <!-- Secondary options for different use cases -->
-        <div class="flex flex-wrap justify-center gap-4 mb-8">
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 px-4">
           <button
             id="figurineCTABtn"
-            class="px-6 py-3 bg-purple-800/50 backdrop-blur-sm rounded-full border-2 border-purple-500/50 hover:bg-purple-700/50 hover:border-purple-400 transition-all transform hover:scale-105"
+            class="px-3 sm:px-6 py-2 sm:py-3 bg-purple-800/50 backdrop-blur-sm rounded-full border-2 border-purple-500/50 hover:bg-purple-700/50 hover:border-purple-400 transition-all transform hover:scale-105 text-sm sm:text-base"
           >
-            <i class="fas fa-cube mr-2 text-purple-400" aria-hidden="true"></i>
+            <i class="fas fa-cube mr-1 sm:mr-2 text-purple-400" aria-hidden="true"></i>
             <span>Make Figurine</span>
           </button>
           <button
             id="datingCTABtn"
-            class="px-6 py-3 bg-pink-800/50 backdrop-blur-sm rounded-full border-2 border-pink-500/50 hover:bg-pink-700/50 hover:border-pink-400 transition-all transform hover:scale-105"
+            class="px-3 sm:px-6 py-2 sm:py-3 bg-pink-800/50 backdrop-blur-sm rounded-full border-2 border-pink-500/50 hover:bg-pink-700/50 hover:border-pink-400 transition-all transform hover:scale-105 text-sm sm:text-base"
           >
-            <i class="fas fa-heart mr-2 text-pink-400" aria-hidden="true"></i>
+            <i class="fas fa-heart mr-1 sm:mr-2 text-pink-400" aria-hidden="true"></i>
             <span>Dating Photos</span>
           </button>
           <button
             id="businessCTABtn"
-            class="px-6 py-3 bg-blue-800/50 backdrop-blur-sm rounded-full border-2 border-blue-500/50 hover:bg-blue-700/50 hover:border-blue-400 transition-all transform hover:scale-105"
+            class="px-3 sm:px-6 py-2 sm:py-3 bg-blue-800/50 backdrop-blur-sm rounded-full border-2 border-blue-500/50 hover:bg-blue-700/50 hover:border-blue-400 transition-all transform hover:scale-105 text-sm sm:text-base"
           >
             <i
-              class="fas fa-briefcase mr-2 text-blue-400"
+              class="fas fa-briefcase mr-1 sm:mr-2 text-blue-400"
               aria-hidden="true"
             ></i>
             <span>Business Photos</span>
@@ -5426,65 +5315,6 @@
             });
           });
         }
-      });
-    </script>
-
-    <!-- Sticky CTA Functionality -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const ctaContainer = document.getElementById("ctaButtonContainer");
-        const heroSection = document.getElementById("heroSection");
-        let stickyClone = null;
-
-        function handleStickyButtons() {
-          if (!ctaContainer || !heroSection) return;
-
-          const heroRect = heroSection.getBoundingClientRect();
-          const ctaRect = ctaContainer.getBoundingClientRect();
-
-          // Show sticky when original buttons scroll out of view
-          if (ctaRect.bottom < 0) {
-            if (!stickyClone) {
-              // Create sticky clone
-              stickyClone = ctaContainer.cloneNode(true);
-              stickyClone.id = "stickyCtaContainer";
-              stickyClone.classList.add("sticky-cta");
-              stickyClone.classList.remove("relative", "z-10");
-
-              // Update button IDs to prevent conflicts
-              const clonedButton = stickyClone.querySelector("#heroCTABtn");
-              if (clonedButton) {
-                clonedButton.id = "stickyCTABtn";
-                clonedButton.addEventListener("click", function () {
-                  document.querySelector("#uploadArea").scrollIntoView({
-                    behavior: "smooth",
-                    block: "center",
-                  });
-                });
-              }
-
-              document.body.appendChild(stickyClone);
-            } else {
-              stickyClone.classList.remove("hidden-sticky");
-            }
-          } else {
-            if (stickyClone) {
-              stickyClone.classList.add("hidden-sticky");
-            }
-          }
-        }
-
-        // Throttle scroll event for better performance
-        let scrollTimeout;
-        window.addEventListener("scroll", function () {
-          if (scrollTimeout) {
-            window.cancelAnimationFrame(scrollTimeout);
-          }
-          scrollTimeout = window.requestAnimationFrame(handleStickyButtons);
-        });
-
-        // Initial check
-        handleStickyButtons();
       });
     </script>
 
