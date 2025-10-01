@@ -82,6 +82,13 @@
       as="style"
     />
 
+    <!-- DNS Prefetch for External Domains -->
+    <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+    <link rel="dns-prefetch" href="https://js.stripe.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
       {
@@ -324,6 +331,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <style>
+      @font-face {
+        font-display: swap;
+      }
+    </style>
     <style>
       @keyframes float {
         0%,
@@ -798,16 +810,16 @@
           line-height: 1.2;
         }
 
-        /* Hero section example images - prevent excessive height on mobile */
+        /* Hero section example images - larger for better mobile visibility */
         .lg\\:hidden .grid.grid-cols-2 img {
-          height: 120px !important;
-          object-fit: cover;
+          height: 200px !important;
+          object-fit: contain;
         }
 
         /* Adjust grid spacing for hero examples */
         .lg\\:hidden .grid.grid-cols-2 {
           gap: 1rem !important;
-          max-width: 20rem !important;
+          max-width: 26rem !important;
         }
       }
 
@@ -1163,27 +1175,72 @@
           display: none !important;
         }
       }
-    </style>
-    <script
-      src="https://analytics.ahrefs.com/analytics.js"
-      data-key="nbbMIaMmoBy8I696zAoHgw"
-      async
-    ></script>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-78RSLH46CX"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
 
-      gtag("config", "G-78RSLH46CX");
-    </script>
-    <script src="https://js.stripe.com/v3"></script>
+      /* Sticky CTA Buttons */
+      .sticky-cta {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        background: rgba(88, 28, 135, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 12px 16px;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        animation: slideUp 0.3s ease-out;
+      }
+
+      .sticky-cta .inline-flex {
+        gap: 8px;
+      }
+
+      .sticky-cta button,
+      .sticky-cta a {
+        padding: 12px 20px !important;
+        font-size: 1rem !important;
+      }
+
+      .sticky-cta i {
+        font-size: 1.25rem !important;
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateX(-50%) translateY(100px);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(-50%) translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .hidden-sticky {
+        display: none;
+      }
+
+      @media (max-width: 640px) {
+        .sticky-cta {
+          bottom: 10px;
+          padding: 8px 12px;
+          border-radius: 12px;
+        }
+
+        .sticky-cta .inline-flex {
+          flex-direction: column;
+          gap: 6px;
+        }
+
+        .sticky-cta button,
+        .sticky-cta a {
+          padding: 10px 16px !important;
+          font-size: 0.875rem !important;
+          width: 100%;
+          justify-content: center;
+        }
+      }
+    </style>
     <script src="/config.js"></script>
   </head>
   <body
@@ -1361,15 +1418,14 @@
       role="main"
     >
       <!-- Hero Section -->
-      <section id="heroSection" class="text-center mb-16" aria-labelledby="hero-title">
-        <h1 id="hero-title" class="text-5xl lg:text-7xl font-bold mb-6">
-          <span>One Photo, Endless Possibilities:</span>
-          <span class="gradient-text">
-            Figurines, Dating Photos, Business Headshots</span
-          >
+      <section id="heroSection" class="text-center mb-12 sm:mb-16" aria-labelledby="hero-title">
+        <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6">
+          <span>Turn your casual selfies into stunning </span>
+          <span class="gradient-text">dating photos, professional headshots, or collectible figurines</span>
+          <span> in seconds.</span>
         </h1>
 
-        <p class="text-xl text-purple-200 mb-8 max-w-3xl mx-auto">
+        <p class="text-lg sm:text-xl text-purple-200 mb-6 sm:mb-8 max-w-3xl mx-auto">
           Powered by the latest AI Imaging Models, we turn your photos into
           stunning 1:7 scale figurine designs or amazing AI Headshots in
           seconds. Perfect for collectors, gifts, or just for fun!
@@ -1388,7 +1444,10 @@
                   src="\images\businessphotos\Jonas.jpg"
                   alt="Original photo - Professional headshot"
                   class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:scale-110 hover:rotate-3"
-                  loading="lazy"
+                  width="192"
+                  height="192"
+                  fetchpriority="high"
+                  loading="eager"
                 />
                 <div
                   class="absolute -bottom-2 -right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded-full shadow-lg font-medium"
@@ -1402,7 +1461,10 @@
                   src="/images/Elyra.jpg"
                   alt="Original photo - Casual portrait"
                   class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-purple-500/20 transition-all duration-500 transform hover:scale-110 hover:-rotate-2"
-                  loading="lazy"
+                  width="192"
+                  height="192"
+                  fetchpriority="high"
+                  loading="eager"
                 />
                 <div
                   class="absolute -bottom-2 -right-2 bg-white text-gray-800 text-xs px-2 py-1 rounded-full shadow-lg font-medium"
@@ -1421,7 +1483,10 @@
                   src="\images\businessphotos\Jonas-business-09.jpg"
                   alt="AI generated Business Shot"
                   class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 transform hover:scale-110 hover:-rotate-3 border-2 border-purple-400/40"
-                  loading="lazy"
+                  width="192"
+                  height="192"
+                  fetchpriority="high"
+                  loading="eager"
                 />
                 <div
                   class="absolute -top-2 -right-2 bg-purple-600 text-white text-xs px-2 py-1 rounded-full shadow-lg"
@@ -1435,7 +1500,10 @@
                   src="/images/Example10.jpg"
                   alt="AI generated professional headshot"
                   class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-pink-500/30 transition-all duration-500 transform hover:scale-110 hover:rotate-2 border-2 border-pink-400/40"
-                  loading="lazy"
+                  width="192"
+                  height="192"
+                  fetchpriority="high"
+                  loading="eager"
                 />
                 <div
                   class="absolute -top-2 -right-2 bg-pink-600 text-white text-xs px-2 py-1 rounded-full shadow-lg"
@@ -1446,30 +1514,61 @@
             </div>
           </div>
 
-          <!-- CTA Button -->
-          <button
-            id="heroCTABtn"
-            class="relative z-10 px-12 py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl pulse-glow inline-flex items-center"
-            aria-label="Start creating your AI figurine now"
-          >
-            <i class="fas fa-magic mr-3 text-3xl" aria-hidden="true"></i>
-            <span>Create Your AI Photo Now</span>
-            <i
-              class="fas fa-arrow-down ml-3 text-2xl animate-bounce"
-              aria-hidden="true"
-            ></i>
-          </button>
+          <!-- CTA Buttons Container -->
+          <div id="ctaButtonContainer" class="relative z-10 inline-flex flex-col sm:flex-row gap-3 sm:gap-4 items-center w-full sm:w-auto px-4 sm:px-0">
+            <button
+              id="heroCTABtn"
+              class="w-full sm:w-auto px-6 sm:px-12 py-4 sm:py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-lg sm:text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl pulse-glow inline-flex items-center justify-center"
+              aria-label="Start creating your AI figurine now"
+            >
+              <i class="fas fa-magic mr-2 text-xl sm:text-3xl" aria-hidden="true"></i>
+              <span>Create Your AI Photo Now</span>
+              <i
+                class="fas fa-arrow-down ml-2 text-lg sm:text-2xl animate-bounce"
+                aria-hidden="true"
+              ></i>
+            </button>
+
+            <a
+              href="#testimonials"
+              class="w-full sm:w-auto px-6 sm:px-10 py-4 sm:py-6 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-2xl text-lg sm:text-2xl font-bold hover:bg-white/20 hover:border-white/50 transition-all transform hover:scale-105 shadow-xl inline-flex items-center justify-center"
+              aria-label="See example photos"
+            >
+              <i class="fas fa-images mr-2 text-xl sm:text-3xl" aria-hidden="true"></i>
+              <span>See Examples</span>
+              <i class="fas fa-chevron-right ml-2 text-base sm:text-xl" aria-hidden="true"></i>
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base">
+            <div class="flex items-center gap-2 text-purple-200">
+              <i class="fas fa-shield-alt text-green-400 text-xl" aria-hidden="true"></i>
+              <span class="font-medium">Safe Uploads</span>
+            </div>
+            <div class="flex items-center gap-2 text-purple-200">
+              <i class="fas fa-bolt text-yellow-400 text-xl" aria-hidden="true"></i>
+              <span class="font-medium">Instant Results</span>
+            </div>
+            <div class="flex items-center gap-2 text-purple-200">
+              <i class="fas fa-lock text-blue-400 text-xl" aria-hidden="true"></i>
+              <span class="font-medium">Secure Payments</span>
+            </div>
+          </div>
 
           <!-- Mobile Version - Images below CTA -->
           <div class="lg:hidden mt-8">
-            <div class="grid grid-cols-2 gap-4 max-w-sm mx-auto">
+            <div class="grid grid-cols-2 gap-4 max-w-md mx-auto">
               <div class="space-y-3">
                 <div class="relative group">
                   <img
                     src="\images\businessphotos\Jonas.jpg"
                     alt="Original photo"
-                    class="w-full h-32 object-contain rounded-lg shadow-lg"
-                    loading="lazy"
+                    class="w-full h-48 object-contain rounded-lg shadow-lg"
+                    width="192"
+                    height="192"
+                    fetchpriority="high"
+                    loading="eager"
                   />
                   <div
                     class="absolute -bottom-1 -right-1 bg-white text-gray-800 text-xs px-1 py-0.5 rounded-full text-[10px]"
@@ -1481,8 +1580,11 @@
                   <img
                     src="/images/Elyra.jpg"
                     alt="Original photo"
-                    class="w-full h-32 object-contain rounded-lg shadow-lg"
-                    loading="lazy"
+                    class="w-full h-48 object-contain rounded-lg shadow-lg"
+                    width="192"
+                    height="192"
+                    fetchpriority="high"
+                    loading="eager"
                   />
                   <div
                     class="absolute -bottom-1 -right-1 bg-white text-gray-800 text-xs px-1 py-0.5 rounded-full text-[10px]"
@@ -1497,8 +1599,11 @@
                   <img
                     src="\images\businessphotos\Jonas-business-09.jpg"
                     alt="AI Business Shot"
-                    class="w-full h-32 object-contain rounded-lg shadow-lg border border-purple-400/50"
-                    loading="lazy"
+                    class="w-full h-48 object-contain rounded-lg shadow-lg border border-purple-400/50"
+                    width="192"
+                    height="192"
+                    fetchpriority="high"
+                    loading="eager"
                   />
                   <div
                     class="absolute -top-1 -right-1 bg-purple-600 text-white text-xs px-1 py-0.5 rounded-full text-[10px]"
@@ -1507,9 +1612,9 @@
                   </div>
                 </div>
                 <div class="relative group">
-                  <img src="/images/Example10.jpg"" alt="AI Figurine"
-                  class="w-full h-32 object-contain rounded-lg shadow-lg border
-                  border-pink-400/50" loading="lazy" />
+                  <img src="/images/Example10.jpg" alt="AI Figurine"
+                  class="w-full h-48 object-contain rounded-lg shadow-lg border
+                  border-pink-400/50" width="192" height="192" fetchpriority="high" loading="eager" />
                   <div
                     class="absolute -top-1 -right-1 bg-pink-600 text-white text-xs px-1 py-0.5 rounded-full text-[10px]"
                   >
@@ -2859,8 +2964,11 @@
               1
             </div>
             <h3 class="text-xl font-semibold mb-2">Upload Photo</h3>
-            <p class="text-purple-300 text-sm mb-4">
+            <p class="text-purple-300 text-sm mb-2">
               Choose a clear, forward-facing photo. JPG or PNG files work best.
+            </p>
+            <p class="text-purple-400 text-xs font-semibold mb-4">
+              ⏱️ Takes 10 seconds
             </p>
             <img
               src="/images/PortraitExampleStep1.jpg"
@@ -2878,10 +2986,12 @@
             >
               2
             </div>
-            <h3 class="text-xl font-semibold mb-2">Generate Design</h3>
-            <p class="text-purple-300 text-sm mb-4">
-              Our AI gets to work, transforming your image into a figurine
-              concept.
+            <h3 class="text-xl font-semibold mb-2">Choose Style</h3>
+            <p class="text-purple-300 text-sm mb-2">
+              Select from our curated collection of AI-powered styles.
+            </p>
+            <p class="text-purple-400 text-xs font-semibold mb-4">
+              👆 Just 1 click
             </p>
             <img
               src="/images/PortraitExampleStep3.jpg"
@@ -2899,9 +3009,12 @@
             >
               3
             </div>
-            <h3 class="text-xl font-semibold mb-2">Download Result</h3>
-            <p class="text-purple-300 text-sm mb-4">
-              Save your high-resolution image for personal or commercial use.
+            <h3 class="text-xl font-semibold mb-2">Generate & Download</h3>
+            <p class="text-purple-300 text-sm mb-2">
+              AI transforms your photo into amazing results instantly.
+            </p>
+            <p class="text-purple-400 text-xs font-semibold mb-4">
+              ⚡ Under 30 seconds
             </p>
             <img
               src="/images/PortraitExampleStep2.jpeg"
@@ -5316,6 +5429,65 @@
       });
     </script>
 
+    <!-- Sticky CTA Functionality -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const ctaContainer = document.getElementById("ctaButtonContainer");
+        const heroSection = document.getElementById("heroSection");
+        let stickyClone = null;
+
+        function handleStickyButtons() {
+          if (!ctaContainer || !heroSection) return;
+
+          const heroRect = heroSection.getBoundingClientRect();
+          const ctaRect = ctaContainer.getBoundingClientRect();
+
+          // Show sticky when original buttons scroll out of view
+          if (ctaRect.bottom < 0) {
+            if (!stickyClone) {
+              // Create sticky clone
+              stickyClone = ctaContainer.cloneNode(true);
+              stickyClone.id = "stickyCtaContainer";
+              stickyClone.classList.add("sticky-cta");
+              stickyClone.classList.remove("relative", "z-10");
+
+              // Update button IDs to prevent conflicts
+              const clonedButton = stickyClone.querySelector("#heroCTABtn");
+              if (clonedButton) {
+                clonedButton.id = "stickyCTABtn";
+                clonedButton.addEventListener("click", function () {
+                  document.querySelector("#uploadArea").scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                });
+              }
+
+              document.body.appendChild(stickyClone);
+            } else {
+              stickyClone.classList.remove("hidden-sticky");
+            }
+          } else {
+            if (stickyClone) {
+              stickyClone.classList.add("hidden-sticky");
+            }
+          }
+        }
+
+        // Throttle scroll event for better performance
+        let scrollTimeout;
+        window.addEventListener("scroll", function () {
+          if (scrollTimeout) {
+            window.cancelAnimationFrame(scrollTimeout);
+          }
+          scrollTimeout = window.requestAnimationFrame(handleStickyButtons);
+        });
+
+        // Initial check
+        handleStickyButtons();
+      });
+    </script>
+
     <!-- Style Zoom Popup Modal -->
     <div id="styleZoomPopup" class="style-zoom-popup">
       <div class="style-zoom-popup-content">
@@ -5331,5 +5503,27 @@
         </button>
       </div>
     </div>
+
+    <!-- Deferred Analytics Scripts -->
+    <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      defer
+    ></script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      defer
+      src="https://www.googletagmanager.com/gtag/js?id=G-78RSLH46CX"
+    ></script>
+    <script defer>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-78RSLH46CX");
+    </script>
+    <script src="https://js.stripe.com/v3" defer></script>
   </body>
 </html>
