@@ -160,7 +160,38 @@
       .arrow-bounce {
         animation: arrow-bounce 2s ease-in-out infinite;
       }
+
+      @keyframes star-fill {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .star-animate {
+        display: inline-block;
+        animation: star-fill 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .star-animate:nth-child(1) { animation-delay: 0.1s; }
+      .star-animate:nth-child(2) { animation-delay: 0.2s; }
+      .star-animate:nth-child(3) { animation-delay: 0.3s; }
+      .star-animate:nth-child(4) { animation-delay: 0.4s; }
+      .star-animate:nth-child(5) { animation-delay: 0.5s; }
     </style>
+     <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      defer
+    ></script>
   </head>
   <body>
     <!-- Header Navigation -->
@@ -204,8 +235,22 @@
           Now you can <strong class="text-white">see exactly how 6 different styles look on YOUR face</strong> before spending a cent. Make the right choice the first time.
         </p>
 
-        <div class="glass-card rounded-2xl p-6 max-w-4xl mx-auto mb-8">
-          <div class="flex flex-wrap justify-center gap-6 text-sm">
+        <div class="glass-card rounded-2xl p-8 max-w-4xl mx-auto mb-8">
+          <h3 class="text-2xl font-bold text-center mb-6 text-white">
+            Get 6 Styles for Just <span class="text-green-400 text-3xl">$4.99</span>
+          </h3>
+
+          <!-- Frame Icons -->
+          <div class="flex justify-center gap-4 mb-6">
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">🤓</div>
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">👓</div>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-6 text-sm mb-6">
             <div class="flex items-start">
               <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
               <div class="text-left">
@@ -230,23 +275,62 @@
             <div class="flex items-start">
               <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
               <div class="text-left">
-                <div class="font-bold text-white text-xl">Just $4.99</div>
-                <div class="text-purple-300 line-through text-sm">Regular: $6.65</div>
-                <div class="text-yellow-300 text-xs font-bold">SAVE 25%</div>
+                <div class="font-bold text-white text-xl">25% OFF</div>
+                <div class="text-purple-300 line-through text-sm">Was: $6.65</div>
+                <div class="text-yellow-300 text-xs font-bold">Limited Time</div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Hero CTA Button -->
+        <div class="mb-12">
+          <a href="#uploadArea" class="cta-button inline-block px-16 py-7 bg-gradient-to-r from-orange-600 to-orange-500 rounded-3xl text-3xl font-black hover:from-orange-700 hover:to-orange-600 transition-all shadow-2xl transform hover:scale-105">
+            <i class="fas fa-camera mr-3"></i>Try It Now - See Your 6 Styles!
+          </a>
+          <p class="mt-4 text-purple-300">
+            <i class="fas fa-shield-alt mr-2 text-green-400"></i>
+            30-Day Money-Back Guarantee • 100% Private & Secure
+          </p>
+        </div>
+
+        <!-- Quick Preview Gallery (Above the Fold) -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-center mb-6 gradient-text">
+            See What You'll Get in 30 Seconds
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-original.webp" alt="Original" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">📸 Original</p>
+            </div>
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-style-01.webp" alt="Aviator" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">👓 Aviator</p>
+            </div>
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-style-02.webp" alt="Wayfarer" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">👓 Wayfarer</p>
+            </div>
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-style-03.webp" alt="Round" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">🤓 Round</p>
+            </div>
+          </div>
+          <p class="text-center mt-4 text-purple-200">
+            <span class="text-white font-bold">+ 2 more styles</span> (Cat-Eye, Square) • All in HD Quality
+          </p>
+        </div>
+
         <!-- Enhanced Trust Signals -->
         <div class="mb-12 glass-card rounded-2xl p-8 max-w-2xl mx-auto">
           <div class="flex flex-col items-center mb-6">
-            <div class="text-5xl mb-3">
-              <i class="fas fa-star text-yellow-400"></i>
-              <i class="fas fa-star text-yellow-400"></i>
-              <i class="fas fa-star text-yellow-400"></i>
-              <i class="fas fa-star text-yellow-400"></i>
-              <i class="fas fa-star text-yellow-400"></i>
+            <div class="text-5xl mb-3" id="starRating">
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
             </div>
             <p class="text-yellow-300 font-bold text-2xl mb-2">
               4.9/5 Rating
@@ -258,14 +342,19 @@
 
           <div class="border-t border-purple-500/30 pt-6">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-full bg-purple-600 flex items-center justify-center flex-shrink-0">
-                <i class="fas fa-user text-white text-xl"></i>
-              </div>
+              <img src="https://i.pravatar.cc/150?img=5" alt="Sarah M." class="w-16 h-16 rounded-full flex-shrink-0 border-2 border-purple-400 shadow-lg" />
               <div class="text-left">
                 <p class="text-white text-lg italic mb-2">
                   "I wish I had this before buying my last pair. Would've saved me $250 on frames I never wear!"
                 </p>
                 <p class="text-purple-400 font-semibold">- Sarah M.</p>
+                <div class="flex gap-1 mt-1">
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                </div>
               </div>
             </div>
           </div>
