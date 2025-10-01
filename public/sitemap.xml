@@ -486,6 +486,26 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/ai-glamour-photography-selfie-to-magazine/"/>
   </url>
 
+  <!-- Blog Article: What Glasses Fit My Face -->
+  <url>
+    <loc>https://toyrender.com/blog/what-glasses-fit-my-face/</loc>
+    <lastmod>2025-10-01</lastmod>
+    <priority>0.70</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/what-glasses-fit-my-face/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/what-glasses-fit-my-face/"/>
+  </url>
+
+  <!-- Virtual Glasses Try-On Landing Page -->
+  <url>
+    <loc>https://toyrender.com/glasses-tryon.html</loc>
+    <lastmod>2025-10-01</lastmod>
+    <priority>0.75</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glasses-tryon"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glasses-tryon"/>
+  </url>
+
   <!-- Product Showcase -->
   <url>
     <loc>https://toyrender.com/product-showcase.html</loc>
