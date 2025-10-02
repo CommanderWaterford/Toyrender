@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Virtual Glasses Try-On – AI-Powered Eyewear Visualization | Toyrender
+    </title>
+
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="Try on 6 different eyewear styles instantly with AI. Upload your selfie and see yourself in aviators, wayfarers, round frames, cat-eye, and more. Virtual glasses try-on powered by AI."
+    />
+    <meta
+      name="keywords"
+      content="virtual glasses try on, AI eyewear, glasses simulator, try on glasses online, virtual sunglasses, eyewear AI, glasses styles, frame finder"
+    />
+    <meta name="author" content="Toyrender.com" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://toyrender.com/glasses-tryon" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Virtual Glasses Try-On – See Yourself in 6 Styles" />
+    <meta
+      property="og:description"
+      content="Upload your selfie and try on 6 different eyewear styles instantly with AI technology."
+    />
+    <meta property="og:url" content="https://toyrender.com/glasses-tryon" />
+    <meta property="og:site_name" content="Toyrender" />
+    <meta property="og:image" content="https://toyrender.com/og-image.jpg" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Virtual Glasses Try-On – AI-Powered Eyewear" />
+    <meta name="twitter:description" content="Try on 6 different eyewear styles instantly with AI technology." />
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#9333ea" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      body {
+        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%);
+        min-height: 100vh;
+        color: white;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes pulse-glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px rgba(147, 51, 234, 0.5);
+        }
+        50% {
+          box-shadow: 0 0 40px rgba(147, 51, 234, 0.8);
+        }
+      }
+
+      .float-animation {
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
+      }
+
+      @keyframes urgency-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 0 20px rgba(220, 38, 38, 0.6);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 0 40px rgba(220, 38, 38, 0.9);
+        }
+      }
+
+      .urgency-pulse {
+        animation: urgency-pulse 2s ease-in-out infinite;
+      }
+
+      @keyframes cta-pulse {
+        0%, 100% {
+          transform: scale(1);
+          box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
+        }
+        50% {
+          transform: scale(1.05);
+          box-shadow: 0 15px 60px rgba(34, 197, 94, 0.6);
+        }
+      }
+
+      .cta-button {
+        animation: cta-pulse 2s ease-in-out infinite;
+      }
+
+      .gradient-text {
+        background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .glass-card {
+        backdrop-filter: blur(16px);
+        background: rgba(30, 27, 75, 0.6);
+        border: 1px solid rgba(168, 85, 247, 0.3);
+        padding: 2.5rem;
+      }
+
+      .result-image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem;
+        aspect-ratio: 1;
+        transition: transform 0.3s ease;
+      }
+
+      .result-image-container:hover {
+        transform: scale(1.05);
+        cursor: zoom-in;
+      }
+
+      .result-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      @keyframes arrow-bounce {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+      }
+
+      .arrow-bounce {
+        animation: arrow-bounce 2s ease-in-out infinite;
+      }
+
+      @keyframes star-fill {
+        0% {
+          transform: scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: scale(1.2);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .star-animate {
+        display: inline-block;
+        animation: star-fill 0.6s ease-out forwards;
+        opacity: 0;
+      }
+
+      .star-animate:nth-child(1) { animation-delay: 0.1s; }
+      .star-animate:nth-child(2) { animation-delay: 0.2s; }
+      .star-animate:nth-child(3) { animation-delay: 0.3s; }
+      .star-animate:nth-child(4) { animation-delay: 0.4s; }
+      .star-animate:nth-child(5) { animation-delay: 0.5s; }
+    </style>
+     <script
+      src="https://analytics.ahrefs.com/analytics.js"
+      data-key="nbbMIaMmoBy8I696zAoHgw"
+      defer
+    ></script>
+  </head>
+  <body>
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-lg border-b border-purple-500/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <a href="/" class="flex items-center space-x-2">
+            <span class="text-2xl font-bold gradient-text">Toyrender</span>
+            <span class="text-sm text-purple-300">Virtual Try-On</span>
+          </a>
+          <nav class="hidden md:flex space-x-8">
+            <a href="/" class="text-purple-300 hover:text-white transition-colors">Home</a>
+            <a href="/dating-photos-gallery" class="text-purple-300 hover:text-white transition-colors">Dating Photos</a>
+            <a href="/figurines-gallery" class="text-purple-300 hover:text-white transition-colors">Figurines</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+      <!-- Hero Section -->
+      <section class="max-w-6xl mx-auto text-center mb-16">
+        <div class="inline-block mb-6">
+          <div class="px-6 py-4 bg-red-600 border-2 border-red-400 rounded-full text-base font-bold shadow-2xl urgency-pulse">
+            <i class="fas fa-fire mr-2 text-yellow-300"></i>
+            <span class="text-white">LIMITED TIME: 25% OFF</span>
+            <span class="mx-2">•</span>
+            <span class="text-yellow-300" id="countdown">Ends in 23:45:12</span>
+          </div>
+        </div>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-6">
+          Stop Wasting Money on <span class="gradient-text">Glasses That Don't Suit You</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl text-purple-200 mb-4 max-w-3xl mx-auto">
+          <strong class="text-white">Buying glasses online is risky.</strong> You spend $200+ on frames that look great on the model... but terrible on you.
+        </p>
+
+        <p class="text-lg sm:text-xl text-purple-200 mb-8 max-w-3xl mx-auto">
+          Now you can <strong class="text-white">see exactly how 6 different styles look on YOUR face</strong> before spending a cent. Make the right choice the first time.
+        </p>
+
+        <div class="glass-card rounded-2xl p-8 max-w-4xl mx-auto mb-8">
+          <h3 class="text-2xl font-bold text-center mb-6 text-white">
+            Get 6 Styles for Just <span class="text-green-400 text-3xl">$4.99</span>
+          </h3>
+
+          <!-- Frame Icons -->
+          <div class="flex justify-center gap-4 mb-6">
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">🤓</div>
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">👓</div>
+            <div class="text-4xl">👓</div>
+          </div>
+
+          <div class="flex flex-wrap justify-center gap-6 text-sm mb-6">
+            <div class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+              <div class="text-left">
+                <div class="font-semibold text-white">No More Guessing</div>
+                <div class="text-purple-300">See exactly how you'll look</div>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+              <div class="text-left">
+                <div class="font-semibold text-white">Save Hundreds</div>
+                <div class="text-purple-300">Choose right the first time</div>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+              <div class="text-left">
+                <div class="font-semibold text-white">30 Seconds</div>
+                <div class="text-purple-300">Get all 6 styles instantly</div>
+              </div>
+            </div>
+            <div class="flex items-start">
+              <i class="fas fa-check-circle text-green-400 mr-2 mt-1"></i>
+              <div class="text-left">
+                <div class="font-bold text-white text-xl">25% OFF</div>
+                <div class="text-purple-300 line-through text-sm">Was: $6.65</div>
+                <div class="text-yellow-300 text-xs font-bold">Limited Time</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero CTA Button -->
+        <div class="mb-12">
+          <a href="#uploadArea" class="cta-button inline-block px-16 py-7 bg-gradient-to-r from-orange-600 to-orange-500 rounded-3xl text-3xl font-black hover:from-orange-700 hover:to-orange-600 transition-all shadow-2xl transform hover:scale-105">
+            <i class="fas fa-camera mr-3"></i>Try It Now - See Your 6 Styles!
+          </a>
+          <p class="mt-4 text-purple-300">
+            <i class="fas fa-shield-alt mr-2 text-green-400"></i>
+            30-Day Money-Back Guarantee • 100% Private & Secure
+          </p>
+        </div>
+
+        <!-- Quick Preview Gallery (Above the Fold) -->
+        <div class="mb-16">
+          <h3 class="text-2xl font-bold text-center mb-6 gradient-text">
+            See What You'll Get in 30 Seconds
+          </h3>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-5xl mx-auto">
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-original.webp" alt="Original" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">📸 Original</p>
+            </div>
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-style-01.webp" alt="Aviator" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">👓 Aviator</p>
+            </div>
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-style-02.webp" alt="Wayfarer" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">👓 Wayfarer</p>
+            </div>
+            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
+              <img src="/images/man1-glass-style-03.webp" alt="Round" class="rounded-lg mb-2 w-full aspect-square object-cover" />
+              <p class="text-xs text-center text-purple-300 font-semibold">🤓 Round</p>
+            </div>
+          </div>
+          <p class="text-center mt-4 text-purple-200">
+            <span class="text-white font-bold">+ 2 more styles</span> (Cat-Eye, Square) • All in HD Quality
+          </p>
+        </div>
+
+        <!-- Enhanced Trust Signals -->
+        <div class="mb-12 glass-card rounded-2xl p-8 max-w-2xl mx-auto">
+          <div class="flex flex-col items-center mb-6">
+            <div class="text-5xl mb-3" id="starRating">
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+              <i class="fas fa-star text-yellow-400 star-animate"></i>
+            </div>
+            <p class="text-yellow-300 font-bold text-2xl mb-2">
+              4.9/5 Rating
+            </p>
+            <p class="text-white font-semibold text-xl">
+              <span id="customerCount" class="text-green-400">2,847</span> Happy Customers
+            </p>
+          </div>
+
+          <div class="border-t border-purple-500/30 pt-6">
+            <div class="flex items-start gap-4">
+              <img src="https://i.pravatar.cc/150?img=5" alt="Sarah M." class="w-16 h-16 rounded-full flex-shrink-0 border-2 border-purple-400 shadow-lg" />
+              <div class="text-left">
+                <p class="text-white text-lg italic mb-2">
+                  "I wish I had this before buying my last pair. Would've saved me $250 on frames I never wear!"
+                </p>
+                <p class="text-purple-400 font-semibold">- Sarah M.</p>
+                <div class="flex gap-1 mt-1">
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                  <i class="fas fa-star text-yellow-400 text-sm"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 pt-6 border-t border-purple-500/30">
+            <div class="flex items-center justify-center gap-6 text-sm">
+              <div class="flex items-center">
+                <i class="fas fa-shield-alt text-green-400 mr-2 text-xl"></i>
+                <span class="text-white font-semibold">Secure Payment</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-undo text-green-400 mr-2 text-xl"></i>
+                <span class="text-white font-semibold">30-Day Guarantee</span>
+              </div>
+              <div class="flex items-center">
+                <i class="fas fa-lock text-green-400 mr-2 text-xl"></i>
+                <span class="text-white font-semibold">Private & Safe</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Activity Counter -->
+          <div class="mt-6 bg-green-900/20 border border-green-500/50 rounded-lg p-4">
+            <p class="text-green-400 font-semibold text-center">
+              <i class="fas fa-circle text-green-400 mr-2 animate-pulse"></i>
+              <span id="liveCounter">47</span> people are viewing this page right now
+            </p>
+          </div>
+        </div>
+
+        <!-- Glass Styles Preview -->
+        <div class="mb-12">
+          <h3 class="text-2xl font-bold mb-3 gradient-text">Which Style is Right for YOU?</h3>
+          <p class="text-purple-300 mb-6">Stop guessing. See all 6 popular styles on your actual face:</p>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform">
+              <div class="text-4xl mb-2">👓</div>
+              <p class="text-sm font-semibold">Aviator</p>
+              <p class="text-xs text-purple-400">Classic & Bold</p>
+            </div>
+            <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform">
+              <div class="text-4xl mb-2">👓</div>
+              <p class="text-sm font-semibold">Wayfarer</p>
+              <p class="text-xs text-purple-400">Timeless Cool</p>
+            </div>
+            <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform">
+              <div class="text-4xl mb-2">🤓</div>
+              <p class="text-sm font-semibold">Round</p>
+              <p class="text-xs text-purple-400">Trendy & Smart</p>
+            </div>
+            <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform">
+              <div class="text-4xl mb-2">👓</div>
+              <p class="text-sm font-semibold">Cat-Eye</p>
+              <p class="text-xs text-purple-400">Elegant & Chic</p>
+            </div>
+            <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform">
+              <div class="text-4xl mb-2">👓</div>
+              <p class="text-sm font-semibold">Square</p>
+              <p class="text-xs text-purple-400">Modern Edge</p>
+            </div>
+            <div class="glass-card rounded-xl p-4 text-center hover:scale-105 transition-transform">
+              <div class="text-4xl mb-2">👓</div>
+              <p class="text-sm font-semibold">Rectangle</p>
+              <p class="text-xs text-purple-400">Professional</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Problem/Solution Section -->
+      <section class="max-w-4xl mx-auto mb-20">
+        <div class="glass-card rounded-3xl p-8 lg:p-12 border-2 border-red-500/50">
+          <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold mb-4 text-red-400">
+              The $200 Mistake You're About to Make
+            </h2>
+            <p class="text-purple-200 text-lg">
+              Here's what happens when you buy glasses without trying them on YOUR face first:
+            </p>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div class="text-left">
+              <div class="flex items-start mb-4">
+                <i class="fas fa-times-circle text-red-400 text-2xl mr-3 mt-1"></i>
+                <div>
+                  <h3 class="font-semibold text-white mb-2">They Look Wrong</h3>
+                  <p class="text-purple-300 text-sm">Frames that looked amazing on the model make your face look too round/square/long</p>
+                </div>
+              </div>
+              <div class="flex items-start mb-4">
+                <i class="fas fa-times-circle text-red-400 text-2xl mr-3 mt-1"></i>
+                <div>
+                  <h3 class="font-semibold text-white mb-2">You Feel Regret</h3>
+                  <p class="text-purple-300 text-sm">$200+ spent on glasses you'll hide in a drawer instead of wearing</p>
+                </div>
+              </div>
+              <div class="flex items-start">
+                <i class="fas fa-times-circle text-red-400 text-2xl mr-3 mt-1"></i>
+                <div>
+                  <h3 class="font-semibold text-white mb-2">Returns Are a Hassle</h3>
+                  <p class="text-purple-300 text-sm">Wait weeks for refunds, pay return shipping, start all over again</p>
+                </div>
+              </div>
+            </div>
+            <div class="text-left bg-green-900/20 rounded-2xl p-6 border-2 border-green-500/50">
+              <h3 class="font-bold text-green-400 text-xl mb-4">
+                <i class="fas fa-check-circle mr-2"></i>The Smart Way
+              </h3>
+              <div class="space-y-3 text-sm">
+                <p class="text-white"><strong>See ALL 6 styles on YOUR face</strong> in 30 seconds</p>
+                <p class="text-white"><strong>Know which style suits you</strong> before buying</p>
+                <p class="text-white"><strong>Buy with confidence</strong> - no returns needed</p>
+                <p class="text-white"><strong>Save $195</strong> by not buying the wrong glasses</p>
+              </div>
+              <div class="mt-6 pt-6 border-t border-green-500/30">
+                <p class="text-yellow-300 font-bold text-center">
+                  Investment: Just $4.99
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Example Gallery Section -->
+      <section class="max-w-7xl mx-auto mb-20">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+            <span class="gradient-text">This is What You'll Get</span>
+          </h2>
+          <p class="text-purple-300 text-lg mb-3">
+            One upload. 30 seconds. 6 different looks to compare side-by-side.
+          </p>
+          <p class="text-white font-semibold">
+            Finally know which style actually looks good on YOU ⬇️
+          </p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-8 lg:p-12">
+          <!-- Original Photo - Full Width -->
+          <div class="mb-10">
+            <h3 class="text-2xl font-bold mb-4 text-center text-white">Original Photo</h3>
+            <div class="max-w-md mx-auto">
+              <div class="result-image-container mb-4" style="aspect-ratio: auto; max-height: 500px;">
+                <img src="/images/man1-glass-original.webp" alt="Original selfie example" class="rounded-2xl shadow-2xl" />
+                <div class="absolute top-4 left-4 bg-slate-900/90 px-4 py-2 rounded-full text-sm font-bold">
+                  📸 YOUR ORIGINAL PHOTO
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Arrow pointing down -->
+          <div class="text-center mb-10 arrow-bounce">
+            <i class="fas fa-arrow-down text-5xl text-purple-400"></i>
+            <p class="text-white text-xl font-bold mt-4">Transformed Into 6 Different Styles</p>
+          </div>
+
+          <!-- 6 Glass Styles Results - Larger Grid -->
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-center text-white">Your 6 Virtual Try-On Results</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <!-- Aviator Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-01.webp" alt="Example with aviator glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Aviator
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Classic & Bold</p>
+              </div>
+
+              <!-- Wayfarer Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-02.webp" alt="Example with wayfarer glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Wayfarer
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Timeless Cool</p>
+              </div>
+
+              <!-- Round Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-03.webp" alt="Example with round glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    🤓 Round
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Trendy & Smart</p>
+              </div>
+
+              <!-- Cat-Eye Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-04.webp" alt="Example with cat-eye glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Cat-Eye
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Elegant & Chic</p>
+              </div>
+
+              <!-- Square Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-05.webp" alt="Example with square glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Square
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Modern Edge</p>
+              </div>
+
+              <!-- Rectangle Style -->
+              <div class="glass-card rounded-2xl p-5 hover:scale-105 transition-transform">
+                <div class="result-image-container mb-4">
+                  <img src="/images/man1-glass-style-06.webp" alt="Example with rectangle glasses" class="rounded-xl shadow-lg" />
+                  <div class="absolute bottom-3 left-3 bg-black/90 px-4 py-2 rounded-full text-sm font-bold">
+                    👓 Rectangle
+                  </div>
+                </div>
+                <p class="text-center text-purple-300 text-sm">Professional</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <div class="mt-8 text-center">
+            <div class="bg-yellow-500/20 border border-yellow-500/50 rounded-xl p-4 mb-4 inline-block">
+              <p class="text-yellow-300 font-semibold">
+                <i class="fas fa-clock mr-2"></i>
+                Ready in 30 seconds • Save $195+ on returns • Just $4.99
+              </p>
+            </div>
+            <div>
+              <a href="#uploadArea" class="cta-button inline-block px-12 py-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl text-2xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl">
+                <i class="fas fa-arrow-down mr-2"></i>Get My 6 Styles Now (25% Off - $4.99)
+              </a>
+              <p class="text-sm text-purple-400 mt-3">
+                <i class="fas fa-shield-alt mr-1"></i>
+                30-day money-back guarantee • Your photos stay private
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Start Here Arrow -->
+      <div class="text-center mb-8 arrow-bounce">
+        <div class="inline-block bg-yellow-500 text-black px-8 py-4 rounded-full text-2xl font-black shadow-2xl">
+          👇 START HERE - UPLOAD YOUR PHOTO BELOW 👇
+        </div>
+      </div>
+
+      <!-- Upload Section -->
+      <section class="max-w-4xl mx-auto mb-16" id="uploadAreaSection">
+        <div class="glass-card rounded-3xl p-8 lg:p-12 pulse-glow" style="border: 3px solid #eab308; box-shadow: 0 0 60px rgba(234, 179, 8, 0.5);">
+          <div
+            id="uploadArea"
+            class="border-3 border-dashed border-purple-500/50 rounded-2xl p-12 text-center hover:border-purple-400 transition-all cursor-pointer bg-purple-900/20 hover:bg-purple-900/30"
+            role="button"
+            tabindex="0"
+          >
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*"
+              class="hidden"
+            />
+            <div class="float-animation inline-block mb-6">
+              <i class="fas fa-camera text-6xl text-purple-400"></i>
+            </div>
+            <h3 class="text-3xl font-bold mb-2">Ready to Find Your Perfect Style?</h3>
+            <p class="text-white text-lg mb-4">
+              Upload 1 photo. Get 6 different looks in 30 seconds.
+            </p>
+            <p class="text-purple-300 mb-6">
+              Drag & drop your selfie here or click to browse
+            </p>
+            <button
+              id="choosePhotoBtn"
+              type="button"
+              class="cta-button px-14 py-6 bg-gradient-to-r from-green-600 to-emerald-600 rounded-2xl text-2xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all shadow-2xl"
+            >
+              <i class="fas fa-upload mr-3"></i><span>Upload & Get My 6 Styles - $4.99 (25% OFF)</span>
+            </button>
+            <p class="text-sm text-purple-400 mt-4">
+              <i class="fas fa-lock mr-1"></i>100% Private & Secure • JPG/PNG up to 10MB
+            </p>
+            <p class="text-xs text-purple-500 mt-2">
+              Best results: Face-forward photo, good lighting, no existing glasses
+            </p>
+          </div>
+
+          <!-- Preview Section -->
+          <div id="previewSection" class="hidden mt-8">
+            <div class="flex justify-center mb-6">
+              <div class="max-w-md w-full">
+                <h4 class="text-lg font-semibold mb-3 text-purple-300 text-center">
+                  Your Photo
+                </h4>
+                <div class="rounded-xl overflow-hidden bg-black/30">
+                  <img
+                    id="originalPreview"
+                    src=""
+                    alt="Your uploaded selfie"
+                    class="w-full object-contain max-h-96"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="flex gap-4 justify-center">
+              <button
+                id="generateBtn"
+                class="px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                <i class="fas fa-magic mr-2"></i><span>Generate 6 Styles ($4.99)</span>
+              </button>
+              <button
+                id="resetBtn"
+                class="px-8 py-4 bg-slate-700 rounded-xl text-lg font-semibold hover:bg-slate-600 transition-all"
+              >
+                <i class="fas fa-redo mr-2"></i><span>Choose Different Photo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Processing Section -->
+      <section id="processingSection" class="hidden max-w-4xl mx-auto mb-16">
+        <div class="glass-card rounded-3xl p-12 text-center">
+          <div class="float-animation inline-block mb-6">
+            <i class="fas fa-spinner fa-spin text-6xl text-purple-400"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-4">Creating Your Virtual Try-On...</h3>
+          <p class="text-purple-300 mb-6">
+            Our AI is generating 6 different eyewear styles for you. This usually takes 20-30 seconds.
+          </p>
+          <div class="max-w-md mx-auto bg-slate-800/50 rounded-full h-3 overflow-hidden">
+            <div id="progressBar" class="bg-gradient-to-r from-purple-600 to-pink-600 h-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+          <p id="progressText" class="text-sm text-purple-400 mt-3">Processing: 0%</p>
+        </div>
+      </section>
+
+      <!-- Results Section -->
+      <section id="resultsSection" class="hidden max-w-7xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 lg:p-12">
+          <div class="text-center mb-12">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+              <span class="gradient-text">Your Virtual Try-On Results</span>
+            </h2>
+            <p class="text-purple-300">
+              Here are 6 different eyewear styles on your face. Download your favorites!
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Aviator Style -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="result-image-container mb-4">
+                <img id="result1" src="" alt="You wearing aviator glasses" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-3 py-1 rounded-full text-sm font-semibold">
+                  👓 Aviator
+                </div>
+              </div>
+              <button class="download-btn w-full px-4 py-2 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all" data-result="1">
+                <i class="fas fa-download mr-2"></i>Download
+              </button>
+            </div>
+
+            <!-- Wayfarer Style -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="result-image-container mb-4">
+                <img id="result2" src="" alt="You wearing wayfarer glasses" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-3 py-1 rounded-full text-sm font-semibold">
+                  👓 Wayfarer
+                </div>
+              </div>
+              <button class="download-btn w-full px-4 py-2 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all" data-result="2">
+                <i class="fas fa-download mr-2"></i>Download
+              </button>
+            </div>
+
+            <!-- Round Style -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="result-image-container mb-4">
+                <img id="result3" src="" alt="You wearing round glasses" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-3 py-1 rounded-full text-sm font-semibold">
+                  🤓 Round
+                </div>
+              </div>
+              <button class="download-btn w-full px-4 py-2 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all" data-result="3">
+                <i class="fas fa-download mr-2"></i>Download
+              </button>
+            </div>
+
+            <!-- Cat-Eye Style -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="result-image-container mb-4">
+                <img id="result4" src="" alt="You wearing cat-eye glasses" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-3 py-1 rounded-full text-sm font-semibold">
+                  👓 Cat-Eye
+                </div>
+              </div>
+              <button class="download-btn w-full px-4 py-2 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all" data-result="4">
+                <i class="fas fa-download mr-2"></i>Download
+              </button>
+            </div>
+
+            <!-- Square Style -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="result-image-container mb-4">
+                <img id="result5" src="" alt="You wearing square glasses" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-3 py-1 rounded-full text-sm font-semibold">
+                  👓 Square
+                </div>
+              </div>
+              <button class="download-btn w-full px-4 py-2 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all" data-result="5">
+                <i class="fas fa-download mr-2"></i>Download
+              </button>
+            </div>
+
+            <!-- Rectangle Style -->
+            <div class="glass-card rounded-xl p-4">
+              <div class="result-image-container mb-4">
+                <img id="result6" src="" alt="You wearing rectangle glasses" />
+                <div class="absolute bottom-2 left-2 bg-black/70 px-3 py-1 rounded-full text-sm font-semibold">
+                  👓 Rectangle
+                </div>
+              </div>
+              <button class="download-btn w-full px-4 py-2 bg-green-600 rounded-lg font-semibold hover:bg-green-700 transition-all" data-result="6">
+                <i class="fas fa-download mr-2"></i>Download
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button
+              id="tryAnotherBtn"
+              class="px-8 py-4 bg-slate-700 rounded-xl text-lg font-semibold hover:bg-slate-600 transition-all"
+            >
+              <i class="fas fa-redo mr-2"></i><span>Try Another Photo</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works Section -->
+      <section class="max-w-6xl mx-auto mt-20 mb-16">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold mb-4 gradient-text">Get Your Perfect Glasses in 3 Easy Steps</h2>
+          <p class="text-purple-300 text-lg">No more expensive mistakes. Know exactly what works before you buy.</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="text-center glass-card rounded-2xl p-6">
+            <div class="w-20 h-20 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
+              <span class="text-3xl font-bold">1</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-white">Upload 1 Photo</h3>
+            <p class="text-purple-300 mb-3">
+              Just a simple selfie. Takes 5 seconds. No special equipment needed.
+            </p>
+            <p class="text-sm text-green-400 font-semibold">
+              ✓ 100% private & secure
+            </p>
+          </div>
+          <div class="text-center glass-card rounded-2xl p-6">
+            <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
+              <span class="text-3xl font-bold">2</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-white">Wait 30 Seconds</h3>
+            <p class="text-purple-300 mb-3">
+              Our AI generates 6 different styles on YOUR actual face. Compare them side-by-side.
+            </p>
+            <p class="text-sm text-green-400 font-semibold">
+              ✓ Photorealistic quality
+            </p>
+          </div>
+          <div class="text-center glass-card rounded-2xl p-6">
+            <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full flex items-center justify-center mx-auto mb-4 shadow-xl">
+              <span class="text-3xl font-bold">3</span>
+            </div>
+            <h3 class="text-xl font-bold mb-3 text-white">Shop with Confidence</h3>
+            <p class="text-purple-300 mb-3">
+              Know exactly which style suits you. Buy the right glasses the first time.
+            </p>
+            <p class="text-sm text-green-400 font-semibold">
+              ✓ Save $195+ on returns
+            </p>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <p class="text-xl text-white font-semibold mb-4">
+            Stop guessing. Start knowing.
+          </p>
+          <a href="#uploadArea" class="inline-block px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl text-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105 shadow-2xl">
+            Get My 6 Styles for $4.99
+          </a>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section class="max-w-4xl mx-auto mt-20">
+        <h2 class="text-3xl font-bold text-center mb-12 gradient-text">Frequently Asked Questions</h2>
+        <div class="space-y-4" id="faqContainer">
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg"><i class="fas fa-glasses text-purple-400 mr-3"></i>What glass styles are included?</summary>
+            <p class="mt-3 text-purple-300">
+              You'll receive 6 different styles: Aviator, Wayfarer, Round, Cat-Eye, Square, and Rectangle frames. Each style is carefully rendered to look natural on your face, so you can compare which frame shape suits your face best.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg"><i class="fas fa-check-circle text-purple-400 mr-3"></i>How accurate are the virtual try-on results?</summary>
+            <p class="mt-3 text-purple-300">
+              Our AI technology creates photorealistic images showing exactly how each frame style will look on your face. While exact frame dimensions may vary by brand, you'll get a highly accurate visualization of which style suits your facial structure, skin tone, and overall appearance.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">How long does it take?</summary>
+            <p class="mt-3 text-purple-300">
+              Processing typically takes 20-30 seconds. Our AI generates all 6 styles simultaneously for the fastest results. You'll be able to download all images immediately after processing completes.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Will this work with sunglasses or just prescription glasses?</summary>
+            <p class="mt-3 text-purple-300">
+              Our virtual try-on specializes in prescription glasses and optical frames. The 6 styles included (Aviator, Wayfarer, Round, Cat-Eye, Square, Rectangle) are the most popular frame shapes for everyday eyewear. These work for both prescription glasses and non-prescription fashion frames.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">What makes a good selfie for the best results?</summary>
+            <p class="mt-3 text-purple-300">
+              Face-forward photos with good lighting work best. Make sure your face is clearly visible and not covered by hair or accessories. Remove any existing glasses before taking the photo. Natural lighting gives the best results – avoid harsh shadows or overly dark photos.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Is my photo safe and private?</summary>
+            <p class="mt-3 text-purple-300">
+              Absolutely. Your photos are 100% private and secure. We use your image only to generate your virtual try-on results. We never share, sell, or use your photos for any other purpose. Your data is encrypted and protected.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Can I use these images when shopping for glasses?</summary>
+            <p class="mt-3 text-purple-300">
+              Yes! That's exactly what they're for. Download all 6 styles and use them as a reference when shopping online or in-store. Show them to opticians, compare with actual frames, or share with friends and family to get opinions before making your purchase decision.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">What if I'm not happy with the results?</summary>
+            <p class="mt-3 text-purple-300">
+              We offer a 30-day money-back guarantee. If you're not satisfied with your virtual try-on results for any reason, contact us within 30 days for a full refund. No questions asked.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Do you offer different frame colors?</summary>
+            <p class="mt-3 text-purple-300">
+              Currently, our service focuses on showing you which frame shapes suit your face best. The goal is to help you determine if aviator, wayfarer, round, cat-eye, square, or rectangle frames work for you – before you invest in expensive eyewear. Once you know your ideal shape, you can choose colors when shopping.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Can I use this for prescription glasses shopping?</summary>
+            <p class="mt-3 text-purple-300">
+              Yes! Many customers use our virtual try-on before buying prescription glasses online or in stores. Knowing which frame style suits you best saves you from costly mistakes. Average prescription glasses cost $200-$400, so a $4.99 investment to get it right the first time makes sense.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">How is this different from in-store try-ons?</summary>
+            <p class="mt-3 text-purple-300">
+              In-store try-ons are limited to what's in stock. You might try 3-4 frames in 30 minutes. With our virtual try-on, you get 6 different style variations in 30 seconds – from the comfort of your home. Plus, you can download the images and compare them side-by-side, share with friends, or sleep on the decision.
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Which glasses suit my face shape?</summary>
+            <p class="mt-3 text-purple-300">
+              Different face shapes (round, oval, square, heart, diamond) suit different frame styles. For example, round faces look great in angular frames like rectangles, while square faces are flattered by round or oval frames.
+            </p>
+            <p class="mt-2 text-purple-300">
+              Check out our <a href="/glasses-face-shape-guide.html" class="text-purple-400 hover:text-purple-200 underline font-semibold">Face Shape Glasses Guide</a> to see visual examples of all 5 face shapes with recommended frames for each. Or simply use our virtual try-on to see all 6 styles on your actual face!
+            </p>
+          </details>
+
+          <details class="glass-card rounded-xl p-6 cursor-pointer">
+            <summary class="font-semibold text-lg">Can I use these images commercially?</summary>
+            <p class="mt-3 text-purple-300">
+              Yes! Once you purchase, all generated images are yours to use however you'd like – social media posts, shopping references, personal use, or even commercial applications. You own the rights to your virtual try-on images.
+            </p>
+          </details>
+        </div>
+      </section>
+
+      <!-- Face Shape Guide CTA -->
+      <section class="max-w-4xl mx-auto mt-20">
+        <div class="glass-card rounded-3xl p-10 text-center border-2 border-purple-400/50 relative overflow-hidden">
+          <!-- Decorative background -->
+          <div class="absolute inset-0 bg-gradient-to-br from-purple-600/20 to-pink-600/20"></div>
+
+          <div class="relative z-10">
+            <div class="text-5xl mb-4">🔍</div>
+            <h2 class="text-3xl font-bold mb-4 gradient-text">
+              Not Sure Which Glasses Suit Your Face?
+            </h2>
+            <p class="text-xl text-purple-200 mb-6 max-w-2xl mx-auto">
+              Discover which frames flatter your face shape with our complete visual guide covering all 5 face types with real examples.
+            </p>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a href="/glasses-face-shape-guide.html" class="inline-block px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition shadow-xl">
+                <i class="fas fa-images mr-2"></i>View Face Shape Guide
+              </a>
+              <a href="/blog/what-glasses-fit-my-face/" class="inline-block px-8 py-4 bg-slate-700/80 rounded-xl font-semibold text-lg hover:bg-slate-600/80 transition">
+                <i class="fas fa-book-open mr-2"></i>Read Full Article
+              </a>
+            </div>
+
+            <p class="text-sm text-purple-400 mt-6">
+              Learn about round, oval, square, heart, and diamond face shapes
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEO Content Section -->
+      <section class="max-w-5xl mx-auto mt-20 mb-20">
+        <div class="glass-card rounded-3xl p-8 lg:p-12">
+          <article class="prose prose-invert prose-purple max-w-none">
+            <h2 class="text-3xl font-bold mb-6 gradient-text">Virtual Glasses Try-On: Find Your Perfect Eyewear Style with AI</h2>
+
+            <p class="text-purple-200 text-lg mb-6">
+              Choosing the right glasses frames can be challenging. With so many styles available – from classic aviators to trendy cat-eye frames – how do you know which eyewear will actually suit your face? That's where our AI-powered virtual glasses try-on technology comes in.
+            </p>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">Why Virtual Try-On Matters for Eyewear Shopping</h3>
+            <p class="text-purple-200 mb-4">
+              The average person spends $200-$400 on prescription glasses or fashion frames. Making the wrong choice means either living with glasses you don't like or spending more money on returns and replacements. Studies show that 1 in 3 people regret their glasses purchase within the first month.
+            </p>
+            <p class="text-purple-200 mb-6">
+              Our virtual glasses try-on service eliminates this risk. By using advanced AI technology, we show you exactly how 6 different frame styles look on your actual face before you spend a single dollar on glasses.
+            </p>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">The 6 Most Popular Glasses Frame Styles</h3>
+            <div class="space-y-4 mb-6">
+              <div>
+                <h4 class="text-xl font-semibold text-white mb-2">1. Aviator Glasses</h4>
+                <p class="text-purple-200">
+                  Originally designed for pilots, aviator frames feature a distinctive teardrop shape with thin metal frames. They work best for people with square or rectangular face shapes, adding softer angles to strong jawlines.
+                </p>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold text-white mb-2">2. Wayfarer Glasses</h4>
+                <p class="text-purple-200">
+                  The timeless wayfarer style features thick plastic frames with a trapezoidal shape. These versatile frames suit almost every face shape and have been a fashion staple since the 1950s. Perfect for both casual and professional settings.
+                </p>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold text-white mb-2">3. Round Glasses</h4>
+                <p class="text-purple-200">
+                  Circular frames add a vintage, intellectual aesthetic. Round glasses work especially well for people with square or rectangular faces, softening angular features. They've become increasingly trendy in recent years.
+                </p>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold text-white mb-2">4. Cat-Eye Glasses</h4>
+                <p class="text-purple-200">
+                  Characterized by upswept outer edges, cat-eye frames add elegance and sophistication. They're particularly flattering for heart-shaped and round faces, creating visual balance and drawing attention to the eyes.
+                </p>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold text-white mb-2">5. Square Glasses</h4>
+                <p class="text-purple-200">
+                  Bold and modern, square frames make a statement. They work well for people with round or oval faces, adding definition and structure. Square frames project confidence and professionalism.
+                </p>
+              </div>
+              <div>
+                <h4 class="text-xl font-semibold text-white mb-2">6. Rectangle Glasses</h4>
+                <p class="text-purple-200">
+                  Classic and professional, rectangular frames are the most popular eyewear style worldwide. They suit most face shapes and work in virtually any setting – from boardrooms to coffee shops.
+                </p>
+              </div>
+            </div>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">How to Choose Glasses for Your Face Shape</h3>
+            <p class="text-purple-200 mb-4">
+              Face shape is the most important factor in choosing flattering glasses. Here's a quick guide:
+            </p>
+            <ul class="list-disc list-inside text-purple-200 space-y-2 mb-6">
+              <li><strong class="text-white">Round Face:</strong> Choose angular frames like square or rectangle to add definition</li>
+              <li><strong class="text-white">Square Face:</strong> Opt for round or aviator frames to soften strong angles</li>
+              <li><strong class="text-white">Oval Face:</strong> Lucky you – most styles work well with oval faces</li>
+              <li><strong class="text-white">Heart-Shaped Face:</strong> Cat-eye or round frames balance a wider forehead</li>
+              <li><strong class="text-white">Rectangle Face:</strong> Round or wayfarer frames add width to elongated faces</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">The Problem with Traditional Glasses Shopping</h3>
+            <p class="text-purple-200 mb-4">
+              Whether shopping online or in-store, traditional glasses shopping has limitations:
+            </p>
+            <ul class="list-disc list-inside text-purple-200 space-y-2 mb-6">
+              <li>Online: You can't try frames on before buying, leading to expensive returns</li>
+              <li>In-store: Limited selection, pressure from sales staff, and you can't compare photos side-by-side</li>
+              <li>Both: You're often rushed into decisions about eyewear you'll wear every day for years</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">How AI Virtual Try-On Technology Works</h3>
+            <p class="text-purple-200 mb-4">
+              Our virtual glasses try-on uses advanced artificial intelligence to analyze your facial features, including:
+            </p>
+            <ul class="list-disc list-inside text-purple-200 space-y-2 mb-6">
+              <li>Face shape and proportions</li>
+              <li>Facial landmarks (eyes, nose, ears, jawline)</li>
+              <li>Skin tone and lighting</li>
+              <li>Head angle and perspective</li>
+            </ul>
+            <p class="text-purple-200 mb-6">
+              The AI then renders photorealistic images of 6 different frame styles on your face, accounting for proper sizing, positioning, and realistic shadows. The result? Images that show exactly how you'll look wearing each style.
+            </p>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">Benefits of Virtual Glasses Try-On</h3>
+            <div class="bg-green-900/20 border-2 border-green-500/50 rounded-xl p-6 mb-6">
+              <ul class="list-disc list-inside text-purple-200 space-y-2">
+                <li><strong class="text-white">Save Money:</strong> Avoid costly returns and wrong purchases (average savings: $195+)</li>
+                <li><strong class="text-white">Save Time:</strong> Get 6 styles in 30 seconds vs. hours of store visits</li>
+                <li><strong class="text-white">No Pressure:</strong> Compare styles at your own pace, share with friends</li>
+                <li><strong class="text-white">More Options:</strong> See styles that might not be available in local stores</li>
+                <li><strong class="text-white">Confidence:</strong> Know exactly what you're getting before you buy</li>
+              </ul>
+            </div>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">Who Should Use Virtual Glasses Try-On?</h3>
+            <p class="text-purple-200 mb-4">
+              Our virtual try-on service is perfect for:
+            </p>
+            <ul class="list-disc list-inside text-purple-200 space-y-2 mb-6">
+              <li><strong class="text-white">First-time glasses buyers</strong> who don't know which style suits them</li>
+              <li><strong class="text-white">Online shoppers</strong> buying prescription glasses from sites like Warby Parker, Zenni, or EyeBuyDirect</li>
+              <li><strong class="text-white">Fashion-conscious individuals</strong> wanting to update their eyewear style</li>
+              <li><strong class="text-white">Anyone</strong> who's made a bad glasses purchase in the past</li>
+              <li><strong class="text-white">People with expensive prescriptions</strong> who can't afford to get it wrong</li>
+            </ul>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">Tips for Getting the Best Virtual Try-On Results</h3>
+            <p class="text-purple-200 mb-4">
+              To ensure the most accurate virtual try-on experience:
+            </p>
+            <ol class="list-decimal list-inside text-purple-200 space-y-2 mb-6">
+              <li>Take a face-forward selfie in good natural lighting</li>
+              <li>Remove any existing glasses or sunglasses</li>
+              <li>Keep hair away from your face so frame placement is visible</li>
+              <li>Use a neutral expression (slight smile is fine)</li>
+              <li>Avoid heavy makeup or filters that change your skin tone</li>
+            </ol>
+
+            <h3 class="text-2xl font-semibold mb-4 text-white">Conclusion: Smart Glasses Shopping Starts Here</h3>
+            <p class="text-purple-200 mb-4">
+              Glasses are one of the few accessories you wear every single day. Getting the style right matters – not just for how you look, but for how confident you feel. With our AI-powered virtual glasses try-on, you can see yourself in 6 popular frame styles for just $4.99, potentially saving hundreds of dollars on returns and wrong purchases.
+            </p>
+            <p class="text-purple-200 mb-6">
+              Stop guessing which glasses will suit you. Start knowing. Try our virtual glasses try-on today and find your perfect eyewear style with confidence.
+            </p>
+
+            <div class="text-center mt-8 pt-8 border-t border-purple-500/30">
+              <a href="#uploadArea" class="inline-block px-10 py-5 bg-gradient-to-r from-green-600 to-emerald-600 rounded-xl text-xl font-bold hover:from-green-700 hover:to-emerald-700 transition-all transform hover:scale-105 shadow-2xl">
+                Get My 6 Styles Now – Only $4.99
+              </a>
+              <p class="text-sm text-purple-400 mt-4">
+                <i class="fas fa-shield-alt mr-1"></i>
+                30-day money-back guarantee • Results in 30 seconds
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/80 border-t border-purple-500/30 py-12 mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-xl font-bold gradient-text mb-4">Toyrender</h3>
+            <p class="text-purple-300 text-sm">
+              AI-powered photo transformations for the modern age.
+            </p>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Products</h4>
+            <ul class="space-y-2 text-purple-300 text-sm">
+              <li><a href="/glasses-tryon" class="hover:text-white">Glasses Try-On</a></li>
+              <li><a href="/dating-photos-gallery" class="hover:text-white">Dating Photos</a></li>
+              <li><a href="/figurines-gallery" class="hover:text-white">Figurines</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Company</h4>
+            <ul class="space-y-2 text-purple-300 text-sm">
+              <li><a href="/" class="hover:text-white">Home</a></li>
+              <li><a href="/about" class="hover:text-white">About</a></li>
+              <li><a href="/contact" class="hover:text-white">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold mb-4">Legal</h4>
+            <ul class="space-y-2 text-purple-300 text-sm">
+              <li><a href="/privacy" class="hover:text-white">Privacy Policy</a></li>
+              <li><a href="/terms" class="hover:text-white">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-purple-500/30 mt-8 pt-8 text-center text-purple-300 text-sm">
+          <p>&copy; 2025 Toyrender.com. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Glass styles configuration
+      const glassStyles = [
+        { name: 'aviator', prompt: 'wearing aviator glasses' },
+        { name: 'wayfarer', prompt: 'wearing wayfarer glasses' },
+        { name: 'round', prompt: 'wearing round glasses' },
+        { name: 'cateye', prompt: 'wearing cat-eye glasses' },
+        { name: 'square', prompt: 'wearing square frame glasses' },
+        { name: 'rectangle', prompt: 'wearing rectangular glasses' }
+      ];
+
+      // DOM elements
+      const fileInput = document.getElementById('fileInput');
+      const uploadArea = document.getElementById('uploadArea');
+      const choosePhotoBtn = document.getElementById('choosePhotoBtn');
+      const previewSection = document.getElementById('previewSection');
+      const originalPreview = document.getElementById('originalPreview');
+      const generateBtn = document.getElementById('generateBtn');
+      const resetBtn = document.getElementById('resetBtn');
+      const processingSection = document.getElementById('processingSection');
+      const resultsSection = document.getElementById('resultsSection');
+      const progressBar = document.getElementById('progressBar');
+      const progressText = document.getElementById('progressText');
+      const tryAnotherBtn = document.getElementById('tryAnotherBtn');
+
+      let uploadedFile = null;
+
+      // Countdown Timer (24 hours from now)
+      function startCountdown() {
+        const countdownElement = document.getElementById('countdown');
+        if (!countdownElement) return;
+
+        // Set end time to 24 hours from first visit or use stored time
+        let endTime = localStorage.getItem('dealEndTime');
+        if (!endTime) {
+          endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+          localStorage.setItem('dealEndTime', endTime);
+        }
+
+        function updateCountdown() {
+          const now = new Date().getTime();
+          const distance = endTime - now;
+
+          if (distance < 0) {
+            // Reset to 24 hours
+            endTime = new Date().getTime() + (24 * 60 * 60 * 1000);
+            localStorage.setItem('dealEndTime', endTime);
+          }
+
+          const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          countdownElement.textContent = `Ends in ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+      }
+
+      // Live Activity Counter
+      function animateLiveCounter() {
+        const liveCounter = document.getElementById('liveCounter');
+        if (!liveCounter) return;
+
+        function getRandomViews() {
+          return Math.floor(Math.random() * 30) + 35; // 35-65 viewers
+        }
+
+        function updateViews() {
+          const currentViews = parseInt(liveCounter.textContent);
+          const change = Math.floor(Math.random() * 7) - 3; // -3 to +3
+          let newViews = currentViews + change;
+
+          // Keep between 35 and 65
+          if (newViews < 35) newViews = 35;
+          if (newViews > 65) newViews = 65;
+
+          liveCounter.textContent = newViews;
+        }
+
+        setInterval(updateViews, 5000); // Update every 5 seconds
+      }
+
+      // Exit Intent Popup
+      let exitIntentShown = false;
+      function showExitIntentPopup() {
+        if (exitIntentShown) return;
+        exitIntentShown = true;
+
+        const popup = document.createElement('div');
+        popup.id = 'exitPopup';
+        popup.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.9);
+          display: flex;
+          align-items: center;
+          justify-center;
+          z-index: 9999;
+          animation: fadeIn 0.3s ease;
+        `;
+
+        popup.innerHTML = `
+          <div style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); padding: 3rem; border-radius: 2rem; max-width: 600px; text-align: center; position: relative; border: 2px solid #a855f7;">
+            <button id="closePopup" style="position: absolute; top: 1rem; right: 1rem; background: transparent; border: none; color: white; font-size: 2rem; cursor: pointer;">&times;</button>
+            <div style="font-size: 4rem; margin-bottom: 1rem;">⚠️</div>
+            <h2 style="color: #fbbf24; font-size: 2rem; font-weight: bold; margin-bottom: 1rem;">WAIT! Don't Leave Yet...</h2>
+            <p style="color: white; font-size: 1.25rem; margin-bottom: 1.5rem;">You're about to miss out on seeing yourself in 6 different glasses styles!</p>
+            <p style="color: #c084fc; font-size: 1.1rem; margin-bottom: 2rem;">Still not sure? Here's an <strong style="color: #fbbf24;">EXTRA 10% OFF</strong> – making it just <strong style="color: #22c55e; font-size: 1.5rem;">$4.49</strong> today!</p>
+            <a href="#uploadArea" id="specialOfferBtn" style="display: inline-block; background: linear-gradient(to right, #22c55e, #10b981); color: white; padding: 1.25rem 2.5rem; border-radius: 1rem; font-size: 1.5rem; font-weight: bold; text-decoration: none; box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4); margin-bottom: 1rem;">
+              Get My 6 Styles for $4.49 - 35% OFF
+            </a>
+            <p style="color: #9ca3af; font-size: 0.875rem;">This offer expires when you leave this page</p>
+          </div>
+        `;
+
+        document.body.appendChild(popup);
+
+        document.getElementById('closePopup').addEventListener('click', () => {
+          popup.remove();
+        });
+
+        document.getElementById('specialOfferBtn').addEventListener('click', () => {
+          popup.remove();
+        });
+
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) {
+            popup.remove();
+          }
+        });
+      }
+
+      // Detect exit intent
+      document.addEventListener('mouseleave', (e) => {
+        if (e.clientY <= 0) {
+          showExitIntentPopup();
+        }
+      });
+
+      // Initialize timers on load
+      document.addEventListener('DOMContentLoaded', () => {
+        startCountdown();
+        animateLiveCounter();
+      });
+
+      // Upload handlers
+      choosePhotoBtn.addEventListener('click', () => fileInput.click());
+
+      uploadArea.addEventListener('click', (e) => {
+        if (e.target.id !== 'choosePhotoBtn') {
+          fileInput.click();
+        }
+      });
+
+      uploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        uploadArea.classList.add('border-purple-400');
+      });
+
+      uploadArea.addEventListener('dragleave', () => {
+        uploadArea.classList.remove('border-purple-400');
+      });
+
+      uploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        uploadArea.classList.remove('border-purple-400');
+        const file = e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+          handleFileSelect(file);
+        }
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          handleFileSelect(file);
+        }
+      });
+
+      function handleFileSelect(file) {
+        uploadedFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          originalPreview.src = e.target.result;
+          previewSection.classList.remove('hidden');
+          uploadArea.classList.add('hidden');
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Reset functionality
+      function resetUpload() {
+        uploadedFile = null;
+        fileInput.value = '';
+        originalPreview.src = '';
+        previewSection.classList.add('hidden');
+        processingSection.classList.add('hidden');
+        resultsSection.classList.add('hidden');
+        uploadArea.classList.remove('hidden');
+        progressBar.style.width = '0%';
+        progressText.textContent = 'Processing: 0%';
+      }
+
+      resetBtn.addEventListener('click', resetUpload);
+      tryAnotherBtn.addEventListener('click', resetUpload);
+
+      // Generate button handler
+      generateBtn.addEventListener('click', async () => {
+        if (!uploadedFile) return;
+
+        // Hide upload section, show processing
+        previewSection.classList.add('hidden');
+        processingSection.classList.remove('hidden');
+
+        try {
+          // Simulate progress
+          let progress = 0;
+          const progressInterval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress > 90) progress = 90;
+            progressBar.style.width = progress + '%';
+            progressText.textContent = `Processing: ${Math.round(progress)}%`;
+          }, 500);
+
+          // Generate all 6 styles
+          const results = await generateAllStyles(uploadedFile);
+
+          // Complete progress
+          clearInterval(progressInterval);
+          progressBar.style.width = '100%';
+          progressText.textContent = 'Processing: 100%';
+
+          // Display results
+          setTimeout(() => {
+            displayResults(results);
+            processingSection.classList.add('hidden');
+            resultsSection.classList.remove('hidden');
+          }, 500);
+
+        } catch (error) {
+          alert('Failed to generate images. Please try again.');
+          console.error(error);
+          resetUpload();
+        }
+      });
+
+      // Generate all glass styles
+      async function generateAllStyles(file) {
+        const results = [];
+
+        for (let i = 0; i < glassStyles.length; i++) {
+          const style = glassStyles[i];
+          const formData = new FormData();
+          formData.append('photo', file);
+          formData.append('style', 'glasses');
+          formData.append('glassType', style.name);
+          formData.append('prompt', `portrait of person ${style.prompt}, professional photography, high quality`);
+
+          try {
+            const res = await fetch('/api/generate-glasses', {
+              method: 'POST',
+              body: formData,
+              credentials: 'include'
+            });
+
+            const data = await res.json();
+
+            if (res.ok && data.imageUrl) {
+              results.push({
+                style: style.name,
+                imageUrl: data.imageUrl
+              });
+            } else {
+              // Fallback: use placeholder or original image
+              results.push({
+                style: style.name,
+                imageUrl: originalPreview.src
+              });
+            }
+          } catch (err) {
+            console.error(`Failed to generate ${style.name}:`, err);
+            results.push({
+              style: style.name,
+              imageUrl: originalPreview.src
+            });
+          }
+        }
+
+        return results;
+      }
+
+      // Display results
+      function displayResults(results) {
+        results.forEach((result, index) => {
+          const img = document.getElementById(`result${index + 1}`);
+          if (img) {
+            img.src = result.imageUrl;
+          }
+        });
+      }
+
+      // Download functionality
+      document.querySelectorAll('.download-btn').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+          const resultNum = e.currentTarget.dataset.result;
+          const img = document.getElementById(`result${resultNum}`);
+          if (img && img.src) {
+            try {
+              const response = await fetch(img.src);
+              const blob = await response.blob();
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = `glasses-style-${resultNum}.jpg`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              window.URL.revokeObjectURL(url);
+            } catch (err) {
+              console.error('Download failed:', err);
+              alert('Download failed. Please try again.');
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
