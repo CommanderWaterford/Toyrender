@@ -2494,6 +2494,110 @@ app.post(
   }
 );
 
+// --- Free Preview Endpoint (No Auth Required) ---
+app.post(
+  "/api/preview-dating-photo",
+  burstSlowdown,
+  rateLimit({
+    windowMs: 60 * 60 * 1000, // 1 hour
+    max: 3, // Max 3 free previews per hour per IP
+    standardHeaders: true,
+    keyGenerator: (req) => req.ip,
+    message: { error: "Too many preview requests. Try again in an hour." },
+  }),
+  bodySizeGuard,
+  upload.single("photo"),
+  async (req, res) => {
+    const reqId = crypto.randomUUID();
+    const t0 = Date.now();
+    let inputPath = null;
+
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      inputPath = req.file.path;
+      const raw = fs.readFileSync(inputPath);
+
+      // Resize/compress
+      let resizedBuf = raw;
+      try {
+        resizedBuf = await sharp(raw)
+          .resize({
+            width: 2048,
+            height: 2048,
+            fit: "inside",
+            withoutEnlargement: true,
+          })
+          .jpeg({ quality: 85 })
+          .toBuffer();
+      } catch (e) {
+        console.warn("Sharp resize failed; using original:", e.message);
+      }
+
+      // Dating photo preview prompt
+      const previewPrompt = `Create a professional, tasteful dating profile photo. Transform this portrait into an attractive, high-quality photo suitable for dating apps like Tinder, Bumble, or Hinge. Use professional lighting, elegant clothing (blazer, dress shirt, or casual chic), and a clean background. Keep it PG-13 appropriate - no nudity, no NSFW content. The result should look natural, confident, and approachable.`;
+
+      const parts = [
+        { text: previewPrompt },
+        {
+          inlineData: {
+            mimeType: "image/jpeg",
+            data: resizedBuf.toString("base64"),
+          },
+        },
+      ];
+
+      // Call Gemini API
+      const response = await modelLimiter.schedule(() =>
+        genAI.generateContent({
+          contents: [{ parts }],
+          config: {
+            temperature: 0.4,
+            responseMimeType: "image/png",
+          },
+        })
+      );
+
+      const buffer = Buffer.from(await response.arrayBuffer());
+
+      // Save to results directory
+      const fname = `preview-dating-${Date.now()}-${crypto
+        .randomBytes(4)
+        .toString("hex")}.png`;
+      const outImagePath = path.join(RESULTS_DIR, fname);
+      fs.writeFileSync(outImagePath, buffer);
+
+      // Always apply watermark for free previews
+      console.log(`Applying watermark to free preview: ${fname}`);
+      await applyWatermark(outImagePath);
+
+      console.log(
+        `✅ Free preview generated in ${Date.now() - t0}ms: ${fname}`
+      );
+
+      return res.json({
+        ok: true,
+        imageUrl: "/results/" + fname,
+        watermarked: true,
+        message: "Preview generated! Upgrade for watermark-free, full-quality photos.",
+      });
+    } catch (e) {
+      console.error("Preview generation error:", e?.message || e);
+      return res.status(e?.status || 500).json({
+        ok: false,
+        error: e?.message || "Preview generation failed",
+      });
+    } finally {
+      // Clean up uploaded file
+      if (inputPath) {
+        fs.unlink(inputPath, () => {});
+      }
+    }
+  }
+);
+
 // --- Hourly cleanup of old files ---
 const RETENTION_H = parseInt(process.env.UPLOAD_RETENTION_HOURS || "24", 10);
 function cleanupDir(dir) {
