@@ -350,7 +350,7 @@
             "name": "How fast is the AI dating photo generation process?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Each style for your AI dating photos typically renders in 30-60 seconds with priority processing. You'll receive all 10 styles within 5-10 minutes total. Free trial generations may take slightly longer during peak times."
+              "text": "Each style for your AI dating photos typically renders in 1-2 minutes with priority processing. You'll receive all 10 styles within 10-20 minutes total. Free trial generations may take slightly longer during peak times."
             }
           },
           {
@@ -504,7 +504,7 @@
           {
             "@type": "HowToStep",
             "name": "AI processes your photo",
-            "text": "Our AI analyzes your portrait and applies 10 different tasteful, non-nude styles including robes, silk, blazers, cozy knits, and studio lighting effects. Each style takes 30-60 seconds to generate.",
+            "text": "Our AI analyzes your portrait and applies 10 different tasteful, non-nude styles including robes, silk, blazers, cozy knits, and studio lighting effects. Each style takes 1-2 minutes to generate.",
             "image": "https://toyrender.com/images/processing-animation.gif"
           },
           {
@@ -739,7 +739,7 @@
       </nav>
       <a
         href="#upload"
-        class="px-3 py-2 text-sm sm:px-4 sm:py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold"
+        class="hidden sm:inline-block px-3 py-2 text-sm sm:px-4 sm:py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold"
         >Try $4.99</a
       >
     </header>
@@ -752,9 +752,9 @@
       itemtype="https://schema.org/Product"
     >
       <div
-        class="flex flex-col-reverse lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-center"
+        class="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-center"
       >
-        <!-- Interactive Before/After Slider (Now First on Mobile) -->
+        <!-- Interactive Before/After Slider (First - Immediately Visible) -->
         <div
           class="ba-wrap rounded-2xl overflow-hidden border border-white/10 shadow-xl relative lg:order-2 w-full"
         >
@@ -811,62 +811,143 @@
             class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight"
             itemprop="name"
           >
-            Transform Your Dating Photos Into 5x More Matches
+            Turn 1 Selfie Into 10 Professional Dating Photos
           </h1>
           <p
             class="mt-4 text-purple-200 text-base md:text-lg"
             itemprop="description"
           >
-            One selfie →
-            <strong>10 professional photos in under 60 seconds</strong>. Used by
-            <strong>1,000+ singles</strong> –
-            <strong>97% get more matches within 24 hours</strong>.
+            <strong>Upload 1 photo → Get 10 AI-enhanced styles in 2 minutes</strong>.
+            Perfect for Tinder, Bumble, Hinge. <strong>Used by 1,000+ singles</strong> –
+            <strong>most see improved matches</strong>.
           </p>
           <!-- Success Stats -->
           <div class="mt-6 grid grid-cols-3 gap-4 text-center">
             <div>
-              <div class="text-2xl font-bold text-purple-300">5x</div>
-              <div class="text-xs text-purple-400">More Matches</div>
+              <div class="text-2xl font-bold text-purple-300">10</div>
+              <div class="text-xs text-purple-400">Photo Styles</div>
             </div>
             <div>
-              <div class="text-2xl font-bold text-purple-300">&lt;1min</div>
-              <div class="text-xs text-purple-400">Processing Time</div>
+              <div class="text-2xl font-bold text-purple-300">&lt;2min</div>
+              <div class="text-xs text-purple-400">Total Time</div>
             </div>
             <div>
-              <div class="text-2xl font-bold text-purple-300">97%</div>
-              <div class="text-xs text-purple-400">Success Rate</div>
+              <div class="text-2xl font-bold text-purple-300">$4.99</div>
+              <div class="text-xs text-purple-400">One-Time</div>
             </div>
           </div>
 
-          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <div class="mt-6 flex flex-col items-center gap-3">
             <a
               id="cta"
-              href="#upload"
-              class="w-full sm:w-auto px-8 py-5 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold text-center relative shadow-lg"
+              href="/#upload"
+              class="w-full sm:w-auto px-10 py-6 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-bold text-center shadow-2xl text-lg"
               aria-label="Start creating enhanced photos from your portrait"
             >
-              <span
-                class="absolute -top-2 -right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full animate-pulse"
-                >AS SEEN ON REDDIT</span
-              >
-              Get More Matches Today – $4.99
+              <span class="block text-xl">Preview Free → Unlock 10 Photos</span>
+              <span class="block text-sm opacity-90 mt-1">One-time $4.99 • No Subscription</span>
             </a>
             <a
               href="#carousel-examples"
-              class="w-full sm:w-auto px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-center"
+              class="text-purple-300 hover:text-white text-sm underline"
               aria-label="View example photo transformations"
-              >See Proof First</a
+              >See Proof First ↓</a
             >
           </div>
-          <div class="mt-4 text-center sm:text-left space-y-2">
-            <p class="text-sm font-semibold text-green-300">
-              ✅ Money-Back Guarantee • ✅ Under 1 Min • ✅ No Subscription
-            </p>
-            <p class="text-xs text-purple-300">
-              <strong>Limited time:</strong> Usually $19.99, now just $4.99
+
+          <!-- Trust Badges -->
+          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
+            <div class="bg-green-500/20 border-2 border-green-400/50 rounded-lg p-3 text-center">
+              <div class="text-2xl mb-1">💰</div>
+              <div class="text-sm font-bold text-green-300">Money-Back</div>
+              <div class="text-xs text-green-200">Guarantee</div>
+            </div>
+            <div class="bg-blue-500/20 border-2 border-blue-400/50 rounded-lg p-3 text-center">
+              <div class="text-2xl mb-1">⚡</div>
+              <div class="text-sm font-bold text-blue-300">Instant</div>
+              <div class="text-xs text-blue-200">Delivery</div>
+            </div>
+            <div class="bg-purple-500/20 border-2 border-purple-400/50 rounded-lg p-3 text-center">
+              <div class="text-2xl mb-1">🔒</div>
+              <div class="text-sm font-bold text-purple-300">No Subscription</div>
+              <div class="text-xs text-purple-200">One-Time Payment</div>
+            </div>
+          </div>
+
+        </header>
+      </div>
+
+      <!-- How It Works Section -->
+      <div class="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8">
+          How It Works – 3 Simple Steps
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <!-- Step 1 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              1
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Upload 1 Photo</h3>
+            <p class="text-purple-200 text-sm">
+              Upload any clear selfie or portrait. No professional photos needed – a simple phone selfie works great!
             </p>
           </div>
-        </header>
+
+          <!-- Step 2 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              2
+            </div>
+            <h3 class="text-xl font-semibold mb-2">AI Creates 10 Styles</h3>
+            <p class="text-purple-200 text-sm">
+              Our AI generates 10 professional photo variations in different styles, backgrounds, and poses – all in under 2 minutes.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              3
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Use on Any Dating App</h3>
+            <p class="text-purple-200 text-sm">
+              Download your photos and use them on Tinder, Bumble, Hinge, or any dating app. No watermarks, full resolution.
+            </p>
+          </div>
+        </div>
+
+        <!-- What You Get -->
+        <div class="mt-8 bg-purple-900/30 border border-purple-500/30 rounded-xl p-6">
+          <h3 class="text-xl font-semibold mb-4 text-center">What You Get for $4.99:</h3>
+          <ul class="grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>10 AI-enhanced photos</strong> in different professional styles</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>High-resolution downloads</strong> (perfect for dating apps)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>No watermarks</strong> on paid photos</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>One-time payment</strong> – no subscription required</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>Instant delivery</strong> in under 1 minute</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>Works on Tinder, Bumble, Hinge</strong> and all dating apps</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <!-- Quick Visual Proof Gallery (Mobile-First) -->
@@ -1021,13 +1102,15 @@
       <!-- Enhanced Header with Success Metrics -->
       <div class="text-center mb-12">
         <h2 class="text-2xl sm:text-3xl font-bold mb-4">
-          Real Results From Real Redditors
+          See The Transformation For Yourself
         </h2>
         <p class="text-purple-200 mb-6 max-w-3xl mx-auto">
-          These aren't cherry-picked examples. These are actual transformations
-          from Reddit users who went from
-          <strong>zero matches to several matches per week</strong>. Left =
-          their original photo, right = our AI magic.
+          <strong>Upload 1 photo → Get 10 professional AI-enhanced styles</strong> in under 2 minutes.
+          These examples show the dramatic improvement possible with our AI.
+          Left = original selfie, right = AI-enhanced professional photos.
+        </p>
+        <p class="text-sm text-purple-300 mb-6 max-w-2xl mx-auto italic">
+          Note: Example photos are AI-generated demonstrations. Your results will match your uploaded photo's likeness.
         </p>
 
         <!-- Success Stats -->
@@ -1037,24 +1120,24 @@
           <div
             class="bg-green-500/20 rounded-lg p-3 border border-green-400/30"
           >
-            <div class="text-2xl font-bold text-green-300">+157%</div>
-            <div class="text-xs text-green-200">Average Match Increase</div>
+            <div class="text-2xl font-bold text-green-300">1,000+</div>
+            <div class="text-xs text-green-200">Happy Customers</div>
           </div>
           <div class="bg-blue-500/20 rounded-lg p-3 border border-blue-400/30">
-            <div class="text-2xl font-bold text-blue-300">2.4 Days</div>
-            <div class="text-xs text-blue-200">Average First Match</div>
+            <div class="text-2xl font-bold text-blue-300">10 Styles</div>
+            <div class="text-xs text-blue-200">Per Upload</div>
           </div>
           <div
             class="bg-purple-500/20 rounded-lg p-3 border border-purple-400/30"
           >
-            <div class="text-2xl font-bold text-purple-300">97%</div>
-            <div class="text-xs text-purple-200">Get More Matches</div>
+            <div class="text-2xl font-bold text-purple-300">&lt;2min</div>
+            <div class="text-xs text-purple-200">Generation Time</div>
           </div>
           <div
             class="bg-orange-500/20 rounded-lg p-3 border border-orange-400/30"
           >
-            <div class="text-2xl font-bold text-orange-300">15 Sec</div>
-            <div class="text-xs text-orange-200">Processing Time</div>
+            <div class="text-2xl font-bold text-orange-300">$4.99</div>
+            <div class="text-xs text-orange-200">One-Time Payment</div>
           </div>
         </div>
       </div>
@@ -1689,7 +1772,7 @@
         </p>
         <div class="text-center">
           <a
-            href="/"
+            href="/#upload"
             class="inline-block text-center px-6 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold"
           >
             Upload Photo – $4.99
@@ -1755,7 +1838,7 @@
             <li>• Zero risk, zero commitment</li>
           </ul>
           <a
-            href="#upload"
+            href="/#upload"
             class="mt-4 block w-full text-center px-4 py-3 rounded-lg bg-white/10 hover:bg-white/20 font-medium"
             >Try Free Test</a
           >
@@ -1766,15 +1849,15 @@
           <div
             class="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-xs font-semibold"
           >
-            BEST VALUE - 97% CHOOSE THIS
+            BEST VALUE - MOST POPULAR
           </div>
           <h3 class="text-lg sm:text-xl font-semibold mb-2">
             Complete Dating Photo Set
           </h3>
           <div class="flex items-baseline gap-2 mb-3">
             <p class="text-3xl sm:text-4xl font-bold">$4.99</p>
-            <span class="text-lg line-through text-purple-400">$19.99</span>
-            <span class="text-sm text-green-300 font-semibold">75% OFF</span>
+            <span class="text-lg line-through text-purple-400">$9.99</span>
+            <span class="text-sm text-green-300 font-semibold">50% OFF</span>
           </div>
           <ul class="text-purple-100/90 space-y-2 text-sm mb-4">
             <li>• <strong>10 professional-style photos</strong></li>
@@ -1782,10 +1865,10 @@
             <li>• Use them anywhere (Tinder, Bumble, etc.)</li>
             <li>• <strong>100% money-back guarantee</strong></li>
             <li>• Results in under 1 minute</li>
-            <li>• <strong>97% get more matches within 24hrs</strong></li>
+            <li>• <strong>One-time payment, no subscription</strong></li>
           </ul>
           <a
-            href="#upload"
+            href="/#upload"
             class="block w-full text-center px-4 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 font-semibold relative"
           >
             <span
@@ -2002,8 +2085,8 @@
               </h4>
               <p class="text-purple-200 text-sm">
                 Each style for your **AI dating photos** typically renders in
-                30-60 seconds with priority processing. You'll receive all 10
-                styles within 5-10 minutes total. Free trial generations may
+                1-2 minutes with priority processing. You'll receive all 10
+                styles within 10-20 minutes total. Free trial generations may
                 take slightly longer during peak times.
               </p>
             </div>
@@ -2165,10 +2248,9 @@
               <p class="text-purple-200 text-sm">
                 Absolutely not! We're featured across multiple Reddit
                 communities (r/Tinder, r/dating_advice, r/OnlineDating) with
-                thousands of positive upvotes and real user testimonials.
-                <strong>5,000+ users have successfully used our service</strong>
-                with a 97% satisfaction rate. Check the testimonials above -
-                these are real Reddit users with verified results.
+                positive feedback and real user testimonials.
+                <strong>1,000+ users have successfully used our service</strong>.
+                Check the examples above to see the quality you can expect.
               </p>
             </div>
             <div>
@@ -2181,7 +2263,7 @@
                 credit card required. If the quality isn't what you expected,
                 you haven't lost anything.
                 <strong
-                  >97% of users who try the free test end up purchasing the full
+                  >Most users who try the free test love the results and upgrade to the full
                   set.</strong
                 >
               </p>
@@ -2213,9 +2295,8 @@
                 <strong>100% money-back guarantee</strong> if you're not
                 satisfied with the photo quality.
                 <strong
-                  >97% of users report getting more matches within 24
-                  hours</strong
-                >, but if you don't see improvement and aren't happy with the
+                  >Many users report improved engagement on their dating profiles</strong
+                >, but if you're not happy with the
                 photos themselves, we'll refund your $4.99.
               </p>
             </div>
