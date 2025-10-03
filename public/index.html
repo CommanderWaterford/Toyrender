@@ -1403,7 +1403,7 @@
 
               <div class="relative group animate-float-delayed-reverse mr-8">
                 <img
-                  src="/images/Example10.jpg"
+                  src="/images/Example-10.webp"
                   alt="AI generated professional headshot"
                   class="w-48 h-48 object-cover rounded-xl shadow-2xl hover:shadow-pink-500/30 transition-all duration-500 transform hover:scale-110 hover:rotate-2 border-2 border-pink-400/40"
                   width="192"
@@ -1535,7 +1535,7 @@
                   </div>
                 </div>
                 <div class="relative group">
-                  <img src="/images/Example10.jpg" alt="AI Figurine"
+                  <img src="/images/Example-10.webp" alt="AI Figurine"
                   class="w-full h-48 object-contain rounded-lg shadow-lg border
                   border-pink-400/50" width="192" height="192" fetchpriority="high" loading="eager" />
                   <div
@@ -1710,7 +1710,7 @@
       </section>
 
       <!-- Upload Section -->
-      <section class="max-w-4xl mx-auto" aria-labelledby="upload-title">
+      <section id="upload" class="max-w-4xl mx-auto" aria-labelledby="upload-title">
         <div
           class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/30 pulse-glow"
         >
@@ -5006,90 +5006,132 @@
       /* ----------------- Testimonials drag code ----------------- */
       const galleryData = [
         {
-          src: "/images/Example1.jpg",
+          src: "/images/Example-01.webp",
           alt: "Customer figurine example 1",
           caption:
             '"Amazing quality! Turned my photo with my grandma into a figurine that looks simply awesome. My family loves it!" — Sarah M.',
         },
         {
-          src: "/images/Example2.jpg",
+          src: "/images/Example-02.webp",
           alt: "Young Woman creating a Figurine of herself",
           caption:
             '"Creating a figurine of myself! Crazy, isnt it?! Super fast generation!" — Mia R.',
         },
         {
-          src: "/images/Example3.jpg",
+          src: "/images/Example-03.webp",
           alt: "Customer figurine example 3",
           caption:
             '"Used this for my LinkedIn profile makeover. The business pro figurine gives my profile a unique, memorable touch!" — Jennifer L.',
         },
         {
-          src: "/images/Example4.jpg",
+          src: "/images/Example-04.webp",
           alt: "Customer figurine example 4",
           caption:
             '"Best gift ever for my birthday! My wife loved the figurine design. It\'s now framed in our living room!" — David K.',
         },
         {
-          src: "/images/Example5.jpg",
+          src: "/images/Example-05.webp",
           alt: "Customer figurine example 5",
           caption:
             '"Created a set of Figurines of myself in shape for my girl friend. She went immediately to a 3D Publisher with the image! Great quality output." — Robert H.',
         },
         {
-          src: "/images/Example6.jpg",
+          src: "/images/Example-06.webp",
           alt: "Marriage figurine example image",
           caption:
             '"Our Marriage Photo figurines turned out incredible! Worth every penny!" — Emily R.',
         },
         {
-          src: "/images/Example7.jpg",
+          src: "/images/Example-07.webp",
           alt: "Flamenco Dancer figurine example",
           caption: '"Olé! Viva el Flamenco y los Figurines!" — Maria L.',
         },
         {
-          src: "/images/Example8.jpg",
+          src: "/images/Example-08.webp",
           alt: "Party Woman in Bikini figurine example",
           caption:
             '"Amazing photo of me in Bikini - used it in Tinder and Bumble!" — Jenny A.',
         },
         {
-          src: "/images/Example9.jpg",
+          src: "/images/Example-09.webp",
           alt: "Couple in summer clothes as AI Figurine",
           caption:
             '"Perfect for our anniversary! Good summer vibes memories was exactly what I was looking for. Super fast generation too!" — Mike T.',
         },
         {
-          src: "/images/Example10.jpg",
+          src: "/images/Example-10.webp",
           alt: "Woman in White Dress as Figurine in an Art Museum",
           caption:
             '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
         },
         {
-          src: "/images/Example11.jpg",
+          src: "/images/Example-11.webp",
           alt: "",
           caption:
             '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
         },
         {
-          src: "/images/Example12.jpg",
+          src: "/images/Example-12.webp",
           alt: "",
           caption:
             '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
         },
         {
-          src: "/images/Example13.jpg",
+          src: "/images/Example-13.webp",
           alt: "",
           caption:
             '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
         },
         {
-          src: "/images/Example14.jpg",
+          src: "/images/Example-14.webp",
           alt: "",
           caption:
             '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
         },
         {
-          src: "/images/Example15.jpg",
+          src: "/images/Example-15.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-16.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-17.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-18.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-19.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-20.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-21.webp",
+          alt: "",
+          caption:
+            '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
+        },
+        {
+          src: "/images/Example-22.webp",
           alt: "",
           caption:
             '"Amazing photo of me exposed in an art museum! Stunning! — Elisa A.',
@@ -5097,7 +5139,9 @@
       ];
 
       let currentImageIndex = 0;
-      let displayData = [];
+      let displayData = galleryData; // Use all images
+      let galleryStartIndex = 0;
+      let autoScrollInterval;
 
       // Initialize gallery
       function initGallery() {
@@ -5106,9 +5150,37 @@
         // Show 14 items on mobile (< 640px), 15 on desktop
         const isMobile = window.innerWidth < 640;
         const itemsToShow = isMobile ? 14 : 15;
-        displayData = galleryData.slice(0, itemsToShow);
 
+        renderGallery(itemsToShow);
+
+        // Initialize lightbox thumbnails with all images
+        const thumbnailsContainer =
+          document.getElementById("lightboxThumbnails");
         displayData.forEach((item, index) => {
+          const thumb = document.createElement("img");
+          thumb.src = item.src;
+          thumb.alt = item.alt;
+          thumb.className = "lightbox-thumbnail";
+          thumb.onclick = () => goToImage(index);
+          thumbnailsContainer.appendChild(thumb);
+        });
+
+        // Auto-scroll gallery every 5 seconds
+        autoScrollInterval = setInterval(() => {
+          galleryStartIndex = (galleryStartIndex + 1) % displayData.length;
+          renderGallery(itemsToShow);
+        }, 5000);
+      }
+
+      // Render gallery items
+      function renderGallery(itemsToShow) {
+        const galleryGrid = document.getElementById("galleryGrid");
+        galleryGrid.innerHTML = '';
+
+        for (let i = 0; i < itemsToShow; i++) {
+          const index = (galleryStartIndex + i) % displayData.length;
+          const item = displayData[index];
+
           const galleryItem = document.createElement("div");
           galleryItem.className = "gallery-item loading";
           galleryItem.onclick = () => openLightbox(index);
@@ -5128,19 +5200,7 @@
           galleryItem.appendChild(img);
           galleryItem.appendChild(overlay);
           galleryGrid.appendChild(galleryItem);
-        });
-
-        // Initialize lightbox thumbnails
-        const thumbnailsContainer =
-          document.getElementById("lightboxThumbnails");
-        displayData.forEach((item, index) => {
-          const thumb = document.createElement("img");
-          thumb.src = item.src;
-          thumb.alt = item.alt;
-          thumb.className = "lightbox-thumbnail";
-          thumb.onclick = () => goToImage(index);
-          thumbnailsContainer.appendChild(thumb);
-        });
+        }
       }
 
       // Lightbox functions
