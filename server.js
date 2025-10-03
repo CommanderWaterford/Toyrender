@@ -2551,13 +2551,16 @@ app.post(
 
       // Call Gemini API
       const response = await modelLimiter.schedule(() =>
-        genAI.generateContent({
-          contents: [{ parts }],
-          config: {
-            temperature: 0.4,
-            responseMimeType: "image/png",
-          },
-        })
+        withBackoff(() =>
+          ai.models.generateContent({
+            model: "gemini-2.5-flash-image-preview",
+            contents: [{ role: "user", parts }],
+            config: {
+              temperature: 0.4,
+              responseMimeType: "image/png",
+            },
+          })
+        )
       );
 
       const buffer = Buffer.from(await response.arrayBuffer());
