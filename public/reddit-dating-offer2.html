@@ -751,62 +751,7 @@
       itemscope
       itemtype="https://schema.org/Product"
     >
-      <div
-        class="flex flex-col lg:grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 items-center"
-      >
-        <!-- Interactive Before/After Slider (First - Immediately Visible) -->
-        <div
-          class="ba-wrap rounded-2xl overflow-hidden border border-white/10 shadow-xl relative lg:order-2 w-full"
-        >
-          <!-- After Image (base layer shows on right) -->
-          <img
-            src="/images/datingoffer/tony-01.webp"
-            alt="AI-enhanced photo - after processing"
-            class="w-full h-auto object-cover"
-            width="640"
-            height="800"
-            loading="eager"
-          />
-          <!-- Before Image (overlay shows on left) -->
-          <div class="ba-after">
-            <img
-              src="/images/datingoffer/tony-original.webp"
-              alt="Original photo - before AI enhancement"
-              width="640"
-              height="800"
-            />
-          </div>
-          <!-- Handle -->
-          <div class="ba-handle"></div>
-          <!-- Scrubber -->
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value="50"
-            class="ba-scrubber"
-            aria-label="Drag to compare before and after"
-          />
-          <!-- Labels -->
-          <div
-            class="absolute top-2 sm:top-4 left-2 sm:left-4 bg-black/70 text-white px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-semibold"
-          >
-            BEFORE
-          </div>
-          <div
-            class="absolute top-2 sm:top-4 right-2 sm:right-4 bg-purple-600/90 text-white px-2 sm:px-3 py-1 rounded-lg text-xs sm:text-sm font-semibold"
-          >
-            AFTER: AI
-          </div>
-          <!-- Mobile hint -->
-          <div
-            class="lg:hidden absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/70 text-white px-3 py-1 rounded-full text-xs animate-pulse"
-          >
-            👆 Drag to compare
-          </div>
-        </div>
-
-        <header class="lg:order-1">
+      <header class="text-center max-w-4xl mx-auto">
           <h1
             class="text-3xl md:text-4xl lg:text-6xl font-extrabold leading-tight"
             itemprop="name"
@@ -821,23 +766,23 @@
             Perfect for Tinder, Bumble, Hinge. <strong>Used by 1,000+ singles</strong> –
             <strong>most see improved matches</strong>.
           </p>
-          <!-- Success Stats -->
-          <div class="mt-6 grid grid-cols-3 gap-4 text-center">
-            <div>
-              <div class="text-2xl font-bold text-purple-300">10</div>
-              <div class="text-xs text-purple-400">Photo Styles</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold text-purple-300">&lt;2min</div>
-              <div class="text-xs text-purple-400">Total Time</div>
-            </div>
-            <div>
-              <div class="text-2xl font-bold text-purple-300">$4.99</div>
-              <div class="text-xs text-purple-400">One-Time</div>
-            </div>
+        <!-- Success Stats -->
+        <div class="mt-6 grid grid-cols-3 gap-4 max-w-2xl mx-auto">
+          <div>
+            <div class="text-2xl font-bold text-purple-300">10</div>
+            <div class="text-xs text-purple-400">Photo Styles</div>
           </div>
+          <div>
+            <div class="text-2xl font-bold text-purple-300">&lt;2min</div>
+            <div class="text-xs text-purple-400">Total Time</div>
+          </div>
+          <div>
+            <div class="text-2xl font-bold text-purple-300">$4.99</div>
+            <div class="text-xs text-purple-400">One-Time</div>
+          </div>
+        </div>
 
-          <div class="mt-6 flex flex-col items-center gap-3">
+        <div class="mt-6 flex flex-col items-center gap-3">
             <a
               id="cta"
               href="/#upload"
@@ -855,105 +800,30 @@
             >
           </div>
 
-          <!-- Trust Badges -->
-          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
-            <div class="bg-green-500/20 border-2 border-green-400/50 rounded-lg p-3 text-center">
-              <div class="text-2xl mb-1">💰</div>
-              <div class="text-sm font-bold text-green-300">Money-Back</div>
-              <div class="text-xs text-green-200">Guarantee</div>
-            </div>
-            <div class="bg-blue-500/20 border-2 border-blue-400/50 rounded-lg p-3 text-center">
-              <div class="text-2xl mb-1">⚡</div>
-              <div class="text-sm font-bold text-blue-300">Instant</div>
-              <div class="text-xs text-blue-200">Delivery</div>
-            </div>
-            <div class="bg-purple-500/20 border-2 border-purple-400/50 rounded-lg p-3 text-center">
-              <div class="text-2xl mb-1">🔒</div>
-              <div class="text-sm font-bold text-purple-300">No Subscription</div>
-              <div class="text-xs text-purple-200">One-Time Payment</div>
-            </div>
+        <!-- Trust Badges -->
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
+          <div class="bg-green-500/20 border-2 border-green-400/50 rounded-lg p-3 text-center">
+            <div class="text-2xl mb-1">💰</div>
+            <div class="text-sm font-bold text-green-300">Money-Back</div>
+            <div class="text-xs text-green-200">Guarantee</div>
           </div>
-
-        </header>
-      </div>
-
-      <!-- How It Works Section -->
-      <div class="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8">
-        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8">
-          How It Works – 3 Simple Steps
-        </h2>
-
-        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <!-- Step 1 -->
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-              1
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Upload 1 Photo</h3>
-            <p class="text-purple-200 text-sm">
-              Upload any clear selfie or portrait. No professional photos needed – a simple phone selfie works great!
-            </p>
+          <div class="bg-blue-500/20 border-2 border-blue-400/50 rounded-lg p-3 text-center">
+            <div class="text-2xl mb-1">⚡</div>
+            <div class="text-sm font-bold text-blue-300">Instant</div>
+            <div class="text-xs text-blue-200">Delivery</div>
           </div>
-
-          <!-- Step 2 -->
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-              2
-            </div>
-            <h3 class="text-xl font-semibold mb-2">AI Creates 10 Styles</h3>
-            <p class="text-purple-200 text-sm">
-              Our AI generates 10 professional photo variations in different styles, backgrounds, and poses – all in under 2 minutes.
-            </p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="text-center">
-            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
-              3
-            </div>
-            <h3 class="text-xl font-semibold mb-2">Use on Any Dating App</h3>
-            <p class="text-purple-200 text-sm">
-              Download your photos and use them on Tinder, Bumble, Hinge, or any dating app. No watermarks, full resolution.
-            </p>
+          <div class="bg-purple-500/20 border-2 border-purple-400/50 rounded-lg p-3 text-center">
+            <div class="text-2xl mb-1">🔒</div>
+            <div class="text-sm font-bold text-purple-300">No Subscription</div>
+            <div class="text-xs text-purple-200">One-Time Payment</div>
           </div>
         </div>
+      </header>
 
-        <!-- What You Get -->
-        <div class="mt-8 bg-purple-900/30 border border-purple-500/30 rounded-xl p-6">
-          <h3 class="text-xl font-semibold mb-4 text-center">What You Get for $4.99:</h3>
-          <ul class="grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
-            <li class="flex items-start gap-2">
-              <span class="text-green-400 text-xl">✓</span>
-              <span class="text-purple-100"><strong>10 AI-enhanced photos</strong> in different professional styles</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-green-400 text-xl">✓</span>
-              <span class="text-purple-100"><strong>High-resolution downloads</strong> (perfect for dating apps)</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-green-400 text-xl">✓</span>
-              <span class="text-purple-100"><strong>No watermarks</strong> on paid photos</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-green-400 text-xl">✓</span>
-              <span class="text-purple-100"><strong>One-time payment</strong> – no subscription required</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-green-400 text-xl">✓</span>
-              <span class="text-purple-100"><strong>Instant delivery</strong> in under 1 minute</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <span class="text-green-400 text-xl">✓</span>
-              <span class="text-purple-100"><strong>Works on Tinder, Bumble, Hinge</strong> and all dating apps</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Quick Visual Proof Gallery (Mobile-First) -->
-      <div class="mt-8 lg:hidden">
+      <!-- Visual Proof Gallery (Mobile-Optimized) -->
+      <div class="mt-8">
         <p class="text-center text-sm text-purple-300 mb-3 font-semibold">
-          👉 Swipe to see more transformations
+          👉 Swipe to see transformations
         </p>
         <div
           class="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory hide-scrollbar px-2"
@@ -969,7 +839,7 @@
                   alt="Before"
                   class="rounded-lg w-full h-auto object-cover"
                   style="height: 180px"
-                  loading="lazy"
+                  loading="eager"
                 />
                 <span
                   class="absolute top-1 left-1 bg-black/70 text-white px-2 py-0.5 rounded text-xs"
@@ -982,7 +852,7 @@
                   alt="After"
                   class="rounded-lg w-full h-auto object-cover"
                   style="height: 180px"
-                  loading="lazy"
+                  loading="eager"
                 />
                 <span
                   class="absolute top-1 right-1 bg-purple-600/90 text-white px-2 py-0.5 rounded text-xs"
@@ -1092,6 +962,80 @@
           </div>
         </div>
       </div>
+
+      <!-- How It Works Section -->
+      <div class="mt-12 bg-white/5 border border-white/10 rounded-2xl p-6 sm:p-8">
+        <h2 class="text-2xl sm:text-3xl font-bold text-center mb-8">
+          How It Works – 3 Simple Steps
+        </h2>
+
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <!-- Step 1 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              1
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Upload 1 Photo</h3>
+            <p class="text-purple-200 text-sm">
+              Upload any clear selfie or portrait. No professional photos needed – a simple phone selfie works great!
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              2
+            </div>
+            <h3 class="text-xl font-semibold mb-2">AI Creates 10 Styles</h3>
+            <p class="text-purple-200 text-sm">
+              Our AI generates 10 professional photo variations in different styles, backgrounds, and poses – all in under 2 minutes.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="text-center">
+            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+              3
+            </div>
+            <h3 class="text-xl font-semibold mb-2">Use on Any Dating App</h3>
+            <p class="text-purple-200 text-sm">
+              Download your photos and use them on Tinder, Bumble, Hinge, or any dating app. No watermarks, full resolution.
+            </p>
+          </div>
+        </div>
+
+        <!-- What You Get -->
+        <div class="mt-8 bg-purple-900/30 border border-purple-500/30 rounded-xl p-6">
+          <h3 class="text-xl font-semibold mb-4 text-center">What You Get for $4.99:</h3>
+          <ul class="grid sm:grid-cols-2 gap-3 max-w-3xl mx-auto">
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>10 AI-enhanced photos</strong> in different professional styles</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>High-resolution downloads</strong> (perfect for dating apps)</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>No watermarks</strong> on paid photos</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>One-time payment</strong> – no subscription required</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>Instant delivery</strong> in under 1 minute</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="text-green-400 text-xl">✓</span>
+              <span class="text-purple-100"><strong>Works on Tinder, Bumble, Hinge</strong> and all dating apps</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </section>
 
     <!-- Multiple Before/After Examples Carousel -->
