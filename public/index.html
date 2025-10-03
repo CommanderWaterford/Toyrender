@@ -85,7 +85,6 @@
     <!-- DNS Prefetch for External Domains -->
     <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
     <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="dns-prefetch" href="https://js.stripe.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
@@ -2715,6 +2714,9 @@
         </p>
       </div>
     </div>
+
+    <!-- Load Stripe.js before scripts that use it -->
+    <script src="https://js.stripe.com/v3"></script>
 
     <!-- Update the JavaScript section to handle Google auth callbacks -->
     <script>
@@ -5452,6 +5454,5 @@
 
       gtag("config", "G-78RSLH46CX");
     </script>
-    <script src="https://js.stripe.com/v3" defer></script>
   </body>
 </html>
