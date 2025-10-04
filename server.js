@@ -2123,7 +2123,7 @@ app.post(
       const response = await modelLimiter.schedule(() =>
         withBackoff(() =>
           ai.models.generateContent({
-            model: "gemini-2.5-flash-image-preview",
+            model: "gemini-2.5-flash-image",
             contents: [{ role: "user", parts }],
           })
         )
@@ -2399,7 +2399,7 @@ app.post(
       const response = await modelLimiter.schedule(() =>
         withBackoff(() =>
           ai.models.generateContent({
-            model: "gemini-2.5-flash-image-preview",
+            model: "gemini-2.5-flash-image",
             contents: [{ role: "user", parts }],
           })
         )
@@ -2503,7 +2503,7 @@ app.post(
     max: 3, // Max 3 free previews per hour per IP
     standardHeaders: true,
     keyGenerator: (req) => req.ip,
-    message: { error: "Too many preview requests. Try again in an hour." },
+    message: { error: "Too many preview requests!" },
   }),
   bodySizeGuard,
   upload.single("photo"),
@@ -2536,8 +2536,23 @@ app.post(
         console.warn("Sharp resize failed; using original:", e.message);
       }
 
-      // Dating photo preview prompt
-      const previewPrompt = `Create a professional, tasteful dating profile photo. Transform this portrait into an attractive, high-quality photo suitable for dating apps like Tinder, Bumble, or Hinge. Use professional lighting, elegant clothing (blazer, dress shirt, or casual chic), and a clean background. Keep it PG-13 appropriate - no nudity, no NSFW content. The result should look natural, confident, and approachable.`;
+      // Dating photo preview prompts (randomly select one)
+      const prompts = [
+        `A professional, hyperrealistic photograph of the person (preserving natural features), captured during an elegant moment of evening preparation. They stand or sit gracefully at a luxurious vanity table or in a chic dressing area, perhaps adjusting a piece of jewelry, fixing a cufflink, applying perfume, or checking their reflection with a thoughtful, alluring gaze.
+
+They wear either a sophisticated silk robe, a tailored shirt, or a refined slip dress—something that enhances their elegance without being overtly revealing. The softly blurred background features upscale décor like perfume bottles, flowers, and rich textures. Warm, indirect lighting from a vanity lamp or ambient evening light creates an intimate, refined glow. The composition feels cinematic, stylish, and sensual in a timeless way, with a shallow depth of field.`,
+
+        `An adorable and heartwarming photograph of the person (preserving hair color/style, eye color), playfully peeking over the top of a fluffy, oversized comforter in a bright, cozy bedroom. They wear soft, charming loungewear (e.g., silk sleep shirt, knit top, or minimalist pajamas), and their eyes sparkle with warmth and affection as they smile gently at the camera.
+
+Soft, diffused natural light fills the room, creating an inviting, homey atmosphere. A few delicate rose petals are scattered on the comforter, and the background shows a tastefully blurred, sunlit bedroom. The image conveys tenderness, charm, and playful intimacy, ideal for a social media portrait or a personalized keepsake.`,
+
+        `A professional, hyperrealistic photograph capturing the person (preserving their natural hair color/style, eye color, and facial features), reclining gracefully on luxurious, slightly rumpled white silk sheets in a softly lit bedroom. Their body is tastefully draped in an oversized white button-down shirt, silk robe, or minimalist loungewear, revealing just a bare shoulder, collarbone, or leg in a natural, elegant way. They gaze softly toward the camera with a tender, inviting, and subtly playful expression, as if just waking up and sharing an intimate moment.
+
+Soft, warm, diffused morning sunlight filters through sheer curtains, casting a luminous, ethereal glow and delicate highlights across their skin and the fabrics. A single long-stemmed red rose rests casually on the nearby pillow, and the overall composition is clean, airy, and deeply personal. The image evokes feelings of romantic connection, softness, and quiet sensuality, with a shallow depth of field and a focus on authentic emotion.`,
+      ];
+
+      // Randomly select a prompt
+      const previewPrompt = prompts[Math.floor(Math.random() * prompts.length)];
 
       const parts = [
         { text: previewPrompt },
@@ -2553,7 +2568,7 @@ app.post(
       const response = await modelLimiter.schedule(() =>
         withBackoff(() =>
           ai.models.generateContent({
-            model: "gemini-2.5-flash-image-preview",
+            model: "gemini-2.5-flash-image",
             contents: [{ role: "user", parts }],
           })
         )
@@ -2593,7 +2608,8 @@ app.post(
         ok: true,
         imageUrl: "/results/" + fname,
         watermarked: true,
-        message: "Preview generated! Upgrade for watermark-free, full-quality photos.",
+        message:
+          "Preview generated! Upgrade for watermark-free, full-quality photos.",
       });
     } catch (e) {
       console.error("Preview generation error:", e?.message || e);
