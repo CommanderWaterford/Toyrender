@@ -1270,20 +1270,38 @@
         let currentIndex = 0;
         let autoScrollInterval;
         let isPaused = false;
+        let isVisible = false;
 
         function scrollToCard(index) {
           const card = cards[index];
           if (card) {
-            card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+            // Only scroll within the gallery container, not the whole page
+            const cardLeft = card.offsetLeft;
+            gallery.scrollTo({ left: cardLeft, behavior: 'smooth' });
           }
         }
 
         function autoScroll() {
-          if (isPaused) return;
+          if (isPaused || !isVisible) return;
 
           currentIndex = (currentIndex + 1) % cards.length;
           scrollToCard(currentIndex);
         }
+
+        // Use Intersection Observer to detect when gallery is visible
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            isVisible = entry.isIntersecting;
+            // Stop auto-scroll when gallery is not visible
+            if (!isVisible) {
+              isPaused = true;
+            } else {
+              isPaused = false;
+            }
+          });
+        }, { threshold: 0.1 }); // Trigger when 10% of gallery is visible
+
+        observer.observe(gallery);
 
         // Start auto-scroll every 3 seconds
         autoScrollInterval = setInterval(autoScroll, 3000);
@@ -1293,23 +1311,25 @@
           isPaused = true;
         });
 
-        // Resume on mouse leave
+        // Resume on mouse leave (only if gallery is visible)
         gallery.addEventListener('mouseleave', () => {
-          isPaused = false;
+          if (isVisible) {
+            isPaused = false;
+          }
         });
 
         // Pause on touch/manual scroll
         gallery.addEventListener('touchstart', () => {
           isPaused = true;
-          clearInterval(autoScrollInterval);
         });
 
-        // Optional: Resume after touch ends (with delay)
+        // Resume after touch ends (with delay, only if visible)
         gallery.addEventListener('touchend', () => {
           setTimeout(() => {
-            isPaused = false;
-            autoScrollInterval = setInterval(autoScroll, 3000);
-          }, 5000); // Resume after 5 seconds of no interaction
+            if (isVisible) {
+              isPaused = false;
+            }
+          }, 5000);
         });
       })();
     </script>
