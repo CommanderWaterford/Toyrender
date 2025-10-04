@@ -393,6 +393,26 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/ai-background-remover.html"/>
   </url>
 
+  <!-- AI Headshot Creator -->
+  <url>
+    <loc>https://toyrender.com/headshot-creator</loc>
+    <lastmod>2025-10-04</lastmod>
+    <priority>0.85</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/headshot-creator"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/headshot-creator"/>
+  </url>
+
+  <!-- AI Headshot Pricing -->
+  <url>
+    <loc>https://toyrender.com/headshot-pricing</loc>
+    <lastmod>2025-10-04</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/headshot-pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/headshot-pricing"/>
+  </url>
+
   <!-- Business Headshot Gallery -->
   <url>
     <loc>https://toyrender.com/business-photos-gallery/</loc>
@@ -494,6 +514,26 @@
     <changefreq>weekly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/what-glasses-fit-my-face/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/what-glasses-fit-my-face/"/>
+  </url>
+
+  <!-- Blog Article: How Much Does a Headshot Cost -->
+  <url>
+    <loc>https://toyrender.com/blog/how-much-does-a-headshot-cost/</loc>
+    <lastmod>2025-10-04</lastmod>
+    <priority>0.75</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/how-much-does-a-headshot-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/how-much-does-a-headshot-cost/"/>
+  </url>
+
+  <!-- Blog Article: AI vs Traditional Headshot Cost -->
+  <url>
+    <loc>https://toyrender.com/blog/ai-vs-traditional-headshot-cost/</loc>
+    <lastmod>2025-10-04</lastmod>
+    <priority>0.76</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/ai-vs-traditional-headshot-cost/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/ai-vs-traditional-headshot-cost/"/>
   </url>
 
   <!-- Virtual Glasses Try-On Landing Page -->
