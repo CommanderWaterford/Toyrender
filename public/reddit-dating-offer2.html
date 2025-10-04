@@ -780,7 +780,7 @@
             <!-- Upload Box -->
             <div
               id="upload-dropzone"
-              class="border-2 border-dashed border-purple-400/50 rounded-xl p-8 text-center bg-white/5 hover:bg-white/10 hover:border-purple-400 transition cursor-pointer"
+              class="border-2 border-dashed border-purple-400/50 rounded-xl p-5 text-center bg-white/5 hover:bg-white/10 hover:border-purple-400 transition cursor-pointer"
             >
               <input
                 type="file"
@@ -789,13 +789,13 @@
                 class="hidden"
               />
               <div id="upload-prompt">
-                <i class="fa-solid fa-cloud-arrow-up text-5xl text-purple-400 mb-4"></i>
-                <p class="text-lg font-semibold mb-2">Drop your selfie here</p>
+                <i class="fa-solid fa-cloud-arrow-up text-4xl text-purple-400 mb-3"></i>
+                <p class="text-base font-semibold mb-1">Drop your selfie here</p>
                 <p class="text-sm text-purple-300">or click to browse</p>
                 <p class="text-xs text-purple-400 mt-2">JPG, PNG, or WebP • Max 10MB</p>
               </div>
               <div id="upload-preview" class="hidden">
-                <img id="preview-img" src="" alt="Preview" class="max-w-full max-h-48 mx-auto rounded-lg mb-4" />
+                <img id="preview-img" src="" alt="Preview" class="max-w-full max-h-40 mx-auto rounded-lg mb-3" />
                 <p class="text-sm text-purple-200 mb-1">Ready to generate preview</p>
                 <p class="text-xs text-purple-300/80">We'll generate your preview in under 60 seconds 👌</p>
               </div>
@@ -869,16 +869,20 @@
           </div>
 
         <!-- Trust Badges -->
-        <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto">
-          <div class="bg-green-500/20 border-2 border-green-400/50 rounded-lg p-3 text-center">
-            <div class="text-2xl mb-1">💰</div>
-            <div class="text-sm font-bold text-green-300">Money-Back</div>
-            <div class="text-xs text-green-200">Guarantee</div>
-          </div>
-          <div class="bg-blue-500/20 border-2 border-blue-400/50 rounded-lg p-3 text-center">
-            <div class="text-2xl mb-1">⚡</div>
-            <div class="text-sm font-bold text-blue-300">Instant</div>
-            <div class="text-xs text-blue-200">Delivery</div>
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-2xl mx-auto">
+          <div class="bg-gradient-to-r from-green-500/20 to-blue-500/20 border-2 border-green-400/50 rounded-lg p-3">
+            <div class="grid grid-cols-2 gap-2">
+              <div class="text-center">
+                <div class="text-2xl mb-1">💰</div>
+                <div class="text-sm font-bold text-green-300">Money-Back</div>
+                <div class="text-xs text-green-200">Guarantee</div>
+              </div>
+              <div class="text-center border-l border-white/20 pl-2">
+                <div class="text-2xl mb-1">⚡</div>
+                <div class="text-sm font-bold text-blue-300">Instant</div>
+                <div class="text-xs text-blue-200">Delivery</div>
+              </div>
+            </div>
           </div>
           <div class="bg-purple-500/20 border-2 border-purple-400/50 rounded-lg p-3 text-center">
             <div class="text-2xl mb-1">🔒</div>
@@ -1124,34 +1128,6 @@
         <p class="text-sm text-purple-300 mb-6 max-w-2xl mx-auto italic">
           Note: Example photos are AI-generated demonstrations. Your results will match your uploaded photo's likeness.
         </p>
-
-        <!-- Success Stats -->
-        <div
-          class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mb-8"
-        >
-          <div
-            class="bg-green-500/20 rounded-lg p-3 border border-green-400/30"
-          >
-            <div class="text-2xl font-bold text-green-300">1,000+</div>
-            <div class="text-xs text-green-200">Happy Customers</div>
-          </div>
-          <div class="bg-blue-500/20 rounded-lg p-3 border border-blue-400/30">
-            <div class="text-2xl font-bold text-blue-300">10 Styles</div>
-            <div class="text-xs text-blue-200">Per Upload</div>
-          </div>
-          <div
-            class="bg-purple-500/20 rounded-lg p-3 border border-purple-400/30"
-          >
-            <div class="text-2xl font-bold text-purple-300">&lt;2min</div>
-            <div class="text-xs text-purple-200">Generation Time</div>
-          </div>
-          <div
-            class="bg-orange-500/20 rounded-lg p-3 border border-orange-400/30"
-          >
-            <div class="text-2xl font-bold text-orange-300">$4.99</div>
-            <div class="text-xs text-orange-200">One-Time Payment</div>
-          </div>
-        </div>
       </div>
 
       <!-- Carousel Container -->
@@ -1259,19 +1235,6 @@
                 <div class="text-sm font-bold text-pink-300">Bumble</div>
                 <div class="text-xs text-pink-200">Top Pick</div>
               </div>
-            </div>
-
-            <!-- User Quote -->
-            <div
-              class="bg-green-500/10 border border-green-500/20 rounded-lg p-3 mb-3"
-            >
-              <p class="text-sm text-green-200 mb-1">
-                "Holy shit, this actually works! Got more matches in one week
-                than in 6 months before."
-              </p>
-              <p class="text-xs text-green-300">
-                - u/StephNotBasic • r/Tinder • 1.8k upvotes
-              </p>
             </div>
 
             <!-- Quality Indicators -->
@@ -1390,19 +1353,6 @@
               </div>
             </div>
 
-            <!-- User Quote -->
-            <div
-              class="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3 mb-3"
-            >
-              <p class="text-sm text-blue-200 mb-1">
-                "From invisible to getting asked out within 48 hours. This is
-                insane. Thank you Reddit for the recommendation!"
-              </p>
-              <p class="text-xs text-blue-300">
-                - u/SimonSaysDate • r/dating_advice • 2.1k upvotes
-              </p>
-            </div>
-
             <!-- Quality Indicators -->
             <div class="flex flex-wrap gap-1">
               <span
@@ -1519,19 +1469,6 @@
               </div>
             </div>
 
-            <!-- User Quote -->
-            <div
-              class="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3 mb-3"
-            >
-              <p class="text-sm text-orange-200 mb-1">
-                "Went from zero dates in 2025 to having my first coffee date
-                this weekend. Finally feel confident on dating apps!"
-              </p>
-              <p class="text-xs text-orange-300">
-                - u/EthanTheGentleman • r/dating • 1.5k upvotes
-              </p>
-            </div>
-
             <!-- Quality Indicators -->
             <div class="flex flex-wrap gap-1">
               <span
@@ -1646,19 +1583,6 @@
                 <div class="text-sm font-bold text-pink-300">Dinner</div>
                 <div class="text-xs text-pink-200">First Date</div>
               </div>
-            </div>
-
-            <!-- User Quote -->
-            <div
-              class="bg-pink-500/10 border border-pink-500/20 rounded-lg p-3 mb-3"
-            >
-              <p class="text-sm text-pink-200 mb-1">
-                "These photos gave me so much confidence! Had my first real date
-                in over a year. Thank you for making this so easy!"
-              </p>
-              <p class="text-xs text-pink-300">
-                - u/SabrinaConfident • r/dating_advice • 2.2k upvotes
-              </p>
             </div>
 
             <!-- Quality Indicators -->
@@ -1798,14 +1722,9 @@
 
     <!-- Pricing -->
     <section id="pricing" class="max-w-7xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-12 sm:pb-16">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-8 text-center">
         Simple Pricing (No Subscription BS)
       </h2>
-      <p class="text-center text-purple-200 mb-8 max-w-2xl mx-auto">
-        Compare: Professional photographer = $300-500+ and weeks of scheduling.
-        Our AI =
-        <strong>Professional results in under 1 minute for just $4.99</strong>
-      </p>
 
       <!-- Value Comparison -->
       <div
