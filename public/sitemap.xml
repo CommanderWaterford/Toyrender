@@ -576,4 +576,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/product-showcase"/>
   </url>
 
+  <!-- LinkedIn Headshots AI Guide -->
+  <url>
+    <loc>https://toyrender.com/linkedin-headshots-ai</loc>
+    <lastmod>2025-10-04</lastmod>
+    <priority>0.88</priority>
+    <changefreq>weekly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/linkedin-headshots-ai"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/linkedin-headshots-ai"/>
+  </url>
+
 </urlset>
