@@ -278,7 +278,7 @@
     <!-- Horizontal Scrolling Gallery -->
     <section class="py-12 relative">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="scroll-container overflow-x-auto pb-4 snap-x snap-mandatory">
+        <div id="headshot-gallery" class="scroll-container overflow-x-auto pb-4 snap-x snap-mandatory">
           <div class="flex space-x-4 min-w-max">
             <!-- Headshot Card 1 -->
             <div class="headshot-card relative group">
@@ -1257,5 +1257,61 @@
         </div>
       </div>
     </footer>
+
+    <!-- Auto-scroll Gallery Script -->
+    <script>
+      (function() {
+        const gallery = document.getElementById('headshot-gallery');
+        if (!gallery) return;
+
+        const cards = gallery.querySelectorAll('.headshot-card');
+        if (cards.length === 0) return;
+
+        let currentIndex = 0;
+        let autoScrollInterval;
+        let isPaused = false;
+
+        function scrollToCard(index) {
+          const card = cards[index];
+          if (card) {
+            card.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+          }
+        }
+
+        function autoScroll() {
+          if (isPaused) return;
+
+          currentIndex = (currentIndex + 1) % cards.length;
+          scrollToCard(currentIndex);
+        }
+
+        // Start auto-scroll every 3 seconds
+        autoScrollInterval = setInterval(autoScroll, 3000);
+
+        // Pause on hover
+        gallery.addEventListener('mouseenter', () => {
+          isPaused = true;
+        });
+
+        // Resume on mouse leave
+        gallery.addEventListener('mouseleave', () => {
+          isPaused = false;
+        });
+
+        // Pause on touch/manual scroll
+        gallery.addEventListener('touchstart', () => {
+          isPaused = true;
+          clearInterval(autoScrollInterval);
+        });
+
+        // Optional: Resume after touch ends (with delay)
+        gallery.addEventListener('touchend', () => {
+          setTimeout(() => {
+            isPaused = false;
+            autoScrollInterval = setInterval(autoScroll, 3000);
+          }, 5000); // Resume after 5 seconds of no interaction
+        });
+      })();
+    </script>
   </body>
 </html>
