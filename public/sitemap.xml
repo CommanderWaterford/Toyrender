@@ -556,6 +556,16 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/linkedin-headshot-mistakes/"/>
   </url>
 
+  <!-- Blog Article: Do Recruiters Identify AI Headshots -->
+  <url>
+    <loc>https://toyrender.com/blog/do-recruiters-identify-ai-headshots/</loc>
+    <lastmod>2025-10-05</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/do-recruiters-identify-ai-headshots/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/do-recruiters-identify-ai-headshots/"/>
+  </url>
+
   <!-- Virtual Glasses Try-On Landing Page -->
   <url>
     <loc>https://toyrender.com/glasses-tryon.html</loc>
