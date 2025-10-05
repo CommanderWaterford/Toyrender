@@ -606,4 +606,14 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/linkedin-headshots-ai"/>
   </url>
 
+  <!-- AI Christmas Photo Generator -->
+  <url>
+    <loc>https://toyrender.com/christmas-photos</loc>
+    <lastmod>2025-10-05</lastmod>
+    <priority>0.90</priority>
+    <changefreq>daily</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/christmas-photos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/christmas-photos"/>
+  </url>
+
 </urlset>
