@@ -166,43 +166,98 @@
         }
 
         .blog-content h2 {
-            @apply text-3xl font-bold text-rose-100 mt-16 mb-6 border-l-4 border-rose-500 pl-4;
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #e0e7ff;
+            margin-top: 4rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #f43f5e;
+            padding-left: 1rem;
         }
 
         .blog-content h2:first-of-type {
-            @apply mt-8;
+            margin-top: 2rem;
         }
 
         .blog-content h3 {
-            @apply text-xl font-semibold text-rose-200 mt-8 mb-4;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #c7d2fe;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
         .blog-content p {
-            @apply text-rose-100/90 leading-relaxed mb-5 text-lg;
+            color: rgba(224, 231, 255, 0.9);
+            line-height: 1.625;
+            margin-bottom: 1.25rem;
+            font-size: 1.125rem;
+        }
+
+        .blog-content p + h2,
+        .blog-content div + h2,
+        .blog-content ul + h2,
+        .blog-content ol + h2,
+        .blog-content blockquote + h2 {
+            margin-top: 4rem;
         }
 
         .blog-content ul, .blog-content ol {
-            @apply text-rose-100/90 mb-6 pl-6 space-y-2;
+            color: rgba(224, 231, 255, 0.9);
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .blog-content ul {
+            list-style-type: disc;
+        }
+
+        .blog-content ol {
+            list-style-type: decimal;
         }
 
         .blog-content li {
-            @apply mb-2 text-lg;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+            line-height: 1.625;
         }
 
         .blog-content a {
-            @apply text-rose-300 hover:text-rose-100 underline transition-colors;
+            color: #fda4af;
+            text-decoration: underline;
+            transition: color 0.2s;
+        }
+
+        .blog-content a:hover {
+            color: #e0e7ff;
         }
 
         .blog-content blockquote {
-            @apply border-l-4 border-rose-500 pl-6 italic text-rose-200 my-10 py-4 bg-rose-500/10 rounded-r-lg;
+            border-left: 4px solid #f43f5e;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #fda4af;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            background: rgba(244, 63, 94, 0.1);
+            border-radius: 0 0.5rem 0.5rem 0;
         }
 
         .cta-box {
-            @apply bg-gradient-to-r from-rose-600/20 to-pink-600/20 border-2 border-rose-500/40 rounded-2xl p-8 my-10 backdrop-blur-sm;
+            background: linear-gradient(to right, rgba(225, 29, 72, 0.2), rgba(219, 39, 119, 0.2));
+            border: 2px solid rgba(244, 63, 94, 0.4);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-top: 2.5rem;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(4px);
         }
 
         .section-spacing {
-            @apply my-12;
+            margin-top: 3rem;
+            margin-bottom: 3rem;
         }
 
         .stat-card {
@@ -252,31 +307,39 @@
 
         @media (max-width: 640px) {
             .blog-content h2 {
-                @apply text-2xl mt-12 mb-5;
+                font-size: 1.5rem;
+                margin-top: 3rem;
+                margin-bottom: 1.25rem;
             }
 
             .blog-content h2:first-of-type {
-                @apply mt-6;
+                margin-top: 1.5rem;
             }
 
             .blog-content h3 {
-                @apply text-lg mt-6 mb-3;
+                font-size: 1.125rem;
+                margin-top: 1.5rem;
+                margin-bottom: 0.75rem;
             }
 
             .blog-content p, .blog-content li {
-                @apply text-base mb-4;
+                font-size: 1rem;
+                margin-bottom: 1rem;
             }
 
             .stat-number {
-                @apply text-3xl;
+                font-size: 1.875rem;
             }
 
             .cta-box {
-                @apply my-8;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                padding: 1.5rem;
             }
 
             .section-spacing {
-                @apply my-8;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
             }
         }
     </style>
