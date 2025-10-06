@@ -505,14 +505,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/bulk-create-images-with-bananabatch/"/>
   </url>
 
-  <!-- Blog Article: AI Glamour Photography Selfie to Magazine -->
+  <!-- Blog Article: AI Glamour Photography (EN) -->
   <url>
     <loc>https://toyrender.com/blog/ai-glamour-photography-selfie-to-magazine/</loc>
-    <lastmod>2025-09-22</lastmod>
-    <priority>0.70</priority>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-10-06</lastmod>
+    <priority>0.78</priority>
+    <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/ai-glamour-photography-selfie-to-magazine/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/fotografia-glamour-ia-selfie-a-portada/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/blog/fotografia-glamour-ia-selfie-a-portada/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/ai-glamour-photography-selfie-to-magazine/"/>
+  </url>
+
+  <!-- Blog Article: AI Glamour Photography (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/blog/fotografia-glamour-ia-selfie-a-portada/</loc>
+    <lastmod>2025-10-06</lastmod>
+    <priority>0.78</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/ai-glamour-photography-selfie-to-magazine/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/blog/fotografia-glamour-ia-selfie-a-portada/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/ai-glamour-photography-selfie-to-magazine/"/>
   </url>
 
