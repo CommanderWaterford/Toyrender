@@ -166,29 +166,43 @@
         }
 
         .blog-content h2 {
-            @apply text-3xl font-bold text-rose-100 mt-10 mb-5 border-l-4 border-rose-500 pl-4;
+            @apply text-3xl font-bold text-rose-100 mt-16 mb-6 border-l-4 border-rose-500 pl-4;
         }
+
+        .blog-content h2:first-of-type {
+            @apply mt-8;
+        }
+
         .blog-content h3 {
-            @apply text-xl font-semibold text-rose-200 mt-6 mb-3;
+            @apply text-xl font-semibold text-rose-200 mt-8 mb-4;
         }
+
         .blog-content p {
-            @apply text-rose-100/90 leading-relaxed mb-4 text-lg;
+            @apply text-rose-100/90 leading-relaxed mb-5 text-lg;
         }
+
         .blog-content ul, .blog-content ol {
             @apply text-rose-100/90 mb-6 pl-6 space-y-2;
         }
+
         .blog-content li {
             @apply mb-2 text-lg;
         }
+
         .blog-content a {
             @apply text-rose-300 hover:text-rose-100 underline transition-colors;
         }
+
         .blog-content blockquote {
-            @apply border-l-4 border-rose-500 pl-6 italic text-rose-200 my-8 py-4 bg-rose-500/10 rounded-r-lg;
+            @apply border-l-4 border-rose-500 pl-6 italic text-rose-200 my-10 py-4 bg-rose-500/10 rounded-r-lg;
         }
 
         .cta-box {
-            @apply bg-gradient-to-r from-rose-600/20 to-pink-600/20 border-2 border-rose-500/40 rounded-2xl p-8 my-8 backdrop-blur-sm;
+            @apply bg-gradient-to-r from-rose-600/20 to-pink-600/20 border-2 border-rose-500/40 rounded-2xl p-8 my-10 backdrop-blur-sm;
+        }
+
+        .section-spacing {
+            @apply my-12;
         }
 
         .stat-card {
@@ -238,16 +252,31 @@
 
         @media (max-width: 640px) {
             .blog-content h2 {
-                @apply text-2xl mt-8 mb-4;
+                @apply text-2xl mt-12 mb-5;
             }
+
+            .blog-content h2:first-of-type {
+                @apply mt-6;
+            }
+
             .blog-content h3 {
-                @apply text-lg;
+                @apply text-lg mt-6 mb-3;
             }
+
             .blog-content p, .blog-content li {
-                @apply text-base;
+                @apply text-base mb-4;
             }
+
             .stat-number {
                 @apply text-3xl;
+            }
+
+            .cta-box {
+                @apply my-8;
+            }
+
+            .section-spacing {
+                @apply my-8;
             }
         }
     </style>
@@ -399,7 +428,7 @@
 
                 <p>Traditional glamour photography has long been the domain of high-end fashion studios. A typical professional glamour shoot involves:</p>
 
-                <div class="my-8 bg-slate-800/30 rounded-xl p-6 border border-rose-400/20">
+                <div class="section-spacing bg-slate-800/30 rounded-xl p-6 border border-rose-400/20">
                     <h3 class="text-rose-100 font-bold mb-4 text-center">Traditional Glamour Shoot Costs</h3>
                     <table class="comparison-table">
                         <thead>
@@ -441,7 +470,7 @@
                     </table>
                 </div>
 
-                <div class="bg-gradient-to-r from-green-600/20 to-emerald-600/20 border-2 border-green-500/40 rounded-xl p-6 my-8">
+                <div class="bg-gradient-to-r from-green-600/20 to-emerald-600/20 border-2 border-green-500/40 rounded-xl p-6 section-spacing">
                     <div class="flex items-center gap-3 mb-3">
                         <div class="text-3xl">💰</div>
                         <h3 class="text-xl font-bold text-green-100">AI Glamour Photography Cost</h3>
@@ -456,7 +485,7 @@
 
                 <h2>How AI Creates Magazine-Quality Glamour</h2>
 
-                <div class="grid md:grid-cols-2 gap-6 my-8">
+                <div class="grid md:grid-cols-2 gap-6 section-spacing">
                     <div class="feature-card">
                         <div class="icon-circle">
                             <i class="fas fa-face-smile"></i>
@@ -500,7 +529,7 @@
 
                 <p>While AI can work magic, starting with a quality source photo dramatically improves your results. Here's how to capture the perfect selfie for glamour transformation:</p>
 
-                <div class="grid md:grid-cols-3 gap-6 my-8">
+                <div class="grid md:grid-cols-3 gap-6 section-spacing">
                     <div class="bg-slate-800/30 rounded-xl p-6 border border-rose-400/20">
                         <div class="text-3xl mb-3 text-center">💡</div>
                         <h3 class="text-rose-100 font-bold mb-3 text-center">Lighting Tips</h3>
@@ -550,7 +579,7 @@
 
                 <h2>Popular AI Glamour Styles</h2>
 
-                <div class="grid md:grid-cols-2 gap-6 my-8">
+                <div class="grid md:grid-cols-2 gap-6 section-spacing">
                     <div class="bg-gradient-to-br from-slate-800/50 to-rose-900/20 rounded-xl p-6 border border-rose-400/30">
                         <h3 class="text-rose-100 font-bold mb-3 flex items-center gap-2">
                             <i class="fas fa-star text-yellow-400"></i>
@@ -600,7 +629,7 @@
 
                 <p>The accessibility of professional-quality glamour photography is creating new opportunities across industries:</p>
 
-                <div class="space-y-6 my-8">
+                <div class="space-y-6 section-spacing">
                     <div class="flex gap-4 items-start">
                         <div class="text-3xl">👨‍💼</div>
                         <div>
@@ -628,7 +657,7 @@
 
                 <h2>Frequently Asked Questions</h2>
 
-                <div class="space-y-4 my-8">
+                <div class="space-y-4 section-spacing">
                     <div class="bg-slate-800/30 rounded-xl p-6 border border-rose-400/20">
                         <h3 class="text-rose-100 font-bold mb-3 flex items-center gap-2">
                             <i class="fas fa-question-circle text-rose-400"></i>
@@ -664,7 +693,7 @@
 
                 <h2>Ethical Considerations and Best Practices</h2>
 
-                <div class="bg-indigo-600/20 border border-indigo-500/30 rounded-xl p-6 my-8">
+                <div class="bg-indigo-600/20 border border-indigo-500/30 rounded-xl p-6 section-spacing">
                     <h3 class="text-indigo-100 font-bold mb-4 flex items-center gap-2">
                         <i class="fas fa-shield-halved text-indigo-400"></i>
                         Important Guidelines
@@ -693,7 +722,7 @@
 
                 <p>Ready to begin your glamour transformation journey? Here's your step-by-step action plan:</p>
 
-                <div class="space-y-4 my-8">
+                <div class="space-y-4 section-spacing">
                     <div class="flex gap-4 items-start bg-slate-800/30 rounded-xl p-4 border border-rose-400/20">
                         <div class="flex-shrink-0 w-8 h-8 rounded-full bg-rose-600 flex items-center justify-center font-bold">1</div>
                         <div>
