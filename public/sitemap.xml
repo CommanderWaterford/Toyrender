@@ -556,13 +556,25 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/linkedin-headshot-mistakes/"/>
   </url>
 
-  <!-- Blog Article: Do Recruiters Identify AI Headshots -->
+  <!-- Blog Article: Do Recruiters Identify AI Headshots (EN) -->
   <url>
     <loc>https://toyrender.com/blog/do-recruiters-identify-ai-headshots/</loc>
-    <lastmod>2025-10-05</lastmod>
+    <lastmod>2025-10-06</lastmod>
     <priority>0.82</priority>
     <changefreq>monthly</changefreq>
     <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/do-recruiters-identify-ai-headshots/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/blog/identifican-reclutadores-fotos-ia/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/do-recruiters-identify-ai-headshots/"/>
+  </url>
+
+  <!-- Blog Article: Do Recruiters Identify AI Headshots (ES) -->
+  <url>
+    <loc>https://toyrender.com/es/blog/identifican-reclutadores-fotos-ia/</loc>
+    <lastmod>2025-10-06</lastmod>
+    <priority>0.82</priority>
+    <changefreq>monthly</changefreq>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/blog/do-recruiters-identify-ai-headshots/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/blog/identifican-reclutadores-fotos-ia/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/blog/do-recruiters-identify-ai-headshots/"/>
   </url>
 
