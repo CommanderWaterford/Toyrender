@@ -184,13 +184,13 @@
 
   <!-- Glamour Shoots Gallery -->
   <url>
-    <loc>https://toyrender.com/glamour-gallery/</loc>
+    <loc>https://toyrender.com/glamour-gallery</loc>
     <lastmod>2025-09-17</lastmod>
     <priority>0.60</priority>
     <changefreq>weekly</changefreq>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/glamour-galeria/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery"/>
   </url>
 
   <url>
@@ -198,9 +198,9 @@
     <lastmod>2025-09-18</lastmod>
     <priority>0.58</priority>
     <changefreq>weekly</changefreq>
-    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://toyrender.com/glamour-gallery"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://toyrender.com/es/glamour-galeria/"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://toyrender.com/glamour-gallery"/>
   </url>
 
   <!-- Blog Article: Why Dating Photos Matter -->
