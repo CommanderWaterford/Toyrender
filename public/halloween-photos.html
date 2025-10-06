@@ -541,7 +541,10 @@
           <!-- Example 1 - Stephany -->
           <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
             <div class="grid grid-cols-2 gap-2 p-4">
-              <img src="/images/dating-photos/Stephany.jpg" alt="Stephany original" class="w-full h-48 object-cover rounded-lg">
+              <div class="relative">
+                <img src="/images/dating-photos/Stephany.jpg" alt="Stephany original" class="w-full h-48 object-cover rounded-lg">
+                <div class="absolute top-2 right-2 bg-gray-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">Original</div>
+              </div>
               <img src="/images/dating-photos/Stephany_01.jpg" alt="Stephany vampire" class="w-full h-48 object-cover rounded-lg">
               <img src="/images/dating-photos/Stephany_02.jpg" alt="Stephany witch" class="w-full h-48 object-cover rounded-lg">
               <img src="/images/dating-photos/Stephany_03.jpg" alt="Stephany zombie" class="w-full h-48 object-cover rounded-lg">
@@ -562,7 +565,10 @@
           <!-- Example 2 - Jonas -->
           <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
             <div class="grid grid-cols-2 gap-2 p-4">
-              <img src="/images/dating-photos/Jonas.jpg" alt="Jonas original" class="w-full h-48 object-cover rounded-lg">
+              <div class="relative">
+                <img src="/images/dating-photos/Jonas.jpg" alt="Jonas original" class="w-full h-48 object-cover rounded-lg">
+                <div class="absolute top-2 right-2 bg-gray-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">Original</div>
+              </div>
               <img src="/images/business-headshots/Jonas-Business-01.webp" alt="Jonas werewolf" class="w-full h-48 object-cover rounded-lg">
               <img src="/images/business-headshots/Jonas-Business-02.webp" alt="Jonas zombie" class="w-full h-48 object-cover rounded-lg">
               <img src="/images/business-headshots/Jonas-Business-03.webp" alt="Jonas demon" class="w-full h-48 object-cover rounded-lg">
@@ -580,10 +586,37 @@
             </div>
           </div>
 
-          <!-- Example 3 - Lisa -->
+          <!-- Example 3 - Simone -->
           <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
             <div class="grid grid-cols-2 gap-2 p-4">
-              <img src="/images/halloween/Lisa-Halloween-Original.webp" alt="Lisa original" class="w-full h-48 object-cover rounded-lg">
+              <div class="relative">
+                <img src="/images/halloween/Simone-Halloween-Original.webp" alt="Simone original" class="w-full h-48 object-cover rounded-lg">
+                <div class="absolute top-2 right-2 bg-gray-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">Original</div>
+              </div>
+              <img src="/images/halloween/Simone-Halloween-01.webp" alt="Simone witch" class="w-full h-48 object-cover rounded-lg">
+              <img src="/images/halloween/Simone-Halloween-02.webp" alt="Simone ghost" class="w-full h-48 object-cover rounded-lg">
+              <img src="/images/halloween/Simone-Halloween-03.webp" alt="Simone vampire" class="w-full h-48 object-cover rounded-lg">
+            </div>
+            <div class="p-6">
+              <h3 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Simone's Haunting Photos</h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-3">"No costume rental needed! This Halloween costumes generator gave me incredible photos without leaving my house. Absolutely love it!"</p>
+              <div class="flex items-center gap-1 text-yellow-500">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Example 4 - Lisa -->
+          <div class="bg-gray-50 dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl">
+            <div class="grid grid-cols-2 gap-2 p-4">
+              <div class="relative">
+                <img src="/images/halloween/Lisa-Halloween-Original.webp" alt="Lisa original" class="w-full h-48 object-cover rounded-lg">
+                <div class="absolute top-2 right-2 bg-gray-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">Original</div>
+              </div>
               <img src="/images/halloween/Lisa-Halloween-01.webp" alt="Lisa vampire" class="w-full h-48 object-cover rounded-lg">
               <img src="/images/halloween/Lisa-Halloween-02.webp" alt="Lisa witch" class="w-full h-48 object-cover rounded-lg">
               <img src="/images/halloween/Lisa-Halloween-03.webp" alt="Lisa dark queen" class="w-full h-48 object-cover rounded-lg">
@@ -1029,6 +1062,12 @@
       </div>
     </footer>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4" onclick="closeLightbox()">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-4xl hover:text-orange-500 transition z-50">&times;</button>
+      <img id="lightbox-img" src="" alt="" class="max-w-full max-h-[90vh] object-contain rounded-lg" onclick="event.stopPropagation()">
+    </div>
+
     <script>
       // Mobile menu toggle
       document.querySelector('nav button').addEventListener('click', function() {
@@ -1036,6 +1075,42 @@
         if (mobileMenu) {
           mobileMenu.classList.toggle('hidden');
         }
+      });
+
+      // Lightbox functionality
+      function openLightbox(imgSrc, imgAlt) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = imgSrc;
+        lightboxImg.alt = imgAlt;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+      }
+
+      // Add click handlers to all gallery images
+      document.addEventListener('DOMContentLoaded', function() {
+        const galleryImages = document.querySelectorAll('#examples img');
+        galleryImages.forEach(img => {
+          img.style.cursor = 'pointer';
+          img.addEventListener('click', function() {
+            openLightbox(this.src, this.alt);
+          });
+        });
+
+        // ESC key to close lightbox
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeLightbox();
+          }
+        });
       });
     </script>
   </body>
