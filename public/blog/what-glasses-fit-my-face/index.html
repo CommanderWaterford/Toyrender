@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>
-      What Glasses Fit My Face? Complete Guide to Finding Your Perfect Frame (2025)
+      What Glasses Fit My Face? Complete Guide to Finding Your Perfect Frame
+      (2025)
     </title>
 
     <!-- SEO -->
@@ -12,7 +13,10 @@
       name="description"
       content="Discover what glasses fit your face shape perfectly. Complete guide to choosing the right frames for round, oval, square, heart, and diamond face shapes. Try on 6 different styles instantly with AI."
     />
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large"
+    />
     <meta name="googlebot" content="index, follow" />
     <link
       rel="canonical"
@@ -226,7 +230,8 @@
         color: #cbd5e1;
       }
 
-      .prose ul, .prose ol {
+      .prose ul,
+      .prose ol {
         margin-left: 1.5rem;
         margin-bottom: 1.25rem;
       }
@@ -272,7 +277,8 @@
       }
 
       @keyframes pulse-glow {
-        0%, 100% {
+        0%,
+        100% {
           box-shadow: 0 0 20px rgba(147, 51, 234, 0.4);
         }
         50% {
@@ -283,12 +289,76 @@
       .pulse-glow {
         animation: pulse-glow 2s ease-in-out infinite;
       }
+
+      /* Lightbox Modal */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        align-items: center;
+        justify-content: center;
+        cursor: zoom-out;
+      }
+
+      .lightbox.active {
+        display: flex;
+      }
+
+      .lightbox-content {
+        max-width: 90%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 1rem;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+      }
+
+      .lightbox-close {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 3rem;
+        color: white;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.5);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s;
+      }
+
+      .lightbox-close:hover {
+        background: rgba(168, 85, 247, 0.8);
+        transform: scale(1.1);
+      }
+
+      .clickable-image {
+        cursor: zoom-in;
+      }
+
+      .clickable-image:hover {
+        opacity: 0.9;
+      }
     </style>
   </head>
 
   <body class="text-white">
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+      <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+      <img id="lightbox-img" class="lightbox-content" src="" alt="Zoomed image" />
+    </div>
     <!-- Header/Navigation -->
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-purple-500/30 shadow-lg">
+    <header
+      class="sticky top-0 z-50 backdrop-blur-md bg-slate-900/80 border-b border-purple-500/30 shadow-lg"
+    >
       <div class="container mx-auto px-6 py-4">
         <div class="flex items-center justify-between">
           <a href="/" class="flex items-center gap-3 group">
@@ -299,11 +369,22 @@
             </div>
           </a>
           <nav class="hidden md:flex gap-6">
-            <a href="/" class="text-purple-300 hover:text-white transition">Home</a>
-            <a href="/blog/" class="text-purple-300 hover:text-white transition">Blog</a>
-            <a href="/glasses-tryon.html" class="text-purple-300 hover:text-white transition">Try On Glasses</a>
+            <a href="/" class="text-purple-300 hover:text-white transition"
+              >Home</a
+            >
+            <a href="/blog/" class="text-purple-300 hover:text-white transition"
+              >Blog</a
+            >
+            <a
+              href="/glasses-tryon.html"
+              class="text-purple-300 hover:text-white transition"
+              >Try On Glasses</a
+            >
           </nav>
-          <a href="/glasses-tryon.html" class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition">
+          <a
+            href="/glasses-tryon.html"
+            class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-2 rounded-full font-semibold hover:from-purple-700 hover:to-pink-700 transition"
+          >
             Try Now
           </a>
         </div>
@@ -327,11 +408,14 @@
           <span class="gradient-text">What Glasses Fit My Face?</span>
         </h1>
         <p class="text-xl text-purple-200 mb-6">
-          Complete guide to finding your perfect frame based on face shape, style, and personal preference
+          Complete guide to finding your perfect frame based on face shape,
+          style, and personal preference
         </p>
 
         <!-- Meta info -->
-        <div class="flex flex-wrap items-center gap-4 text-sm text-purple-300 mb-8">
+        <div
+          class="flex flex-wrap items-center gap-4 text-sm text-purple-300 mb-8"
+        >
           <div class="flex items-center gap-2">
             <i class="far fa-calendar"></i>
             <span>October 1, 2025</span>
@@ -352,55 +436,172 @@
             <div class="flex-1">
               <h3 class="text-2xl font-bold mb-2">💡 Skip the Guesswork!</h3>
               <p class="text-purple-100 mb-0">
-                Try on 6 different glasses styles instantly with AI. See exactly what fits your face in 30 seconds.
+                Try on 6 different glasses styles instantly with AI. See exactly
+                what fits your face in 30 seconds.
               </p>
             </div>
-            <a href="/glasses-tryon.html" class="bg-white text-purple-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-purple-50 transition whitespace-nowrap">
+            <a
+              href="/glasses-tryon.html"
+              class="bg-white text-purple-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-purple-50 transition whitespace-nowrap"
+            >
               Try On Now - $4.99
             </a>
           </div>
         </div>
 
-        <!-- Mini Gallery Above Fold -->
+        <!-- Full Gallery Above Fold -->
         <div class="mt-8">
           <div class="text-center mb-6">
-            <h2 class="text-2xl font-bold gradient-text mb-2">See Real Results: 1 Selfie → 6 Styles</h2>
-            <p class="text-purple-300 text-sm">AI generates professional results in 30 seconds</p>
-          </div>
-
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-5xl mx-auto">
-            <!-- Original -->
-            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
-              <img src="/images/man1-glass-original.webp" alt="Original selfie" class="rounded-lg mb-2 w-full aspect-square object-cover" loading="eager" />
-              <p class="text-xs text-center text-purple-300 font-semibold">📸 Original</p>
-            </div>
-
-            <!-- Aviator -->
-            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
-              <img src="/images/man1-glass-style-01.webp" alt="Aviator frames" class="rounded-lg mb-2 w-full aspect-square object-cover" loading="eager" />
-              <p class="text-xs text-center text-purple-300 font-semibold">👓 Aviator</p>
-            </div>
-
-            <!-- Wayfarer -->
-            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
-              <img src="/images/man1-glass-style-02.webp" alt="Wayfarer frames" class="rounded-lg mb-2 w-full aspect-square object-cover" loading="eager" />
-              <p class="text-xs text-center text-purple-300 font-semibold">🤓 Wayfarer</p>
-            </div>
-
-            <!-- Round -->
-            <div class="glass-card rounded-xl p-3 hover:scale-105 transition-transform">
-              <img src="/images/man1-glass-style-03.webp" alt="Round frames" class="rounded-lg mb-2 w-full aspect-square object-cover" loading="eager" />
-              <p class="text-xs text-center text-purple-300 font-semibold">⭕ Round</p>
-            </div>
-          </div>
-
-          <div class="text-center mt-6">
-            <p class="text-purple-200 text-sm mb-3">
-              <i class="fas fa-plus-circle text-purple-400"></i> Get 2 more styles (Cat-Eye & Rectangle) when you try it
+            <h2 class="text-3xl font-bold gradient-text mb-2">
+              See Real Results: 1 Selfie → 6 Styles
+            </h2>
+            <p class="text-purple-200 text-lg">
+              Our AI generates professional results in 30 (!) seconds
             </p>
-            <a href="/glasses-tryon.html" class="inline-block bg-gradient-to-r from-orange-600 to-orange-500 px-8 py-3 rounded-xl font-bold hover:from-orange-700 hover:to-orange-600 transition shadow-lg">
-              <i class="fas fa-camera mr-2"></i>Try On 6 Styles Now - $4.99
-            </a>
+          </div>
+
+          <div class="glass-card rounded-2xl p-6 max-w-6xl mx-auto">
+            <!-- Original Photo -->
+            <div class="text-center mb-6">
+              <div class="max-w-xs mx-auto mb-4">
+                <img
+                  src="/images/man1-glass-original.webp"
+                  alt="Original selfie"
+                  class="rounded-xl shadow-xl w-full clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <p class="text-sm text-purple-300 font-semibold mt-3">
+                  📸 Original Selfie (click to zoom)
+                </p>
+              </div>
+              <div class="text-4xl mb-2">⬇️</div>
+              <p class="text-purple-200 font-semibold">
+                AI instantly generates all 6 styles
+              </p>
+            </div>
+
+            <!-- All 6 Styles Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+              <!-- Aviator -->
+              <div
+                class="face-shape-card rounded-xl p-4 hover:scale-105 transition-transform"
+              >
+                <img
+                  src="/images/man1-glass-style-01.webp"
+                  alt="Aviator frames - Click to zoom"
+                  class="rounded-lg shadow-lg w-full mb-3 clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <div class="text-center">
+                  <p class="font-bold text-purple-200">👓 Aviator</p>
+                  <p class="text-xs text-purple-400 mt-1">Classic & timeless</p>
+                </div>
+              </div>
+
+              <!-- Wayfarer -->
+              <div
+                class="face-shape-card rounded-xl p-4 hover:scale-105 transition-transform"
+              >
+                <img
+                  src="/images/man1-glass-style-02.webp"
+                  alt="Wayfarer frames - Click to zoom"
+                  class="rounded-lg shadow-lg w-full mb-3 clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <div class="text-center">
+                  <p class="font-bold text-purple-200">🤓 Wayfarer</p>
+                  <p class="text-xs text-purple-400 mt-1">Bold & modern</p>
+                </div>
+              </div>
+
+              <!-- Round -->
+              <div
+                class="face-shape-card rounded-xl p-4 hover:scale-105 transition-transform"
+              >
+                <img
+                  src="/images/man1-glass-style-03.webp"
+                  alt="Round frames - Click to zoom"
+                  class="rounded-lg shadow-lg w-full mb-3 clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <div class="text-center">
+                  <p class="font-bold text-purple-200">⭕ Round</p>
+                  <p class="text-xs text-purple-400 mt-1">Vintage & artistic</p>
+                </div>
+              </div>
+
+              <!-- Cat-Eye -->
+              <div
+                class="face-shape-card rounded-xl p-4 hover:scale-105 transition-transform"
+              >
+                <img
+                  src="/images/man1-glass-style-04.webp"
+                  alt="Cat-eye frames - Click to zoom"
+                  class="rounded-lg shadow-lg w-full mb-3 clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <div class="text-center">
+                  <p class="font-bold text-purple-200">😎 Cat-Eye</p>
+                  <p class="text-xs text-purple-400 mt-1">
+                    Chic & sophisticated
+                  </p>
+                </div>
+              </div>
+
+              <!-- Square -->
+              <div
+                class="face-shape-card rounded-xl p-4 hover:scale-105 transition-transform"
+              >
+                <img
+                  src="/images/man1-glass-style-05.webp"
+                  alt="Square frames - Click to zoom"
+                  class="rounded-lg shadow-lg w-full mb-3 clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <div class="text-center">
+                  <p class="font-bold text-purple-200">⬜ Square</p>
+                  <p class="text-xs text-purple-400 mt-1">Strong & confident</p>
+                </div>
+              </div>
+
+              <!-- Rectangle -->
+              <div
+                class="face-shape-card rounded-xl p-4 hover:scale-105 transition-transform"
+              >
+                <img
+                  src="/images/man1-glass-style-06.webp"
+                  alt="Rectangle frames - Click to zoom"
+                  class="rounded-lg shadow-lg w-full mb-3 clickable-image"
+                  loading="eager"
+                  onclick="openLightbox(this.src, this.alt)"
+                />
+                <div class="text-center">
+                  <p class="font-bold text-purple-200">▭ Rectangle</p>
+                  <p class="text-xs text-purple-400 mt-1">
+                    Professional & sleek
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- CTA Button -->
+            <div class="text-center">
+              <a
+                href="/glasses-tryon.html"
+                class="inline-block bg-gradient-to-r from-orange-600 to-orange-500 px-10 py-4 rounded-xl font-bold text-lg hover:from-orange-700 hover:to-orange-600 transition shadow-xl"
+              >
+                <i class="fas fa-camera mr-2"></i>Get Your 6 Styles for $4.99
+              </a>
+              <p class="text-sm text-purple-300 mt-3">
+                ✓ Results in 30 seconds • Private & secure
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -412,36 +613,70 @@
         <div class="glass-card rounded-3xl p-8 md:p-12">
           <div class="prose">
             <p class="text-xl leading-relaxed text-purple-100 mb-8">
-              <strong>Wondering "what glasses fit my face?"</strong> You're not alone. Choosing the right glasses can be overwhelming with hundreds of frame styles available. This comprehensive guide will help you identify your face shape and discover which glasses frames will look best on you.
+              <strong>Wondering "what glasses fit my face?"</strong> You're not
+              alone. Choosing the right glasses can be overwhelming with
+              hundreds of frame styles available. This comprehensive guide will
+              help you identify your face shape and discover which glasses
+              frames will look best on you.
             </p>
 
             <h2>Why Face Shape Matters for Glasses</h2>
             <p>
-              The key to finding flattering glasses is understanding the relationship between your face shape and frame style. <strong>The golden rule</strong>: choose frames that contrast with your face shape to create balance and visual harmony.
+              The key to finding flattering glasses is understanding the
+              relationship between your face shape and frame style.
+              <strong>The golden rule</strong>: choose frames that contrast with
+              your face shape to create balance and visual harmony.
             </p>
             <p>
-              According to <a href="https://www.aao.org" target="_blank" rel="noopener noreferrer">The American Academy of Ophthalmology</a>, the right frame can enhance your best features while minimizing less favorable ones. This isn't about following rigid rules—it's about understanding proportions and finding what makes you feel confident.
+              According to
+              <a
+                href="https://www.aao.org"
+                target="_blank"
+                rel="noopener noreferrer"
+                >The American Academy of Ophthalmology</a
+              >, the right frame can enhance your best features while minimizing
+              less favorable ones. This isn't about following rigid rules—it's
+              about understanding proportions and finding what makes you feel
+              confident.
             </p>
 
             <h2>How to Determine Your Face Shape</h2>
             <p>
-              Before choosing glasses, you need to identify your face shape. Here's the simple method:
+              Before choosing glasses, you need to identify your face shape.
+              Here's the simple method:
             </p>
             <ol>
-              <li><strong>Take a straight-on photo</strong> or stand in front of a mirror with your hair pulled back</li>
-              <li><strong>Trace your face outline</strong> on the mirror with a washable marker or analyze your photo</li>
-              <li><strong>Compare the shape</strong> to the five common face shapes below</li>
+              <li>
+                <strong>Take a straight-on photo</strong> or stand in front of a
+                mirror with your hair pulled back
+              </li>
+              <li>
+                <strong>Trace your face outline</strong> on the mirror with a
+                washable marker or analyze your photo
+              </li>
+              <li>
+                <strong>Compare the shape</strong> to the five common face
+                shapes below
+              </li>
             </ol>
 
-            <div class="glass-card rounded-xl p-6 my-6 border-2 border-purple-400/50">
+            <div
+              class="glass-card rounded-xl p-6 my-6 border-2 border-purple-400/50"
+            >
               <div class="flex items-center gap-3 mb-3">
                 <div class="text-3xl">👀</div>
-                <h3 class="text-xl font-bold text-purple-200 mb-0">Visual Face Shape Guide</h3>
+                <h3 class="text-xl font-bold text-purple-200 mb-0">
+                  Visual Face Shape Guide
+                </h3>
               </div>
               <p class="text-purple-200 mb-3">
-                See real examples of all 5 face shapes with recommended glasses for each type.
+                See real examples of all 5 face shapes with recommended glasses
+                for each type.
               </p>
-              <a href="/glasses-face-shape-guide.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition">
+              <a
+                href="/glasses-face-shape-guide.html"
+                class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition"
+              >
                 <i class="fas fa-images mr-2"></i>View Face Shape Gallery
               </a>
             </div>
@@ -450,117 +685,218 @@
 
             <h3>1. Round Face Shape 🔴</h3>
             <p>
-              <strong>Characteristics:</strong> Equal width and length, soft curves, full cheeks, rounded chin
+              <strong>Characteristics:</strong> Equal width and length, soft
+              curves, full cheeks, rounded chin
             </p>
             <p>
-              <strong>Best Glasses:</strong> Angular and rectangular frames that add definition and create the illusion of a longer, slimmer face.
+              <strong>Best Glasses:</strong> Angular and rectangular frames that
+              add definition and create the illusion of a longer, slimmer face.
             </p>
             <ul>
-              <li><strong>Rectangle frames:</strong> Add angles to balance soft curves</li>
-              <li><strong>Square frames:</strong> Create sharp contrast with round features</li>
-              <li><strong>Geometric frames:</strong> Modern angular shapes work beautifully</li>
-              <li><strong>Avoid:</strong> Round or oval frames that emphasize roundness</li>
+              <li>
+                <strong>Rectangle frames:</strong> Add angles to balance soft
+                curves
+              </li>
+              <li>
+                <strong>Square frames:</strong> Create sharp contrast with round
+                features
+              </li>
+              <li>
+                <strong>Geometric frames:</strong> Modern angular shapes work
+                beautifully
+              </li>
+              <li>
+                <strong>Avoid:</strong> Round or oval frames that emphasize
+                roundness
+              </li>
             </ul>
 
             <h3>2. Oval Face Shape 🥚</h3>
             <p>
-              <strong>Characteristics:</strong> Balanced proportions, forehead slightly wider than chin, gentle curves
+              <strong>Characteristics:</strong> Balanced proportions, forehead
+              slightly wider than chin, gentle curves
             </p>
             <p>
-              <strong>Best Glasses:</strong> Lucky you! Oval faces are considered the most versatile and can wear almost any frame style.
+              <strong>Best Glasses:</strong> Lucky you! Oval faces are
+              considered the most versatile and can wear almost any frame style.
             </p>
             <ul>
-              <li><strong>Aviator frames:</strong> Classic choice that complements natural balance</li>
-              <li><strong>Wayfarer frames:</strong> Timeless and always flattering</li>
-              <li><strong>Oversized frames:</strong> Make a bold fashion statement</li>
-              <li><strong>Cat-eye frames:</strong> Add playful sophistication</li>
-              <li><strong>Pro tip:</strong> Choose frames that are as wide as (or slightly wider than) the broadest part of your face</li>
+              <li>
+                <strong>Aviator frames:</strong> Classic choice that complements
+                natural balance
+              </li>
+              <li>
+                <strong>Wayfarer frames:</strong> Timeless and always flattering
+              </li>
+              <li>
+                <strong>Oversized frames:</strong> Make a bold fashion statement
+              </li>
+              <li>
+                <strong>Cat-eye frames:</strong> Add playful sophistication
+              </li>
+              <li>
+                <strong>Pro tip:</strong> Choose frames that are as wide as (or
+                slightly wider than) the broadest part of your face
+              </li>
             </ul>
 
             <h3>3. Square Face Shape ⬜</h3>
             <p>
-              <strong>Characteristics:</strong> Strong jawline, broad forehead, angular features, similar width and length
+              <strong>Characteristics:</strong> Strong jawline, broad forehead,
+              angular features, similar width and length
             </p>
             <p>
-              <strong>Best Glasses:</strong> Round or oval frames that soften angular features and add curves.
+              <strong>Best Glasses:</strong> Round or oval frames that soften
+              angular features and add curves.
             </p>
             <ul>
-              <li><strong>Round frames:</strong> Perfect contrast to strong angles</li>
-              <li><strong>Oval frames:</strong> Classic and softening effect</li>
-              <li><strong>Cat-eye frames:</strong> Draw attention upward and add curves</li>
-              <li><strong>Avoid:</strong> Heavy, boxy frames that emphasize angularity</li>
+              <li>
+                <strong>Round frames:</strong> Perfect contrast to strong angles
+              </li>
+              <li>
+                <strong>Oval frames:</strong> Classic and softening effect
+              </li>
+              <li>
+                <strong>Cat-eye frames:</strong> Draw attention upward and add
+                curves
+              </li>
+              <li>
+                <strong>Avoid:</strong> Heavy, boxy frames that emphasize
+                angularity
+              </li>
             </ul>
 
             <h3>4. Heart Face Shape 💜</h3>
             <p>
-              <strong>Characteristics:</strong> Wider forehead, high cheekbones, narrow chin, inverted triangle shape
+              <strong>Characteristics:</strong> Wider forehead, high cheekbones,
+              narrow chin, inverted triangle shape
             </p>
             <p>
-              <strong>Best Glasses:</strong> Frames that are wider at the bottom to balance a broader forehead.
+              <strong>Best Glasses:</strong> Frames that are wider at the bottom
+              to balance a broader forehead.
             </p>
             <ul>
-              <li><strong>Aviator frames:</strong> Wider bottom balances forehead width</li>
+              <li>
+                <strong>Aviator frames:</strong> Wider bottom balances forehead
+                width
+              </li>
               <li><strong>Round frames:</strong> Soften the pointed chin</li>
               <li><strong>Rimless frames:</strong> Minimize top-heaviness</li>
-              <li><strong>Light-colored frames:</strong> Draw less attention to forehead</li>
-              <li><strong>Avoid:</strong> Heavy top bars or decorative embellishments on top</li>
+              <li>
+                <strong>Light-colored frames:</strong> Draw less attention to
+                forehead
+              </li>
+              <li>
+                <strong>Avoid:</strong> Heavy top bars or decorative
+                embellishments on top
+              </li>
             </ul>
 
             <h3>5. Diamond Face Shape 💎</h3>
             <p>
-              <strong>Characteristics:</strong> Narrow forehead and chin, wide cheekbones, angular features
+              <strong>Characteristics:</strong> Narrow forehead and chin, wide
+              cheekbones, angular features
             </p>
             <p>
-              <strong>Best Glasses:</strong> Frames that highlight eyes and soften cheekbones.
+              <strong>Best Glasses:</strong> Frames that highlight eyes and
+              soften cheekbones.
             </p>
             <ul>
-              <li><strong>Cat-eye frames:</strong> Accentuate cheekbones beautifully</li>
+              <li>
+                <strong>Cat-eye frames:</strong> Accentuate cheekbones
+                beautifully
+              </li>
               <li><strong>Oval frames:</strong> Soften angular features</li>
-              <li><strong>Rimless frames:</strong> Don't compete with striking bone structure</li>
-              <li><strong>Frames with detailing:</strong> Draw attention to brow line</li>
-              <li><strong>Avoid:</strong> Narrow frames that make cheekbones appear wider</li>
+              <li>
+                <strong>Rimless frames:</strong> Don't compete with striking
+                bone structure
+              </li>
+              <li>
+                <strong>Frames with detailing:</strong> Draw attention to brow
+                line
+              </li>
+              <li>
+                <strong>Avoid:</strong> Narrow frames that make cheekbones
+                appear wider
+              </li>
             </ul>
 
             <h2>Beyond Face Shape: Other Important Considerations</h2>
 
             <h3>Frame Size and Proportions</h3>
-            <p>
-              Size matters just as much as shape. Your glasses should:
-            </p>
+            <p>Size matters just as much as shape. Your glasses should:</p>
             <ul>
-              <li><strong>Not extend beyond your face width:</strong> Frames should align with or sit just inside your temples</li>
-              <li><strong>Sit properly on your nose:</strong> No sliding or pinching</li>
-              <li><strong>Not touch your cheeks:</strong> When you smile, frames shouldn't lift</li>
-              <li><strong>Match your facial features:</strong> Large features can handle bold frames; delicate features suit thinner frames</li>
+              <li>
+                <strong>Not extend beyond your face width:</strong> Frames
+                should align with or sit just inside your temples
+              </li>
+              <li>
+                <strong>Sit properly on your nose:</strong> No sliding or
+                pinching
+              </li>
+              <li>
+                <strong>Not touch your cheeks:</strong> When you smile, frames
+                shouldn't lift
+              </li>
+              <li>
+                <strong>Match your facial features:</strong> Large features can
+                handle bold frames; delicate features suit thinner frames
+              </li>
             </ul>
 
             <h3>Skin Tone and Coloring</h3>
-            <p>
-              Frame color can enhance your natural coloring:
-            </p>
+            <p>Frame color can enhance your natural coloring:</p>
             <ul>
-              <li><strong>Warm undertones (golden/peachy):</strong> Tortoiseshell, gold, honey, olive, warm reds</li>
-              <li><strong>Cool undertones (pink/blue):</strong> Black, silver, blue, purple, pink, burgundy</li>
-              <li><strong>Neutral undertones:</strong> You're versatile—most colors work!</li>
+              <li>
+                <strong>Warm undertones (golden/peachy):</strong> Tortoiseshell,
+                gold, honey, olive, warm reds
+              </li>
+              <li>
+                <strong>Cool undertones (pink/blue):</strong> Black, silver,
+                blue, purple, pink, burgundy
+              </li>
+              <li>
+                <strong>Neutral undertones:</strong> You're versatile—most
+                colors work!
+              </li>
             </ul>
 
             <h3>Your Personal Style</h3>
             <p>
-              Don't forget personal preference! Your glasses are an extension of your personality:
+              Don't forget personal preference! Your glasses are an extension of
+              your personality:
             </p>
             <ul>
-              <li><strong>Professional:</strong> Classic rectangles, subtle colors, timeless shapes</li>
-              <li><strong>Creative:</strong> Bold colors, unique shapes, statement pieces</li>
-              <li><strong>Minimalist:</strong> Rimless or thin metal frames, neutral tones</li>
-              <li><strong>Trendy:</strong> Current fashion-forward styles, designer brands</li>
+              <li>
+                <strong>Professional:</strong> Classic rectangles, subtle
+                colors, timeless shapes
+              </li>
+              <li>
+                <strong>Creative:</strong> Bold colors, unique shapes, statement
+                pieces
+              </li>
+              <li>
+                <strong>Minimalist:</strong> Rimless or thin metal frames,
+                neutral tones
+              </li>
+              <li>
+                <strong>Trendy:</strong> Current fashion-forward styles,
+                designer brands
+              </li>
             </ul>
 
             <h2>The Modern Solution: Virtual Try-On Technology</h2>
             <p>
-              Gone are the days of guessing which glasses suit you. With AI-powered virtual try-on technology, you can see exactly how different frame styles look on your actual face before purchasing.
+              Gone are the days of guessing which glasses suit you. With
+              AI-powered virtual try-on technology, you can see exactly how
+              different frame styles look on your actual face before purchasing.
             </p>
             <p>
-              <a href="/glasses-tryon.html">Toyrender's Virtual Glasses Try-On</a> uses advanced AI to show you wearing 6 different glasses styles in under 30 seconds. Simply upload a selfie and instantly see:
+              <a href="/glasses-tryon.html"
+                >Toyrender's Virtual Glasses Try-On</a
+              >
+              uses advanced AI to show you wearing 6 different glasses styles in
+              under 30 seconds. Simply upload a selfie and instantly see:
             </p>
             <ul>
               <li>Aviator frames</li>
@@ -571,122 +907,72 @@
               <li>Rectangle frames</li>
             </ul>
             <p>
-              For just $4.99, you get high-quality renders that show exactly how each style complements your face shape, eliminating the guesswork and buyer's regret.
+              For just $4.99, you get high-quality renders that show exactly how
+              each style complements your face shape, eliminating the guesswork
+              and buyer's regret.
             </p>
 
-            <h3>See Real Examples: AI Virtual Try-On Results</h3>
             <p>
-              Here's what you get when you use our virtual try-on tool. One selfie transforms into 6 professional-quality renders showing you in different frame styles:
+              As shown in the gallery at the top of this article, you can see
+              real results from our virtual try-on tool. One selfie transforms
+              into 6 professional-quality renders showing you in different frame
+              styles—all generated in 30 seconds.
             </p>
-
-            <div class="my-8 -mx-4 md:mx-0">
-              <!-- Original Photo Large -->
-              <div class="glass-card rounded-2xl p-6 mb-6">
-                <div class="text-center mb-4">
-                  <h4 class="text-xl font-bold text-purple-200 mb-2">📸 Original Selfie</h4>
-                  <p class="text-sm text-purple-300">Upload one clear front-facing photo</p>
-                </div>
-                <div class="max-w-sm mx-auto">
-                  <img src="/images/man1-glass-original.webp" alt="Original selfie before virtual try-on" class="rounded-xl shadow-2xl w-full" loading="lazy" />
-                </div>
-              </div>
-
-              <!-- Arrow Down -->
-              <div class="text-center py-4">
-                <div class="text-5xl animate-bounce">⬇️</div>
-                <p class="text-purple-200 font-semibold mt-2">AI generates 6 styles in 30 seconds</p>
-              </div>
-
-              <!-- 6 Styles Grid -->
-              <div class="glass-card rounded-2xl p-6">
-                <div class="text-center mb-6">
-                  <h4 class="text-2xl font-bold text-purple-200 mb-2">👓 Your 6 Virtual Try-On Results</h4>
-                  <p class="text-sm text-purple-300">See exactly how each frame style suits your face</p>
-                </div>
-
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <!-- Aviator -->
-                  <div class="face-shape-card rounded-xl p-4">
-                    <img src="/images/man1-glass-style-01.webp" alt="Aviator frames virtual try-on result" class="rounded-lg shadow-lg w-full mb-3" loading="lazy" />
-                    <div class="text-center">
-                      <p class="font-bold text-purple-200">Aviator</p>
-                      <p class="text-xs text-purple-400 mt-1">Classic & timeless</p>
-                    </div>
-                  </div>
-
-                  <!-- Wayfarer -->
-                  <div class="face-shape-card rounded-xl p-4">
-                    <img src="/images/man1-glass-style-02.webp" alt="Wayfarer frames virtual try-on result" class="rounded-lg shadow-lg w-full mb-3" loading="lazy" />
-                    <div class="text-center">
-                      <p class="font-bold text-purple-200">Wayfarer</p>
-                      <p class="text-xs text-purple-400 mt-1">Bold & modern</p>
-                    </div>
-                  </div>
-
-                  <!-- Round -->
-                  <div class="face-shape-card rounded-xl p-4">
-                    <img src="/images/man1-glass-style-03.webp" alt="Round frames virtual try-on result" class="rounded-lg shadow-lg w-full mb-3" loading="lazy" />
-                    <div class="text-center">
-                      <p class="font-bold text-purple-200">Round</p>
-                      <p class="text-xs text-purple-400 mt-1">Vintage & artistic</p>
-                    </div>
-                  </div>
-
-                  <!-- Cat-Eye -->
-                  <div class="face-shape-card rounded-xl p-4">
-                    <img src="/images/man1-glass-style-04.webp" alt="Cat-eye frames virtual try-on result" class="rounded-lg shadow-lg w-full mb-3" loading="lazy" />
-                    <div class="text-center">
-                      <p class="font-bold text-purple-200">Cat-Eye</p>
-                      <p class="text-xs text-purple-400 mt-1">Chic & sophisticated</p>
-                    </div>
-                  </div>
-
-                  <!-- Square -->
-                  <div class="face-shape-card rounded-xl p-4">
-                    <img src="/images/man1-glass-style-05.webp" alt="Square frames virtual try-on result" class="rounded-lg shadow-lg w-full mb-3" loading="lazy" />
-                    <div class="text-center">
-                      <p class="font-bold text-purple-200">Square</p>
-                      <p class="text-xs text-purple-400 mt-1">Strong & confident</p>
-                    </div>
-                  </div>
-
-                  <!-- Rectangle -->
-                  <div class="face-shape-card rounded-xl p-4">
-                    <img src="/images/man1-glass-style-06.webp" alt="Rectangle frames virtual try-on result" class="rounded-lg shadow-lg w-full mb-3" loading="lazy" />
-                    <div class="text-center">
-                      <p class="font-bold text-purple-200">Rectangle</p>
-                      <p class="text-xs text-purple-400 mt-1">Professional & sleek</p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- CTA inside gallery -->
-                <div class="mt-8 text-center">
-                  <a href="/glasses-tryon.html" class="inline-block bg-gradient-to-r from-purple-600 to-pink-600 px-10 py-4 rounded-xl font-bold text-lg hover:from-purple-700 hover:to-pink-700 transition shadow-xl">
-                    <i class="fas fa-camera mr-2"></i>Get Your 6 Styles for $4.99
-                  </a>
-                  <p class="text-sm text-purple-400 mt-3">✓ Results in 30 seconds • Private & secure</p>
-                </div>
-              </div>
-            </div>
+            <p>
+              <a href="/glasses-tryon.html">Try the virtual glasses tool now</a>
+              and see exactly how each style suits your unique face shape.
+            </p>
 
             <h2>Common Mistakes to Avoid</h2>
             <ul>
-              <li><strong>❌ Choosing frames too small:</strong> Makes your face appear larger and disproportionate</li>
-              <li><strong>❌ Ignoring your eyebrows:</strong> Frame top should follow your natural brow line</li>
-              <li><strong>❌ Following trends blindly:</strong> Not every popular style suits every face</li>
-              <li><strong>❌ Buying without trying:</strong> Always test frames (physically or virtually) before purchasing</li>
-              <li><strong>❌ Neglecting comfort:</strong> Style means nothing if glasses hurt after 30 minutes</li>
+              <li>
+                <strong>❌ Choosing frames too small:</strong> Makes your face
+                appear larger and disproportionate
+              </li>
+              <li>
+                <strong>❌ Ignoring your eyebrows:</strong> Frame top should
+                follow your natural brow line
+              </li>
+              <li>
+                <strong>❌ Following trends blindly:</strong> Not every popular
+                style suits every face
+              </li>
+              <li>
+                <strong>❌ Buying without trying:</strong> Always test frames
+                (physically or virtually) before purchasing
+              </li>
+              <li>
+                <strong>❌ Neglecting comfort:</strong> Style means nothing if
+                glasses hurt after 30 minutes
+              </li>
             </ul>
 
             <h2>Expert Tips for Glasses Shopping</h2>
             <ol>
-              <li><strong>Try multiple styles:</strong> Don't stop at the first pair that looks good</li>
-              <li><strong>Get second opinions:</strong> Ask friends, family, or use virtual try-on tools</li>
-              <li><strong>Consider lifestyle needs:</strong> Do you need durability? Lightweight frames? Blue light blocking?</li>
-              <li><strong>Check the measurements:</strong> Frame width, bridge width, and temple length all matter</li>
-              <li><strong>Think about lens type:</strong> Progressive? Single vision? Transition lenses?</li>
-              <li><strong>Budget wisely:</strong> Quality frames are an investment, but you don't need to overspend</li>
+              <li>
+                <strong>Try multiple styles:</strong> Don't stop at the first
+                pair that looks good
+              </li>
+              <li>
+                <strong>Get second opinions:</strong> Ask friends, family, or
+                use virtual try-on tools
+              </li>
+              <li>
+                <strong>Consider lifestyle needs:</strong> Do you need
+                durability? Lightweight frames? Blue light blocking?
+              </li>
+              <li>
+                <strong>Check the measurements:</strong> Frame width, bridge
+                width, and temple length all matter
+              </li>
+              <li>
+                <strong>Think about lens type:</strong> Progressive? Single
+                vision? Transition lenses?
+              </li>
+              <li>
+                <strong>Budget wisely:</strong> Quality frames are an
+                investment, but you don't need to overspend
+              </li>
             </ol>
 
             <h2>Quick Reference Guide</h2>
@@ -694,8 +980,12 @@
               <table class="w-full text-left">
                 <thead>
                   <tr class="border-b border-purple-500/30">
-                    <th class="pb-3 pr-4 font-bold text-purple-300">Face Shape</th>
-                    <th class="pb-3 pr-4 font-bold text-purple-300">Best Frames</th>
+                    <th class="pb-3 pr-4 font-bold text-purple-300">
+                      Face Shape
+                    </th>
+                    <th class="pb-3 pr-4 font-bold text-purple-300">
+                      Best Frames
+                    </th>
                     <th class="pb-3 font-bold text-purple-300">Avoid</th>
                   </tr>
                 </thead>
@@ -731,28 +1021,42 @@
 
             <h2>Final Thoughts: Trust Your Eyes (and AI)</h2>
             <p>
-              While understanding face shapes provides excellent guidance, the most important factor is how you feel wearing your glasses. If a frame makes you feel confident and comfortable, it's the right choice—regardless of "rules."
+              While understanding face shapes provides excellent guidance, the
+              most important factor is how you feel wearing your glasses. If a
+              frame makes you feel confident and comfortable, it's the right
+              choice—regardless of "rules."
             </p>
             <p>
-              That said, technology has made finding the perfect frames easier than ever. Instead of visiting multiple stores or ordering frames online only to return them, <strong>virtual try-on tools let you experiment risk-free</strong> from home.
+              That said, technology has made finding the perfect frames easier
+              than ever. Instead of visiting multiple stores or ordering frames
+              online only to return them,
+              <strong>virtual try-on tools let you experiment risk-free</strong>
+              from home.
             </p>
 
             <div class="cta-box rounded-2xl p-8 mt-12 text-center">
-              <h3 class="text-3xl font-bold mb-4">Ready to Find Your Perfect Glasses?</h3>
+              <h3 class="text-3xl font-bold mb-4">
+                Ready to Find Your Perfect Glasses?
+              </h3>
               <p class="text-xl text-purple-100 mb-6">
-                Stop guessing and see exactly what you'll look like in 6 different glasses styles.
+                Stop guessing and see exactly what you'll look like in 6
+                different glasses styles.
               </p>
               <p class="text-lg mb-6 text-purple-200">
-                ✓ Upload one selfie<br/>
-                ✓ Get 6 professional renders in 30 seconds<br/>
-                ✓ See which style suits your face shape best<br/>
+                ✓ Upload one selfie<br />
+                ✓ Get 6 professional renders in 30 seconds<br />
+                ✓ See which style suits your face shape best<br />
                 ✓ Only $4.99 (vs. $300+ for professional photoshoots)
               </p>
-              <a href="/glasses-tryon.html" class="inline-block bg-white text-purple-900 px-12 py-5 rounded-2xl font-black text-xl hover:bg-purple-50 transition shadow-2xl">
+              <a
+                href="/glasses-tryon.html"
+                class="inline-block bg-white text-purple-900 px-12 py-5 rounded-2xl font-black text-xl hover:bg-purple-50 transition shadow-2xl"
+              >
                 <i class="fas fa-camera mr-2"></i>Try On 6 Glasses Styles Now
               </a>
               <p class="text-sm text-purple-300 mt-4">
-                🔒 Private & secure • Results in 30 seconds • Money-back guarantee
+                🔒 Private & secure • Results in 30 seconds • Money-back
+                guarantee
               </p>
             </div>
 
@@ -760,52 +1064,97 @@
 
             <h3>How do I know what glasses suit my face?</h3>
             <p>
-              First, determine your face shape (round, oval, square, heart, or diamond). Then choose frames that contrast with your shape—angular frames for round faces, curved frames for square faces, etc. The easiest method is using a virtual try-on tool to see multiple styles on your actual face.
+              First, determine your face shape (round, oval, square, heart, or
+              diamond). Then choose frames that contrast with your shape—angular
+              frames for round faces, curved frames for square faces, etc. The
+              easiest method is using a virtual try-on tool to see multiple
+              styles on your actual face.
             </p>
 
             <h3>Can I wear any glasses if I have an oval face?</h3>
             <p>
-              Yes! Oval faces are the most versatile and can pull off almost any frame style. Focus on choosing frames that are as wide as (or slightly wider than) the broadest part of your face for the most flattering look.
+              Yes! Oval faces are the most versatile and can pull off almost any
+              frame style. Focus on choosing frames that are as wide as (or
+              slightly wider than) the broadest part of your face for the most
+              flattering look.
             </p>
 
             <h3>What glasses are best for a round face?</h3>
             <p>
-              Angular frames work best for round faces. Try rectangle, square, or geometric frames that add definition and create the illusion of a longer, slimmer face. Avoid round or oval frames that emphasize roundness.
+              Angular frames work best for round faces. Try rectangle, square,
+              or geometric frames that add definition and create the illusion of
+              a longer, slimmer face. Avoid round or oval frames that emphasize
+              roundness.
             </p>
 
             <h3>How accurate are virtual glasses try-on tools?</h3>
             <p>
-              Modern AI-powered virtual try-on tools are remarkably accurate. They map your facial features and apply realistic glasses renders that show authentic proportions, angles, and how frames sit on your face. <a href="/glasses-tryon.html">Toyrender's AI technology</a> has a 95% customer satisfaction rate for accuracy.
+              Modern AI-powered virtual try-on tools are remarkably accurate.
+              They map your facial features and apply realistic glasses renders
+              that show authentic proportions, angles, and how frames sit on
+              your face.
+              <a href="/glasses-tryon.html">Toyrender's AI technology</a> has a
+              95% customer satisfaction rate for accuracy.
             </p>
 
-            <h3>Should I choose glasses based on face shape or personal style?</h3>
+            <h3>
+              Should I choose glasses based on face shape or personal style?
+            </h3>
             <p>
-              Both! Use face shape guidelines as a starting point, then factor in your personal style, lifestyle needs, and what makes you feel confident. The "rules" are flexible—if you love how a frame looks despite it not being "recommended" for your face shape, go for it.
+              Both! Use face shape guidelines as a starting point, then factor
+              in your personal style, lifestyle needs, and what makes you feel
+              confident. The "rules" are flexible—if you love how a frame looks
+              despite it not being "recommended" for your face shape, go for it.
             </p>
 
             <h3>How many pairs of glasses should I try on before deciding?</h3>
             <p>
-              We recommend trying at least 6-10 different styles to understand what works best for you. With physical shopping, this can be exhausting. Virtual try-on tools let you test dozens of styles in minutes without leaving home.
+              We recommend trying at least 6-10 different styles to understand
+              what works best for you. With physical shopping, this can be
+              exhausting. Virtual try-on tools let you test dozens of styles in
+              minutes without leaving home.
             </p>
-
           </div>
         </div>
 
         <!-- Related Posts -->
         <div class="mt-16">
-          <h2 class="text-3xl font-bold mb-8 gradient-text">Related Articles</h2>
+          <h2 class="text-3xl font-bold mb-8 gradient-text">
+            Related Articles
+          </h2>
           <div class="grid md:grid-cols-3 gap-6">
-            <a href="/blog/ai-glamour-photography-selfie-to-magazine/" class="glass-card rounded-xl p-6 hover:border-purple-400 transition">
-              <h3 class="text-xl font-bold mb-2 text-purple-200">AI Glamour Photography</h3>
-              <p class="text-sm text-purple-300">Transform your selfies into magazine-quality portraits with AI</p>
+            <a
+              href="/blog/ai-glamour-photography-selfie-to-magazine/"
+              class="glass-card rounded-xl p-6 hover:border-purple-400 transition"
+            >
+              <h3 class="text-xl font-bold mb-2 text-purple-200">
+                AI Glamour Photography
+              </h3>
+              <p class="text-sm text-purple-300">
+                Transform your selfies into magazine-quality portraits with AI
+              </p>
             </a>
-            <a href="/dating-photos-gallery/" class="glass-card rounded-xl p-6 hover:border-purple-400 transition">
-              <h3 class="text-xl font-bold mb-2 text-purple-200">Dating Photo Examples</h3>
-              <p class="text-sm text-purple-300">See real examples of AI-enhanced dating profile photos</p>
+            <a
+              href="/dating-photos-gallery/"
+              class="glass-card rounded-xl p-6 hover:border-purple-400 transition"
+            >
+              <h3 class="text-xl font-bold mb-2 text-purple-200">
+                Dating Photo Examples
+              </h3>
+              <p class="text-sm text-purple-300">
+                See real examples of AI-enhanced dating profile photos
+              </p>
             </a>
-            <a href="/blog/how-to-upscale-ai-photos/" class="glass-card rounded-xl p-6 hover:border-purple-400 transition">
-              <h3 class="text-xl font-bold mb-2 text-purple-200">How to Upscale AI Photos</h3>
-              <p class="text-sm text-purple-300">Get 4K quality from your AI-generated images</p>
+            <a
+              href="/blog/how-to-upscale-ai-photos/"
+              class="glass-card rounded-xl p-6 hover:border-purple-400 transition"
+            >
+              <h3 class="text-xl font-bold mb-2 text-purple-200">
+                How to Upscale AI Photos
+              </h3>
+              <p class="text-sm text-purple-300">
+                Get 4K quality from your AI-generated images
+              </p>
             </a>
           </div>
         </div>
@@ -819,39 +1168,116 @@
           <div>
             <h4 class="font-bold text-lg mb-4 gradient-text">Toyrender</h4>
             <p class="text-sm text-purple-300">
-              AI-powered virtual try-on for glasses, dating photos, professional headshots, and more.
+              AI-powered virtual try-on for glasses, dating photos, professional
+              headshots, and more.
             </p>
           </div>
           <div>
             <h4 class="font-bold mb-4">Products</h4>
             <ul class="space-y-2 text-sm text-purple-300">
-              <li><a href="/glasses-tryon.html" class="hover:text-white transition">Glasses Try-On</a></li>
-              <li><a href="/dating-photos-gallery/" class="hover:text-white transition">Dating Photos</a></li>
-              <li><a href="/business-photos-gallery/" class="hover:text-white transition">Business Headshots</a></li>
-              <li><a href="/figurines-gallery/" class="hover:text-white transition">AI Figurines</a></li>
+              <li>
+                <a
+                  href="/glasses-tryon.html"
+                  class="hover:text-white transition"
+                  >Glasses Try-On</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/dating-photos-gallery/"
+                  class="hover:text-white transition"
+                  >Dating Photos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/business-photos-gallery/"
+                  class="hover:text-white transition"
+                  >Business Headshots</a
+                >
+              </li>
+              <li>
+                <a
+                  href="/figurines-gallery/"
+                  class="hover:text-white transition"
+                  >AI Figurines</a
+                >
+              </li>
             </ul>
           </div>
           <div>
             <h4 class="font-bold mb-4">Resources</h4>
             <ul class="space-y-2 text-sm text-purple-300">
-              <li><a href="/blog/" class="hover:text-white transition">Blog</a></li>
-              <li><a href="/faq.html" class="hover:text-white transition">FAQ</a></li>
-              <li><a href="/pricing.html" class="hover:text-white transition">Pricing</a></li>
+              <li>
+                <a href="/blog/" class="hover:text-white transition">Blog</a>
+              </li>
+              <li>
+                <a href="/faq.html" class="hover:text-white transition">FAQ</a>
+              </li>
+              <li>
+                <a href="/pricing.html" class="hover:text-white transition"
+                  >Pricing</a
+                >
+              </li>
             </ul>
           </div>
           <div>
             <h4 class="font-bold mb-4">Legal</h4>
             <ul class="space-y-2 text-sm text-purple-300">
-              <li><a href="/privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
-              <li><a href="/terms" class="hover:text-white transition">Terms of Service</a></li>
-              <li><a href="/contact" class="hover:text-white transition">Contact</a></li>
+              <li>
+                <a href="/privacy.html" class="hover:text-white transition"
+                  >Privacy Policy</a
+                >
+              </li>
+              <li>
+                <a href="/terms" class="hover:text-white transition"
+                  >Terms of Service</a
+                >
+              </li>
+              <li>
+                <a href="/contact" class="hover:text-white transition"
+                  >Contact</a
+                >
+              </li>
             </ul>
           </div>
         </div>
-        <div class="border-t border-purple-500/30 pt-8 text-center text-sm text-purple-400">
+        <div
+          class="border-t border-purple-500/30 pt-8 text-center text-sm text-purple-400"
+        >
           <p>&copy; 2025 Toyrender. All rights reserved.</p>
         </div>
       </div>
     </footer>
+
+    <script>
+      // Lightbox functionality
+      function openLightbox(src, alt) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+
+      function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Re-enable scrolling
+      }
+
+      // Close on ESC key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+          closeLightbox();
+        }
+      });
+
+      // Prevent closing when clicking on the image itself
+      document.getElementById('lightbox-img').addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+    </script>
   </body>
 </html>

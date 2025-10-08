@@ -18,3 +18,5 @@
 [2025-09-27T16:15:31.527Z] EVENT: CHECKOUT_SESSION_CREATED | SESSION: cs_live_b1mgiaXeYBldOdygBm2OXScRZfdCpr0y35eazGfyqXA2VVH0AqVYmJYrp9 | USER_ID: 84 | EMAIL: rafiksaidina@gmail.com | STATUS: pending | META: {"package":"starter_pack_25_credits"}
 [2025-09-27T16:24:00.632Z] EVENT: WEBHOOK_CHECKOUT.SESSION.COMPLETED | META: {"eventId":"evt_1SC0uiF01O2UKyKA4THpe30I"}
 [2025-10-06T02:18:46.763Z] EVENT: WEBHOOK_CHECKOUT.SESSION.COMPLETED | META: {"eventId":"evt_1SF40gF01O2UKyKAysAjMnre"}
+[2025-10-06T16:25:43.753Z] EVENT: CHECKOUT_ATTEMPTED | USER_ID: 99 | EMAIL: dimas.knyaz99@gmail.com | META: {"package":"starter_pack_25_credits"}
+[2025-10-06T16:25:44.294Z] EVENT: CHECKOUT_SESSION_CREATED | SESSION: cs_live_b1g85tahNkDKJPabrQZpB5CnTRxtTaKOhTsNTX1stbVnQL38cB5FD5gZRZ | USER_ID: 99 | EMAIL: dimas.knyaz99@gmail.com | STATUS: pending | META: {"package":"starter_pack_25_credits"}
