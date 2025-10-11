@@ -196,6 +196,12 @@
       defer
       src="https://www.googletagmanager.com/gtag/js?id=G-78RSLH46CX"
     ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-78RSLH46CX');
+    </script>
   </head>
   <body>
     <!-- Header Navigation -->
@@ -1393,6 +1399,14 @@
         });
 
         document.getElementById('specialOfferBtn').addEventListener('click', () => {
+          // GA4 Event: Exit intent CTA clicked
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'click', {
+              event_category: 'CTA',
+              event_label: 'Exit Intent Popup CTA',
+              value: 4.99
+            });
+          }
           popup.remove();
         });
 
@@ -1406,6 +1420,13 @@
       // Detect exit intent
       document.addEventListener('mouseleave', (e) => {
         if (e.clientY <= 0) {
+          // GA4 Event: Exit intent triggered
+          if (typeof gtag !== 'undefined' && !exitIntentShown) {
+            gtag('event', 'exit_intent', {
+              event_category: 'Engagement',
+              event_label: 'Exit Intent Triggered'
+            });
+          }
           showExitIntentPopup();
         }
       });
@@ -1413,6 +1434,21 @@
       // Initialize timers on load
       document.addEventListener('DOMContentLoaded', () => {
         animateLiveCounter();
+
+        // Track all CTA button clicks
+        document.querySelectorAll('a[href="#uploadArea"], .cta-button').forEach((btn, index) => {
+          btn.addEventListener('click', (e) => {
+            const buttonText = btn.textContent.trim().substring(0, 50);
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'cta_click', {
+                event_category: 'CTA',
+                event_label: buttonText,
+                button_position: index + 1,
+                value: 4.99
+              });
+            }
+          });
+        });
       });
 
       // Upload handlers
@@ -1451,6 +1487,17 @@
 
       function handleFileSelect(file) {
         uploadedFile = file;
+
+        // GA4 Event: File uploaded
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'file_upload', {
+            event_category: 'Glasses Try-On',
+            event_label: 'Photo Uploaded',
+            file_size: file.size,
+            file_type: file.type
+          });
+        }
+
         const reader = new FileReader();
         reader.onload = (e) => {
           originalPreview.src = e.target.result;
@@ -1480,6 +1527,16 @@
       generateBtn.addEventListener('click', async () => {
         if (!uploadedFile) return;
 
+        // GA4 Event: Generate started
+        const startTime = Date.now();
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'generate_started', {
+            event_category: 'Glasses Try-On',
+            event_label: 'Generate Button Clicked',
+            value: 4.99
+          });
+        }
+
         // Hide upload section, show processing
         previewSection.classList.add('hidden');
         processingSection.classList.remove('hidden');
@@ -1507,9 +1564,29 @@
             displayResults(results);
             processingSection.classList.add('hidden');
             resultsSection.classList.remove('hidden');
+
+            // GA4 Event: Generation complete
+            const generationTime = Date.now() - startTime;
+            if (typeof gtag !== 'undefined') {
+              gtag('event', 'generation_complete', {
+                event_category: 'Glasses Try-On',
+                event_label: 'All 6 Styles Generated',
+                value: 1,
+                generation_time_ms: generationTime
+              });
+            }
           }, 500);
 
         } catch (error) {
+          // GA4 Event: Generation error
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'generation_error', {
+              event_category: 'Glasses Try-On',
+              event_label: 'Generation Failed',
+              error_message: error.message || 'Unknown error'
+            });
+          }
+
           alert('Failed to generate images. Please try again.');
           console.error(error);
           resetUpload();
@@ -1575,7 +1652,19 @@
       document.querySelectorAll('.download-btn').forEach(btn => {
         btn.addEventListener('click', async (e) => {
           const resultNum = e.currentTarget.dataset.result;
+          const styleName = glassStyles[resultNum - 1]?.name || `style-${resultNum}`;
           const img = document.getElementById(`result${resultNum}`);
+
+          // GA4 Event: Download button clicked
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'download_style', {
+              event_category: 'Glasses Try-On',
+              event_label: `Download ${styleName}`,
+              style_name: styleName,
+              style_number: resultNum
+            });
+          }
+
           if (img && img.src) {
             try {
               const response = await fetch(img.src);
