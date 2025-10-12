@@ -83,10 +83,10 @@
     />
 
     <!-- DNS Prefetch for External Domains -->
-    <link rel="dns-prefetch" href="https://analytics.ahrefs.com">
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-    <link rel="preconnect" href="https://cdn.tailwindcss.com">
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://analytics.ahrefs.com" />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -360,6 +360,141 @@
       .pulse-glow {
         animation: pulse-glow 2s ease-in-out infinite;
       }
+
+      /* Enhanced CTA button glow animation */
+      @keyframes cta-pulse {
+        0%, 100% {
+          box-shadow: 0 0 30px rgba(147, 51, 234, 0.6),
+                      0 0 60px rgba(236, 72, 153, 0.4),
+                      0 4px 20px rgba(0, 0, 0, 0.3);
+          transform: scale(1);
+        }
+        50% {
+          box-shadow: 0 0 50px rgba(147, 51, 234, 0.9),
+                      0 0 90px rgba(236, 72, 153, 0.6),
+                      0 6px 30px rgba(0, 0, 0, 0.4);
+          transform: scale(1.02);
+        }
+      }
+
+      .cta-pulse {
+        animation: cta-pulse 2.5s ease-in-out infinite;
+      }
+
+      /* Mobile-specific CTA enhancements */
+      @media (max-width: 640px) {
+        #heroCTABtn {
+          font-size: 1.125rem !important;
+          padding: 1.25rem 1.5rem !important;
+          min-height: 64px;
+          touch-action: manipulation;
+          -webkit-tap-highlight-color: rgba(147, 51, 234, 0.3);
+        }
+      }
+
+      /* Hero headline animated background glow */
+      .hero-glow-container {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .hero-glow-bg {
+        position: absolute;
+        inset: -2rem;
+        z-index: -1;
+        opacity: 0.4;
+        pointer-events: none;
+        filter: blur(60px);
+        will-change: transform;
+      }
+
+      @keyframes gradient-shift {
+        0%, 100% {
+          background: radial-gradient(
+            ellipse 80% 50% at 50% 50%,
+            rgba(147, 51, 234, 0.4),
+            rgba(236, 72, 153, 0.3),
+            transparent 70%
+          );
+        }
+        33% {
+          background: radial-gradient(
+            ellipse 80% 50% at 50% 50%,
+            rgba(236, 72, 153, 0.4),
+            rgba(99, 102, 241, 0.3),
+            transparent 70%
+          );
+        }
+        66% {
+          background: radial-gradient(
+            ellipse 80% 50% at 50% 50%,
+            rgba(99, 102, 241, 0.4),
+            rgba(147, 51, 234, 0.3),
+            transparent 70%
+          );
+        }
+      }
+
+      .hero-glow-bg {
+        animation: gradient-shift 8s ease-in-out infinite;
+      }
+
+      /* Additional subtle radial glows for depth */
+      .hero-glow-orb-1,
+      .hero-glow-orb-2 {
+        position: absolute;
+        border-radius: 50%;
+        pointer-events: none;
+        filter: blur(80px);
+        opacity: 0.3;
+        will-change: transform;
+      }
+
+      .hero-glow-orb-1 {
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(147, 51, 234, 0.6), transparent 70%);
+        top: -100px;
+        left: 10%;
+        animation: float-orb-1 12s ease-in-out infinite;
+      }
+
+      .hero-glow-orb-2 {
+        width: 350px;
+        height: 350px;
+        background: radial-gradient(circle, rgba(236, 72, 153, 0.5), transparent 70%);
+        top: -80px;
+        right: 15%;
+        animation: float-orb-2 10s ease-in-out infinite;
+      }
+
+      @keyframes float-orb-1 {
+        0%, 100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(20px, -15px) scale(1.1);
+        }
+      }
+
+      @keyframes float-orb-2 {
+        0%, 100% {
+          transform: translate(0, 0) scale(1);
+        }
+        50% {
+          transform: translate(-15px, 20px) scale(1.05);
+        }
+      }
+
+      /* Reduce motion for accessibility */
+      @media (prefers-reduced-motion: reduce) {
+        .hero-glow-bg,
+        .hero-glow-orb-1,
+        .hero-glow-orb-2 {
+          animation: none;
+        }
+      }
+
       .gradient-text {
         background: linear-gradient(135deg, #a5b4fc 0%, #c084fc 100%);
         -webkit-background-clip: text;
@@ -802,7 +937,6 @@
           border-radius: 0.75rem;
         }
 
-
         /* Smaller text on mobile */
         .style-option span {
           font-size: 0.65rem !important;
@@ -1142,7 +1276,6 @@
           display: none !important;
         }
       }
-
     </style>
     <script src="/config.js"></script>
   </head>
@@ -1255,7 +1388,9 @@
                 );
               "
             ></span>
-            <span class="hidden sm:inline text-xs sm:text-sm font-semibold">ES</span>
+            <span class="hidden sm:inline text-xs sm:text-sm font-semibold"
+              >ES</span
+            >
           </a>
 
           <a
@@ -1276,7 +1411,9 @@
                 );
               "
             ></span>
-            <span class="hidden sm:inline text-xs sm:text-sm font-semibold">PT</span>
+            <span class="hidden sm:inline text-xs sm:text-sm font-semibold"
+              >PT</span
+            >
           </a>
 
           <!-- Auth -->
@@ -1294,7 +1431,8 @@
             class="hidden px-2 sm:px-4 py-1 sm:py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all text-xs sm:text-base"
             aria-label="Sign out"
           >
-            <i class="fas fa-right-from-bracket sm:mr-2"></i><span class="hidden sm:inline">Logout</span>
+            <i class="fas fa-right-from-bracket sm:mr-2"></i
+            ><span class="hidden sm:inline">Logout</span>
           </button>
         </div>
       </div>
@@ -1306,17 +1444,34 @@
       role="main"
     >
       <!-- Hero Section -->
-      <section id="heroSection" class="text-center mb-12 sm:mb-16" aria-labelledby="hero-title">
-        <h1 id="hero-title" class="text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6">
-          <span>Turn your casual selfies into stunning </span>
-          <span class="gradient-text">dating photos, professional headshots, or collectible figurines</span>
-          <span> in seconds.</span>
-        </h1>
+      <section
+        id="heroSection"
+        class="text-center mb-12 sm:mb-16"
+        aria-labelledby="hero-title"
+      >
+        <!-- Hero Headline with Animated Glow Background -->
+        <div class="hero-glow-container mb-4 sm:mb-6">
+          <div class="hero-glow-bg"></div>
+          <div class="hero-glow-orb-1"></div>
+          <div class="hero-glow-orb-2"></div>
+          <h1
+            id="hero-title"
+            class="text-4xl sm:text-5xl lg:text-7xl font-bold relative"
+          >
+            <span>Transform your selfies into stunning AI Portraits.</span>
+            <span class="gradient-text"
+              >Dating photos • Professional headshots • Figurines — ready in
+              seconds.</span
+            >
+          </h1>
+        </div>
 
-        <p class="text-lg sm:text-xl text-purple-200 mb-6 sm:mb-8 max-w-3xl mx-auto">
-          Powered by the latest AI Imaging Models, we turn your photos into
-          stunning 1:7 scale figurine designs or amazing AI Headshots in
-          seconds. Perfect for collectors, gifts, or just for fun!
+        <p
+          class="text-lg sm:text-xl text-purple-200 mb-6 sm:mb-8 max-w-3xl mx-auto"
+        >
+          Powered by cutting-edge AI, Toyrender turns any photo into
+          ultra-realistic figurines or premium headshots. Perfect for gifts,
+          profiles, or collectors.
         </p>
 
         <!-- PRIMARY CTA BUTTON - Above the fold with floating images -->
@@ -1437,13 +1592,19 @@
           </div>
 
           <!-- CTA Buttons Container -->
-          <div id="ctaButtonContainer" class="relative z-10 inline-flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch w-full sm:w-auto max-w-full sm:max-w-none px-4 sm:px-0">
+          <div
+            id="ctaButtonContainer"
+            class="relative z-10 inline-flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch w-full sm:w-auto max-w-full sm:max-w-none px-4 sm:px-0"
+          >
             <button
               id="heroCTABtn"
-              class="w-full sm:w-auto px-4 sm:px-12 py-3 sm:py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-base sm:text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl pulse-glow inline-flex items-center justify-center"
+              class="w-full sm:w-auto px-6 sm:px-12 py-5 sm:py-6 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl text-base sm:text-2xl font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-2xl cta-pulse inline-flex items-center justify-center"
               aria-label="Start creating your AI figurine now"
             >
-              <i class="fas fa-magic mr-1 sm:mr-2 text-lg sm:text-3xl" aria-hidden="true"></i>
+              <i
+                class="fas fa-magic mr-1 sm:mr-2 text-lg sm:text-3xl"
+                aria-hidden="true"
+              ></i>
               <span>Create Your AI Photo Now</span>
               <i
                 class="fas fa-arrow-down ml-1 sm:ml-2 text-base sm:text-2xl animate-bounce"
@@ -1456,24 +1617,41 @@
               class="w-full sm:w-auto px-4 sm:px-10 py-3 sm:py-6 bg-white/10 backdrop-blur-sm border-2 border-white/30 rounded-2xl text-base sm:text-2xl font-bold hover:bg-white/20 hover:border-white/50 transition-all transform hover:scale-105 shadow-xl inline-flex items-center justify-center"
               aria-label="See example photos"
             >
-              <i class="fas fa-images mr-1 sm:mr-2 text-lg sm:text-3xl" aria-hidden="true"></i>
+              <i
+                class="fas fa-images mr-1 sm:mr-2 text-lg sm:text-3xl"
+                aria-hidden="true"
+              ></i>
               <span>See Examples</span>
-              <i class="fas fa-chevron-right ml-1 sm:ml-2 text-sm sm:text-xl" aria-hidden="true"></i>
+              <i
+                class="fas fa-chevron-right ml-1 sm:ml-2 text-sm sm:text-xl"
+                aria-hidden="true"
+              ></i>
             </a>
           </div>
 
           <!-- Trust Badges -->
-          <div class="mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base">
+          <div
+            class="mt-8 flex flex-wrap justify-center gap-4 sm:gap-6 text-sm sm:text-base"
+          >
             <div class="flex items-center gap-2 text-purple-200">
-              <i class="fas fa-shield-alt text-green-400 text-xl" aria-hidden="true"></i>
+              <i
+                class="fas fa-shield-alt text-green-400 text-xl"
+                aria-hidden="true"
+              ></i>
               <span class="font-medium">Safe Uploads</span>
             </div>
             <div class="flex items-center gap-2 text-purple-200">
-              <i class="fas fa-bolt text-yellow-400 text-xl" aria-hidden="true"></i>
+              <i
+                class="fas fa-bolt text-yellow-400 text-xl"
+                aria-hidden="true"
+              ></i>
               <span class="font-medium">Instant Results</span>
             </div>
             <div class="flex items-center gap-2 text-purple-200">
-              <i class="fas fa-lock text-blue-400 text-xl" aria-hidden="true"></i>
+              <i
+                class="fas fa-lock text-blue-400 text-xl"
+                aria-hidden="true"
+              ></i>
               <span class="font-medium">Secure Payments</span>
             </div>
           </div>
@@ -1534,9 +1712,15 @@
                   </div>
                 </div>
                 <div class="relative group">
-                  <img src="/images/Example-10.webp" alt="AI Figurine"
-                  class="w-full h-48 object-contain rounded-lg shadow-lg border
-                  border-pink-400/50" width="192" height="192" fetchpriority="high" loading="eager" />
+                  <img
+                    src="/images/Example-10.webp"
+                    alt="AI Figurine"
+                    class="w-full h-48 object-contain rounded-lg shadow-lg border border-pink-400/50"
+                    width="192"
+                    height="192"
+                    fetchpriority="high"
+                    loading="eager"
+                  />
                   <div
                     class="absolute -top-1 -right-1 bg-pink-600 text-white text-xs px-1 py-0.5 rounded-full text-[10px]"
                   >
@@ -1632,14 +1816,20 @@
             id="figurineCTABtn"
             class="px-3 sm:px-6 py-2 sm:py-3 bg-purple-800/50 backdrop-blur-sm rounded-full border-2 border-purple-500/50 hover:bg-purple-700/50 hover:border-purple-400 transition-all transform hover:scale-105 text-sm sm:text-base"
           >
-            <i class="fas fa-cube mr-1 sm:mr-2 text-purple-400" aria-hidden="true"></i>
+            <i
+              class="fas fa-cube mr-1 sm:mr-2 text-purple-400"
+              aria-hidden="true"
+            ></i>
             <span>Make Figurine</span>
           </button>
           <button
             id="datingCTABtn"
             class="px-3 sm:px-6 py-2 sm:py-3 bg-pink-800/50 backdrop-blur-sm rounded-full border-2 border-pink-500/50 hover:bg-pink-700/50 hover:border-pink-400 transition-all transform hover:scale-105 text-sm sm:text-base"
           >
-            <i class="fas fa-heart mr-1 sm:mr-2 text-pink-400" aria-hidden="true"></i>
+            <i
+              class="fas fa-heart mr-1 sm:mr-2 text-pink-400"
+              aria-hidden="true"
+            ></i>
             <span>Dating Photos</span>
           </button>
           <button
@@ -1709,7 +1899,11 @@
       </section>
 
       <!-- Upload Section -->
-      <section id="upload" class="max-w-4xl mx-auto" aria-labelledby="upload-title">
+      <section
+        id="upload"
+        class="max-w-4xl mx-auto"
+        aria-labelledby="upload-title"
+      >
         <div
           class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-purple-500/30 pulse-glow"
         >
@@ -1818,14 +2012,22 @@
 
       <!-- Results Section -->
       <section id="resultsSection" class="hidden max-w-6xl mx-auto mt-8">
-        <div class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30">
-          <h2 class="text-3xl font-bold mb-8 text-center gradient-text">Your Generated Image</h2>
+        <div
+          class="bg-slate-800/50 backdrop-blur-xl rounded-3xl p-8 border border-purple-500/30"
+        >
+          <h2 class="text-3xl font-bold mb-8 text-center gradient-text">
+            Your Generated Image
+          </h2>
 
           <div class="grid md:grid-cols-3 gap-6 mb-8">
             <!-- Original Photo -->
             <div class="text-center">
-              <h3 class="text-lg font-semibold mb-4 text-purple-300">Original Photo</h3>
-              <div class="relative rounded-xl overflow-hidden bg-black/30 aspect-square">
+              <h3 class="text-lg font-semibold mb-4 text-purple-300">
+                Original Photo
+              </h3>
+              <div
+                class="relative rounded-xl overflow-hidden bg-black/30 aspect-square"
+              >
                 <img
                   id="resultsOriginalPreview"
                   src=""
@@ -1837,15 +2039,21 @@
 
             <!-- Blurred Preview -->
             <div class="text-center">
-              <h3 class="text-lg font-semibold mb-4 text-purple-300">Preview</h3>
-              <div class="relative rounded-xl overflow-hidden bg-black/30 aspect-square">
+              <h3 class="text-lg font-semibold mb-4 text-purple-300">
+                Preview
+              </h3>
+              <div
+                class="relative rounded-xl overflow-hidden bg-black/30 aspect-square"
+              >
                 <img
                   id="resultsBlurredPreview"
                   src=""
                   alt="Blurred preview of your generated image"
                   class="w-full h-full object-cover blur-[1px]"
                 />
-                <div class="absolute inset-0 flex items-center justify-center bg-black/50">
+                <div
+                  class="absolute inset-0 flex items-center justify-center bg-black/50"
+                >
                   <div class="text-center p-4">
                     <i class="fas fa-eye-slash text-3xl text-white mb-2"></i>
                     <p class="text-white font-semibold">Preview Quality</p>
@@ -1856,29 +2064,46 @@
 
             <!-- Full Quality with Package Upgrade -->
             <div class="text-center">
-              <h3 class="text-lg font-semibold mb-4 text-green-400">Full Quality</h3>
-              <div class="relative rounded-xl overflow-hidden bg-black/30 aspect-square">
+              <h3 class="text-lg font-semibold mb-4 text-green-400">
+                Full Quality
+              </h3>
+              <div
+                class="relative rounded-xl overflow-hidden bg-black/30 aspect-square"
+              >
                 <img
                   id="resultsFullQualityPreview"
                   src=""
                   alt="Full quality preview"
                   class="w-full h-full object-cover"
                 />
-                <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent">
+                <div
+                  class="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                >
                   <div class="text-center p-6">
-                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full mb-3">
+                    <div
+                      class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-4 py-2 rounded-full mb-3"
+                    >
                       <i class="fas fa-crown mr-2"></i>Standard Package
                     </div>
-                    <p class="text-white font-semibold text-lg mb-2">Unlock Full Quality</p>
-                    <p class="text-gray-300 text-sm">High-resolution, watermark-free</p>
+                    <p class="text-white font-semibold text-lg mb-2">
+                      Unlock Full Quality
+                    </p>
+                    <p class="text-gray-300 text-sm">
+                      High-resolution, watermark-free
+                    </p>
                   </div>
                 </div>
               </div>
               <!-- Testimonial -->
-              <div class="mt-4 p-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-xl border border-yellow-500/30">
+              <div
+                class="mt-4 p-4 bg-gradient-to-r from-yellow-500/20 to-orange-500/20 rounded-xl border border-yellow-500/30"
+              >
                 <div class="text-center">
                   <div class="text-yellow-400 mb-2">⭐⭐⭐⭐⭐</div>
-                  <p class="text-sm text-gray-300 italic mb-2">"Loved it! The HD version looked stunning — totally worth it."</p>
+                  <p class="text-sm text-gray-300 italic mb-2">
+                    "Loved it! The HD version looked stunning — totally worth
+                    it."
+                  </p>
                   <p class="text-xs text-gray-400">– Anna, Berlin</p>
                 </div>
               </div>
@@ -1901,7 +2126,9 @@
               >
                 👉 Unlock Full Quality – $3.99
               </button>
-              <div class="mt-2 flex items-center justify-center text-xs text-gray-400">
+              <div
+                class="mt-2 flex items-center justify-center text-xs text-gray-400"
+              >
                 <i class="fas fa-shield-alt mr-1"></i>
                 <span>Secure payment · Instant download</span>
               </div>
@@ -2838,13 +3065,14 @@
       class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 mt-16"
     >
       <h2 class="text-3xl lg:text-4xl font-bold mb-6">
-        <span class="gradient-text">How Toyrender Works</span> — Transform Your Photos
+        <span class="gradient-text">How Toyrender Works</span> — Transform Your
+        Photos
       </h2>
       <p class="text-purple-200 max-w-3xl">
         Turn any clear portrait into stunning AI-generated images in seconds.
         Whether you need collectible figurines, professional dating photos, or
-        business headshots, our AI - powered by Google's latest Image Model
-        Nano Banana - creates high-resolution designs tailored to your needs.
+        business headshots, our AI - powered by Google's latest Image Model Nano
+        Banana - creates high-resolution designs tailored to your needs.
       </p>
 
       <!-- How It Works -->
@@ -3912,15 +4140,17 @@
 
       // Show/hide continue button functionality
       function showContinueButton() {
-        const stickyCTA = document.getElementById('stickyCTABtn');
+        const stickyCTA = document.getElementById("stickyCTABtn");
         if (stickyCTA) {
-          stickyCTA.innerHTML = '<i class="fas fa-magic mr-2"></i>Generate Image';
-          stickyCTA.style.background = 'linear-gradient(135deg, #10b981, #059669)';
-          stickyCTA.style.transform = 'scale(1.05)';
-          stickyCTA.style.boxShadow = '0 8px 25px rgba(16, 185, 129, 0.4)';
+          stickyCTA.innerHTML =
+            '<i class="fas fa-magic mr-2"></i>Generate Image';
+          stickyCTA.style.background =
+            "linear-gradient(135deg, #10b981, #059669)";
+          stickyCTA.style.transform = "scale(1.05)";
+          stickyCTA.style.boxShadow = "0 8px 25px rgba(16, 185, 129, 0.4)";
 
           // Update click handler to execute generate image functionality
-          stickyCTA.onclick = function() {
+          stickyCTA.onclick = function () {
             // Trigger the generate image function
             generateImage();
 
@@ -3935,15 +4165,17 @@
       }
 
       function hideContinueButton() {
-        const stickyCTA = document.getElementById('stickyCTABtn');
+        const stickyCTA = document.getElementById("stickyCTABtn");
         if (stickyCTA) {
-          stickyCTA.innerHTML = '<i class="fas fa-bolt"></i><span>Try it for free!</span>';
-          stickyCTA.style.background = 'linear-gradient(to right, rgb(249 115 22), rgb(239 68 68))';
-          stickyCTA.style.transform = '';
-          stickyCTA.style.boxShadow = '';
+          stickyCTA.innerHTML =
+            '<i class="fas fa-bolt"></i><span>Try it for free!</span>';
+          stickyCTA.style.background =
+            "linear-gradient(to right, rgb(249 115 22), rgb(239 68 68))";
+          stickyCTA.style.transform = "";
+          stickyCTA.style.boxShadow = "";
 
           // Restore original click handler
-          stickyCTA.onclick = function() {
+          stickyCTA.onclick = function () {
             document.querySelector("#uploadArea").scrollIntoView({
               behavior: "smooth",
               block: "center",
@@ -3960,7 +4192,11 @@
 
       // Mobile device detection
       function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth <= 768;
+        return (
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          ) || window.innerWidth <= 768
+        );
       }
 
       // Generate image function to be called by the sticky CTA
@@ -3975,26 +4211,31 @@
       // Results page functionality
       function showResultsPage(originalImageSrc, generatedImageSrc) {
         // Hide all other sections
-        document.getElementById('heroSection')?.classList.add('hidden');
-        document.getElementById('styleSelectionSection')?.classList.add('hidden');
-        document.getElementById('previewSection')?.classList.add('hidden');
+        document.getElementById("heroSection")?.classList.add("hidden");
+        document
+          .getElementById("styleSelectionSection")
+          ?.classList.add("hidden");
+        document.getElementById("previewSection")?.classList.add("hidden");
 
         // Show results section
-        const resultsSection = document.getElementById('resultsSection');
-        resultsSection.classList.remove('hidden');
+        const resultsSection = document.getElementById("resultsSection");
+        resultsSection.classList.remove("hidden");
 
         // Set images
-        document.getElementById('resultsOriginalPreview').src = originalImageSrc;
-        document.getElementById('resultsBlurredPreview').src = generatedImageSrc;
-        document.getElementById('resultsFullQualityPreview').src = generatedImageSrc;
+        document.getElementById("resultsOriginalPreview").src =
+          originalImageSrc;
+        document.getElementById("resultsBlurredPreview").src =
+          generatedImageSrc;
+        document.getElementById("resultsFullQualityPreview").src =
+          generatedImageSrc;
 
         // Scroll to results
-        resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
 
         // Update sticky CTA to hide it
-        const stickyCTA = document.getElementById('stickyCTABtn');
+        const stickyCTA = document.getElementById("stickyCTABtn");
         if (stickyCTA) {
-          stickyCTA.style.display = 'none';
+          stickyCTA.style.display = "none";
         }
 
         // Update buttons immediately since session is already refreshed
@@ -4004,224 +4245,274 @@
       function updateResultsPageButtons() {
         // Customize buttons based on user credits
         const userCredits = totalCredits();
-        console.log('updateResultsPageButtons - User credits:', userCredits, 'Credits object:', credits);
-        const upgradeBtn = document.getElementById('upgradePackageBtn');
-        const generateAnotherBtn = document.getElementById('generateAnotherBtn');
-        const downloadBtn = document.getElementById('downloadPreviewBtn');
+        console.log(
+          "updateResultsPageButtons - User credits:",
+          userCredits,
+          "Credits object:",
+          credits
+        );
+        const upgradeBtn = document.getElementById("upgradePackageBtn");
+        const generateAnotherBtn =
+          document.getElementById("generateAnotherBtn");
+        const downloadBtn = document.getElementById("downloadPreviewBtn");
 
         // Find the lock overlay on the full quality image
-        const fullQualityContainer = document.getElementById('resultsFullQualityPreview')?.parentElement;
-        const lockOverlay = fullQualityContainer?.querySelector('.absolute.inset-0');
+        const fullQualityContainer = document.getElementById(
+          "resultsFullQualityPreview"
+        )?.parentElement;
+        const lockOverlay =
+          fullQualityContainer?.querySelector(".absolute.inset-0");
 
         // Find testimonial and payment badge
-        const testimonial = document.querySelector('.mt-4.bg-gradient-to-r.from-yellow-500\\/20');
-        const securePaymentBadge = document.querySelector('.mt-2.flex.items-center.justify-center.text-xs.text-gray-400');
+        const testimonial = document.querySelector(
+          ".mt-4.bg-gradient-to-r.from-yellow-500\\/20"
+        );
+        const securePaymentBadge = document.querySelector(
+          ".mt-2.flex.items-center.justify-center.text-xs.text-gray-400"
+        );
 
         // Find the button container
-        const buttonContainer = document.querySelector('#resultsSection .grid.grid-cols-1.md\\:grid-cols-3');
+        const buttonContainer = document.querySelector(
+          "#resultsSection .grid.grid-cols-1.md\\:grid-cols-3"
+        );
 
         if (userCredits > 0) {
           // User has credits - simplify UI
-          console.log('User has credits - simplifying UI');
+          console.log("User has credits - simplifying UI");
 
           // Hide the lock overlay on full quality image
           if (lockOverlay) {
-            lockOverlay.style.display = 'none';
+            lockOverlay.style.display = "none";
           }
 
           // Hide testimonial - not needed for credited users
           if (testimonial) {
-            testimonial.style.display = 'none';
+            testimonial.style.display = "none";
           }
 
           // Hide secure payment badge - not needed for credited users
           if (securePaymentBadge) {
-            securePaymentBadge.style.display = 'none';
+            securePaymentBadge.style.display = "none";
           }
 
           // Hide the first download button - we only need one
           if (downloadBtn) {
-            downloadBtn.style.display = 'none';
+            downloadBtn.style.display = "none";
           }
 
           // Change grid to 2 columns for credited users
           if (buttonContainer) {
-            buttonContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto';
+            buttonContainer.className =
+              "grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto";
           }
 
           // Update main button to be Download Full Quality
           if (upgradeBtn) {
-            upgradeBtn.innerHTML = '👉 Download Full Quality';
-            upgradeBtn.className = 'w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg';
+            upgradeBtn.innerHTML = "👉 Download Full Quality";
+            upgradeBtn.className =
+              "w-full px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg";
           }
 
           // Update generate another button
           if (generateAnotherBtn) {
-            generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Generate More Styles';
-            generateAnotherBtn.className = 'px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center';
+            generateAnotherBtn.innerHTML =
+              '<i class="fas fa-magic mr-2"></i>Generate More Styles';
+            generateAnotherBtn.className =
+              "px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center";
           }
         } else {
           // User has no credits - show full upgrade UI
-          console.log('User has no credits - showing upgrade prompts');
+          console.log("User has no credits - showing upgrade prompts");
 
           // Show the lock overlay on full quality image
           if (lockOverlay) {
-            lockOverlay.style.display = 'flex';
+            lockOverlay.style.display = "flex";
           }
 
           // Show testimonial for free users
           if (testimonial) {
-            testimonial.style.display = 'block';
+            testimonial.style.display = "block";
           }
 
           // Show secure payment badge for free users
           if (securePaymentBadge) {
-            securePaymentBadge.style.display = 'flex';
+            securePaymentBadge.style.display = "flex";
           }
 
           // Show download preview button for free users
           if (downloadBtn) {
-            downloadBtn.style.display = 'block';
+            downloadBtn.style.display = "block";
           }
 
           // Use 3 columns for free users
           if (buttonContainer) {
-            buttonContainer.className = 'grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto';
+            buttonContainer.className =
+              "grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto";
           }
 
           // Update main upgrade button
           if (upgradeBtn) {
-            upgradeBtn.innerHTML = '👉 Unlock Full Quality – $3.99';
-            upgradeBtn.className = 'w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg';
+            upgradeBtn.innerHTML = "👉 Unlock Full Quality – $3.99";
+            upgradeBtn.className =
+              "w-full px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg";
           }
 
           // Update generate another button
           if (generateAnotherBtn) {
-            generateAnotherBtn.innerHTML = '<i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles';
-            generateAnotherBtn.className = 'px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center';
+            generateAnotherBtn.innerHTML =
+              '<i class="fas fa-magic mr-2"></i>Upgrade to Generate More Styles';
+            generateAnotherBtn.className =
+              "px-6 py-3 bg-purple-600 hover:bg-purple-700 rounded-xl font-semibold transition-all text-center";
           }
 
           // Update download button
           if (downloadBtn) {
-            downloadBtn.innerHTML = '👉 Free sample – low-res, watermarked';
-            downloadBtn.className = 'px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded-xl font-semibold transition-all text-center';
+            downloadBtn.innerHTML = "👉 Free sample – low-res, watermarked";
+            downloadBtn.className =
+              "px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded-xl font-semibold transition-all text-center";
           }
         }
       }
 
       function setupResultsPageHandlers() {
         // Download Preview button
-        document.getElementById('downloadPreviewBtn')?.addEventListener('click', function() {
-          const userCredits = totalCredits();
-          const link = document.createElement('a');
+        document
+          .getElementById("downloadPreviewBtn")
+          ?.addEventListener("click", function () {
+            const userCredits = totalCredits();
+            const link = document.createElement("a");
 
-          if (userCredits > 0) {
-            // User has credits - download full quality
-            link.href = document.getElementById('resultsFullQualityPreview').src;
-            link.download = 'toyrender-full-quality.png';
-          } else {
-            // No credits - download preview
-            link.href = document.getElementById('resultsBlurredPreview').src;
-            link.download = 'toyrender-preview.png';
-          }
+            if (userCredits > 0) {
+              // User has credits - download full quality
+              link.href = document.getElementById(
+                "resultsFullQualityPreview"
+              ).src;
+              link.download = "toyrender-full-quality.png";
+            } else {
+              // No credits - download preview
+              link.href = document.getElementById("resultsBlurredPreview").src;
+              link.download = "toyrender-preview.png";
+            }
 
-          link.click();
-
-          // After download, prompt for upgrade only if user has no credits
-          if (userCredits === 0) {
-            setTimeout(() => {
-              if (confirm('Want the full HD quality without watermark? Upgrade now for just $3.99!')) {
-                startCheckout('starter_pack_25_credits');
-              }
-            }, 1000);
-          }
-
-          if (typeof gtag === "function") {
-            gtag("event", userCredits > 0 ? "download_full_quality" : "download_preview", {
-              event_category: "engagement",
-            });
-          }
-        });
-
-        // Upgrade Package button
-        document.getElementById('upgradePackageBtn')?.addEventListener('click', function() {
-          const userCredits = totalCredits();
-          if (userCredits > 0) {
-            // User has credits - download full quality image
-            const link = document.createElement('a');
-            link.href = document.getElementById('resultsFullQualityPreview').src;
-            link.download = 'toyrender-full-quality.png';
             link.click();
 
+            // After download, prompt for upgrade only if user has no credits
+            if (userCredits === 0) {
+              setTimeout(() => {
+                if (
+                  confirm(
+                    "Want the full HD quality without watermark? Upgrade now for just $3.99!"
+                  )
+                ) {
+                  startCheckout("starter_pack_25_credits");
+                }
+              }, 1000);
+            }
+
             if (typeof gtag === "function") {
-              gtag("event", "download_full_quality", {
+              gtag(
+                "event",
+                userCredits > 0 ? "download_full_quality" : "download_preview",
+                {
+                  event_category: "engagement",
+                }
+              );
+            }
+          });
+
+        // Upgrade Package button
+        document
+          .getElementById("upgradePackageBtn")
+          ?.addEventListener("click", function () {
+            const userCredits = totalCredits();
+            if (userCredits > 0) {
+              // User has credits - download full quality image
+              const link = document.createElement("a");
+              link.href = document.getElementById(
+                "resultsFullQualityPreview"
+              ).src;
+              link.download = "toyrender-full-quality.png";
+              link.click();
+
+              if (typeof gtag === "function") {
+                gtag("event", "download_full_quality", {
+                  event_category: "engagement",
+                });
+              }
+              return;
+            }
+            startCheckout("starter_pack_25_credits");
+
+            if (typeof gtag === "function") {
+              gtag("event", "click_upgrade_package", {
+                event_category: "conversion",
+              });
+            }
+          });
+
+        // Generate Another button
+        document
+          .getElementById("generateAnotherBtn")
+          ?.addEventListener("click", function () {
+            const userCredits = totalCredits();
+            if (userCredits > 0) {
+              // User has credits, go back to style selection
+              document.getElementById("resultsSection").classList.add("hidden");
+              document
+                .getElementById("styleSelectionSection")
+                .classList.remove("hidden");
+
+              // Show sticky CTA again as Generate Image
+              const stickyCTA = document.getElementById("stickyCTABtn");
+              if (stickyCTA) {
+                stickyCTA.style.display = "";
+                showContinueButton(); // This will make it "Generate Image"
+              }
+            } else {
+              // User has no credits, prompt for upgrade
+              if (
+                confirm(
+                  "Unlock unlimited style generation with the Starter Pack for $3.99. Continue?"
+                )
+              ) {
+                startCheckout("starter_pack_25_credits");
+              }
+            }
+
+            if (typeof gtag === "function") {
+              gtag("event", "generate_another_image", {
                 event_category: "engagement",
               });
             }
-            return;
-          }
-          startCheckout('starter_pack_25_credits');
-
-          if (typeof gtag === "function") {
-            gtag("event", "click_upgrade_package", {
-              event_category: "conversion",
-            });
-          }
-        });
-
-        // Generate Another button
-        document.getElementById('generateAnotherBtn')?.addEventListener('click', function() {
-          const userCredits = totalCredits();
-          if (userCredits > 0) {
-            // User has credits, go back to style selection
-            document.getElementById('resultsSection').classList.add('hidden');
-            document.getElementById('styleSelectionSection').classList.remove('hidden');
-
-            // Show sticky CTA again as Generate Image
-            const stickyCTA = document.getElementById('stickyCTABtn');
-            if (stickyCTA) {
-              stickyCTA.style.display = '';
-              showContinueButton(); // This will make it "Generate Image"
-            }
-          } else {
-            // User has no credits, prompt for upgrade
-            if (confirm('Unlock unlimited style generation with the Starter Pack for $3.99. Continue?')) {
-              startCheckout('starter_pack_25_credits');
-            }
-          }
-
-          if (typeof gtag === "function") {
-            gtag("event", "generate_another_image", {
-              event_category: "engagement",
-            });
-          }
-        });
+          });
 
         // Start Over button
-        document.getElementById('startOverBtn')?.addEventListener('click', function() {
-          // Reset everything
-          document.getElementById('resultsSection').classList.add('hidden');
-          document.getElementById('heroSection')?.classList.remove('hidden');
-          document.querySelector('#uploadArea')?.classList.remove('hidden');
+        document
+          .getElementById("startOverBtn")
+          ?.addEventListener("click", function () {
+            // Reset everything
+            document.getElementById("resultsSection").classList.add("hidden");
+            document.getElementById("heroSection")?.classList.remove("hidden");
+            document.querySelector("#uploadArea")?.classList.remove("hidden");
 
-          // Reset file and previews
-          currentFile = null;
-          document.getElementById('originalPreview').src = '';
-          document.getElementById('resultPreview').src = '';
+            // Reset file and previews
+            currentFile = null;
+            document.getElementById("originalPreview").src = "";
+            document.getElementById("resultPreview").src = "";
 
-          // Restore original CTA
-          const stickyCTA = document.getElementById('stickyCTABtn');
-          if (stickyCTA) {
-            stickyCTA.style.display = '';
-            hideContinueButton();
-          }
+            // Restore original CTA
+            const stickyCTA = document.getElementById("stickyCTABtn");
+            if (stickyCTA) {
+              stickyCTA.style.display = "";
+              hideContinueButton();
+            }
 
-          if (typeof gtag === "function") {
-            gtag("event", "start_over", {
-              event_category: "engagement",
-            });
-          }
-        });
+            if (typeof gtag === "function") {
+              gtag("event", "start_over", {
+                event_category: "engagement",
+              });
+            }
+          });
       }
 
       // Initialize style selection
@@ -4274,24 +4565,25 @@
                   event_label: this.dataset.style,
                 });
               }
-
             });
 
             // Add hover event to trigger zoom popup (desktop only)
-            const styleThumb = button.querySelector('.style-thumb');
+            const styleThumb = button.querySelector(".style-thumb");
             if (styleThumb && !isMobileDevice()) {
               let hoverTimeout;
 
-              styleThumb.addEventListener('mouseenter', function() {
+              styleThumb.addEventListener("mouseenter", function () {
                 hoverTimeout = setTimeout(() => {
-                  const zoomOverlay = button.querySelector('.style-zoom-overlay');
+                  const zoomOverlay = button.querySelector(
+                    ".style-zoom-overlay"
+                  );
                   if (zoomOverlay) {
                     zoomOverlay.click();
                   }
                 }, 500); // 500ms delay before showing popup
               });
 
-              styleThumb.addEventListener('mouseleave', function() {
+              styleThumb.addEventListener("mouseleave", function () {
                 if (hoverTimeout) {
                   clearTimeout(hoverTimeout);
                 }
@@ -4355,7 +4647,6 @@
             icon.className = "fas fa-check";
           }
         }
-
       }
 
       /* ----------------------- Auth & Credits UI ----------------------- */
@@ -4381,7 +4672,7 @@
         }
         updateAuthUI();
         // Update results page buttons if they exist
-        if (document.getElementById('upgradePackageBtn')) {
+        if (document.getElementById("upgradePackageBtn")) {
           updateResultsPageButtons();
         }
       }
@@ -4629,7 +4920,7 @@
             await refreshSession();
 
             // Show new results page with updated credit info
-            const originalSrc = document.getElementById('originalPreview').src;
+            const originalSrc = document.getElementById("originalPreview").src;
             showResultsPage(originalSrc, data.imageUrl);
 
             // Track which style was used (check if gtag exists)
@@ -5184,7 +5475,7 @@
       // Render gallery items
       function renderGallery(itemsToShow) {
         const galleryGrid = document.getElementById("galleryGrid");
-        galleryGrid.innerHTML = '';
+        galleryGrid.innerHTML = "";
 
         for (let i = 0; i < itemsToShow; i++) {
           const index = (galleryStartIndex + i) % displayData.length;
