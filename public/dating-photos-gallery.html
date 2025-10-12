@@ -222,9 +222,16 @@
         left: 0;
         right: 0;
         z-index: 998;
-        background: linear-gradient(135deg, rgba(147, 51, 234, 0.98), rgba(236, 72, 153, 0.98));
+        background: linear-gradient(
+          135deg,
+          rgba(147, 51, 234, 0.98),
+          rgba(236, 72, 153, 0.98)
+        );
         backdrop-filter: blur(10px);
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 -8px 32px rgba(236, 72, 153, 0.5),
+                    0 -4px 16px rgba(147, 51, 234, 0.4),
+                    0 -2px 8px rgba(0, 0, 0, 0.6);
+        border-top: 2px solid rgba(255, 255, 255, 0.3);
         animation: slideUp 0.3s ease-out;
       }
 
@@ -374,8 +381,13 @@
       }
 
       @keyframes pulse {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.8; }
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.8;
+        }
       }
 
       /* Mobile optimization */
@@ -393,8 +405,13 @@
 
       /* Urgency animations */
       @keyframes pulse-slow {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.9; }
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.9;
+        }
       }
 
       .animate-pulse-slow {
@@ -899,20 +916,28 @@
 
         <!-- Language Toggle -->
         <div class="flex items-center gap-3">
-          <div class="language-toggle flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20">
-            <a href="/dating-photos-gallery"
-               class="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-full transition-all hover:bg-white/30"
-               aria-label="English">
+          <div
+            class="language-toggle flex items-center bg-white/10 backdrop-blur rounded-full p-1 border border-white/20"
+          >
+            <a
+              href="/dating-photos-gallery"
+              class="px-3 py-1.5 text-sm font-medium text-white bg-white/20 rounded-full transition-all hover:bg-white/30"
+              aria-label="English"
+            >
               🇺🇸 EN
             </a>
-            <a href="/es/fotos-citas-galeria"
-               class="px-3 py-1.5 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
-               aria-label="Español">
+            <a
+              href="/es/fotos-citas-galeria"
+              class="px-3 py-1.5 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              aria-label="Español"
+            >
               🇪🇸 ES
             </a>
-            <a href="/pt/galeria-fotos-namoro"
-               class="px-3 py-1.5 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
-               aria-label="Português">
+            <a
+              href="/pt/galeria-fotos-namoro"
+              class="px-3 py-1.5 text-sm font-medium text-white/70 hover:text-white hover:bg-white/10 rounded-full transition-all"
+              aria-label="Português"
+            >
               🇧🇷 PT
             </a>
           </div>
@@ -980,31 +1005,6 @@
       class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 pb-24"
       role="main"
     >
-      <!-- Urgency Banner -->
-      <section class="pt-6">
-        <div id="urgency-banner" class="relative bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 rounded-2xl p-4 mb-8 text-white text-center shadow-2xl border border-white/20 animate-pulse-slow">
-          <div class="absolute inset-0 bg-gradient-to-r from-red-600/20 via-pink-600/20 to-purple-600/20 rounded-2xl blur-sm"></div>
-          <div class="relative z-10">
-            <div class="flex items-center justify-center gap-2 mb-2">
-              <span class="text-2xl">🚨</span>
-              <h3 class="font-bold text-lg">LIMITED TIME: 25% OFF AI PHOTOS</h3>
-              <span class="text-2xl">🚨</span>
-            </div>
-            <p class="text-sm text-white/90 mb-3">Get professional dating photos that increase matches by 300%</p>
-            <div class="flex items-center justify-center gap-4 flex-wrap">
-              <div class="bg-white/20 rounded-lg px-3 py-1">
-                <div class="text-xs text-white/80">EXPIRES IN</div>
-                <div id="countdown-timer" class="font-bold text-lg">23:45:12</div>
-              </div>
-              <a href="/dating-photos" class="bg-white text-purple-600 px-6 py-2 rounded-full font-bold text-sm hover:bg-purple-50 transition-colors transform hover:scale-105">
-                Claim 25% Off Now →
-              </a>
-              <button onclick="document.getElementById('urgency-banner').style.display='none'" class="text-white/70 hover:text-white text-xs ml-2">✕ Dismiss</button>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <!-- Intro -->
       <section class="pb-6">
         <nav class="text-sm text-purple-300 mb-3" aria-label="Breadcrumb">
@@ -1022,6 +1022,9 @@
           <span class="gradient-text">Dating & Tinder Photo Ideas</span> —
           Original + 10 Styles
         </h1>
+        <p class="mt-4 text-xl lg:text-2xl font-semibold text-white max-w-3xl">
+          Turn one selfie into 10 stunning dating photos — boost matches in minutes.
+        </p>
         <p class="mt-3 text-purple-200 max-w-3xl">
           Six real examples (3 women, 3 men). We run each original portrait
           through the full
@@ -1033,7 +1036,9 @@
         </p>
 
         <!-- Primary CTA Section -->
-        <div class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center">
+        <div
+          class="mt-8 flex flex-col sm:flex-row gap-4 items-center justify-center"
+        >
           <a
             href="/"
             class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold text-lg rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-xl hover:shadow-2xl"
@@ -1045,24 +1050,94 @@
         <!-- Pricing & Value Proposition -->
         <div class="mt-6 text-center space-y-3">
           <p class="text-white text-lg font-semibold">
-            Most people spend $300+ on photoshoots — <span class="text-yellow-300">get yours in minutes for $4.99</span>
+            Most people spend $300+ on photoshoots —
+            <span class="text-yellow-300">get yours in minutes for $4.99</span>
           </p>
           <p class="text-purple-300 text-sm">
-            ✨ <span class="font-semibold">95% of users</span> see increased matches within 7 days
+            ✨ <span class="font-semibold">95% of users</span> see increased
+            matches within 7 days
           </p>
         </div>
 
         <!-- Privacy Guarantee Badge -->
         <div class="mt-6 flex justify-center">
-          <div class="inline-flex items-center gap-3 px-6 py-3 bg-green-900/30 border border-green-500/30 rounded-xl">
-            <div class="flex-shrink-0 w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
-              <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+          <div
+            class="inline-flex items-center gap-3 px-6 py-3 bg-green-900/30 border border-green-500/30 rounded-xl"
+          >
+            <div
+              class="flex-shrink-0 w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center"
+            >
+              <svg
+                class="w-6 h-6 text-green-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                ></path>
               </svg>
             </div>
             <div class="text-left">
-              <p class="text-green-300 font-semibold text-sm">🔒 Safe & Private</p>
-              <p class="text-green-200/70 text-xs">We never share or sell your photos. Used only for your render.</p>
+              <p class="text-green-300 font-semibold text-sm">
+                🔒 Safe & Private
+              </p>
+              <p class="text-green-200/70 text-xs">
+                We never share or sell your photos. Used only for your render.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Trust Strip -->
+      <section class="mt-8 mb-12">
+        <div
+          class="rounded-2xl border-2 border-white/20 bg-gradient-to-r from-indigo-900/60 to-purple-900/60 backdrop-blur-lg p-6 shadow-2xl"
+        >
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-white/20"
+          >
+            <!-- Trust Indicator 1 -->
+            <div class="flex flex-col items-center justify-center py-4 md:py-0">
+              <div
+                class="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mb-3"
+              >
+                <span class="text-4xl">⭐</span>
+              </div>
+              <p class="text-white font-bold text-lg">
+                95% saw more matches
+              </p>
+              <p class="text-purple-200 text-sm">within 7 days</p>
+            </div>
+
+            <!-- Trust Indicator 2 -->
+            <div class="flex flex-col items-center justify-center py-4 md:py-0">
+              <div
+                class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-3"
+              >
+                <span class="text-4xl">🧍</span>
+              </div>
+              <p class="text-white font-bold text-lg">
+                1,000+ users
+              </p>
+              <p class="text-purple-200 text-sm">have tried it</p>
+            </div>
+
+            <!-- Trust Indicator 3 -->
+            <div class="flex flex-col items-center justify-center py-4 md:py-0">
+              <div
+                class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-3"
+              >
+                <span class="text-4xl">🔐</span>
+              </div>
+              <p class="text-white font-bold text-lg">
+                Secure & Private
+              </p>
+              <p class="text-purple-200 text-sm">Photos never shared or sold</p>
             </div>
           </div>
         </div>
@@ -1216,8 +1291,12 @@
         </article>
 
         <!-- Secondary CTA -->
-        <div class="py-8 text-center border border-purple-500/20 rounded-2xl bg-gradient-to-r from-purple-900/30 to-pink-900/30">
-          <p class="text-purple-200 mb-4">Ready to transform your dating profile like Simone?</p>
+        <div
+          class="py-8 text-center border border-purple-500/20 rounded-2xl bg-gradient-to-r from-purple-900/30 to-pink-900/30"
+        >
+          <p class="text-purple-200 mb-4">
+            Ready to transform your dating profile like Simone?
+          </p>
           <a
             href="/"
             class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-xl transition-all duration-300 transform hover:scale-105"
@@ -1362,22 +1441,6 @@
             </div>
           </div>
         </article>
-
-        <!-- Mini CTA Block 1 -->
-        <div class="my-12 p-8 bg-gradient-to-r from-pink-900/40 to-purple-900/40 border-2 border-pink-500/50 rounded-3xl text-center">
-          <p class="text-2xl font-bold text-white mb-4">
-            🔥 Ready to get photos like Stephany?
-          </p>
-          <a
-            href="/"
-            class="inline-flex items-center px-10 py-4 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold text-xl rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl"
-          >
-            → Claim 25% Off Now
-          </a>
-          <p class="mt-4 text-purple-200 text-sm">
-            Limited time offer • Instant delivery • Cancel anytime
-          </p>
-        </div>
 
         <!-- Person: Sabrina (Women) -->
         <article
@@ -1524,7 +1587,6 @@
           </div>
         </article>
 
-
         <!-- Person: Richard (Men) -->
         <article
           class="space-y-4"
@@ -1666,7 +1728,9 @@
         </article>
 
         <!-- Mini CTA Block 2 -->
-        <div class="my-12 p-8 bg-gradient-to-r from-blue-900/40 to-purple-900/40 border-2 border-blue-500/50 rounded-3xl text-center">
+        <div
+          class="my-12 p-8 bg-gradient-to-r from-blue-900/40 to-purple-900/40 border-2 border-blue-500/50 rounded-3xl text-center"
+        >
           <p class="text-2xl font-bold text-white mb-4">
             💪 Want professional results like Richard?
           </p>
@@ -1970,19 +2034,27 @@
       </section>
 
       <!-- Platform Logos Section -->
-      <section class="mt-16 rounded-3xl border border-purple-500/30 bg-white/5 p-6 lg:p-8">
+      <section
+        class="mt-16 rounded-3xl border border-purple-500/30 bg-white/5 p-6 lg:p-8"
+      >
         <header class="text-center mb-8">
           <h2 class="text-xl lg:text-2xl font-bold text-white mb-3">
             Used Successfully On All Major Dating Platforms
           </h2>
-          <p class="text-purple-200">Join thousands finding matches with AI-enhanced photos</p>
+          <p class="text-purple-200">
+            Join thousands finding matches with AI-enhanced photos
+          </p>
         </header>
 
         <!-- Platform Logos Grid -->
-        <div class="flex justify-center items-center gap-8 flex-wrap opacity-90">
+        <div
+          class="flex justify-center items-center gap-8 flex-wrap opacity-90"
+        >
           <!-- Tinder -->
           <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-pink-500 to-red-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform"
+            >
               🔥
             </div>
             <span class="text-white text-sm mt-2 font-medium">Tinder</span>
@@ -1990,7 +2062,9 @@
 
           <!-- Bumble -->
           <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform"
+            >
               🐝
             </div>
             <span class="text-white text-sm mt-2 font-medium">Bumble</span>
@@ -1998,7 +2072,9 @@
 
           <!-- Hinge -->
           <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform"
+            >
               💜
             </div>
             <span class="text-white text-sm mt-2 font-medium">Hinge</span>
@@ -2006,7 +2082,12 @@
 
           <!-- Coffee Meets Bagel -->
           <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-16 h-16 bg-gradient-to-br from-brown-600 to-amber-700 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform" style="background: linear-gradient(135deg, #8B4513 0%, #D2691E 100%)">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-brown-600 to-amber-700 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform"
+              style="
+                background: linear-gradient(135deg, #8b4513 0%, #d2691e 100%);
+              "
+            >
               ☕
             </div>
             <span class="text-white text-sm mt-2 font-medium">CMB</span>
@@ -2014,7 +2095,9 @@
 
           <!-- OkCupid -->
           <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-blue-500 to-green-500 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform"
+            >
               💙
             </div>
             <span class="text-white text-sm mt-2 font-medium">OkCupid</span>
@@ -2022,7 +2105,9 @@
 
           <!-- Match -->
           <div class="flex flex-col items-center group cursor-pointer">
-            <div class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform">
+            <div
+              class="w-16 h-16 bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl flex items-center justify-center text-white text-2xl font-bold shadow-lg group-hover:scale-110 transition-transform"
+            >
               💕
             </div>
             <span class="text-white text-sm mt-2 font-medium">Match</span>
@@ -2051,19 +2136,25 @@
       </section>
 
       <!-- Testimonials Section -->
-      <section class="mt-12 rounded-3xl border border-purple-500/30 bg-white/5 p-6 lg:p-10">
+      <section
+        class="mt-12 rounded-3xl border border-purple-500/30 bg-white/5 p-6 lg:p-10"
+      >
         <header class="text-center mb-8">
           <h2 class="text-2xl lg:text-3xl font-extrabold tracking-tight">
             <span class="gradient-text">Real Results</span> from Real Users
           </h2>
-          <p class="text-purple-200 mt-2">See how AI dating photos transformed their match rates</p>
+          <p class="text-purple-200 mt-2">
+            See how AI dating photos transformed their match rates
+          </p>
         </header>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <!-- Testimonial 1 -->
           <div class="bg-slate-800/50 border border-white/10 rounded-xl p-6">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold"
+              >
                 M
               </div>
               <div class="ml-3">
@@ -2072,17 +2163,23 @@
               </div>
             </div>
             <p class="text-purple-100 text-sm mb-3">
-              "Went from 2 matches per month to 15+ after using the AI photo styles. The golden hour and cafe shots worked amazing!"
+              "Went from 2 matches per month to 15+ after using the AI photo
+              styles. The golden hour and cafe shots worked amazing!"
             </p>
             <p class="text-purple-300 text-xs">
-              <span class="font-semibold text-green-400">+650% more matches</span> in 2 weeks
+              <span class="font-semibold text-green-400"
+                >+650% more matches</span
+              >
+              in 2 weeks
             </p>
           </div>
 
           <!-- Testimonial 2 -->
           <div class="bg-slate-800/50 border border-white/10 rounded-xl p-6">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold"
+              >
                 S
               </div>
               <div class="ml-3">
@@ -2091,17 +2188,23 @@
               </div>
             </div>
             <p class="text-purple-100 text-sm mb-3">
-              "The B&W editorial and smart-casual styles got me so many quality matches. Finally found my boyfriend through Hinge!"
+              "The B&W editorial and smart-casual styles got me so many quality
+              matches. Finally found my boyfriend through Hinge!"
             </p>
             <p class="text-purple-300 text-xs">
-              <span class="font-semibold text-green-400">Found relationship</span> in 3 weeks
+              <span class="font-semibold text-green-400"
+                >Found relationship</span
+              >
+              in 3 weeks
             </p>
           </div>
 
           <!-- Testimonial 3 -->
           <div class="bg-slate-800/50 border border-white/10 rounded-xl p-6">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold">
+              <div
+                class="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center text-white font-bold"
+              >
                 J
               </div>
               <div class="ml-3">
@@ -2110,10 +2213,14 @@
               </div>
             </div>
             <p class="text-purple-100 text-sm mb-3">
-              "Professional yet approachable photos. The city night shots got conversations started immediately."
+              "Professional yet approachable photos. The city night shots got
+              conversations started immediately."
             </p>
             <p class="text-purple-300 text-xs">
-              <span class="font-semibold text-green-400">300% more conversations</span> started
+              <span class="font-semibold text-green-400"
+                >300% more conversations</span
+              >
+              started
             </p>
           </div>
         </div>
@@ -2150,15 +2257,29 @@
 
         <!-- Social Sharing -->
         <div class="mt-6 text-center">
-          <p class="text-purple-300 text-sm mb-3">Share this gallery with friends:</p>
+          <p class="text-purple-300 text-sm mb-3">
+            Share this gallery with friends:
+          </p>
           <div class="flex justify-center gap-3">
-            <a href="https://twitter.com/intent/tweet?url=https://toyrender.com/dating-photos-gallery&text=Check out these amazing AI dating photo transformations!" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+            <a
+              href="https://twitter.com/intent/tweet?url=https://toyrender.com/dating-photos-gallery&text=Check out these amazing AI dating photo transformations!"
+              target="_blank"
+              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+            >
               Twitter
             </a>
-            <a href="https://www.facebook.com/sharer/sharer.php?u=https://toyrender.com/dating-photos-gallery" target="_blank" class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+            <a
+              href="https://www.facebook.com/sharer/sharer.php?u=https://toyrender.com/dating-photos-gallery"
+              target="_blank"
+              class="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+            >
               Facebook
             </a>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://toyrender.com/dating-photos-gallery" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors">
+            <a
+              href="https://www.linkedin.com/sharing/share-offsite/?url=https://toyrender.com/dating-photos-gallery"
+              target="_blank"
+              class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition-colors"
+            >
               LinkedIn
             </a>
           </div>
@@ -2372,17 +2493,32 @@
         <section class="pt-6 border-t border-purple-500/30">
           <h4 class="text-lg font-semibold mb-3">Explore More Photo Styles</h4>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <a href="/business-photos-gallery" class="block p-4 bg-slate-800/30 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors">
+            <a
+              href="/business-photos-gallery"
+              class="block p-4 bg-slate-800/30 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors"
+            >
               <h5 class="font-semibold text-white">Business Photos</h5>
-              <p class="text-purple-200 text-sm">Professional headshots & corporate portraits</p>
+              <p class="text-purple-200 text-sm">
+                Professional headshots & corporate portraits
+              </p>
             </a>
-            <a href="/glamour-gallery" class="block p-4 bg-slate-800/30 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors">
+            <a
+              href="/glamour-gallery"
+              class="block p-4 bg-slate-800/30 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors"
+            >
               <h5 class="font-semibold text-white">Glamour Gallery</h5>
-              <p class="text-purple-200 text-sm">Elegant & sophisticated photo styles</p>
+              <p class="text-purple-200 text-sm">
+                Elegant & sophisticated photo styles
+              </p>
             </a>
-            <a href="/figurines-gallery" class="block p-4 bg-slate-800/30 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors">
+            <a
+              href="/figurines-gallery"
+              class="block p-4 bg-slate-800/30 rounded-xl border border-white/10 hover:border-purple-400/50 transition-colors"
+            >
               <h5 class="font-semibold text-white">AI Figurines</h5>
-              <p class="text-purple-200 text-sm">Transform photos into collectible figurines</p>
+              <p class="text-purple-200 text-sm">
+                Transform photos into collectible figurines
+              </p>
             </a>
           </div>
         </section>
@@ -2395,12 +2531,9 @@
             class="underline decoration-purple-400 hover:text-white"
             >AI Figurine Gallery</a
           >,
-          <a
-            href="/"
-            class="underline decoration-purple-400 hover:text-white"
+          <a href="/" class="underline decoration-purple-400 hover:text-white"
             >Dating Photos Service</a
-          >,
-          or
+          >, or
           <a
             href="/contact"
             class="underline decoration-purple-400 hover:text-white"
@@ -2661,10 +2794,11 @@
       })();
 
       // Floating CTA Bar
-      (function() {
-        const floatingCTA = document.createElement('div');
-        floatingCTA.id = 'floating-cta';
-        floatingCTA.className = 'fixed bottom-4 left-4 right-4 z-40 transform translate-y-full transition-all duration-300 opacity-0';
+      (function () {
+        const floatingCTA = document.createElement("div");
+        floatingCTA.id = "floating-cta";
+        floatingCTA.className =
+          "fixed bottom-4 left-4 right-4 z-40 transform translate-y-full transition-all duration-300 opacity-0";
         floatingCTA.innerHTML = `
           <div class="max-w-md mx-auto bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-4 shadow-2xl border border-white/20">
             <div class="flex items-center justify-between">
@@ -2682,83 +2816,92 @@
         document.body.appendChild(floatingCTA);
 
         let ctaShown = false;
-        let ctaDismissed = localStorage.getItem('floatingCtaDismissed') === 'true';
+        let ctaDismissed =
+          localStorage.getItem("floatingCtaDismissed") === "true";
 
         function showFloatingCTA() {
           if (!ctaDismissed && !ctaShown) {
-            floatingCTA.style.transform = 'translateY(0)';
-            floatingCTA.style.opacity = '1';
+            floatingCTA.style.transform = "translateY(0)";
+            floatingCTA.style.opacity = "1";
             ctaShown = true;
           }
         }
 
         function hideFloatingCTA() {
-          floatingCTA.style.transform = 'translateY(full)';
-          floatingCTA.style.opacity = '0';
+          floatingCTA.style.transform = "translateY(full)";
+          floatingCTA.style.opacity = "0";
           ctaShown = false;
         }
 
         // Show after scrolling 50% of page
-        window.addEventListener('scroll', function() {
-          const scrollPercent = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+        window.addEventListener("scroll", function () {
+          const scrollPercent =
+            (window.scrollY /
+              (document.documentElement.scrollHeight - window.innerHeight)) *
+            100;
           if (scrollPercent > 50) {
             showFloatingCTA();
           }
         });
 
         // Dismiss functionality
-        document.getElementById('close-floating-cta').addEventListener('click', function() {
-          hideFloatingCTA();
-          localStorage.setItem('floatingCtaDismissed', 'true');
-          ctaDismissed = true;
-        });
+        document
+          .getElementById("close-floating-cta")
+          .addEventListener("click", function () {
+            hideFloatingCTA();
+            localStorage.setItem("floatingCtaDismissed", "true");
+            ctaDismissed = true;
+          });
       })();
 
       // Lazy Loading Implementation
-      (function() {
-        const lazyImages = document.querySelectorAll('img[data-src]');
+      (function () {
+        const lazyImages = document.querySelectorAll("img[data-src]");
 
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              const img = entry.target;
+        const imageObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
 
-              // Add loading placeholder
-              img.classList.add('image-loading');
-              img.style.minHeight = '200px';
+                // Add loading placeholder
+                img.classList.add("image-loading");
+                img.style.minHeight = "200px";
 
-              // Create new image for loading
-              const newImg = new Image();
-              newImg.onload = function() {
-                img.src = this.src;
-                img.classList.remove('image-loading');
-                img.style.minHeight = '';
-                img.style.opacity = '1';
-              };
+                // Create new image for loading
+                const newImg = new Image();
+                newImg.onload = function () {
+                  img.src = this.src;
+                  img.classList.remove("image-loading");
+                  img.style.minHeight = "";
+                  img.style.opacity = "1";
+                };
 
-              newImg.onerror = function() {
-                img.classList.remove('image-loading');
-                img.alt = 'Failed to load image';
-              };
+                newImg.onerror = function () {
+                  img.classList.remove("image-loading");
+                  img.alt = "Failed to load image";
+                };
 
-              newImg.src = img.dataset.src;
-              observer.unobserve(img);
-            }
-          });
-        }, {
-          rootMargin: '100px'
-        });
+                newImg.src = img.dataset.src;
+                observer.unobserve(img);
+              }
+            });
+          },
+          {
+            rootMargin: "100px",
+          }
+        );
 
-        lazyImages.forEach(img => {
-          img.style.opacity = '0.3';
-          img.style.transition = 'opacity 0.3s ease';
+        lazyImages.forEach((img) => {
+          img.style.opacity = "0.3";
+          img.style.transition = "opacity 0.3s ease";
           imageObserver.observe(img);
         });
       })();
 
       // Image preloading for gallery navigation
-      (function() {
-        const allImages = Array.from(document.querySelectorAll('img[src]'));
+      (function () {
+        const allImages = Array.from(document.querySelectorAll("img[src]"));
         let preloadedImages = new Set();
 
         function preloadImage(src) {
@@ -2770,21 +2913,26 @@
         }
 
         // Preload images when user hovers over thumbnails
-        document.addEventListener('mouseover', function(e) {
-          if (e.target.tagName === 'IMG' && e.target.closest('.gallery-thumbnail')) {
-            const figure = e.target.closest('figure');
+        document.addEventListener("mouseover", function (e) {
+          if (
+            e.target.tagName === "IMG" &&
+            e.target.closest(".gallery-thumbnail")
+          ) {
+            const figure = e.target.closest("figure");
             const group = figure.dataset.group;
 
             // Preload other images in the same group
-            const groupImages = document.querySelectorAll(`figure[data-group="${group}"] img`);
-            groupImages.forEach(img => preloadImage(img.src));
+            const groupImages = document.querySelectorAll(
+              `figure[data-group="${group}"] img`
+            );
+            groupImages.forEach((img) => preloadImage(img.src));
           }
         });
       })();
 
       // Countdown Timer for Urgency Banner
-      (function() {
-        const countdownElement = document.getElementById('countdown-timer');
+      (function () {
+        const countdownElement = document.getElementById("countdown-timer");
         if (!countdownElement) return;
 
         // Set countdown time (24 hours from now, but show it as if it's ending soon)
@@ -2797,12 +2945,18 @@
 
           if (timeLeft > 0) {
             const hours = Math.floor(timeLeft / (1000 * 60 * 60));
-            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const minutes = Math.floor(
+              (timeLeft % (1000 * 60 * 60)) / (1000 * 60)
+            );
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            countdownElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            countdownElement.textContent = `${hours
+              .toString()
+              .padStart(2, "0")}:${minutes
+              .toString()
+              .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
           } else {
-            countdownElement.textContent = '00:00:00';
+            countdownElement.textContent = "00:00:00";
             // Reset timer after it expires
             endTime.setHours(endTime.getHours() + 24);
           }
@@ -2813,16 +2967,18 @@
       })();
 
       // Exit-Intent Popup
-      (function() {
+      (function () {
         let exitIntentShown = false;
-        const exitIntentDismissed = localStorage.getItem('exitIntentDismissed') === 'true';
+        const exitIntentDismissed =
+          localStorage.getItem("exitIntentDismissed") === "true";
 
         if (exitIntentDismissed) return;
 
         // Create exit-intent popup
-        const exitPopup = document.createElement('div');
-        exitPopup.id = 'exit-intent-popup';
-        exitPopup.className = 'fixed inset-0 z-50 bg-black/80 backdrop-blur-sm opacity-0 invisible transition-all duration-300';
+        const exitPopup = document.createElement("div");
+        exitPopup.id = "exit-intent-popup";
+        exitPopup.className =
+          "fixed inset-0 z-50 bg-black/80 backdrop-blur-sm opacity-0 invisible transition-all duration-300";
         exitPopup.innerHTML = `
           <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-gradient-to-br from-purple-900 to-pink-900 rounded-3xl p-8 max-w-md w-full text-white text-center transform scale-95 transition-transform duration-300">
@@ -2850,22 +3006,22 @@
 
         function showExitPopup() {
           if (!exitIntentShown && !exitIntentDismissed) {
-            exitPopup.classList.remove('opacity-0', 'invisible');
-            exitPopup.querySelector('div > div').classList.remove('scale-95');
+            exitPopup.classList.remove("opacity-0", "invisible");
+            exitPopup.querySelector("div > div").classList.remove("scale-95");
             exitIntentShown = true;
-            document.body.style.overflow = 'hidden';
+            document.body.style.overflow = "hidden";
           }
         }
 
         function hideExitPopup() {
-          exitPopup.classList.add('opacity-0', 'invisible');
-          exitPopup.querySelector('div > div').classList.add('scale-95');
-          document.body.style.overflow = '';
-          localStorage.setItem('exitIntentDismissed', 'true');
+          exitPopup.classList.add("opacity-0", "invisible");
+          exitPopup.querySelector("div > div").classList.add("scale-95");
+          document.body.style.overflow = "";
+          localStorage.setItem("exitIntentDismissed", "true");
         }
 
         // Exit intent detection
-        document.addEventListener('mouseleave', function(e) {
+        document.addEventListener("mouseleave", function (e) {
           if (e.clientY <= 0 && !exitIntentShown) {
             showExitPopup();
           }
@@ -2875,10 +3031,14 @@
         let lastScrollY = window.scrollY;
         let scrollUpCounter = 0;
 
-        window.addEventListener('scroll', function() {
+        window.addEventListener("scroll", function () {
           if (window.scrollY < lastScrollY) {
             scrollUpCounter++;
-            if (scrollUpCounter > 5 && !exitIntentShown && window.innerWidth <= 768) {
+            if (
+              scrollUpCounter > 5 &&
+              !exitIntentShown &&
+              window.innerWidth <= 768
+            ) {
               showExitPopup();
             }
           } else {
@@ -2888,9 +3048,11 @@
         });
 
         // Close popup events
-        document.getElementById('close-exit-popup').addEventListener('click', hideExitPopup);
+        document
+          .getElementById("close-exit-popup")
+          .addEventListener("click", hideExitPopup);
 
-        exitPopup.addEventListener('click', function(e) {
+        exitPopup.addEventListener("click", function (e) {
           if (e.target === exitPopup) {
             hideExitPopup();
           }
@@ -2908,13 +3070,17 @@
     <!-- Sticky CTA Bar -->
     <div class="sticky-cta-bar">
       <div class="container mx-auto px-4 py-4">
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div
+          class="flex flex-col sm:flex-row items-center justify-between gap-4"
+        >
           <div class="text-center sm:text-left">
             <p class="text-white font-bold text-lg">
-              🚀 Create Your AI Dating Photos – <span class="text-yellow-300">25% Off Today Only</span>
+              🚀 Create Your AI Dating Photos –
+              <span class="text-yellow-300">⏰ 25% Off Today Only</span>
             </p>
             <p class="text-purple-100 text-sm">
-              Most popular: 10 styles for just $4.99 • 95% see more matches within 7 days
+              Most popular: 10 styles for just $4.99 • 95% see more matches
+              within 7 days
             </p>
           </div>
           <a
