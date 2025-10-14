@@ -4567,28 +4567,6 @@
               }
             });
 
-            // Add hover event to trigger zoom popup (desktop only)
-            const styleThumb = button.querySelector(".style-thumb");
-            if (styleThumb && !isMobileDevice()) {
-              let hoverTimeout;
-
-              styleThumb.addEventListener("mouseenter", function () {
-                hoverTimeout = setTimeout(() => {
-                  const zoomOverlay = button.querySelector(
-                    ".style-zoom-overlay"
-                  );
-                  if (zoomOverlay) {
-                    zoomOverlay.click();
-                  }
-                }, 500); // 500ms delay before showing popup
-              });
-
-              styleThumb.addEventListener("mouseleave", function () {
-                if (hoverTimeout) {
-                  clearTimeout(hoverTimeout);
-                }
-              });
-            }
           });
 
         document
