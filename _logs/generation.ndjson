@@ -196,3 +196,29 @@
 [2025-10-07T22:53:10.986Z] EVENT: GEN_SUCCESS | REQ: 1bf270bb-d4a0-4f18-87c3-ef114771dde0 | USER: gonza.juani@gmail.com | DURATION: 7758ms | FILE: "Sofi Levantamiento 1.png" (558.19 KB) | OUTPUT: toyrender-20251007-225310-8236f4aa.png
 [2025-10-09T10:35:57.724Z] EVENT: UPLOAD_RECEIVED | REQ: 65ae76b0-feee-460e-b053-03c17a352af0 | USER: alonsoruynan@gmail.com | FILE: "Captura de pantalla 2025-10-09 112709.png" (775.75 KB)
 [2025-10-09T10:36:06.129Z] EVENT: GEN_SUCCESS | REQ: 65ae76b0-feee-460e-b053-03c17a352af0 | USER: alonsoruynan@gmail.com | DURATION: 8405ms | FILE: "Captura de pantalla 2025-10-09 112709.png" (775.75 KB) | OUTPUT: toyrender-20251009-103605-025cd020.png
+[2025-10-12T07:35:05.747Z] EVENT: UPLOAD_RECEIVED | REQ: 5e313a43-4328-4b6b-a939-4980096bbebd | USER: centaurea.asteraceae@gmail.com | FILE: "1000041724.jpg" (267.29 KB)
+[2025-10-12T07:35:15.455Z] EVENT: GEN_SUCCESS | REQ: 5e313a43-4328-4b6b-a939-4980096bbebd | USER: centaurea.asteraceae@gmail.com | DURATION: 9709ms | FILE: "1000041724.jpg" (267.29 KB) | OUTPUT: toyrender-20251012-073515-0d215e70.png
+[2025-10-12T07:37:11.861Z] EVENT: UPLOAD_RECEIVED | REQ: 87d18f91-40fb-4ffb-ac23-b80a353aba1d | USER: centaurea.asteraceae@gmail.com | FILE: "1000041724.jpg" (267.29 KB)
+[2025-10-12T07:37:19.848Z] EVENT: GEN_SUCCESS | REQ: 87d18f91-40fb-4ffb-ac23-b80a353aba1d | USER: centaurea.asteraceae@gmail.com | DURATION: 7987ms | FILE: "1000041724.jpg" (267.29 KB) | OUTPUT: toyrender-20251012-073719-9014cc25.png
+[2025-10-13T20:54:17.475Z] EVENT: UPLOAD_RECEIVED | REQ: 2f33ac74-e7b3-4e0f-9611-5e12af4501cd | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:54:25.758Z] EVENT: GEN_SUCCESS | REQ: 2f33ac74-e7b3-4e0f-9611-5e12af4501cd | USER: unfathomableadventure@gmail.com | DURATION: 8284ms | FILE: "IMG_4413.jpeg" (1959.61 KB) | OUTPUT: toyrender-20251013-205425-d8702397.png
+[2025-10-13T20:55:38.748Z] EVENT: UPLOAD_RECEIVED | REQ: bd7323ba-1ffe-4c4d-89af-4357283faff4 | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:55:47.161Z] EVENT: GEN_SUCCESS | REQ: bd7323ba-1ffe-4c4d-89af-4357283faff4 | USER: unfathomableadventure@gmail.com | DURATION: 8414ms | FILE: "IMG_4413.jpeg" (1959.61 KB) | OUTPUT: toyrender-20251013-205546-011aa8cc.png
+[2025-10-13T20:57:22.374Z] EVENT: UPLOAD_RECEIVED | REQ: 4fb430b7-ee13-4a6a-80d5-1219c2dd80c7 | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:57:29.664Z] EVENT: GEN_SUCCESS | REQ: 4fb430b7-ee13-4a6a-80d5-1219c2dd80c7 | USER: unfathomableadventure@gmail.com | DURATION: 7291ms | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:57:31.240Z] EVENT: UPLOAD_RECEIVED | REQ: 8869b0ae-e199-4c21-91d9-19feff94b750 | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:57:39.063Z] EVENT: GEN_SUCCESS | REQ: 8869b0ae-e199-4c21-91d9-19feff94b750 | USER: unfathomableadventure@gmail.com | DURATION: 7823ms | FILE: "IMG_4413.jpeg" (1959.61 KB) | OUTPUT: toyrender-20251013-205739-979fba61.png
+[2025-10-13T20:57:40.963Z] EVENT: UPLOAD_RECEIVED | REQ: d957a1a1-a90b-4c09-8f34-20f1deb72369 | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:57:50.246Z] EVENT: GEN_SUCCESS | REQ: d957a1a1-a90b-4c09-8f34-20f1deb72369 | USER: unfathomableadventure@gmail.com | DURATION: 9283ms | FILE: "IMG_4413.jpeg" (1959.61 KB) | OUTPUT: toyrender-20251013-205750-8ba938d9.png
+[2025-10-13T20:57:52.082Z] EVENT: UPLOAD_RECEIVED | REQ: 31bda8f0-1ca5-4039-9ab0-715cca8b3c7a | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:58:00.187Z] EVENT: GEN_SUCCESS | REQ: 31bda8f0-1ca5-4039-9ab0-715cca8b3c7a | USER: unfathomableadventure@gmail.com | DURATION: 8105ms | FILE: "IMG_4413.jpeg" (1959.61 KB) | OUTPUT: toyrender-20251013-205800-1d81e08f.png
+[2025-10-13T20:58:01.906Z] EVENT: UPLOAD_RECEIVED | REQ: fef68497-7ef2-41b9-b08b-5ebb61b85dac | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:58:09.153Z] EVENT: GEN_SUCCESS | REQ: fef68497-7ef2-41b9-b08b-5ebb61b85dac | USER: unfathomableadventure@gmail.com | DURATION: 7248ms | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:58:10.886Z] EVENT: UPLOAD_RECEIVED | REQ: ab1b3bb9-47e0-4fd4-9e96-ffe77ea9cf61 | USER: unfathomableadventure@gmail.com | FILE: "IMG_4413.jpeg" (1959.61 KB)
+[2025-10-13T20:58:19.308Z] EVENT: GEN_SUCCESS | REQ: ab1b3bb9-47e0-4fd4-9e96-ffe77ea9cf61 | USER: unfathomableadventure@gmail.com | DURATION: 8422ms | FILE: "IMG_4413.jpeg" (1959.61 KB) | OUTPUT: toyrender-20251013-205819-7371cce9.png
+[2025-10-13T21:04:10.225Z] EVENT: UPLOAD_RECEIVED | REQ: 406d1ec4-b20f-48a3-827c-bc39ae809dd0 | USER: unfathomableadventure@gmail.com | FILE: "IMG_3403.jpeg" (1984.22 KB)
+[2025-10-13T21:04:18.451Z] EVENT: GEN_SUCCESS | REQ: 406d1ec4-b20f-48a3-827c-bc39ae809dd0 | USER: unfathomableadventure@gmail.com | DURATION: 8225ms | FILE: "IMG_3403.jpeg" (1984.22 KB) | OUTPUT: toyrender-20251013-210418-a893e843.png
+[2025-10-13T21:04:56.443Z] EVENT: UPLOAD_RECEIVED | REQ: 20256135-4f98-4fee-906b-158051a5d153 | USER: unfathomableadventure@gmail.com | FILE: "IMG_3403.jpeg" (1984.22 KB)
+[2025-10-13T21:05:04.340Z] EVENT: GEN_SUCCESS | REQ: 20256135-4f98-4fee-906b-158051a5d153 | USER: unfathomableadventure@gmail.com | DURATION: 7898ms | FILE: "IMG_3403.jpeg" (1984.22 KB)
+[2025-10-14T00:47:14.498Z] EVENT: UPLOAD_RECEIVED | REQ: 30a5fe13-0cbe-4e35-a6ed-1557b1bfdf56 | USER: stlavoie0101@gmail.com | FILE: "25-Oct-13-06-06-40-03.png" (272.47 KB)
+[2025-10-14T00:47:22.179Z] EVENT: GEN_SUCCESS | REQ: 30a5fe13-0cbe-4e35-a6ed-1557b1bfdf56 | USER: stlavoie0101@gmail.com | DURATION: 7682ms | FILE: "25-Oct-13-06-06-40-03.png" (272.47 KB) | OUTPUT: toyrender-20251014-004721-1b5c53b4.png
