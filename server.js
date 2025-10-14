@@ -1185,7 +1185,7 @@ app.use("/api/", apiLimiter);
 
 const perUserGenerateLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: parseInt(process.env.MAX_UPLOADS_PER_15M || "12", 10),
+  max: parseInt(process.env.MAX_UPLOADS_PER_15M || "60", 10), // Increased from 12 to 60
   standardHeaders: true,
   legacyHeaders: false,
   keyGenerator: (req) =>
@@ -1196,7 +1196,7 @@ const burstSlowdown = slowDown({
   windowMs: 60 * 1000,
   delayAfter: Math.max(
     1,
-    Math.floor((parseInt(process.env.MAX_UPLOADS_PER_15M || "12", 10) * 2) / 3)
+    Math.floor((parseInt(process.env.MAX_UPLOADS_PER_15M || "60", 10) * 2) / 3) // Increased from 12 to 60
   ),
   delayMs: 250,
 });

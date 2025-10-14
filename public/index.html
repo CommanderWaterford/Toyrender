@@ -4571,21 +4571,37 @@
 
         document
           .getElementById("dating9PackBtn")
-          ?.addEventListener("click", function () {
-            // Remove active from all buttons
-            document
-              .querySelectorAll(".style-option[data-style]")
-              .forEach((btn) => btn.classList.remove("active"));
-            // Add active to pack button
-            this.classList.add("active");
-            selectedStyle = "dating-pack";
-            isPackGeneration = true;
+          ?.addEventListener("click", async function () {
+            // Check if file is uploaded
+            if (!currentFile) {
+              toast("Please upload a photo first.");
+              return;
+            }
+
+            // Check if user is logged in
+            if (!sessionUser) {
+              openAuth("login");
+              return;
+            }
+
+            // Check if user has enough credits (6 required for dating pack)
+            const requiredCredits = 6;
+            if (totalCredits() < requiredCredits) {
+              toast(`Not enough credits. You need ${requiredCredits} credits for the Dating Photo Pack.`);
+              return;
+            }
+
+            // Track the style selection
             if (typeof gtag === "function") {
               gtag("event", "select_style", {
                 event_category: "engagement",
                 event_label: "dating-pack",
               });
             }
+
+            // Open modal and start generation immediately
+            openDatingPackModal();
+            await generateDatingPackWithModal();
           });
 
         // Handle continue button
@@ -5204,6 +5220,162 @@
         }
       };
 
+      // Dating Pack Modal Functions
+      function openDatingPackModal() {
+        const modal = document.getElementById("datingPackModal");
+        if (modal) {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+          // Reset modal state
+          document.getElementById("packProgressCount").textContent = "0";
+          document.getElementById("packProgressBar").style.width = "0%";
+          document.getElementById("packDownloadSection").classList.add("hidden");
+
+          // Reset all photo slots to loading state
+          const slots = document.querySelectorAll(".pack-photo-slot");
+          slots.forEach(slot => {
+            const img = slot.querySelector("img");
+            const loader = slot.querySelector(".absolute");
+            img.classList.add("hidden");
+            loader.classList.remove("hidden");
+          });
+        }
+      }
+
+      function closeDatingPackModal() {
+        const modal = document.getElementById("datingPackModal");
+        if (modal) {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        }
+      }
+
+      function updatePackModalProgress(completedCount, totalCount, imageUrl, style) {
+        // Update progress count
+        document.getElementById("packProgressCount").textContent = completedCount;
+
+        // Update progress bar
+        const percentage = (completedCount / totalCount) * 100;
+        document.getElementById("packProgressBar").style.width = percentage + "%";
+
+        // Update the specific photo slot
+        if (imageUrl && style) {
+          const slot = document.querySelector(`.pack-photo-slot[data-style="${style}"]`);
+          if (slot) {
+            const img = slot.querySelector("img");
+            const loader = slot.querySelector(".absolute");
+            img.src = imageUrl;
+            img.classList.remove("hidden");
+            loader.classList.add("hidden");
+          }
+        }
+
+        // Show download section if all complete
+        if (completedCount === totalCount) {
+          document.getElementById("packDownloadSection").classList.remove("hidden");
+        }
+      }
+
+      // Modal close button handlers
+      document.getElementById("closeDatingPackModal")?.addEventListener("click", closeDatingPackModal);
+      document.getElementById("closePackModalBtn")?.addEventListener("click", closeDatingPackModal);
+
+      // Download all button handler for modal
+      document.getElementById("downloadAllPackBtn")?.addEventListener("click", async function() {
+        if (packResults.length === 0) return;
+
+        // Create ZIP using the existing API endpoint
+        try {
+          const imagePaths = packResults.map(r => r.url);
+          const res = await fetch("/api/generate-zip", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({ imagePaths }),
+          });
+
+          if (res.ok) {
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `dating-photos-pack-${Date.now()}.zip`;
+            a.click();
+            window.URL.revokeObjectURL(url);
+            toast("Download started!");
+          } else {
+            toast("Download failed. Please try again.");
+          }
+        } catch (err) {
+          console.error("Download error:", err);
+          toast("Download failed. Please try again.");
+        }
+      });
+
+      // New function to generate dating pack with modal updates
+      async function generateDatingPackWithModal() {
+        const datingStyles = [
+          "dating1",
+          "dating2",
+          "dating3",
+          "dating4",
+          "dating5",
+          "dating6",
+        ];
+        packResults = [];
+        let completedCount = 0;
+
+        try {
+          // Generate each style and update modal in real-time
+          for (let i = 0; i < datingStyles.length; i++) {
+            const style = datingStyles[i];
+
+            const formData = new FormData();
+            formData.append("photo", currentFile);
+            formData.append("prompt", stylePrompts[style]);
+
+            const res = await fetch("/api/generate", {
+              method: "POST",
+              body: formData,
+              credentials: "include",
+            });
+
+            const data = await res.json().catch(() => ({}));
+
+            if (res.ok && data.imageUrl) {
+              packResults.push({
+                style: style,
+                url: data.imageUrl,
+                name: getStyleName(style),
+              });
+              completedCount++;
+              updatePackModalProgress(completedCount, datingStyles.length, data.imageUrl, style);
+            } else {
+              // Log error but continue
+              console.error(
+                `Failed to generate ${style}:`,
+                data.error || res.statusText
+              );
+              completedCount++;
+              updatePackModalProgress(completedCount, datingStyles.length, null, style);
+            }
+          }
+
+          // Refresh session to update credits
+          await refreshSession();
+
+          // Show success message
+          if (packResults.length > 0) {
+            toast(`Successfully generated ${packResults.length} photos!`);
+          } else {
+            toast("Pack generation failed. Please try again.");
+          }
+        } catch (err) {
+          console.error("Pack generation error:", err);
+          toast(err.message || "Pack generation failed");
+        }
+      }
+
       resetBtn.addEventListener("click", () => {
         // Reset file input and current file
         fileInput.value = "";
@@ -5717,6 +5889,198 @@
       defer
     ></script>
     <!-- Google tag (gtag.js) -->
+    <!-- Dating Pack Modal -->
+    <div
+      id="datingPackModal"
+      class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4"
+    >
+      <div
+        class="bg-slate-900 rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto border-2 border-purple-500/30 shadow-2xl"
+      >
+        <!-- Modal Header -->
+        <div
+          class="flex items-center justify-between p-6 border-b border-purple-500/30"
+        >
+          <div>
+            <h3 class="text-2xl font-bold text-white">Dating Photo Pack</h3>
+            <p class="text-purple-300 text-sm mt-1">
+              Generating all 6 dating styles...
+            </p>
+          </div>
+          <button
+            id="closeDatingPackModal"
+            class="text-purple-300 hover:text-white transition-colors p-2"
+          >
+            <i class="fas fa-times text-2xl"></i>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6">
+          <!-- Progress Bar -->
+          <div class="mb-6">
+            <div class="flex justify-between items-center mb-2">
+              <span class="text-purple-300 text-sm"
+                >Progress: <span id="packProgressCount">0</span>/6</span
+              >
+              <span class="text-purple-300 text-sm"
+                >Estimated time: <span id="packEstimatedTime">~3 min</span></span
+              >
+            </div>
+            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+              <div
+                id="packProgressBar"
+                class="h-full bg-gradient-to-r from-purple-600 to-pink-600 transition-all duration-500"
+                style="width: 0%"
+              ></div>
+            </div>
+          </div>
+
+          <!-- Photo Grid -->
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="packPhotoGrid">
+            <!-- Photo slots will be added here dynamically -->
+            <div class="pack-photo-slot" data-style="dating1">
+              <div
+                class="aspect-square bg-slate-800 rounded-xl overflow-hidden relative"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin text-purple-500 text-3xl mb-2"
+                  ></i>
+                  <span class="text-purple-300 text-sm">Morning Glow</span>
+                </div>
+                <img
+                  class="hidden w-full h-full object-cover"
+                  alt="Morning Glow"
+                />
+              </div>
+            </div>
+
+            <div class="pack-photo-slot" data-style="dating2">
+              <div
+                class="aspect-square bg-slate-800 rounded-xl overflow-hidden relative"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin text-purple-500 text-3xl mb-2"
+                  ></i>
+                  <span class="text-purple-300 text-sm">Playful Charm</span>
+                </div>
+                <img
+                  class="hidden w-full h-full object-cover"
+                  alt="Playful Charm"
+                />
+              </div>
+            </div>
+
+            <div class="pack-photo-slot" data-style="dating3">
+              <div
+                class="aspect-square bg-slate-800 rounded-xl overflow-hidden relative"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin text-purple-500 text-3xl mb-2"
+                  ></i>
+                  <span class="text-purple-300 text-sm">Evening Elegance</span>
+                </div>
+                <img
+                  class="hidden w-full h-full object-cover"
+                  alt="Evening Elegance"
+                />
+              </div>
+            </div>
+
+            <div class="pack-photo-slot" data-style="dating4">
+              <div
+                class="aspect-square bg-slate-800 rounded-xl overflow-hidden relative"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin text-purple-500 text-3xl mb-2"
+                  ></i>
+                  <span class="text-purple-300 text-sm">Carefree Summer</span>
+                </div>
+                <img
+                  class="hidden w-full h-full object-cover"
+                  alt="Carefree Summer"
+                />
+              </div>
+            </div>
+
+            <div class="pack-photo-slot" data-style="dating5">
+              <div
+                class="aspect-square bg-slate-800 rounded-xl overflow-hidden relative"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin text-purple-500 text-3xl mb-2"
+                  ></i>
+                  <span class="text-purple-300 text-sm">Artistic Sensual</span>
+                </div>
+                <img
+                  class="hidden w-full h-full object-cover"
+                  alt="Artistic Sensual"
+                />
+              </div>
+            </div>
+
+            <div class="pack-photo-slot" data-style="dating6">
+              <div
+                class="aspect-square bg-slate-800 rounded-xl overflow-hidden relative"
+              >
+                <div
+                  class="absolute inset-0 flex flex-col items-center justify-center"
+                >
+                  <i
+                    class="fas fa-spinner fa-spin text-purple-500 text-3xl mb-2"
+                  ></i>
+                  <span class="text-purple-300 text-sm"
+                    >Confident Intimate</span
+                  >
+                </div>
+                <img
+                  class="hidden w-full h-full object-cover"
+                  alt="Confident Intimate"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Download Buttons (hidden until complete) -->
+          <div id="packDownloadSection" class="hidden mt-6 text-center">
+            <p class="text-green-400 mb-4 font-semibold">
+              <i class="fas fa-check-circle mr-2"></i>All photos generated
+              successfully!
+            </p>
+            <div class="flex gap-4 justify-center flex-wrap">
+              <button
+                id="downloadAllPackBtn"
+                class="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl font-semibold hover:from-purple-700 hover:to-pink-700 transition-all"
+              >
+                <i class="fas fa-download mr-2"></i>Download All (ZIP)
+              </button>
+              <button
+                id="closePackModalBtn"
+                class="px-6 py-3 bg-slate-700 rounded-xl font-semibold hover:bg-slate-600 transition-all"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script
       defer
       src="https://www.googletagmanager.com/gtag/js?id=G-78RSLH46CX"
