@@ -381,6 +381,39 @@
         animation: cta-pulse 2.5s ease-in-out infinite;
       }
 
+      /* Pricing card border pulse animations */
+      @keyframes pulse-border {
+        0%, 100% {
+          border-color: rgba(34, 197, 94, 0.4);
+          box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+        }
+        50% {
+          border-color: rgba(34, 197, 94, 0.7);
+          box-shadow: 0 0 30px rgba(34, 197, 94, 0.4);
+        }
+      }
+
+      @keyframes pulse-border-pro {
+        0%, 100% {
+          border-color: rgba(244, 114, 182, 0.6);
+          box-shadow: 0 0 30px rgba(147, 51, 234, 0.3),
+                      0 0 50px rgba(236, 72, 153, 0.2);
+        }
+        50% {
+          border-color: rgba(244, 114, 182, 0.9);
+          box-shadow: 0 0 50px rgba(147, 51, 234, 0.5),
+                      0 0 80px rgba(236, 72, 153, 0.3);
+        }
+      }
+
+      .animate-pulse-border {
+        animation: pulse-border 3s ease-in-out infinite;
+      }
+
+      .animate-pulse-border-pro {
+        animation: pulse-border-pro 2.5s ease-in-out infinite;
+      }
+
       /* Mobile-specific CTA enhancements */
       @media (max-width: 640px) {
         #heroCTABtn {
@@ -2748,141 +2781,178 @@
 
       <!-- Pricing Section -->
       <section class="mt-20 text-center" aria-labelledby="pricing-title">
-        <h2 id="pricing-title" class="text-3xl font-bold mb-12">
+        <h2 id="pricing-title" class="text-3xl font-bold mb-4">
           Simple Pricing
         </h2>
+        <p class="text-purple-200 text-lg mb-12 max-w-2xl mx-auto">
+          Join <span class="text-white font-semibold">10,000+ creators</span> who started for free. No hidden fees, cancel anytime.
+        </p>
         <div
           class="max-w-5xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           role="list"
           aria-label="Pricing plans"
         >
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/30 flex flex-col"
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border-2 border-green-500/40 flex flex-col relative overflow-hidden animate-pulse-border"
             role="listitem"
           >
-            <h3 class="text-2xl font-bold mb-4">Free Trial</h3>
-            <p class="text-4xl font-bold mb-4">$0</p>
+            <!-- Free Badge -->
+            <div class="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+              100% FREE
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Free Trial</h3>
+            <p class="text-sm text-green-400 font-semibold mb-4">
+              No signup • No card required
+            </p>
+            <p class="text-4xl font-bold mb-6">$0</p>
             <ul
               class="space-y-3 mb-8 text-left flex-grow"
               role="list"
               aria-label="Free trial features"
             >
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-check text-green-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>2 Free Generations</span>
+                ></i>
+                <span><strong>2 Free Generations</strong><br/><span class="text-sm text-purple-300">Try before you buy</span></span>
               </li>
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-check text-green-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>Low-Resolution Downloads</span>
+                ></i>
+                <span>Low-Resolution Downloads</span>
               </li>
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-check text-green-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>Watermarked Images</span>
+                ></i>
+                <span>Watermarked Images</span>
               </li>
             </ul>
             <button
               id="freeTrialBtn"
-              class="w-full py-3 bg-slate-700 rounded-lg hover:bg-slate-600 transition-all mt-auto"
+              class="w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-lg font-bold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg mt-auto"
               aria-label="Start with free trial"
             >
-              Get Started
+              <i class="fas fa-rocket mr-2"></i>
+              Start Free Now
             </button>
+            <p class="text-xs text-purple-300 mt-3 text-center">
+              Instant access • No credit card
+            </p>
           </article>
           <article
-            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/30 flex flex-col"
+            class="bg-slate-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-500/30 flex flex-col relative"
             role="listitem"
           >
-            <h3 class="text-2xl font-bold mb-4">Starter Pack</h3>
-            <p class="text-4xl font-bold mb-4">$3.99</p>
+            <h3 class="text-2xl font-bold mb-2">Starter Pack</h3>
+            <p class="text-sm text-purple-300 mb-4">Perfect for testing</p>
+            <p class="text-4xl font-bold mb-2">$3.99</p>
+            <p class="text-sm text-purple-300 mb-6">$0.16 per photo</p>
             <ul
               class="space-y-3 mb-8 text-left flex-grow"
               role="list"
               aria-label="Starter pack features"
             >
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-bolt text-yellow-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>25 Credits to create photos</span>
+                ></i>
+                <span><strong>25 Credits</strong><br/><span class="text-sm text-purple-300">Create 25 photos</span></span>
               </li>
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-tachometer-alt text-blue-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>Fast generation priority</span>
+                ></i>
+                <span><strong>Fast Processing</strong><br/><span class="text-sm text-purple-300">~60 seconds per photo</span></span>
+              </li>
+              <li role="listitem" class="flex items-start">
+                <i
+                  class="fas fa-download text-green-400 mr-3 mt-1"
+                  aria-hidden="true"
+                ></i>
+                <span>HD Downloads</span>
               </li>
             </ul>
             <button
               id="buyStarterPackBtn"
-              class="w-full py-3 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-105 mt-auto"
+              class="w-full py-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl text-lg font-bold hover:from-indigo-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg mt-auto"
               aria-label="Purchase starter pack credits"
             >
-              Buy Starter Pack
+              Get Starter Pack
             </button>
           </article>
           <article
-            class="bg-gradient-to-br from-purple-800/50 to-pink-800/50 backdrop-blur-xl rounded-2xl p-8 border border-purple-400/50 transform scale-105 flex flex-col"
+            class="bg-gradient-to-br from-purple-800/50 to-pink-800/50 backdrop-blur-xl rounded-2xl p-8 border-2 border-pink-400/60 transform scale-105 flex flex-col relative shadow-2xl animate-pulse-border-pro"
             role="listitem"
           >
             <div
-              class="bg-yellow-500 text-black text-sm font-bold px-3 py-1 rounded-full inline-block mb-4"
+              class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-black text-sm font-bold px-4 py-1.5 rounded-full inline-block mb-2 shadow-lg"
             >
-              POPULAR
+              ⭐ MOST POPULAR
             </div>
-            <h3 class="text-2xl font-bold mb-4">Pro Pack</h3>
-            <p class="text-4xl font-bold mb-4">$4.99</p>
+            <p class="text-xs text-yellow-300 font-semibold mb-4">
+              78% of users choose Pro
+            </p>
+            <h3 class="text-2xl font-bold mb-2">Pro Pack</h3>
+            <p class="text-sm text-pink-300 mb-4">Best value for serious creators</p>
+            <div class="flex items-baseline gap-2 mb-2">
+              <p class="text-4xl font-bold">$4.99</p>
+              <span class="text-sm text-pink-300 line-through">$9.99</span>
+            </div>
+            <p class="text-sm text-green-400 font-semibold mb-6">
+              $0.10 per photo • Save 50%
+            </p>
             <ul
               class="space-y-3 mb-8 text-left flex-grow"
               role="list"
               aria-label="Pro pack features"
             >
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-crown text-yellow-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>50 Credits to create photos</span>
+                ></i>
+                <span><strong>50 Credits</strong><br/><span class="text-sm text-purple-300">Create 50 photos • 2x Starter</span></span>
               </li>
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-bolt-lightning text-yellow-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>Priority Processing</span>
+                ></i>
+                <span><strong>Priority Processing</strong><br/><span class="text-sm text-purple-300">Skip the queue • Faster results</span></span>
               </li>
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-palette text-pink-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>Multiple Styles</span>
+                ></i>
+                <span><strong>Multiple Styles</strong><br/><span class="text-sm text-purple-300">Access all premium styles</span></span>
               </li>
-              <li role="listitem">
+              <li role="listitem" class="flex items-start">
                 <i
-                  class="fas fa-check text-green-400 mr-2"
+                  class="fas fa-briefcase text-green-400 mr-3 mt-1"
                   aria-hidden="true"
-                ></i
-                ><span>Commercial Use License</span>
+                ></i>
+                <span><strong>Commercial License</strong><br/><span class="text-sm text-purple-300">Sell & monetize your photos</span></span>
               </li>
             </ul>
             <button
               id="buyCreditsBtn"
-              class="w-full py-3 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 mt-auto"
+              class="w-full py-4 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl text-lg font-bold hover:from-pink-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-2xl mt-auto"
               aria-label="Purchase pro pack credits"
             >
-              Buy Credits
+              <i class="fas fa-star mr-2"></i>
+              Get Pro Pack
             </button>
+            <p class="text-xs text-pink-300 mt-3 text-center font-semibold">
+              ⚡ Most creators upgrade within 24h
+            </p>
           </article>
         </div>
       </section>
