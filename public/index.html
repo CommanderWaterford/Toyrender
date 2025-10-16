@@ -4298,7 +4298,7 @@
 
         dating4: `Prompt: An energetic and enchanting photograph of the person (preserving hair color/style, eye color), captured in a moment of playful, lighthearted motion, perhaps twirling gently, tossing her hair back with a laugh, or playfully reaching out towards the camera. She is dressed in a light, flowing summer dress or a soft, denim-and-lace ensemble that moves with her, hinting at her form. The setting is a vibrant, sun-drenched outdoor location, like a blooming garden, a pristine beach with gentle waves, or a cheerful, airy patio. Bright, natural daylight creates sparkling highlights and a joyous, carefree atmosphere. Her expression is genuinely happy, with a flirty smile and sparkling eyes. The background is beautifully blurred, adding to the dynamic and inviting feel, with subtle motion blur on her hair or dress to emphasize movement.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, stiff pose, harsh shadows, explicit nudity, aggressive or crude gestures, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman holding a delicate wildflower bouquet," "Subtle sun flare effect in the background," "A tiny, barely visible anklet or bracelet accessory."`,
 
-        dating5: `Prompt: An artistic and graceful photograph of the person (preserving hair color/style, eye color), captured in a moment of serene self-reflection. She is sitting or kneeling gracefully, perhaps with her back partially turned, with her hair artfully styled, perhaps partially undone or swept to one side. She is dressed in a soft, luxurious silk slip or delicate robe. The setting is minimalist and elegant, like a high-end bedroom or a spa-like bathroom, with a large, antique-style mirror in the soft-focused background or as a framing element. Soft, ambient lighting creates gentle contrasts and beautiful highlights. The mood is one of serene introspection, quiet beauty, and sophisticated elegance, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cluttered background, harsh lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "A delicate string of pearls or a simple necklace," "Subtle steam effect in a bathroom setting," "A single, flickering candle creating a warm glow."`,
+        dating5: `Prompt: An artistic and graceful photograph of the person (preserving hair color/style, eye color), captured in a moment of serene self-reflection. She is sitting or kneeling gracefully, perhaps with her back partially turned, with her hair artfully styled, perhaps partially undone or swept to one side. She is dressed in a soft, luxurious silk or delicate robe. The setting is minimalist and elegant, like a high-end bedroom or a spa-like bathroom, with a large, antique-style mirror in the soft-focused background or as a framing element. Soft, ambient lighting creates gentle contrasts and beautiful highlights. The mood is one of serene introspection, quiet beauty, and sophisticated elegance, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, cluttered background, harsh lighting, aggressive or crude pose, unrealistic proportions, visible tattoos (unless specified)."\nOptions: "A delicate string of pearls or a simple necklace," "Subtle steam effect in a bathroom setting," "A single, flickering candle creating a warm glow."`,
 
         dating6: `Prompt: A charming, hyperrealistic photograph of a woman (preserving hair color/style, eye color), seated casually yet gracefully on the edge of a bed, dressed in an oversized, soft cotton shirt. Her hair is beautifully disheveled, as if just woken, and she turns her head slightly towards the camera with a confident, slightly playful, and warmly inviting smile. One hand might be playfully running through her hair or resting comfortably. The luxurious bedding (silk or high-thread-count cotton) is slightly rumpled around her. The scene is bathed in soft, warm, diffused morning light, creating a dreamy, cozy glow. The background is a tastefully blurred bedroom, emphasizing comfort and personal space. The mood is one of relaxed morning charm, approachable warmth, and confident ease, with a shallow depth-of-field.\nNegatives: "extra limbs, duplicate heads, text, watermark, brand logos, messy or dirty bedding, harsh or cold lighting, aggressive or crude pose,unrealistic proportions, visible tattoos (unless specified)."\nOptions: "Woman wearing a delicate, minimalist necklace," "A personalized, sleek mug of coffee on a nearby nightstand," "A glimpse of a luxurious robe casually draped over a chair."`,
 
@@ -5363,6 +5363,12 @@ File Size: ${currentFile?.size ? (currentFile.size / 1024).toFixed(2) + ' KB' : 
             console.log(`│ Start Time: ${new Date().toISOString()}`);
             console.log(`└─────────────────────────────────────────────────────────┘`);
 
+            // Add 1 second delay between requests (except for the first one) to help avoid rate limits
+            if (i > 0) {
+              console.log(`⏸️  Waiting 1 second before next request to avoid rate limits...`);
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
             try {
               const formData = new FormData();
               formData.append("photo", currentFile);
@@ -5653,8 +5659,8 @@ Stack: ${err.stack}
         }
       }
 
-      function updatePackModalProgress(completedCount, totalCount, imageUrl, style) {
-        // Update progress count
+      function updatePackModalProgress(completedCount, totalCount, imageUrl, style, successCount, failedCount) {
+        // Update progress count (total attempted so far)
         document.getElementById("packProgressCount").textContent = completedCount;
 
         // Update progress bar
@@ -5673,9 +5679,36 @@ Stack: ${err.stack}
           }
         }
 
-        // Show download section if all complete
+        // Show download section if all attempts complete (success or failure)
         if (completedCount === totalCount) {
-          document.getElementById("packDownloadSection").classList.remove("hidden");
+          const downloadSection = document.getElementById("packDownloadSection");
+          downloadSection.classList.remove("hidden");
+
+          // Update the status message based on success/failure counts
+          const statusMessage = downloadSection.querySelector("p");
+          if (successCount === totalCount) {
+            // Full success
+            statusMessage.innerHTML = `<i class="fas fa-check-circle mr-2"></i>All ${totalCount} photos generated successfully!`;
+            statusMessage.className = "text-green-400 mb-4 font-semibold";
+          } else if (successCount > 0) {
+            // Partial success
+            statusMessage.innerHTML = `<i class="fas fa-exclamation-triangle mr-2"></i>Partial success: ${successCount} of ${totalCount} photos generated. ${failedCount} failed.`;
+            statusMessage.className = "text-yellow-400 mb-4 font-semibold";
+          } else {
+            // Complete failure
+            statusMessage.innerHTML = `<i class="fas fa-times-circle mr-2"></i>Generation failed completely. All ${totalCount} photos failed.`;
+            statusMessage.className = "text-red-400 mb-4 font-semibold";
+          }
+
+          // Only show download buttons if at least one photo succeeded
+          const downloadAllBtn = document.getElementById("downloadAllPackBtn");
+          if (successCount === 0) {
+            downloadAllBtn.classList.add("hidden");
+          } else {
+            downloadAllBtn.classList.remove("hidden");
+            // Update button text with actual count
+            downloadAllBtn.innerHTML = `<i class="fas fa-download mr-2"></i>Download ${successCount === totalCount ? 'All' : successCount} Photo${successCount > 1 ? 's' : ''} (ZIP)`;
+          }
         }
       }
 
@@ -5757,6 +5790,12 @@ File Size: ${currentFile?.size ? (currentFile.size / 1024).toFixed(2) + ' KB' : 
             console.log(`│ Start Time: ${new Date().toISOString()}`);
             console.log(`└─────────────────────────────────────────────────────────┘`);
 
+            // Add 1 second delay between requests (except for the first one) to help avoid rate limits
+            if (i > 0) {
+              console.log(`⏸️  Waiting 1 second before next request to avoid rate limits...`);
+              await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
             try {
               const formData = new FormData();
               formData.append("photo", currentFile);
@@ -5793,7 +5832,7 @@ File Size: ${currentFile?.size ? (currentFile.size / 1024).toFixed(2) + ' KB' : 
                   name: getStyleName(style),
                 });
                 completedCount++;
-                updatePackModalProgress(completedCount + failedCount, datingStyles.length, data.imageUrl, style);
+                updatePackModalProgress(completedCount + failedCount, datingStyles.length, data.imageUrl, style, completedCount, failedCount);
 
                 console.log(`┌─────────────────────────────────────────────────────────┐`);
                 console.log(`│ ✅ SUCCESS - Photo ${styleNumber}/${expectedCount}`);
@@ -5807,7 +5846,7 @@ File Size: ${currentFile?.size ? (currentFile.size / 1024).toFixed(2) + ' KB' : 
               } else {
                 const styleDuration = Date.now() - styleStartTime;
                 failedCount++;
-                updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style);
+                updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style, completedCount, failedCount);
 
                 console.log(`┌─────────────────────────────────────────────────────────┐`);
                 console.log(`│ ❌ FAILED - Photo ${styleNumber}/${expectedCount}`);
@@ -5839,7 +5878,7 @@ File Size: ${currentFile?.size ? (currentFile.size / 1024).toFixed(2) + ' KB' : 
             } catch (fetchErr) {
               const styleDuration = Date.now() - styleStartTime;
               failedCount++;
-              updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style);
+              updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style, completedCount, failedCount);
 
               console.log(`┌─────────────────────────────────────────────────────────┐`);
               console.log(`│ ❌ NETWORK ERROR - Photo ${styleNumber}/${expectedCount}`);

@@ -1094,7 +1094,9 @@ async function withBackoff(fn, tries = 2) {
   err.status = 429;
   throw err;
 }
-const modelLimiter = new Bottleneck({ maxConcurrent: 1, minTime: 1500 });
+// Increased from 1500ms to 3000ms to avoid Gemini API rate limits (429 errors)
+// Gemini API has strict per-minute quotas, so we space requests 3 seconds apart
+const modelLimiter = new Bottleneck({ maxConcurrent: 1, minTime: 3000 });
 
 // --- Auth helpers ---
 function ensureAuth(req, res, next) {
