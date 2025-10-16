@@ -2120,42 +2120,123 @@ app.post(
       ];
 
       // Model call with throttle + backoff
-      const response = await modelLimiter.schedule(() =>
-        withBackoff(() =>
-          ai.models.generateContent({
-            model: "gemini-2.5-flash-image",
-            contents: [{ role: "user", parts }],
-          })
-        )
-      );
+      console.log(`
+┌──────────────────────────────────────────────────────────────────
+│ 🤖 CALLING GEMINI API
+├──────────────────────────────────────────────────────────────────
+│ Request ID: ${reqId}
+│ User: ${userEmail} (ID: ${userId})
+│ Model: gemini-2.5-flash-image
+│ Prompt Length: ${prompt.length} chars
+│ Image Size: ${(resizedBuf.length / 1024).toFixed(2)} KB
+│ Is Free Trial: ${isFreeTrial}
+│ Time: ${new Date().toISOString()}
+└──────────────────────────────────────────────────────────────────
+      `);
+
+      const geminiStartTime = Date.now();
+      let response;
+      try {
+        response = await modelLimiter.schedule(() =>
+          withBackoff(() =>
+            ai.models.generateContent({
+              model: "gemini-2.5-flash-image",
+              contents: [{ role: "user", parts }],
+            })
+          )
+        );
+        const geminiDuration = Date.now() - geminiStartTime;
+        console.log(`✅ Gemini API call succeeded in ${geminiDuration}ms`);
+      } catch (geminiError) {
+        const geminiDuration = Date.now() - geminiStartTime;
+        console.error(`
+┌──────────────────────────────────────────────────────────────────
+│ ❌ GEMINI API ERROR
+├──────────────────────────────────────────────────────────────────
+│ Request ID: ${reqId}
+│ User: ${userEmail} (ID: ${userId})
+│ Duration: ${geminiDuration}ms
+│ Error Name: ${geminiError.name}
+│ Error Message: ${geminiError.message}
+│ Error Status: ${geminiError.status || 'N/A'}
+│ Error Reason: ${geminiError.reason || 'N/A'}
+├──────────────────────────────────────────────────────────────────
+│ FULL ERROR DETAILS:
+│ ${JSON.stringify(geminiError, null, 2)}
+├──────────────────────────────────────────────────────────────────
+│ ERROR STACK:
+│ ${geminiError.stack}
+└──────────────────────────────────────────────────────────────────
+        `);
+
+        // Log to NDJSON for analysis
+        logGen({
+          event: "gemini_api_error",
+          reqId,
+          duration_ms: geminiDuration,
+          userEmail,
+          error: {
+            name: geminiError.name,
+            message: geminiError.message,
+            status: geminiError.status,
+            reason: geminiError.reason,
+            details: geminiError.error?.details || null,
+          },
+          user_id: userId,
+        });
+
+        throw geminiError; // Re-throw to be caught by outer catch
+      }
 
       // Extract outputs
       const cand = response?.candidates?.[0]?.content?.parts || [];
+      console.log(`📦 Response received with ${cand.length} parts`);
+
       let outImagePath = null;
       let outText = "";
+      let imageFound = false;
+
       for (const part of cand) {
-        if (part.text) outText += part.text + "\n";
+        if (part.text) {
+          outText += part.text + "\n";
+          console.log(`📝 Text part found (${part.text.length} chars)`);
+        }
         else if (part.inlineData?.data) {
+          imageFound = true;
           const buffer = Buffer.from(part.inlineData.data, "base64");
           const fname = generateTimestampFilename("toyrender", "png");
           outImagePath = path.join(RESULTS_DIR, fname);
           fs.writeFileSync(outImagePath, buffer);
+          console.log(`🖼️  Image saved: ${fname} (${(buffer.length / 1024).toFixed(2)} KB)`);
 
           // APPLY WATERMARK FOR FREE TRIAL USERS
           if (isFreeTrial && outImagePath) {
-            console.log(`Applying watermark for free trial user: ${userEmail}`);
+            console.log(`🔒 Applying watermark for free trial user: ${userEmail}`);
             try {
               await applyWatermark(outImagePath);
-              console.log(`Watermark applied successfully to ${fname}`);
+              console.log(`✅ Watermark applied successfully to ${fname}`);
             } catch (watermarkError) {
               console.error(
-                `Failed to apply watermark to ${fname}:`,
+                `⚠️  Failed to apply watermark to ${fname}:`,
                 watermarkError
               );
               // Continue even if watermark fails - don't break the user experience
             }
           }
         }
+      }
+
+      if (!imageFound) {
+        console.error(`
+┌──────────────────────────────────────────────────────────────────
+│ ❌ NO IMAGE IN GEMINI RESPONSE
+├──────────────────────────────────────────────────────────────────
+│ Request ID: ${reqId}
+│ User: ${userEmail}
+│ Response had ${cand.length} parts but no image data
+│ Response structure: ${JSON.stringify(response, null, 2)}
+└──────────────────────────────────────────────────────────────────
+        `);
       }
 
       // Log success
@@ -2197,24 +2278,107 @@ app.post(
         watermarked: isFreeTrial, // Let frontend know if image was watermarked
       });
     } catch (e) {
+      const errorDuration = Date.now() - t0;
+
+      // Categorize error type for better logging
+      let errorCategory = 'UNKNOWN';
+      let errorDetails = {};
+
+      if (e?.status === 429) {
+        errorCategory = e?.reason === 'daily' ? 'DAILY_QUOTA_EXCEEDED' : 'RATE_LIMITED';
+        errorDetails = {
+          status: e.status,
+          reason: e.reason,
+          quotaType: e?.reason === 'daily' ? 'daily' : 'per-minute',
+        };
+      } else if (e?.status === 402) {
+        errorCategory = 'NO_CREDITS';
+      } else if (e?.status === 503) {
+        errorCategory = 'SERVICE_UNAVAILABLE';
+      } else if (e?.name === 'TypeError') {
+        errorCategory = 'TYPE_ERROR';
+      } else if (e?.name === 'NetworkError') {
+        errorCategory = 'NETWORK_ERROR';
+      } else if (e?.message?.includes('timeout')) {
+        errorCategory = 'TIMEOUT';
+      } else if (e?.status >= 500) {
+        errorCategory = 'SERVER_ERROR';
+      } else if (e?.status >= 400) {
+        errorCategory = 'CLIENT_ERROR';
+      }
+
+      console.error(`
+┌══════════════════════════════════════════════════════════════════
+│ ❌ GENERATION FAILED
+├══════════════════════════════════════════════════════════════════
+│ Request ID: ${reqId}
+│ User: ${userEmail} (ID: ${userId})
+│ Duration: ${errorDuration}ms
+│ Error Category: ${errorCategory}
+├──────────────────────────────────────────────────────────────────
+│ ERROR INFORMATION:
+│ Name: ${e?.name || 'Unknown'}
+│ Message: ${e?.message || 'Unknown error'}
+│ Status Code: ${e?.status || 'N/A'}
+│ Reason: ${e?.reason || 'N/A'}
+├──────────────────────────────────────────────────────────────────
+│ FULL ERROR OBJECT:
+${JSON.stringify({
+  name: e?.name,
+  message: e?.message,
+  status: e?.status,
+  reason: e?.reason,
+  errorDetails: e?.error,
+  stack: e?.stack?.split('\n').slice(0, 5).join('\n'),
+}, null, 2).split('\n').map(line => `│ ${line}`).join('\n')}
+├──────────────────────────────────────────────────────────────────
+│ FILE INFORMATION:
+│ Original Name: ${req.file?.originalname || 'N/A'}
+│ Size: ${req.file?.size ? (req.file.size / 1024).toFixed(2) + ' KB' : 'N/A'}
+│ MIME Type: ${req.file?.mimetype || 'N/A'}
+├──────────────────────────────────────────────────────────────────
+│ FULL ERROR STACK:
+│ ${e?.stack || 'No stack trace available'}
+└══════════════════════════════════════════════════════════════════
+      `);
+
       // refund on failure
       try {
         await run("UPDATE gen_events SET status='error' WHERE req_id=?", [
           reqId,
         ]);
-      } catch {}
+        console.log(`✅ Updated gen_events to 'error' status`);
+      } catch (dbErr) {
+        console.error(`⚠️  Failed to update gen_events:`, dbErr.message);
+      }
+
       try {
         await refundCredit(userId, 1);
-      } catch {}
-      console.error("Generation error:", e?.message || e);
+        console.log(`✅ Refunded 1 credit to user ${userId}`);
+      } catch (refundErr) {
+        console.error(`⚠️  Failed to refund credit:`, refundErr.message);
+      }
 
-      // Log error
+      // Log error to NDJSON with full details
       logGen({
         event: "gen_error",
         reqId,
-        duration_ms: Date.now() - t0,
+        duration_ms: errorDuration,
         userEmail: userEmail,
-        error: { message: e?.message || "Unknown error" },
+        error: {
+          category: errorCategory,
+          name: e?.name || 'Unknown',
+          message: e?.message || "Unknown error",
+          status: e?.status,
+          reason: e?.reason,
+          details: e?.error?.details || null,
+          stack: e?.stack,
+        },
+        file: {
+          name: req.file?.originalname,
+          size: req.file?.size,
+          mimetype: req.file?.mimetype,
+        },
         user_id: userId,
       });
 
@@ -2224,6 +2388,7 @@ app.post(
         error: e?.message || "Generation failed",
         reason: e?.reason || null,
         details: e?.error?.details || null,
+        errorCategory: errorCategory, // Add this for client-side categorization
       });
     } finally {
       // if (inputPath) fs.unlink(inputPath, () => {}); // disk hygiene: always remove upload

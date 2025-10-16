@@ -5603,16 +5603,41 @@
         let completedCount = 0;
         let failedCount = 0;
         const expectedCount = datingStyles.length;
+        const packStartTime = Date.now();
+
+        console.log(`
+═══════════════════════════════════════════════════════════
+🎨 DATING PACK GENERATION STARTED
+═══════════════════════════════════════════════════════════
+Start Time: ${new Date().toISOString()}
+Total Styles: ${expectedCount}
+File Name: ${currentFile?.name || 'unknown'}
+File Size: ${currentFile?.size ? (currentFile.size / 1024).toFixed(2) + ' KB' : 'unknown'}
+═══════════════════════════════════════════════════════════
+        `);
 
         try {
           // Generate each style and update modal in real-time
           for (let i = 0; i < datingStyles.length; i++) {
             const style = datingStyles[i];
+            const styleStartTime = Date.now();
+            const styleNumber = i + 1;
+
+            console.log(`\n┌─────────────────────────────────────────────────────────┐`);
+            console.log(`│ 📸 GENERATING PHOTO ${styleNumber}/${expectedCount}`);
+            console.log(`├─────────────────────────────────────────────────────────┤`);
+            console.log(`│ Style ID: ${style}`);
+            console.log(`│ Style Name: ${getStyleName(style)}`);
+            console.log(`│ Start Time: ${new Date().toISOString()}`);
+            console.log(`└─────────────────────────────────────────────────────────┘`);
 
             try {
               const formData = new FormData();
               formData.append("photo", currentFile);
               formData.append("prompt", stylePrompts[style]);
+
+              console.log(`⏳ Sending request to /api/generate...`);
+              const requestStartTime = Date.now();
 
               const res = await fetch("/api/generate", {
                 method: "POST",
@@ -5620,9 +5645,22 @@
                 credentials: "include",
               });
 
-              const data = await res.json().catch(() => ({}));
+              const requestDuration = Date.now() - requestStartTime;
+              console.log(`⏱️  Request completed in ${requestDuration}ms`);
+              console.log(`📊 HTTP Status: ${res.status} ${res.statusText}`);
+              console.log(`📋 Response Headers:`, Object.fromEntries(res.headers.entries()));
+
+              let data = {};
+              try {
+                data = await res.json();
+                console.log(`✅ Response JSON parsed successfully`);
+              } catch (jsonErr) {
+                console.error(`❌ Failed to parse JSON response:`, jsonErr);
+                console.log(`📄 Raw response text:`, await res.text().catch(() => 'Unable to read response text'));
+              }
 
               if (res.ok && data.imageUrl) {
+                const styleDuration = Date.now() - styleStartTime;
                 packResults.push({
                   style: style,
                   url: data.imageUrl,
@@ -5630,27 +5668,89 @@
                 });
                 completedCount++;
                 updatePackModalProgress(completedCount + failedCount, datingStyles.length, data.imageUrl, style);
+
+                console.log(`┌─────────────────────────────────────────────────────────┐`);
+                console.log(`│ ✅ SUCCESS - Photo ${styleNumber}/${expectedCount}`);
+                console.log(`├─────────────────────────────────────────────────────────┤`);
+                console.log(`│ Style: ${getStyleName(style)}`);
+                console.log(`│ Image URL: ${data.imageUrl}`);
+                console.log(`│ Duration: ${styleDuration}ms`);
+                console.log(`│ Watermarked: ${data.watermarked ? 'Yes' : 'No'}`);
+                console.log(`│ Progress: ${completedCount} succeeded, ${failedCount} failed`);
+                console.log(`└─────────────────────────────────────────────────────────┘`);
               } else {
-                // Log error and track failure
-                console.error(
-                  `Failed to generate ${style}:`,
-                  data.error || res.statusText
-                );
+                const styleDuration = Date.now() - styleStartTime;
                 failedCount++;
                 updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style);
-                // Show which photo failed
-                toast(`Warning: ${getStyleName(style)} generation failed`, "error");
+
+                console.log(`┌─────────────────────────────────────────────────────────┐`);
+                console.log(`│ ❌ FAILED - Photo ${styleNumber}/${expectedCount}`);
+                console.log(`├─────────────────────────────────────────────────────────┤`);
+                console.log(`│ Style: ${getStyleName(style)}`);
+                console.log(`│ HTTP Status: ${res.status} ${res.statusText}`);
+                console.log(`│ Duration: ${styleDuration}ms`);
+                console.log(`│ Error Type: API Error / Non-OK Response`);
+                console.log(`│ Error Message: ${data.error || res.statusText || 'Unknown error'}`);
+                console.log(`│ Response Status Code: ${data.status || res.status || 'N/A'}`);
+                console.log(`│ Error Reason: ${data.reason || 'Not specified'}`);
+                console.log(`│ Full Response Data:`, data);
+                console.log(`│ Progress: ${completedCount} succeeded, ${failedCount} failed`);
+                console.log(`└─────────────────────────────────────────────────────────┘`);
+
+                // Categorize error type for better debugging
+                let errorCategory = 'UNKNOWN';
+                if (res.status === 429) errorCategory = 'RATE_LIMIT';
+                else if (res.status === 402) errorCategory = 'NO_CREDITS';
+                else if (res.status === 500) errorCategory = 'SERVER_ERROR';
+                else if (res.status === 503) errorCategory = 'SERVICE_UNAVAILABLE';
+                else if (res.status >= 400 && res.status < 500) errorCategory = 'CLIENT_ERROR';
+                else if (res.status >= 500) errorCategory = 'SERVER_ERROR';
+
+                console.log(`🏷️  Error Category: ${errorCategory}`);
+
+                toast(`Warning: ${getStyleName(style)} generation failed (${errorCategory})`, "error");
               }
             } catch (fetchErr) {
-              console.error(`Network error generating ${style}:`, fetchErr);
+              const styleDuration = Date.now() - styleStartTime;
               failedCount++;
               updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style);
+
+              console.log(`┌─────────────────────────────────────────────────────────┐`);
+              console.log(`│ ❌ NETWORK ERROR - Photo ${styleNumber}/${expectedCount}`);
+              console.log(`├─────────────────────────────────────────────────────────┤`);
+              console.log(`│ Style: ${getStyleName(style)}`);
+              console.log(`│ Duration: ${styleDuration}ms`);
+              console.log(`│ Error Type: Network/Fetch Error`);
+              console.log(`│ Error Name: ${fetchErr.name}`);
+              console.log(`│ Error Message: ${fetchErr.message}`);
+              console.log(`│ Error Stack:`, fetchErr.stack);
+              console.log(`│ Progress: ${completedCount} succeeded, ${failedCount} failed`);
+              console.log(`└─────────────────────────────────────────────────────────┘`);
+
               toast(`Warning: ${getStyleName(style)} generation failed due to network error`, "error");
             }
           }
 
           // Refresh session to update credits
           await refreshSession();
+
+          const packDuration = Date.now() - packStartTime;
+          const avgTimePerPhoto = packDuration / expectedCount;
+
+          console.log(`
+═══════════════════════════════════════════════════════════
+🎨 DATING PACK GENERATION COMPLETED
+═══════════════════════════════════════════════════════════
+End Time: ${new Date().toISOString()}
+Total Duration: ${packDuration}ms (${(packDuration / 1000).toFixed(2)}s)
+Average Time Per Photo: ${avgTimePerPhoto.toFixed(0)}ms
+───────────────────────────────────────────────────────────
+✅ Succeeded: ${completedCount}/${expectedCount} (${((completedCount/expectedCount)*100).toFixed(1)}%)
+❌ Failed: ${failedCount}/${expectedCount} (${((failedCount/expectedCount)*100).toFixed(1)}%)
+───────────────────────────────────────────────────────────
+Final Result: ${completedCount === expectedCount ? 'FULL SUCCESS' : failedCount === expectedCount ? 'COMPLETE FAILURE' : 'PARTIAL SUCCESS'}
+═══════════════════════════════════════════════════════════
+          `);
 
           // Show accurate success/failure message
           if (packResults.length === expectedCount) {
@@ -5661,7 +5761,16 @@
             toast("Pack generation failed completely. Please try again.", "error");
           }
         } catch (err) {
-          console.error("Pack generation error:", err);
+          console.log(`
+═══════════════════════════════════════════════════════════
+❌ CRITICAL ERROR IN PACK GENERATION
+═══════════════════════════════════════════════════════════
+Error Name: ${err.name}
+Error Message: ${err.message}
+Error Stack:
+${err.stack}
+═══════════════════════════════════════════════════════════
+          `);
           toast(err.message || "Pack generation failed", "error");
         }
       }
