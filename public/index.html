@@ -5274,6 +5274,8 @@
           "dating6",
         ];
         packResults = [];
+        let failedCount = 0;
+        const expectedCount = datingStyles.length;
 
         // Update UI for pack generation
         generateBtn.disabled = true;
@@ -5307,48 +5309,62 @@
             const dot = progressDiv.querySelector(`[data-index="${i}"]`);
             dot.classList.add("bg-yellow-500", "animate-pulse");
 
-            const formData = new FormData();
-            formData.append("photo", currentFile);
-            // Use the actual prompt for each style, not the style name
-            formData.append("prompt", stylePrompts[style]);
+            try {
+              const formData = new FormData();
+              formData.append("photo", currentFile);
+              // Use the actual prompt for each style, not the style name
+              formData.append("prompt", stylePrompts[style]);
 
-            const res = await fetch("/api/generate", {
-              method: "POST",
-              body: formData,
-              credentials: "include",
-            });
-
-            const data = await res.json().catch(() => ({}));
-
-            if (res.ok && data.imageUrl) {
-              packResults.push({
-                style: style,
-                url: data.imageUrl,
-                name: getStyleName(style),
+              const res = await fetch("/api/generate", {
+                method: "POST",
+                body: formData,
+                credentials: "include",
               });
-              dot.classList.remove("bg-yellow-500", "animate-pulse");
-              dot.classList.add("bg-green-500");
-            } else {
+
+              const data = await res.json().catch(() => ({}));
+
+              if (res.ok && data.imageUrl) {
+                packResults.push({
+                  style: style,
+                  url: data.imageUrl,
+                  name: getStyleName(style),
+                });
+                dot.classList.remove("bg-yellow-500", "animate-pulse");
+                dot.classList.add("bg-green-500");
+              } else {
+                failedCount++;
+                dot.classList.remove("bg-yellow-500", "animate-pulse");
+                dot.classList.add("bg-red-500");
+                // Log error but continue with other generations
+                console.error(
+                  `Failed to generate ${style}:`,
+                  data.error || res.statusText
+                );
+              }
+            } catch (fetchErr) {
+              failedCount++;
               dot.classList.remove("bg-yellow-500", "animate-pulse");
               dot.classList.add("bg-red-500");
-              // Log error but continue with other generations
-              console.error(
-                `Failed to generate ${style}:`,
-                data.error || res.statusText
-              );
+              console.error(`Network error generating ${style}:`, fetchErr);
             }
           }
 
-          // Show pack results viewer
-          if (packResults.length > 0) {
+          // Refresh session to update credits
+          await refreshSession();
+
+          // Show accurate success/failure message
+          if (packResults.length === expectedCount) {
+            toast(`✓ All ${expectedCount} photos generated successfully!`);
+            showPackResults();
+          } else if (packResults.length > 0) {
+            toast(`Partial success: ${packResults.length} of ${expectedCount} photos generated. ${failedCount} failed.`, "warning");
             showPackResults();
           } else {
-            toast("Pack generation failed. Please try again.");
+            toast("Pack generation failed completely. Please try again.", "error");
           }
-          await refreshSession();
         } catch (err) {
           console.error(err);
-          toast(err.message || "Pack generation failed");
+          toast(err.message || "Pack generation failed", "error");
         } finally {
           loadingSpinner.classList.add("hidden");
           generateBtn.disabled = false;
@@ -5585,55 +5601,68 @@
         ];
         packResults = [];
         let completedCount = 0;
+        let failedCount = 0;
+        const expectedCount = datingStyles.length;
 
         try {
           // Generate each style and update modal in real-time
           for (let i = 0; i < datingStyles.length; i++) {
             const style = datingStyles[i];
 
-            const formData = new FormData();
-            formData.append("photo", currentFile);
-            formData.append("prompt", stylePrompts[style]);
+            try {
+              const formData = new FormData();
+              formData.append("photo", currentFile);
+              formData.append("prompt", stylePrompts[style]);
 
-            const res = await fetch("/api/generate", {
-              method: "POST",
-              body: formData,
-              credentials: "include",
-            });
-
-            const data = await res.json().catch(() => ({}));
-
-            if (res.ok && data.imageUrl) {
-              packResults.push({
-                style: style,
-                url: data.imageUrl,
-                name: getStyleName(style),
+              const res = await fetch("/api/generate", {
+                method: "POST",
+                body: formData,
+                credentials: "include",
               });
-              completedCount++;
-              updatePackModalProgress(completedCount, datingStyles.length, data.imageUrl, style);
-            } else {
-              // Log error but continue
-              console.error(
-                `Failed to generate ${style}:`,
-                data.error || res.statusText
-              );
-              completedCount++;
-              updatePackModalProgress(completedCount, datingStyles.length, null, style);
+
+              const data = await res.json().catch(() => ({}));
+
+              if (res.ok && data.imageUrl) {
+                packResults.push({
+                  style: style,
+                  url: data.imageUrl,
+                  name: getStyleName(style),
+                });
+                completedCount++;
+                updatePackModalProgress(completedCount + failedCount, datingStyles.length, data.imageUrl, style);
+              } else {
+                // Log error and track failure
+                console.error(
+                  `Failed to generate ${style}:`,
+                  data.error || res.statusText
+                );
+                failedCount++;
+                updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style);
+                // Show which photo failed
+                toast(`Warning: ${getStyleName(style)} generation failed`, "error");
+              }
+            } catch (fetchErr) {
+              console.error(`Network error generating ${style}:`, fetchErr);
+              failedCount++;
+              updatePackModalProgress(completedCount + failedCount, datingStyles.length, null, style);
+              toast(`Warning: ${getStyleName(style)} generation failed due to network error`, "error");
             }
           }
 
           // Refresh session to update credits
           await refreshSession();
 
-          // Show success message
-          if (packResults.length > 0) {
-            toast(`Successfully generated ${packResults.length} photos!`);
+          // Show accurate success/failure message
+          if (packResults.length === expectedCount) {
+            toast(`✓ All ${expectedCount} photos generated successfully!`);
+          } else if (packResults.length > 0) {
+            toast(`Partial success: ${packResults.length} of ${expectedCount} photos generated. ${failedCount} failed.`, "warning");
           } else {
-            toast("Pack generation failed. Please try again.");
+            toast("Pack generation failed completely. Please try again.", "error");
           }
         } catch (err) {
           console.error("Pack generation error:", err);
-          toast(err.message || "Pack generation failed");
+          toast(err.message || "Pack generation failed", "error");
         }
       }
 
@@ -6177,7 +6206,7 @@
                 >Progress: <span id="packProgressCount">0</span>/6</span
               >
               <span class="text-purple-300 text-sm"
-                >Estimated time: <span id="packEstimatedTime">~3 min</span></span
+                >Estimated time: <span id="packEstimatedTime">~1 min</span></span
               >
             </div>
             <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
