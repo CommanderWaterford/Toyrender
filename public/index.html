@@ -5630,6 +5630,8 @@ Stack: ${err.stack}
       };
 
       // Dating Pack Modal Functions
+      let modalEventListenersAttached = false;
+
       function openDatingPackModal() {
         const modal = document.getElementById("datingPackModal");
         if (modal) {
@@ -5648,6 +5650,58 @@ Stack: ${err.stack}
             img.classList.add("hidden");
             loader.classList.remove("hidden");
           });
+
+          // Attach event listeners once (only on first open)
+          if (!modalEventListenersAttached) {
+            // Close button handlers
+            const closeDatingPackModalBtn = document.getElementById("closeDatingPackModal");
+            const closePackModalBtn = document.getElementById("closePackModalBtn");
+
+            if (closeDatingPackModalBtn) {
+              closeDatingPackModalBtn.addEventListener("click", closeDatingPackModal);
+            }
+            if (closePackModalBtn) {
+              closePackModalBtn.addEventListener("click", closeDatingPackModal);
+            }
+
+            // Download all button handler
+            const downloadAllPackBtn = document.getElementById("downloadAllPackBtn");
+            if (downloadAllPackBtn) {
+              downloadAllPackBtn.addEventListener("click", async function() {
+                if (packResults.length === 0) return;
+
+                // Create ZIP using the existing API endpoint
+                try {
+                  const imagePaths = packResults.map(r => r.url);
+                  const res = await fetch("/api/generate-zip", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    credentials: "include",
+                    body: JSON.stringify({ imagePaths }),
+                  });
+
+                  if (res.ok) {
+                    const blob = await res.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = `dating-photos-pack-${Date.now()}.zip`;
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    toast("Download started!");
+                  } else {
+                    toast("Download failed. Please try again.");
+                  }
+                } catch (err) {
+                  console.error("Download error:", err);
+                  toast("Download failed. Please try again.");
+                }
+              });
+            }
+
+            modalEventListenersAttached = true;
+            console.log("✅ Modal event listeners attached");
+          }
         }
       }
 
@@ -5712,41 +5766,8 @@ Stack: ${err.stack}
         }
       }
 
-      // Modal close button handlers
-      document.getElementById("closeDatingPackModal")?.addEventListener("click", closeDatingPackModal);
-      document.getElementById("closePackModalBtn")?.addEventListener("click", closeDatingPackModal);
-
-      // Download all button handler for modal
-      document.getElementById("downloadAllPackBtn")?.addEventListener("click", async function() {
-        if (packResults.length === 0) return;
-
-        // Create ZIP using the existing API endpoint
-        try {
-          const imagePaths = packResults.map(r => r.url);
-          const res = await fetch("/api/generate-zip", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-            body: JSON.stringify({ imagePaths }),
-          });
-
-          if (res.ok) {
-            const blob = await res.blob();
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = `dating-photos-pack-${Date.now()}.zip`;
-            a.click();
-            window.URL.revokeObjectURL(url);
-            toast("Download started!");
-          } else {
-            toast("Download failed. Please try again.");
-          }
-        } catch (err) {
-          console.error("Download error:", err);
-          toast("Download failed. Please try again.");
-        }
-      });
+      // Note: Modal event listeners are now attached inside openDatingPackModal()
+      // This ensures the DOM elements exist when we try to attach listeners
 
       // New function to generate dating pack with modal updates
       async function generateDatingPackWithModal() {
