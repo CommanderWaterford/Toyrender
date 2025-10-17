@@ -1407,10 +1407,10 @@
       <!-- Slide-out Menu Panel -->
       <div
         id="menuPanel"
-        style="background: #ff0000 !important; background-color: #ff0000 !important; opacity: 1 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; filter: none !important; will-change: auto !important; transform: translate3d(100%, 0, 0) !important; transition: none !important;"
-        class="fixed top-0 right-0 h-full w-80 shadow-2xl z-50 overflow-y-auto border-l-4 border-yellow-400"
+        style="background: #0f172a !important; background-color: #0f172a !important; opacity: 1 !important; backdrop-filter: none !important; -webkit-backdrop-filter: none !important; filter: none !important; will-change: auto !important; transform: translate3d(100%, 0, 0) !important; transition: transform 300ms ease-in-out !important; z-index: 99999 !important;"
+        class="fixed top-0 right-0 h-full w-80 shadow-2xl overflow-y-auto border-l-4 border-purple-600"
       >
-        <div class="p-6" style="background: #ff0000 !important; background-color: #ff0000 !important; opacity: 1 !important; position: relative; z-index: 9999;">
+        <div class="p-6" style="background: #0f172a !important; background-color: #0f172a !important; opacity: 1 !important; position: relative;">
           <!-- Close Button -->
           <button
             id="menuClose"
@@ -1518,7 +1518,8 @@
       <!-- Menu Overlay -->
       <div
         id="menuOverlay"
-        class="fixed inset-0 bg-black/70 opacity-0 invisible transition-all duration-300 z-40"
+        style="z-index: 99998 !important;"
+        class="fixed inset-0 bg-black/70 opacity-0 invisible transition-all duration-300"
       ></div>
     </nav>
 
